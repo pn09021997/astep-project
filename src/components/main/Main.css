@@ -1,0 +1,14 @@
+.main-navbar{
+    text-align: center;
+}
+.main-navbar--custom-link {
+    text-decoration: none;
+    color: #000;
+    transition: all .5s;
+}
+.main-navbar--custom-link:hover{
+    color: #b3b3b3;
+}
+.main--custom-btn{
+    width: 100%;
+} 
