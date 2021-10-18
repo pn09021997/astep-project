@@ -4,6 +4,8 @@ import {
   CarouselItem,
   CarouselControl,
   CarouselIndicators,
+  Row,
+  Col,
 } from "reactstrap";
 import "./SlideShow.css";
 
@@ -80,20 +82,6 @@ export default function SlideShow({ categoriesList }) {
           />
         </Carousel>
       </div>
-      <Demo />
-    </div>
-  );
-}
-
-function Demo() {
-  return (
-    <div className="demo container-fluid">
-      <h1>Demo</h1>
-      <ul>
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-      </ul>
     </div>
   );
 }

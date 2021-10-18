@@ -1,5 +1,8 @@
-import Reac, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
+import Footer from './Footer/Footer';
 import SlideShow from './SlideShow/SlideShow';
+import TrendingCategories from './TrendingCategories/TrendingCategories';
+import TrendingProduct from './TrendingProduct/TrendingProduct';
 
 const productData = [
   {
@@ -84,6 +87,11 @@ const categoriesData = [
     caption: "Categories 3",
     img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/files/h7-s1_1080x.jpg?v=1612888560",
   },
+  {
+    id: 3,
+    caption: "Categories 4",
+    img: "https://cdn.shopify.com/s/files/1/0076/1708/5530/files/h7-s2_1296x.jpg?v=1612888560",
+  },
 ];
 
 export default function Home() {
@@ -97,10 +105,22 @@ export default function Home() {
 
   return (
     <div className="home">
+      {/* Slide Show */}
       <SlideShow 
-        categoriesList={categoriesList}
+        categoriesList={categoriesList.slice(0, 3)}
       />
+      {/* Trending Categories */}
+      <TrendingCategories 
+        productList={productList.slice(0, 3)}
+        categoriesList={categoriesList.slice(0, 3)}
+      />
+      {/* Trending Products */}
+      <TrendingProduct 
+        productList={productList}
+      />
+      {/* Footer */}
+      <Footer />
     </div>
-  )
+  );
 }
 
