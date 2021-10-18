@@ -73,14 +73,14 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
             <FormText>Must be 8-20 characters long.</FormText>
           </FormGroup>
           <FormGroup className="mb-3">
-            <Button color="info" className="main--custom-btn mb-2">
+            <Button color="secondary" className="main--custom-btn mb-2">
               Login
             </Button>
             <Link
               to="/register"
               id="btnBack"
             >
-              <Button color="outline-info" className="main--custom-btn">
+              <Button color="outline-secondary" className="main--custom-btn">
                 Register
               </Button>
             </Link>

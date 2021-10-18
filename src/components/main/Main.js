@@ -17,9 +17,9 @@ import {
 import "./Main.css";
 
 //Components
+import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Login/Register/Register";
-import Info from "./Login/Info/Info";
 
 export default function Main() {
   //Account Data
@@ -57,13 +57,13 @@ export default function Main() {
   const toggleNavbar = () => setCollapsed(!collapsed);
 
   return (
-    <div className="main container-fluid">
+    <div className="main">
       <Router>
         <Navbar
-          color="faded"
-          light
+          color="dark"
+          dark
           key="navbar"
-          className="main-navbar"
+          className="main-navbar container-fluid"
         >
           <NavbarBrand href="/" className="mr-auto">
             reactstrap
@@ -118,10 +118,6 @@ export default function Main() {
       </Router>
     </div>
   );
-}
-
-function Home() {
-  return <h1>Home</h1>;
 }
 
 function NoMatch() {

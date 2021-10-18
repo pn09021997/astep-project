@@ -117,14 +117,14 @@ export default function Register({ accountData, setAccountData }) {
           <FormText>Must be 10 characters long.</FormText>
         </FormGroup>
         <FormGroup className="mb-3">
-          <Button type="submit" color="info" className="main--custom-btn mb-2">
+          <Button type="submit" color="secondary" className="main--custom-btn mb-2">
             Register
           </Button>
           <Link
             to="/login"
             id="btnBack"
           >
-            <Button color="outline-info" className="main--custom-btn">
+            <Button color="outline-secondary" className="main--custom-btn">
               Back to Login
             </Button>
           </Link>
