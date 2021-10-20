@@ -66,7 +66,11 @@ export default function Main() {
           className="main-navbar container-fluid"
         >
           <NavbarBrand href="/" className="mr-auto">
-            reactstrap
+            <img 
+              src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
+              alt="uneox logo"
+              className="img-fluid navbar--custom-logo"
+            />
           </NavbarBrand>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>

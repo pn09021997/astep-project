@@ -9,12 +9,12 @@ import {
 } from "reactstrap";
 import "./SlideShow.css";
 
-export default function SlideShow({ categoriesList }) { 
+export default function SlideShow({ categoriesList }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [animating, setAnimating] = useState(false);
 
   useEffect(() => {
-    let changeSlide_Show = setInterval(() => {  
+    let changeSlide_Show = setInterval(() => {
       next();
     }, 5000);
     return () => {
@@ -24,13 +24,15 @@ export default function SlideShow({ categoriesList }) {
 
   const next = () => {
     if (animating) return;
-    const nextIndex = activeIndex === categoriesList.length - 1 ? 0 : activeIndex + 1;
+    const nextIndex =
+      activeIndex === categoriesList.length - 1 ? 0 : activeIndex + 1;
     setActiveIndex(nextIndex);
   };
 
   const previous = () => {
     if (animating) return;
-    const nextIndex = activeIndex === 0 ? categoriesList.length - 1 : activeIndex - 1;
+    const nextIndex =
+      activeIndex === 0 ? categoriesList.length - 1 : activeIndex - 1;
     setActiveIndex(nextIndex);
   };
 
@@ -81,6 +83,10 @@ export default function SlideShow({ categoriesList }) {
             onClickHandler={next}
           />
         </Carousel>
+        <div className="slide-show-controls--mobile-custom">
+          <button onClick={previous} id="btnPrev-Mobile"></button>
+          <button onClick={next}></button>
+        </div>
       </div>
     </div>
   );
