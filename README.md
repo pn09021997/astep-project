@@ -1,6 +1,8 @@
 # Project-CDW1
 DB src tên là project-cdw1 -> php artisan migrate.
+Passport: php artisan passport:install
 Các bước chạy src: 
-B1: Thiếu node_module gõ lệnh npm/yarn install.
-B2: Terminal -> Gõ npm/yarn run dev -> Thông báo success(good).
-B3: Terminal -> Gõ php artisan serve.
+Thiếu node_module gõ lệnh npm/yarn install.
+Thiếu vendor gõ lệnh composer update/composer dump-autoload.
+B1: Terminal -> Gõ npm/yarn run dev -> Thông báo success(good).
+B2: Terminal -> Gõ php artisan serve.
