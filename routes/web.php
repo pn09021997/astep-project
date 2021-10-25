@@ -18,8 +18,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login',[UserController::class,'loginview'])->name('login');
-Route::get('/register',[UserController::class,'registerview']);
+Route::get('/login',[UserController::class,'loginview'])->middleware('checklogin')->name('login');
+Route::get('/register',[UserController::class,'registerview'])->middleware('checklogin');
 Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api');
 Route::get('/password',function (){
     return view('password');
