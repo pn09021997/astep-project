@@ -1,0 +1,12 @@
+.trending-categories-info {
+    padding: 5vh 2vh;
+    position: relative;
+}
+.trending-categories-info img{
+    width: 100%;
+}
+.trending-categories-info .info-detail {
+    position: absolute; 
+    bottom: 10vh;
+    left: 5vh;
+} 
