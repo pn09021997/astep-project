@@ -6,8 +6,8 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h1 class="page-header">Product
-                            <small>List</small>
+                        <h1 class="page-header">Danh sách
+                            <small>Sản Phẩm</small>
                         </h1>
                          <form style="padding-right:40%;padding-top:2%;" class="form-inline my-2 my-lg-0" role="search" method="get" id="" action="{{route('product.search')}}">
             <input style="border-radius:5px;" type="text" value="" name="key" placeholder="Nhập từ khóa...">

@@ -13,7 +13,7 @@
                     <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
-            <input type="text" name="product_name" id="name" class="form-control" placeholder="Tên sản phẩm...">
+            <input type="text" name="product_name" id="product_name" class="form-control" placeholder="Tên sản phẩm...">
         </div>
         <div class="form-group">
             <input type="text" name="price" id="price" class="form-control" placeholder="Giá...">
