@@ -1,11 +1,9 @@
 import React from 'react';
-import "../../assets/css/cart.css"
-import { Component } from 'react';
+import "../../../css/Cart.css";
 
-class Cart extends Component {
-    render() {
-        return (
-            <div className="container">
+export default function Cart() {
+    return (
+        <div className="container">
                 <div className="row">
                     <div className="col-md-12">
 
@@ -81,7 +79,9 @@ class Cart extends Component {
                     </div>
                 </div>
             </div>
-        );
-    }
+    )
 }
-export default Cart;
+
+
+
+

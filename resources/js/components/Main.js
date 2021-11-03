@@ -1,9 +1,11 @@
 import React from 'react'
-
+import Navbar from './navbar/Navbar'
+import Cart from './cart/Cart'
 export default function Main() {
     return (
         <div className="main">
-            Hello World !!!
+            <Navbar></Navbar>
+            <Cart></Cart>
         </div>
     )
 }
