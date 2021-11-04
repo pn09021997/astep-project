@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import "../../../css/Home.css";
-import Footer from './Footer';
 import SlideShow from './SlideShow';
 import TrendingCategories from './TrendingCategories';
 import TrendingProduct from './TrendingProduct';
@@ -119,8 +118,6 @@ export default function Home() {
       <TrendingProduct 
         productList={productList}
       />
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }
