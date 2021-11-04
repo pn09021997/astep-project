@@ -1,0 +1,18 @@
+.slide-show-custom-tag {
+    max-width: 100%;
+    position: relative;
+  }
+  .slide-show-slide {
+    background: #212529;
+  }
+  .slide-show--custom-img {
+    width: 100%;
+    height: auto;
+  }
+  .slide-show-carouse-info {
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 20vh;
+  }
