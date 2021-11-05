@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('view');
+    return view('welcome');
 });
 
 Route::get('/login',[UserController::class,'loginview'])->middleware('checklogin')->name('login');
