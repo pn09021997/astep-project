@@ -1,14 +1,19 @@
 import React, { useState } from "react";
-import { Form, FormGroup, Input, Label, Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col } from "reactstrap";
 import axios from "axios";
 import ExpensesList from "./ExpensesListing";
 import Swal from "sweetalert2";
+import { AvForm, AvField } from "availity-reactstrap-validation";
+import { error } from "jquery";
 
 export default function CreateExpense(props) {
     const [expense, setExpense] = useState({
-        name: "",
+        product_name: "",
         description: "",
-        amount: "",
+        quantity: "",
+        price: "",
+        category_id: "1",
+        product_image: "",
     });
 
     const handleChange = (e) => {
@@ -19,65 +24,134 @@ export default function CreateExpense(props) {
         }));
     };
 
-    const doSubmit = (e) => {
-        e.preventDefault();
+    const handleOnValid = (event, value) => {
         const expenseObject = {
-            name: expense.name,
-            amount: expense.amount,
-            description: expense.description,
+            ...expense,
         };
         axios
-            .post("http://localhost:8000/api/expenses/", expenseObject)
-            .then((res) => console.log(res.data));
-        Swal.fire("Good job!", "Expense Added Successfully", "success");
+            .post("http://localhost:8000/api/product/", expenseObject)
+            .then((res) => {
+                Swal.fire("Good job!", "Expense Added Successfully", "success")
+                .then(() => {
+                    window.location.reload(false);
+                });   
+            })
+            .catch((error) => {
+                Swal.fire({
+                    title: "Error!",
+                    text: "Do you want to continue ?",
+                    icon: "error",
+                    confirmButtonText: "Cool",
+                });
+            });
+        
+    };
 
-        setExpense({ name: '', amount: '',description: ''  });
+    const handleOnInvalid = (event, error) => {
+        Swal.fire({
+            title: "Error!",
+            text: "Do you want to continue ?",
+            icon: "error",
+            confirmButtonText: "Cool",
+        });
     };
 
     return (
         <div className="form-wrapper">
-            <Form onSubmit={doSubmit}>
+            <AvForm
+                onValidSubmit={handleOnValid}
+                onInvalidSubmit={handleOnInvalid}
+            >
                 <Row>
-                    <Col>
-                        <FormGroup controlid="name">
-                            <Label>Name</Label>
-                            <Input
-                                name="name"
-                                type="text"
-                                value={expense.name}
-                                onChange={handleChange}
-                            />
-                        </FormGroup>
+                    <Col lg="6" md="6" sm="12">
+                        <AvField
+                            name="product_name"
+                            label="Name"
+                            type="text"
+                            placeholder="Product Name..."
+                            value={expense.product_name}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
                     </Col>
-
-                    <Col>
-                        <FormGroup controlid="amount">
-                            <Label>Amount</Label>
-                            <Input
-                                name="amount"
-                                type="number"
-                                value={expense.amount}
-                                onChange={handleChange}
-                            />
-                        </FormGroup>
+                    <Col lg="6" md="6" sm="12">
+                        <AvField
+                            name="category_id"
+                            label="Category"
+                            type="select"
+                            value={expense.category_id}
+                            onChange={handleChange}
+                        >
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                            <option value="3">Category 3</option>
+                        </AvField>
                     </Col>
                 </Row>
-
-                <FormGroup controlid="description">
-                    <Label>Description</Label>
-                    <Input
-                        name="description"
-                        as="textarea"
-                        type="textarea"
-                        value={expense.description}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-
-                <Button variant="primary" size="lg" block="block" type="submit">
-                    Add Expense
+                <Row>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="quantity"
+                            label="Quantity"
+                            type="number"
+                            placeholder="Quantity..."
+                            value={expense.quantity}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
+                    </Col>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="price"
+                            label="Price"
+                            type="number"
+                            placeholder="Product price $ ..."
+                            value={expense.price}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
+                    </Col>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="product_image"
+                            label="Image"
+                            type="file"
+                            value={expense.product_image}
+                            onChange={handleChange}
+                        />
+                    </Col>
+                </Row>
+                <AvField
+                    name="description"
+                    label="Description"
+                    type="textarea"
+                    placeholder="Description ..."
+                    value={expense.description}
+                    onChange={handleChange}
+                />
+                <Button
+                    type="submit"
+                    color="primary"
+                    className="btn-md btn-block"
+                >
+                    SUBMIT
                 </Button>
-            </Form>
+            </AvForm>
             <br></br>
             <br></br>
 

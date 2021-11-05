@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Form, FormGroup, Input, Label, Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { AvForm, AvField } from "availity-reactstrap-validation";
+import { Link } from "react-router-dom";
+import "../../../../css/EditExpense.css";
 
 export default function EditExpense(props) {
     const [expense, setExpense] = useState({
-        name: "",
-        amount: "",
+        product_name: "",
         description: "",
+        quantity: "",
+        price: "",
+        category_id: "",
+        product_image: "",
     });
 
     useEffect(() => {
-        axios
-            .get("http://localhost:8000/api/expenses/" + props.match.params.id)
-            .then((res) => {
-                setExpense({
-                    name: res.data.name,
-                    amount: res.data.amount,
-                    description: res.data.description,
-                });
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        const fetchData = async () => {
+            const result = await axios.get(
+                "http://localhost:8000/api/product/" + props.match.params.id
+            );
+            const { data } = await result;
+            setExpense(data);
+        };
+        fetchData();
     }, []);
 
     const handleChange = (e) => {
@@ -33,69 +35,153 @@ export default function EditExpense(props) {
         }));
     };
 
-    const doSubmit = (e) => {
-        e.preventDefault();
-
+    const handleOnValid = (event, value) => {
         const expenseObject = {
-            name: expense.name,
-            amount: expense.amount,
-            description: expense.description,
+            ...expense,
         };
 
-        axios
-            .patch(
-                "http://localhost:8000/api/expenses/" + props.match.params.id,
-                expenseObject
-            )
-            .then((res) => {
-                console.log(res.data);
-                Swal.fire("Good job!", "Expense Updated Successfully", "success");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .patch(
+                        "http://localhost:8000/api/product/" +
+                            props.match.params.id,
+                        expenseObject
+                    )
+                    .catch((error) => {
+                        Swal.fire({
+                            title: "Error!",
+                            text: "Do you want to continue ?",
+                            icon: "error",
+                            confirmButtonText: "Cool",
+                        });
+                    });
 
-        // Redirect to Expense List
-        props.history.push("/edit-expense/" + props.match.params.id);
+                Swal.fire("Saved!", "", "success")
+                .then(() => {
+                    props.history.push(`/edit-expense/${props.match.params.id}`);
+                });
+            } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info")
+            }
+        });
+    };
+
+    const handleOnInvalid = (event, error, value) => {
+        Swal.fire({
+            title: "Error!",
+            text: "Do you want to continue ?",
+            icon: "error",
+            confirmButtonText: "Cool",
+        });
     };
 
     return (
         <div className="form-wrapper">
-            <Form onSubmit={doSubmit}>
-                <FormGroup controlid="Name">
-                    <Label>Name</Label>
-                    <Input
-                        name="name"
-                        type="text"
-                        value={expense.name}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-
-                <FormGroup controlid="Amount">
-                    <Label>Amount</Label>
-                    <Input
-                        name="amount"
-                        type="number"
-                        value={expense.amount}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-
-                <FormGroup controlid="Description">
-                    <Label>Description</Label>
-                    <Input
-                        name="description"
-                        type="text"
-                        value={expense.description}
-                        onChange={handleChange}
-                    />
-                </FormGroup>
-
-                <Button variant="danger" size="lg" block="block" type="submit">
-                    Update Expense
+            <AvForm
+                onValidSubmit={handleOnValid}
+                onInvalidSubmit={handleOnInvalid}
+            >
+                <Row>
+                    <Col lg="6" md="6" sm="12">
+                        <AvField
+                            name="product_name"
+                            label="Name"
+                            type="text" 
+                            value={expense.product_name}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
+                    </Col>
+                    <Col lg="6" md="6" sm="12">
+                        <AvField
+                            name="category_id"
+                            label="Category"
+                            type="select"
+                            value={expense.category_id}
+                            onChange={handleChange}
+                        >
+                            <option value="1">Category 1</option>
+                            <option value="2">Category 2</option>
+                            <option value="3">Category 3</option>
+                        </AvField>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="quantity"
+                            label="Quantity"
+                            type="number"
+                            value={expense.quantity}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
+                    </Col>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="price"
+                            label="Price"
+                            type="number"
+                            value={expense.price}
+                            onChange={handleChange}
+                            validate={{
+                                required: {
+                                    value: true,
+                                    errorMessage: "Please enter product name",
+                                },
+                            }}
+                        />
+                    </Col>
+                    <Col lg="4" md="4" sm="12">
+                        <AvField
+                            name="product_image"
+                            label="Image"
+                            type="file"
+                            onChange={handleChange}
+                        />
+                    </Col>
+                </Row>
+                <AvField
+                    name="description"
+                    label="Description"
+                    type="textarea"
+                    className="text-area-custom"
+                    onChange={handleChange}
+                />
+                <Button
+                    type="submit"
+                    color="danger"
+                    className="btn-md btn-block mb-2"
+                >
+                    UPDATE
                 </Button>
-            </Form>
+                <Link to="/">
+                    <Button
+                        color="danger"
+                        outline
+                        className="btn-md btn-block mb-2"
+                    >
+                        BACK
+                    </Button>
+                </Link>
+            </AvForm>
         </div>
     );
 }

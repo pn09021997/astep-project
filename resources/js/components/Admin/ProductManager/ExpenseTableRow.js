@@ -1,36 +1,72 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button} from 'reactstrap';
+import { Button } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function ExpenseTableRow(props) {
+    const subDescripton = (txtDesc) => {
+        let temp = txtDesc + "";
+        return temp.substr(0, 92);
+    }
     const deleteExpense = () => {
-        axios
-            .delete("http://localhost:8000/api/expenses/" + props.obj.id)
-            .then((res) => {
-                Swal.fire("Good job!", "Expense Delete Successfully", "success");
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios
+                    .delete("http://localhost:8000/api/product/" + props.obj.id)
+                    .then((res) => {
+                        Swal.fire(
+                            "Good job!",
+                            "Expense Delete Successfully",
+                            "success"
+                        ).then(() => {
+                            window.location.reload(false);
+                        })
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+           
+        });
+        
     };
 
     return (
         <tr>
-            <td>{props.obj.name}</td>
-            <td>{props.obj.amount}</td>
-            <td>{props.obj.description}</td>
+            <td></td>
+            <td>{props.obj.product_name}</td>
+            <td>{props.obj.category_id}</td>
+            <td>{props.obj.quantity}</td>
+            <td>$ {props.obj.price}</td>
+            <td>
+                {subDescripton(props.obj.description)}
+                <Link to={"/edit-expense/" + props.obj.id}>
+                     ...
+                </Link>
+            </td>
             <td>
                 <Link
                     className="edit-link"
                     to={"/edit-expense/" + props.obj.id}
                 >
-                    <Button size="sm" variant="info">
+                    <Button className="btn-sm btn-block mb-2" color="success">
                         Edit
                     </Button>
                 </Link>
-                <Button onClick={deleteExpense} size="sm" variant="danger">
+                <Button
+                    onClick={deleteExpense}
+                    className="btn-sm btn-block"
+                    color="danger"
+                >
                     Delete
                 </Button>
             </td>

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\products;
 use Illuminate\Http\Request;
-
+use App\Models\products;
+use App\Models\categories;
 class ProductController extends Controller
 {
     /**
@@ -15,6 +15,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = products::all();
+        $categories = categories::all();
         return response()->json($products);
     }
 
@@ -35,27 +36,34 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $validate = $request->validate([
-            'amount' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
+        $request->validate([
+            'product_name' => 'required',
             'price' => 'required',
-            //optional if you want this to be required
+            'product_image' => 'required',
+            'description' => 'required',
+            'quantity' => 'required'
         ]);
-        if ($validate) {
-            $products = products::create($request->all());
-            return response()->json([
-                'message' => 'products created',
-                'products' => $products
-            ]);
-        }
+
+        $product = new products([
+            'product_name' => $request->get('product_name'),
+            'price' => $request->get('price'),
+            'description' => $request->get('description'),
+            'quantity' => $request->get('quantity'),
+            'product_image' => basename($request->file('product_image')->store('public/images')),
+            'category_id' => $request->get('category_id'),
+        ]);
+
+        $product->save();
+        return response()->json([
+            'message' => 'product created',
+            'products' => $product
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\products
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request, $id)
@@ -64,19 +72,19 @@ class ProductController extends Controller
         if ($products) {
 
             return response()->json([
-                'message' => 'expense found!',
+                'message' => 'product found!',
                 'products' => $products,
             ]);
         }
         return response()->json([
-            'message' => 'products not found!',
+            'message' => 'product not found!',
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\products  $products
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -89,47 +97,46 @@ class ProductController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\products  $products
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        $validate = $request->validate([
-            'amount' => 'required',
-            'description' => 'required',
-            'category_id' => 'required',
+        $request->validate([
+            'product_name' => 'required',
             'price' => 'required',
-            //optional if you want this to be required
+            'description' => 'required',
+            'quantity' => 'required'
         ]);
 
-        if ($validate) {
-            $item = products::find($id);
-            $item->name = $request->get('name');
-            $item->amount = $request->get('amount');
-            $item->description = $request->get('description');
-            $item->category_id = $request->get('category_id');
-            $item->price = $request->get('price');
-            $item->product_image = $request->get('product_image');
-            $item->save();
+        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
+        $product = products::find($id);
+        $product->product_name = $request->get('product_name');
+        $product->price = $request->get('price');
+        $product->description = $request->get('description');
+        $product->quantity = $request->get('quantity');
+        // $product->pro_image = $request->get('pro_image');
 
-            return response()->json([
-                'message' => 'products updated!',
-                'products' => $item
-            ]);
-        }
+        //3 Luu
+        $product->save();
+        
+        return response()->json([
+            'message' => 'products updated!',
+            'products' => $product
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\products  $products
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $item = products::find($id);
-        if ($item) {
-            $item->delete();
+        $product = products::find($id);
+        if ($product) {
+            $product->delete();
             return response()->json([
                 'message' => 'products deleted'
             ]);
@@ -137,5 +144,12 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'products not found !!!'
         ]);
+    }
+
+    public function getSearch(Request $request){
+        $product = products::where('product_name','like','%'.$request->key.'%')
+                            ->orwhere('price','like','%'.$request->key.'%')
+                            ->get();
+                            return view('admin.product.search', compact('product'));
     }
 }

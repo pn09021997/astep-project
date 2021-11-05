@@ -5,24 +5,14 @@ import ExpenseTableRow from "./ExpenseTableRow";
 
 export default function ExpenseList(props) {
     const [expenses, setExpenses] = useState([]);
-    const [checkGetAPI, setCheckGetAPI] = useState(true);
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios("http://localhost:8000/api/expenses/");
+            const result = await axios("http://localhost:8000/api/product/");   
             setExpenses(result.data);
-            if (expenses.length === 0) setCheckGetAPI(false);
         };
         fetchData();
-        /*axios
-            .get("http://localhost:8000/api/expenses/")
-            .then((res) => {
-                setExpenses([...res.data]);
-            })
-            .catch((error) => {
-                console.log(error);
-            });*/
-    }, [checkGetAPI]);
+    }, []);
 
     const DataTable = expenses.map((res, i) => {
         return <ExpenseTableRow obj={res} key={i} />;
@@ -30,11 +20,14 @@ export default function ExpenseList(props) {
 
     return (
         <div className="table-wrapper">
-            <Table striped bordered hover>
+            <Table striped hover>
                 <thead>
                     <tr>
+                        <th>Image</th>
                         <th>Name</th>
-                        <th>Amount</th>
+                        <th>Category</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
                         <th>Description</th>
                         <th>Action</th>
                     </tr>

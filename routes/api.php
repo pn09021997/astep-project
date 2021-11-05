@@ -29,14 +29,5 @@ Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api');
 
-
-//API Product
-Route::get('/expenses', [ProductController::class, 'index'])->name('expenses.all');
-
-Route::post('/expenses', [ProductController::class, 'store'])->name('expenses.store');
-
-Route::get('/expenses/{expense}', [ProductController::class, 'show'])->name('expenses.show');
-
-Route::patch('/expenses/{expense}', [ProductController::class, 'update'])->name('expenses.update');
-
-Route::delete('/expenses/{expense}', [ProductController::class, 'destroy'])->name('expense.destroy');
+Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
