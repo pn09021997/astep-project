@@ -31,7 +31,7 @@ Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api
 
 
 //API Product
-Route::get('/expenses', [ProductController::class, 'index'])->name('expenses.all');
+/*Route::get('/expenses', [ProductController::class, 'index'])->name('expenses.all');
 
 Route::post('/expenses', [ProductController::class, 'store'])->name('expenses.store');
 
@@ -40,3 +40,8 @@ Route::get('/expenses/{expense}', [ProductController::class, 'show'])->name('exp
 Route::patch('/expenses/{expense}', [ProductController::class, 'update'])->name('expenses.update');
 
 Route::delete('/expenses/{expense}', [ProductController::class, 'destroy'])->name('expense.destroy');
+
+*/
+Route::resources([
+    'expenses' => ProductController::class,
+]);
