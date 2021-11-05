@@ -16,7 +16,11 @@
             <input style="border-radius:5px;" type="text" value="" name="keyword" placeholder="Nhập từ khóa...">
             <button style="border-radius:5px;"  class="btn btn-success"type="submit" id="">Tìm kiếm</button>
 </form>
+    @if(empty(count($category)))
+     <p class="pull-left">Không tìm thấy danh mục nào</p>
+     @else
     <p style="padding-left:2%;"class="pull-left">Tìm thấy {{count($category)}} danh mục</p>
+    @endif
     <div class="clearfix"></div></div></div>
   
     </div>
