@@ -16,7 +16,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('view');
 });
 
 Route::get('/login',[UserController::class,'loginview'])->middleware('checklogin')->name('login');
@@ -28,3 +28,4 @@ Route::get('/password',function (){
 
 Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+

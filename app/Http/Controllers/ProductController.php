@@ -16,7 +16,7 @@ class ProductController extends Controller
     {
         $products = products::all();
         $categories = categories::all();
-        return view('admin.product.index', compact('products','categories'));
+        return response()->json($products);
     }
 
     /**
@@ -26,8 +26,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = categories::all();
-        return view('admin.product.create', compact('categories'));
+
     }
 
     /**
@@ -47,26 +46,40 @@ class ProductController extends Controller
         ]);
 
         $product = new products([
-            'product_name' => $request->get('product_name'),
+            'product_name' => $request->get('productName'),
             'price' => $request->get('price'),
             'description' => $request->get('description'),
             'quantity' => $request->get('quantity'),
             'product_image' => basename($request->file('product_image')->store('public/images')),
-            'category_id' => $request->category_id[0]
+            'category_id' => $request->get('categoryId'),
         ]);
+
         $product->save();
-        return redirect('/product')->with('success', 'Product added.');
+        return response()->json([
+            'message' => 'product created',
+            'products' => $product
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
-        //
+        $products = products::find($id);
+        if ($products) {
+
+            return response()->json([
+                'message' => 'product found!',
+                'products' => $products,
+            ]);
+        }
+        return response()->json([
+            'message' => 'product not found!',
+        ]);
     }
 
     /**
@@ -77,8 +90,8 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $item = products::find($id);
-        return view('admin.product.edit', compact('item'));
+        $products = products::find($id);
+        return response()->json($products);
     }
 
     /**
@@ -93,7 +106,6 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'price' => 'required',
-            // 'product_image' => 'required',
             'description' => 'required',
             'quantity' => 'required'
         ]);
@@ -108,7 +120,11 @@ class ProductController extends Controller
 
         //3 Luu
         $product->save();
-        return redirect('/product')->with('success', 'Product updated.');
+        
+        return response()->json([
+            'message' => 'products updated!',
+            'products' => $product
+        ]);
     }
 
     /**
@@ -120,8 +136,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = products::find($id);
-        $product->delete();
-        return redirect('/product')->with('success', 'Deleted.');
+        if ($product) {
+            $product->delete();
+            return response()->json([
+                'message' => 'products deleted'
+            ]);
+        } 
+        return response()->json([
+            'message' => 'products not found !!!'
+        ]);
     }
 
     public function getSearch(Request $request){
