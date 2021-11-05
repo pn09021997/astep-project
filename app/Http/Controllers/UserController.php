@@ -10,12 +10,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Models\OauthAccessToken;
-
-
-
-
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
     public  function loginview(){
         return view('auth.login');
     }
@@ -115,5 +117,123 @@ class UserController extends Controller
         if (Auth::check()) {
             Auth::user()->AauthAcessToken()->delete();
         }
+    }
+
+    public function index()
+    {
+        $users = User::all();
+        return view('admin.user.index',compact('users'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('admin.user.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'Username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'type' => 'required',
+            'address' => 'required'
+        ]);
+
+        $user = new User([
+            'Username' => $request->get('Username'),
+            'email' => $request->get('email'),
+            'password' => $request->get('password'),
+            'phone' => $request->get('phone'),
+            'type' => $request->get('type'),
+            'address' => $request->get('address')
+        ]);
+        $user->save();
+        return redirect('/user')->with('success', 'User added.');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $item = User::find($id);
+        return view('admin.user.edit', compact('item'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'Username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'phone' => 'required',
+            'type' => 'required',
+            'address' => 'required'
+        ]);
+      
+        $user = User::find($id);
+        $user->Username = $request->get('Username');
+        $user->email = $request->get('email');
+        $user->password = $request->get('password');
+        $user->phone = $request->get('phone');
+        $user->type = $request->get('type');
+        $user->address = $request->get('address');
+
+        $user->save();
+        return redirect('/user')->with('success', 'User updated.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = User::find($id);
+        $user->delete();
+        return redirect('/user')->with('success', 'Deleted.');
+    }
+
+    public function getSearch(Request $request){
+        $user = User::where('Username','like','%'.$request->keyword.'%')
+                     ->orwhere('address','like','%'.$request->keyword.'%')
+                     ->get();        
+                    return view('admin.user.search', compact('user'));
     }
 }

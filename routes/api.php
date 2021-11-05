@@ -27,3 +27,7 @@ Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->
 Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api');
+
+Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::resource('/category', 'App\Http\Controllers\Api\CategoryController');
+Route::resource('/user', 'App\Http\Controllers\Api\UserController');
