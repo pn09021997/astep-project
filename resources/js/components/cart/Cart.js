@@ -9,14 +9,12 @@ export default function Cart() {
 
                         <div className="breadcrumb clearfix">
                             <ul>
-                                <li itemType="http://shema.org/Breadcrumb" className="home">
+                                <li className="home">
                                     <a title="Đến trang chủ"><span itemProp="title">Trang chủ</span></a>
                                 </li>
-                                <li className="icon-li"><strong>Giỏ hàng</strong> </li>
+                                <li className="cart"><strong>Giỏ hàng</strong> </li>
                             </ul>
                         </div>
-                        <script src="/app/services/orderServices.js"></script>
-                        <script src="/app/controllers/orderController.js"></script>
                         <div className="cart-content ng-scope" >
                             <h1 className="title"><span>Giỏ hàng của tôi</span></h1>
                             <div className="steps clearfix">
