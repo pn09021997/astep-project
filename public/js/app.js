@@ -2242,10 +2242,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ Footer)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Row.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Col.js");
 /* harmony import */ var _css_Footer_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../css/Footer.css */ "./resources/css/Footer.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
 
 
 
@@ -2263,10 +2265,13 @@ function Footer() {
           md: "4",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
             className: "footer-logo mb-3",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-              src: "https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402",
-              alt: "uneox logo",
-              className: "img-fluid navbar--custom-logo"
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
+              to: "/",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+                src: "https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402",
+                alt: "uneox logo",
+                className: "img-fluid navbar--custom-logo"
+              })
             })
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
@@ -2550,9 +2555,9 @@ function SlideShow(_ref) {
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "slide-show",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
       className: "slide-show-slide",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
         activeIndex: activeIndex,
         next: next,
         previous: previous,
@@ -2569,15 +2574,7 @@ function SlideShow(_ref) {
           directionText: "Next",
           onClickHandler: next
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-        className: "slide-show-controls--mobile-custom",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-          onClick: previous,
-          id: "btnPrev-Mobile"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-          onClick: next
-        })]
-      })]
+      })
     })
   });
 }
@@ -2613,13 +2610,16 @@ function TrendingCategories(_ref) {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
         className: "trending-categories-info",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
+          className: "trending-category-product-img img-fluid",
           src: product.img,
           alt: product.name
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
           className: "info-detail",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+            className: "trending-category-title",
             children: ["# ", product.category]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            className: "trending-category-product-title",
             children: product.name
           })]
         })]
@@ -2651,7 +2651,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ TrendingProduct)
 /* harmony export */ });
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Col.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Row.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Button.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/es/Row.js");
 /* harmony import */ var _css_TrendingProduct_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../css/TrendingProduct.css */ "./resources/css/TrendingProduct.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
@@ -2664,10 +2665,21 @@ function TrendingProduct(_ref) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__["default"], {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
         className: "trending-product-info",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
-          src: product.img,
-          alt: product.name,
-          className: "img-fluid"
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+          className: "product-action--action",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
+            src: product.img,
+            alt: product.name,
+            className: "img-fluid"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+            "class": "action-cart",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__["default"], {
+              color: "danger",
+              outline: true,
+              className: "btn-block",
+              children: "Add Cart"
+            })
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
           className: "info-detail",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
@@ -2690,7 +2702,7 @@ function TrendingProduct(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         children: "Find a bright ideal to suit your taste with our great selection of suspension, wall, floor and table lights."
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
       xs: "1",
       sm: "2",
       md: "4",
@@ -2721,7 +2733,7 @@ __webpack_require__.r(__webpack_exports__);
 function Info(_ref) {
   var isLogin = _ref.isLogin;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-    className: "info",
+    className: "info mt-5 mb-5",
     children: JSON.stringify(isLogin)
   });
 }
@@ -2806,7 +2818,7 @@ function Login(_ref) {
     });
   } else {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-      className: "login container",
+      className: "login container mt-5 mb-5",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
         className: "login-title text-center",
         children: "LOGIN"
@@ -2953,7 +2965,7 @@ function Register(_ref) {
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-    className: "register container",
+    className: "register container mt-5 mb-5",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h1", {
       className: "register-title text-center",
       children: "REGISTER"
@@ -7786,7 +7798,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".home{\r\n    \r\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7906,7 +7918,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".slide-show-custom-tag {\r\n    max-width: 100%;\r\n    position: relative;\r\n  }\r\n  .slide-show-slide {\r\n    background: #212529;\r\n  }\r\n  .slide-show--custom-img {\r\n    width: 100%;\r\n    height: auto;\r\n  }\r\n  .slide-show-carouse-info {\r\n    color: #fff;\r\n    position: absolute;\r\n    left: 50%;\r\n    transform: translate(-50%, 0);\r\n    bottom: 20vh;\r\n  }\r\n  .slide-show-controls--mobile-custom {\r\n    color: #fff;\r\n    position: absolute;\r\n    left: 50%;\r\n    transform: translate(-50%, 0);\r\n    bottom: 0vh;\r\n  }\r\n  .slide-show-controls--mobile-custom button{\r\n    border: none;\r\n    outline: none;\r\n    display: inline-block;\r\n    padding: .1vh 2vh;\r\n    background: #fff;\r\n  }\r\n  .slide-show-controls--mobile-custom button:focus{\r\n    border: 1px solid #e66f28;\r\n  }\r\n  #btnPrev-Mobile{\r\n    margin-right: 1vh;\r\n  }\r\n  ", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".slide-show-custom-tag {\r\n    max-width: 100%;\r\n    position: relative;\r\n}\r\n.slide-show-slide {\r\n    background: #212529;\r\n}\r\n.slide-show--custom-img {\r\n    width: 100%;\r\n    height: auto;\r\n}\r\n.slide-show-carouse-info {\r\n    color: #fff;\r\n    position: absolute;\r\n    left: 50%;\r\n    transform: translate(-50%, 0);\r\n    bottom: 20vh;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7930,7 +7942,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".trending-categories-info {\r\n    padding: 5vh 2vh;\r\n    position: relative;\r\n}\r\n.trending-categories-info img{\r\n    width: 100%;\r\n}\r\n.trending-categories-info .info-detail {\r\n    position: absolute; \r\n    bottom: 10vh;\r\n    left: 5vh;\r\n} ", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".trending-categories-info {\r\n    padding: 5vh 2vh;\r\n    position: relative;\r\n}\r\n.trending-categories-info .trending-category-product-img {\r\n    transition: transform .5s, filter .5s ease-in-out;\r\n    filter: grayscale(100%);\r\n}\r\n.trending-categories-info .trending-category-product-img {\r\n    width: 100%;\r\n}\r\n.trending-categories-info .info-detail {\r\n    position: absolute;\r\n    bottom: 20%;\r\n    left: 5vh;\r\n}\r\n.trending-category-title {\r\n    font-size: 1.5rem;\r\n    transition: 0.5s;\r\n}\r\n.trending-category-product-title {\r\n    font-size: 2rem;\r\n    transition: 0.5s;\r\n}\r\n.trending-category-title:hover,\r\n.trending-category-product-title:hover {\r\n    color: #eb7025;\r\n}\r\n.trending-categories-info:hover .trending-category-product-img {\r\n    filter: grayscale(0);\r\n    transform: scale(1.1);\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7954,7 +7966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".trending-product-info{\r\n    padding: 5vh 2vh;\r\n    text-align: center;\r\n}\r\n.trending-product-info img {\r\n    width: 100%;\r\n    height: auto;\r\n}\r\n.trending-product-info .info-detail {\r\n    margin: 0;\r\n    margin-top: 2vh;\r\n} \r\n.trending-product-introduce{\r\n    text-align: center;\r\n}\r\n.trending-product-introduce p{\r\n    color: #a3a1a1;\r\n}\r\n.trending-product-info .info-detail-name {\r\n    font-size: 1rem;\r\n    font-weight: 500;\r\n} \r\n.trending-product-info .info-detail-price{\r\n    color: #a3a1a1;\r\n    margin: 0;\r\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".trending-product-info {\r\n    padding: 5vh 2vh;\r\n    text-align: center;\r\n}\r\n.trending-product-info img {\r\n    filter: grayscale(0);\r\n    display: block;\r\n    width: 100%;\r\n    height: auto;\r\n    transition: filter .5s ease-in-out;\r\n    -webkit-backface-visibility: hidden;\r\n            backface-visibility: hidden;\r\n}\r\n.trending-product-info .info-detail {\r\n    margin: 0;\r\n    margin-top: 2vh;\r\n}\r\n.trending-product-introduce {\r\n    text-align: center;\r\n}\r\n.trending-product-introduce p {\r\n    color: #a3a1a1;\r\n}\r\n.trending-product-info .info-detail-name {\r\n    font-size: 1.2rem;\r\n    font-weight: 500;\r\n    transition: 0.5s;\r\n}\r\n.trending-product-info .info-detail-name:hover {\r\n    color: #eb7025;\r\n}\r\n.trending-product-info .info-detail-price {\r\n    color: #a3a1a1;\r\n    margin: 0;\r\n    font-size: 1rem;\r\n}\r\n.product-action--action{\r\n    position: relative;\r\n}\r\n.action-cart {\r\n    width: 100%;\r\n    opacity: 0;\r\n    position: absolute;\r\n    bottom: 0;\r\n    left: 50%;\r\n    transform: translate(-50%, -50%);\r\n    -ms-transform: translate(-50%, -50%);\r\n    text-align: center;\r\n    transition: opacity .7s;\r\n}\r\n.product-action--action:hover img {\r\n    filter: grayscale(100%);\r\n}\r\n\r\n.product-action--action:hover .action-cart {\r\n    opacity: 1;\r\n}\r\n.add-cart {\r\n    background-color: #04aa6d;\r\n    color: white;\r\n    font-size: 16px;\r\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

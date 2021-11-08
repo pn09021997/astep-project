@@ -83,10 +83,6 @@ export default function SlideShow({ categoriesList }) {
             onClickHandler={next}
           />
         </Carousel>
-        <div className="slide-show-controls--mobile-custom">
-          <button onClick={previous} id="btnPrev-Mobile"></button>
-          <button onClick={next}></button>
-        </div>
       </div>
     </div>
   );
