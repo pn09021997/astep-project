@@ -46,8 +46,7 @@ class UserController extends Controller
         return view('auth.register');
     }
 
-    public  function  register(Request  $request){
-        
+    public  function  register(Request  $request){ 
     /*$validator = Validator::make($request->all(),[
         'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
         'password'=>'required|min:6|max:12', // test rồi
