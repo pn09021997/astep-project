@@ -72,8 +72,8 @@ export default function Register({ accountData, setAccountData }) {
         });
     };
 
-    return (
-        <div className="register container">
+    return ( 
+        <div className="register container mt-5 mb-5">
             <h1 className="register-title text-center">REGISTER</h1>
             <AvForm
                 onValidSubmit={doRegister}

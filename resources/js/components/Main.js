@@ -20,7 +20,6 @@ import "../../css/Main.css";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
-import Footer from "./Home/Footer";
 
 export default function Main() {
     //Account Data
@@ -132,8 +131,6 @@ export default function Main() {
                     </Route>
                 </Switch>
             </Router>
-            {/* Footer */}
-            <Footer />
         </div>
     );
 }

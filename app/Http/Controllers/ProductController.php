@@ -34,7 +34,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //insert
     {
         $request->validate([
             'product_name' => 'required',
@@ -66,7 +66,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $id)
+    public function show(Request $request, $id) //get item by id
     {
         $products = products::find($id);
         if ($products) {
@@ -100,7 +100,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id) //update
     {
         $request->validate([
             'product_name' => 'required',
@@ -132,7 +132,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id) //remove
     {
         $product = products::find($id);
         if ($product) {

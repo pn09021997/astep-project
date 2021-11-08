@@ -64,7 +64,7 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
         return <Info isLogin={isLogin} accountData={accountData} />;
     } else {
         return (
-            <div className="login container">
+            <div className="login container mt-5 mb-5">
                 <h1 className="login-title text-center">LOGIN</h1>
                 <AvForm
                     onValidSubmit={doLogin}
