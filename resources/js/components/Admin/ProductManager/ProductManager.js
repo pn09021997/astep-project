@@ -47,11 +47,6 @@ export default function ProductManager() {
                             <div className="wrapper">
                                 <Switch>
                                     <Route
-                                        exact
-                                        path="/"
-                                        component={CreateExpense}
-                                    />
-                                    <Route
                                         path="/create-expense"
                                         component={CreateExpense}
                                     />
