@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 
 
@@ -27,3 +28,6 @@ Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->
 Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api');
+
+Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');

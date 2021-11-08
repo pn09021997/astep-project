@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,3 +25,7 @@ Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api');
 Route::get('/password',function (){
     return view('password');
 })->middleware('auth:api');
+
+Route::resource('/product', 'App\Http\Controllers\ProductController');
+Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+
