@@ -23,4 +23,4 @@ Route::get('/register',[UserController::class,'registerview']); // Route Registe
 Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api'); // Route info user
 Route::get('/password',function (){
     return view('password');
-})->middleware('auth:api'); // Route Password 
+})->middleware('auth:api'); // Route Password
