@@ -58,8 +58,18 @@ class User extends Authenticatable
         }
     }
 
+
+    public function username()
+    {
+        return 'Username';
+    }
+
     public function AauthAcessToken(){
         return $this->hasMany('App\Models\oauth_token');
+    }
+
+    public function findForPassport($username) {
+        return $this->where('Username', $username)->first();
     }
 
 }
