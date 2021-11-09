@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "b59bae7c-323a-452a-ab7f-a9c04e71c858",
+		"name": "Project-CDW1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Username",
+							"value": "anhkatari",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456conga",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "anhdagia123@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "1232211789",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "anhdagia",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/register",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeinfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "1212@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "1234567898",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/info",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "Username",
+							"value": "anhkatari",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456conga",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/login",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/logout",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getinfo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8000/api/info",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"info"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChangePassWord",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "user cart",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		}
+	]
+}
