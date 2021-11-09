@@ -163,6 +163,7 @@ export default function EditExpense(props) {
                     label="Description"
                     type="textarea"
                     className="text-area-custom"
+                    value={expense.description}
                     onChange={handleChange}
                 />
                 <Button
