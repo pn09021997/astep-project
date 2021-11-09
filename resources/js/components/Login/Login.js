@@ -1,4 +1,4 @@
-import React from "react";
+import React, {  useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -8,6 +8,22 @@ import "../../../css/Login.css";
 import Info from "./Info";
 
 export default function Login({ isLogin, setIsLogin, accountData }) {
+    //State Login Account data input
+    const [loginAccount, setLoginAccount] = useState({
+        email: "",
+        password: "",
+    })
+
+    //Catch change of login form input and save in login Account 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setLoginAccount((loginAccount) => ({
+            ...loginAccount,
+            [name]: value,
+        }));
+        console.table(loginAccount);
+    }
+    
     //Do Login
     const setLoginInfo = (loginCheck) => {
         if (loginCheck.length === 0) {
@@ -75,6 +91,8 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                         label="Email"
                         type="text"
                         placeholder="Your email..."
+                        value={loginAccount.email}
+                        onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,
@@ -91,6 +109,8 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                         label="Password"
                         type="password"
                         placeholder="Your password..."
+                        value={loginAccount.username}
+                        onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,

@@ -20,7 +20,7 @@ export default function Info({ isLogin }) {
         });
     };
     return (
-        <div className="info container">
+        <div className="info container mt-5 mb-5">
             <h1 className="info-title text-center">WELCOME BACK</h1>
             <AvForm
                 onValidSubmit={doUpdateInfo}
