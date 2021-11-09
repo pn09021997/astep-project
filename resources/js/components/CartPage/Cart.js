@@ -1,5 +1,5 @@
 import React from 'react';
-import "../../../css/Cart.css";
+import "../../../css/addcart.css";
 
 export default function Cart() {
     return (
@@ -76,7 +76,9 @@ export default function Cart() {
                         </div>
                     </div>
                 </div>
+                
             </div>
+            
     )
 }
 
