@@ -16,7 +16,6 @@ export default function Info({ isLogin }) {
     });
     //Check change of input
     const [preInfoLogin, setPreInfoLogin] = useState({ ...isLogin });
-
     //Catch onChange on input of update form to save in state infoLogin
     const handleChange = (e) => {
         const { name, value } = e.target;
