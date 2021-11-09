@@ -4,13 +4,37 @@ import { Button } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../../css/Info.css";
+import { update } from "lodash";
 export default function Info({ isLogin }) {
     const history = useHistory();
-    const [infoLogin, setInfoLogin] = useState({ ...isLogin });
+    const [updateData, setUpdateData] = useState({
+        username: isLogin.username,
+        email: isLogin.email,
+        phone: isLogin.phone,
+        address: isLogin.address,
+        fieldChange: [],
+    });
+    //Check change of input
+    const [preInfoLogin, setPreInfoLogin] = useState({ ...isLogin });
+
+    //Catch onChange on input of update form to save in state infoLogin
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setUpdateData((updateData) => ({
+            ...updateData,
+            [name]: value,
+            fieldChange:
+                updateData.fieldChange.indexOf(name) === -1
+                    ? [...updateData.fieldChange, name]
+                    : [...updateData.fieldChange],
+        }));
+        console.table(updateData.fieldChange);
+    };
+
     const doUpdateInfo = (event, values) => {
         console.log(`Successfully`);
-        history.push('/');
-    }
+        history.push("/");
+    };
     const handleInvalidSubmit = (event, errors, values) => {
         Swal.fire({
             title: "Error!",
@@ -20,7 +44,7 @@ export default function Info({ isLogin }) {
         });
     };
     return (
-        <div className="info container">
+        <div className="info container mt-5 mb-5">
             <h1 className="info-title text-center">WELCOME BACK</h1>
             <AvForm
                 onValidSubmit={doUpdateInfo}
@@ -31,7 +55,8 @@ export default function Info({ isLogin }) {
                     label="Email"
                     type="text"
                     placeholder="Email here..."
-                    value={infoLogin.username}
+                    value={updateData.username}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
@@ -44,11 +69,12 @@ export default function Info({ isLogin }) {
                     }}
                 />
                 <AvField
-                    name="fullname"
-                    label="Fullname"
-                    placeholder="Fullname here..."
+                    name="username"
+                    label="Username"
+                    placeholder="Username here..."
                     type="text"
-                    value={infoLogin.fullname}
+                    value={updateData.username}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
@@ -72,27 +98,38 @@ export default function Info({ isLogin }) {
                     }}
                 />
                 <AvField
-                    name="birthday"
-                    label="Birthday"
-                    type="date"
-                    value={infoLogin.birthday}
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your birthday",
-                        },
-                    }}
-                />
-                <AvField
                     name="phone"
                     label="Phone"
                     placeholder="Phone here..."
                     type="tel"
-                    value={infoLogin.phone}
+                    value={updateData.phone}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
                             errorMessage: "Please enter your phone",
+                        },
+                        minLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 numbers",
+                        },
+                        maxLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 numbers",
+                        },
+                    }}
+                />
+                <AvField
+                    name="address"
+                    label="Address"
+                    placeholder="Address here..."
+                    type="textarea"
+                    value={updateData.address}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter your address",
                         },
                     }}
                 />

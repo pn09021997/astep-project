@@ -44,12 +44,12 @@ export default function Main() {
 
     //Local Info Login User
     const [isLogin, setIsLogin] = useState({
-        id: "none",
-        username: "none",
-        password: "none",
-        fullname: "none",
-        birthday: "none",
-        isLoginStatus: false,
+        id: 1,
+        username: "vyvy09021997@gmail.com",
+        password: "321",
+        phone: "9876543210",
+        address: "123",
+        isLoginStatus: true,
     });
 
     //State of navbar
