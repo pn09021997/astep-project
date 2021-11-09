@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login',[UserController::class,'loginview'])->name('login');
-Route::get('/register',[UserController::class,'registerview']);
-Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api');
+Route::get('/login',[UserController::class,'loginview'])->name('login'); // Route login
+Route::get('/register',[UserController::class,'registerview']); // Route Register
+Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api'); // Route info user
 Route::get('/password',function (){
     return view('password');
-})->middleware('auth:api');
+})->middleware('auth:api'); // Route Password 

@@ -1,10 +1,11 @@
 <?php
 
+use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Session;
-
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/login',[UserController::class,'login']);
-Route::post('/register',[UserController::class,'register']);
-Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->name('userinfo');
-Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
-Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');
+Route::post('/login',[UserController::class,'login']); // Api Login
+Route::post('/register',[UserController::class,'register']); // Api Register
+Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->name('userinfo'); // Api Get info user
+Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api'); // Api  Update info user
+Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');// APi Update PassWord
+Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api'); // Api Logout user
+Route::get('/user_cart',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart

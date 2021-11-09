@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Models\OauthAccessToken;
+
 
 class User extends Authenticatable
 {
@@ -54,6 +56,20 @@ class User extends Authenticatable
         {
             return false;
         }
+    }
+
+
+    public function username()
+    {
+        return 'Username';
+    }
+
+    public function AauthAcessToken(){
+        return $this->hasMany('App\Models\oauth_token');
+    }
+
+    public function findForPassport($username) {
+        return $this->where('Username', $username)->first();
     }
 
 }
