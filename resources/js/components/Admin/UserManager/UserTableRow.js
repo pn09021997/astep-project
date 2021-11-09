@@ -39,13 +39,12 @@ export default function UserTableRow(props) {
 
     return (
         <tr>
-            <td></td>
             <td>{props.obj.Username}</td>
             <td>{props.obj.email}</td>
             <td>{props.obj.phone}</td>
-            <td>$ {props.obj.password}</td>
-            <td>$ {props.obj.type}</td>
-            <td>$ {props.obj.address}</td>
+            <td>{props.obj.password}</td>
+            <td>{props.obj.type}</td>
+            <td>{props.obj.address}</td>
             <td>
                 <Link
                     className="edit-link"

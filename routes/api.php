@@ -30,4 +30,6 @@ Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('a
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api');
 
 Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::resource('/user', 'App\Http\Controllers\Api\UserController');
+
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');

@@ -12,11 +12,11 @@ export default function CreateUser(props) {
         email: "",
         phone: "",
         password: "",
-        type: "1",
+        type: "",
         address: "",
     });
 
-  
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setExpense((expense) => ({
@@ -30,12 +30,12 @@ export default function CreateUser(props) {
             ...expense,
         };
         axios
-            .post("http://localhost:8000/api/product/", expenseObject)
+            .post("http://localhost:8000/api/user/", expenseObject)
             .then((res) => {
                 Swal.fire("Good job!", "Expense Added Successfully", "success")
-                .then(() => {
-                    window.location.reload(false);
-                });   
+                    .then(() => {
+                        window.location.reload(false);
+                    });
             })
             .catch((error) => {
                 Swal.fire({
@@ -45,7 +45,7 @@ export default function CreateUser(props) {
                     confirmButtonText: "Cool",
                 });
             });
-        
+
     };
 
     const handleOnInvalid = (event, error) => {
@@ -63,88 +63,89 @@ export default function CreateUser(props) {
                 onValidSubmit={handleOnValid}
                 onInvalidSubmit={handleOnInvalid}
             >
-                <Row>
-                    <Col lg="6" md="6" sm="12">
-                        <AvField
-                            name="Username"
-                            label="Username"
-                            type="text"
-                            placeholder="User Name..."
-                            value={expense.Username}
-                            onChange={handleChange}
-                            validate={{
-                                required: {
-                                    value: true,
-                                    errorMessage: "Please enter user name",
-                                },
-                            }}
-                        />
-                    </Col>
-             
-                </Row>
-                <Row>
-                <Col lg="6" md="6" sm="12">
-                        <AvField
-                            name="email"
-                            label="Email"
-                            type="text"
-                            placeholder="Enter Email..."
-                            value={expense.email}
-                            onChange={handleChange}
-                            validate={{
-                                required: {
-                                    value: true,
-                                    errorMessage: "Please enter Email",
-                                },
-                            }}
-                        />
-                    </Col>
-                    <Col lg="6" md="6" sm="12">
-                        <AvField
-                            name="phone"
-                            label="Phone Number"
-                            type="text"
-                            placeholder="Enter Email..."
-                            value={expense.phone}
-                            onChange={handleChange}
-                            validate={{
-                                required: {
-                                    value: true,
-                                    errorMessage: "Please enter Phone Number",
-                                },
-                            }}
-                        />
-                    </Col>
-                    <Col lg="6" md="6" sm="12">
-                        <AvField
-                            name="password"
-                            label="Password"
-                            type="text"
-                            placeholder="Enter Password..."
-                            value={expense.password}
-                            onChange={handleChange}
-                            validate={{
-                                required: {
-                                    value: true,
-                                    errorMessage: "Please enter Password!!",
-                                },
-                            }}
-                        />
-                    </Col>
-                    <Col lg="6" md="6" sm="12">
-                        <AvField
-                            name="type"
-                            label="type"
-                            type="select"
-                            value={expense.type}
-                            onChange={handleChange}
-                        >
-                            <option value="1">Admin</option>
-                            <option value="2">User</option>
-                            <option value="3">Other</option>
-                        </AvField>
-                    </Col>
-                </Row>
+                <AvField
+                    name="Username"
+                    label="Username"
+                    type="text"
+                    placeholder="User Name..."
+                    value={expense.Username}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter user name",
+                        },
+                    }}
+                />
+                <AvField
+                    name="email"
+                    label="email"
+                    type="text"
+                    placeholder="Enter Email..."
+                    value={expense.email}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter Email",
+                        },
+                    }}
+                />
+                <AvField
+                    name="phone"
+                    label="Phone Number"
+                    type="text"
+                    placeholder="Enter Phone Number..."
+                    value={expense.phone}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter Phone Number",
+                        },
+                    }}
+                />
+                <AvField
+                    name="password"
+                    label="Password"
+                    type="text"
+                    placeholder="Enter Password..."
+                    value={expense.password}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter Password!!",
+                        },
+                    }}
+                />
+                <AvField
+                    name="type"
+                    label="type"
+                    type="select"
+                    value={expense.type}
+                    onChange={handleChange}
+                >
+                    <option value="1">Admin</option>
+                    <option value="2">User</option>
+                    <option value="3">Other</option>
+                </AvField>
+                <AvField
+                    name="address"
+                    label="address"
+                    type="text"
+                    placeholder="Enter addressr..."
+                    value={expense.phone}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter address",
+                        },
+                    }}
+                />
+
+
                 <Button
                     type="submit"
                     color="primary"
@@ -155,8 +156,8 @@ export default function CreateUser(props) {
             </AvForm>
             <br></br>
             <br></br>
-             <UserList></UserList>
-         
+            <UserList></UserList>
+
         </div>
     );
 }

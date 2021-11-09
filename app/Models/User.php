@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use App\Models\OauthAccessToken;
+use Illuminate\Database\Eloquent\Model;
 
 
 class User extends Authenticatable
@@ -37,6 +38,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+  
 
     /**
      * The attributes that should be cast.
