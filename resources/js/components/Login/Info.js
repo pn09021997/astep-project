@@ -8,7 +8,6 @@ import { update } from "lodash";
 export default function Info({ isLogin }) {
     const history = useHistory();
     const [updateData, setUpdateData] = useState({
-        username: isLogin.username,
         email: isLogin.email,
         phone: isLogin.phone,
         address: isLogin.address,
@@ -54,7 +53,7 @@ export default function Info({ isLogin }) {
                     label="Email"
                     type="text"
                     placeholder="Email here..."
-                    value={updateData.username}
+                    value={updateData.email}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -64,35 +63,6 @@ export default function Info({ isLogin }) {
                         email: {
                             value: true,
                             errorMessage: "Your email not correct",
-                        },
-                    }}
-                />
-                <AvField
-                    name="username"
-                    label="Username"
-                    placeholder="Username here..."
-                    type="text"
-                    value={updateData.username}
-                    onChange={handleChange}
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your fullname",
-                        },
-                        pattern: {
-                            value: "^[A-Za-z]+$",
-                            errorMessage:
-                                "Your password must be composed only with letter",
-                        },
-                        minLength: {
-                            value: 6,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
-                        },
-                        maxLength: {
-                            value: 16,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
                         },
                     }}
                 />
