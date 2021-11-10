@@ -42,7 +42,13 @@ export default function Register({ accountData, setAccountData }) {
                     ...registerCheck[0],
                 },
             ]);
-            history.push("/login");
+            Swal.fire(
+                "Good job!",
+                "Expense Added Successfully",
+                "success"
+            ).then(() => {
+                history.push("/login");
+            });
         }
     };
 
@@ -55,7 +61,7 @@ export default function Register({ accountData, setAccountData }) {
         ];
 
         let registerCheck = accountData.filter((value, index) => {
-            return validateForm(infoRegister, value) === true;
+            return validateForm(infoRegister, value) === false;
         });
         setRegisterInfo(registerCheck);
     };

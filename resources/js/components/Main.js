@@ -26,18 +26,18 @@ export default function Main() {
     const [accountData, setAccountData] = useState([
         {
             id: 0,
-            username: "pn0921997@gmail.com",
+            username: "pn0921997",
             password: "1234567",
-            fullname: "Phuong Nguyen",
-            birthday: "1997-02-09",
+            email: "pn0921997@gmail.com",
+            address: "TDC",
             phone: "0123456789",
         },
         {
             id: 1,
-            username: "vyvy09021997@gmail.com",
-            password: "321",
-            fullname: "Nguyen Phuong",
-            birthday: "1997-02-09",
+            username: "vyvy09021997",
+            password: "1234567",
+            email: "vyvy09021997@gmail.com",
+            address: "TDC",
             phone: "9876543210",
         },
     ]);
@@ -47,8 +47,9 @@ export default function Main() {
         id: "none",
         username: "none",
         password: "none",
-        fullname: "none",
-        birthday: "none",
+        email: "none",
+        address: "none",
+        phone: "none",
         isLoginStatus: false,
     });
 
