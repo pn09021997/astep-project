@@ -66,12 +66,19 @@ export default function Main() {
           className="main-navbar container-fluid"
         >
           <NavbarBrand href="/" className="mr-auto">
-            <img 
+            <img
               src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
               alt="uneox logo"
               className="img-fluid navbar--custom-logo"
             />
           </NavbarBrand>
+          {/* search bar */}
+          <div className = "search-box">
+          <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search"/>
+                <button class="btn btn-outline-success mr-4 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
           <NavbarToggler onClick={toggleNavbar} className="mr-2" />
           <Collapse isOpen={!collapsed} navbar>
             <Nav navbar>
