@@ -38,7 +38,6 @@ class UserController extends Controller
             'Username'=>$request['Username'],
             'password'=>$request['password']
         ];
-
         if (Auth::attempt($datax))
         {
          $user =  User::where('Username',$datax['Username'])->first();
