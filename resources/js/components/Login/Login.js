@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -10,11 +10,11 @@ import Info from "./Info";
 export default function Login({ isLogin, setIsLogin, accountData }) {
     //State Login Account data input
     const [loginAccount, setLoginAccount] = useState({
-        email: "",
+        username: "",
         password: "",
-    })
+    });
 
-    //Catch change of login form input and save in login Account 
+    //Catch change of login form input and save in login Account
     const handleChange = (e) => {
         const { name, value } = e.target;
         setLoginAccount((loginAccount) => ({
@@ -22,8 +22,8 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
             [name]: value,
         }));
         console.table(loginAccount);
-    }
-    
+    };
+
     //Do Login
     const setLoginInfo = (loginCheck) => {
         if (loginCheck.length === 0) {
@@ -32,21 +32,18 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                 text: "Do you want to continue ?",
                 icon: "error",
                 confirmButtonText: "Cool",
-            }); 
-        } else
-            setIsLogin({
-                ...loginCheck[0],
-                isLoginStatus: true,
             });
+        } else Swal.fire("Good job!", "Expense Added Successfully", "success");
+        setIsLogin({
+            ...loginCheck[0],
+            isLoginStatus: true,
+        });
     };
 
     //Get Data at Form
     const doLogin = (event, values) => {
-        let email = values.email;
-        let password = values.password;
         let infoLogin = {
-            username: email,
-            password: password,
+            ...values,
         };
 
         let loginCheck = accountData.filter((value, index) => {
@@ -87,20 +84,16 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                     onInvalidSubmit={handleInvalidSubmit}
                 >
                     <AvField
-                        name="email"
-                        label="Email"
+                        name="username"
+                        label="Username"
                         type="text"
-                        placeholder="Your email..."
-                        value={loginAccount.email}
+                        placeholder="Your username..."
+                        value={loginAccount.username}
                         onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,
                                 errorMessage: "Please enter your email",
-                            },
-                            email: {
-                                value: true,
-                                errorMessage: "Your email not correct",
                             },
                         }}
                     />
