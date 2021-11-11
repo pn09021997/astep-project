@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useHistory } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import "../../../css/Login.css";
 import Info from "./Info";
 
 export default function Login({ isLogin, setIsLogin, accountData }) {
+    const history = useHistory();
     //State Login Account data input
     const [loginAccount, setLoginAccount] = useState({
         username: "",
@@ -33,11 +34,14 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                 icon: "error",
                 confirmButtonText: "Cool",
             });
-        } else Swal.fire("Good job!", "Expense Added Successfully", "success");
-        setIsLogin({
-            ...loginCheck[0],
-            isLoginStatus: true,
-        });
+        } else {
+            Swal.fire("Good job!", "Expense Added Successfully", "success");
+            setIsLogin({
+                ...loginCheck[0],
+                isLoginStatus: true,
+            });
+            history.push('/');
+        }
     };
 
     //Get Data at Form
