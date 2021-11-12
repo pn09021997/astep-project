@@ -31,6 +31,7 @@ export default function Main() {
             email: "pn0921997@gmail.com",
             address: "TDC",
             phone: "0123456789",
+            address: "TDC"
         },
         {
             id: 1,

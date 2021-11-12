@@ -26,9 +26,8 @@ use Laravel\Passport\TokenRepository;
 class UserController extends Controller
 {
     // Login View
-    public  function loginview()
-    {
-        return view('auth.login');
+    public  function loginview(){
+        return view('');
     }
      // Login
     public  function  login(Request  $request){
@@ -40,19 +39,24 @@ class UserController extends Controller
             'Username' => $request['Username'],
             'password' => $request['password']
         ];
-        if (Auth::attempt($datax)) {
-            $user =  User::where('Username', $datax['Username'])->first();
-            $token = $user->createToken('user')->accessToken;
-            return  response()->json(['token' => $token], 200);
-        } else {
+
+        if (Auth::attempt($datax))
+        {
+         $user =  User::where('Username',$datax['Username'])->first();
+         $token = $user->createToken('user')->accessToken;
+            return  response()->json(['token'=> $token],200);
+        }
+        else{
             return abort(401);
         }
     }
 
 
+
+
+
     // Register View
-    public  function  registerview()
-    {
+    public  function  registerview(){
 
         return view('auth.register');
     }
@@ -71,15 +75,15 @@ class UserController extends Controller
                 }
             }
         }
-        $validator = Validator::make($request->all(), [
-            'Username' => 'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
-            'password' => 'required|min:6|max:12', // test rồi
-            'email' => 'required|email|unique:users,email', // test luôn rồi
-            'phone' => 'required|digits:10|unique:users,phone', // khúc này test luôn rồi
-        ]);
+    $validator = Validator::make($request->all(),[
+        'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
+        'password'=>'required|min:6|max:12', // test rồi
+        'email' => 'required|email|unique:users,email', // test luôn rồi
+        'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
+    ]);
 
-        if ($validator->fails()) {
-            return response(['errors' => $validator->errors()->all()], 422);
+        if ($validator->fails()){
+            return response(['errors'=>$validator->errors()->all()], 422);
         }
         $data = [
             'Username' => $request['Username'],
@@ -96,9 +100,8 @@ class UserController extends Controller
 
 
 
-    // Get  info user
-    public  function  infoview(Request $request)
-    {
+     // Get  info user
+    public  function  infoview(Request $request){
         $data = Auth::user();
         $datatoClient = [
             'email' => $data['email'],
@@ -109,14 +112,11 @@ class UserController extends Controller
     }
 
     // Update Info User
-    public  function  infoPost(Request  $request)
-    {
-        $checkrule = array();
+    public  function  infoPost(Request  $request){
+        $checkrule = array() ;
         $data = Auth::user();
-        if (
-            $data['email'] != $request->old_email || $data['phone'] != $request->old_phone
-            || $data['address'] != $request->old_address
-        ) {
+        if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
+            || $data ['address'] != $request->old_address){
             return response(['error' => 'Not Update Success']);
         }
         $phone = $request->phone;
