@@ -31,3 +31,4 @@ Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::get('/searchCategory',[CategoryController::class,'getSearch'])->name('category.search');
+Route::get('/searchUser',[UserController::class,'getSearch'])->name('user.search');

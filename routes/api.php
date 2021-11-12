@@ -31,9 +31,7 @@ Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');// APi Update PassWord
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api'); // Api Logout user
 Route::get('/user_cart',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart
-
-
 Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
 Route::resource('/user', 'App\Http\Controllers\Api\UserController');
-
+Route::resource('/category', 'App\Http\Controllers\Api\CategoryController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');

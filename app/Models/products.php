@@ -20,7 +20,6 @@ class products extends Model
         'quantity'
         
     ];
-    
     public function categories()
     {
         return $this->belongsTo('App\Models\categories');
