@@ -23,6 +23,7 @@ use GuzzleHttp\Client;
 use Laravel\Passport\TokenRepository;
 
 
+
 class UserController extends Controller
 {
     // Login View
@@ -181,4 +182,160 @@ class UserController extends Controller
             return response()->json(['status' => 'logout success'], 200);
         }
     }
+
+/////Viet usercontroller
+
+      /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $user = users::all();
+     
+        return response()->json($user);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'Username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+            'type' => 'required',
+            'address' => 'required'
+        ]);
+
+        $user = new users([
+            'Username' => $request->get('Username'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'password' => $request->get('password'),
+            'type' => $request->get('type'),
+            'address' => $request->get('address'),
+        ]);
+
+        $user->save();
+        return response()->json([
+            'message' => 'user created',
+            'users' => $user
+        ]);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+        $users = users::find($id);
+        if ($users) {
+
+            return response()->json([
+                'message' => 'users found!',
+                'users' => $users,
+            ]);
+        }
+        return response()->json([
+            'message' => 'users not found!',
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $users = users::find($id);
+        return response()->json($users);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'Username' => 'required',
+            'email' => 'required',
+            'phone' => 'required',
+            'password' => 'required',
+            'type' => 'required',
+            'address' => 'required'
+        ]);
+
+        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
+        $user = users::find($id);
+        $user->Username = $request->get('Username');
+        $user->email = $request->get('email');
+        $user->phone = $request->get('phone');
+        $user->password = $request->get('password');
+        $user->type = $request->get('type');
+        $user->address = $request->get('address');
+       
+
+        //3 Luu
+        $user->save();
+        
+        return response()->json([
+            'message' => 'user updated!',
+            'users' => $user
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $user = users::find($id);
+        if ($user) {
+            $user->delete();
+            return response()->json([
+                'message' => 'user deleted'
+            ]);
+        } 
+        return response()->json([
+            'message' => 'user not found !!!'
+        ]);
+    }
+
+    // public function getSearch(Request $request){
+    //     $user = users::where('Username','like','%'.$request->key.'%')
+    //                         ->orwhere('price','like','%'.$request->key.'%')
+    //                         ->get();
+    //                         return view('admin.product.search', compact('product'));
+    // }
+
+
+   
 }

@@ -34,4 +34,6 @@ Route::get('/user_cart',[CartController::class,'Show'])->middleware('auth:api');
 
 
 Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::resource('/user', 'App\Http\Controllers\Api\UserController');
+
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');

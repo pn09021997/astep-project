@@ -26,4 +26,6 @@ Route::get('/password',function (){
     return view('password');
 })->middleware('auth:api'); // Route Password
 Route::resource('/product', 'App\Http\Controllers\ProductController');
+Route::resource('/user', 'App\Http\Controllers\UserController');
+
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
