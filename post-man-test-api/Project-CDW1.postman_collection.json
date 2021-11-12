@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "b59bae7c-323a-452a-ab7f-a9c04e71c858",
+		"_postman_id": "e58b402c-7e10-4268-94fa-1b863fcd09c5",
 		"name": "Project-CDW1",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -33,7 +33,7 @@
 						},
 						{
 							"key": "phone",
-							"value": "1232211789",
+							"value": "0123221178",
 							"type": "text"
 						},
 						{
@@ -69,7 +69,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2Y2NTg0Yjc3ZjEzYzZjY2ExNjJlOTNjMzFjMjcxY2E0Mzc4MDQzZmIwNzA4MTdkMDJjYmMzNDA1YjY2ZjkyYjEwYTNmMGZkOTAzMTNmOWUiLCJpYXQiOjE2MzY1MTA0OTQuNTg1MDM2LCJuYmYiOjE2MzY1MTA0OTQuNTg1MDQyLCJleHAiOjE2MzczNzQ0OTQuMzc3MzMsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.cdhDXP3LLrNgdjBxB5RaS952xNI3p63zxKzhtkx6GntrDZZheFQi9-ojCf1gYKn7xzmgSsivsweqUKyHOHPkH8mN5rWbhApS4OYN8AmiW3sanhNwCfI3WjG6s6-xOWfcs1ScqApWfPm1BzyDsRYR003FP3kQIrgTKNh9t25lSVpGtd4KG7CKIbUyY-TKNprWuZtnXPQBn94LyS7eGiuWTPVHAfX3aLdIBHfD7Prpv8PRHP_pkdw3_sK649hlYGH3laQwA829EXO8EAc4utkvCQsGlEORQ25SjMubAlFxz_r6rOQSbZpSwQA7i7AL0UfV_mgYuwXaScTsaiODjndCFbo93I7Ch6JT8aMsJ9sgP5g3EyWCMm5F8JKLJYgEPVN9ees_G0rdhppQsaaZC7ufHvbEj7yZilaxrSsLy9vNKwclh51cl-tZpuTan9igSPUqAxOtnVg2CkvpsGofwEvYAWqiOCBws59Y0H6fLys0_esL9Ah4Bit7satCltSvL77mg0lZ2nF-fiPXwVk6WShxLlGyrVix8ZQ1MHDQoGUg7AMqlaaCLe-FL_08-3vPbTw2d66OVkXEoUUL9Pl0u9Yapj5JpJAnZzkBRKVij7PjcfLXcegxKUFgrrNYZ07qalpru-iI-fYbswl15B76RxDU33a4-_o44z9HGp97dk5ndrA",
 							"type": "string"
 						}
 					]
@@ -85,8 +85,28 @@
 							"type": "text"
 						},
 						{
+							"key": "address",
+							"value": "TDC",
+							"type": "text"
+						},
+						{
 							"key": "phone",
-							"value": "1234567898",
+							"value": "0123456789",
+							"type": "text"
+						},
+						{
+							"key": "old_email",
+							"value": "anhdagia123@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "old_phone",
+							"value": "0123221178",
+							"type": "text"
+						},
+						{
+							"key": "old_address",
+							"value": "",
 							"type": "text"
 						}
 					]
@@ -112,6 +132,16 @@
 		{
 			"name": "Login",
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiN2Y2NTg0Yjc3ZjEzYzZjY2ExNjJlOTNjMzFjMjcxY2E0Mzc4MDQzZmIwNzA4MTdkMDJjYmMzNDA1YjY2ZjkyYjEwYTNmMGZkOTAzMTNmOWUiLCJpYXQiOjE2MzY1MTA0OTQuNTg1MDM2LCJuYmYiOjE2MzY1MTA0OTQuNTg1MDQyLCJleHAiOjE2MzczNzQ0OTQuMzc3MzMsInN1YiI6IjEiLCJzY29wZXMiOltdfQ.cdhDXP3LLrNgdjBxB5RaS952xNI3p63zxKzhtkx6GntrDZZheFQi9-ojCf1gYKn7xzmgSsivsweqUKyHOHPkH8mN5rWbhApS4OYN8AmiW3sanhNwCfI3WjG6s6-xOWfcs1ScqApWfPm1BzyDsRYR003FP3kQIrgTKNh9t25lSVpGtd4KG7CKIbUyY-TKNprWuZtnXPQBn94LyS7eGiuWTPVHAfX3aLdIBHfD7Prpv8PRHP_pkdw3_sK649hlYGH3laQwA829EXO8EAc4utkvCQsGlEORQ25SjMubAlFxz_r6rOQSbZpSwQA7i7AL0UfV_mgYuwXaScTsaiODjndCFbo93I7Ch6JT8aMsJ9sgP5g3EyWCMm5F8JKLJYgEPVN9ees_G0rdhppQsaaZC7ufHvbEj7yZilaxrSsLy9vNKwclh51cl-tZpuTan9igSPUqAxOtnVg2CkvpsGofwEvYAWqiOCBws59Y0H6fLys0_esL9Ah4Bit7satCltSvL77mg0lZ2nF-fiPXwVk6WShxLlGyrVix8ZQ1MHDQoGUg7AMqlaaCLe-FL_08-3vPbTw2d66OVkXEoUUL9Pl0u9Yapj5JpJAnZzkBRKVij7PjcfLXcegxKUFgrrNYZ07qalpru-iI-fYbswl15B76RxDU33a4-_o44z9HGp97dk5ndrA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -155,7 +185,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOThiZjBkODdhYTQ4OWEzNmMyYzRjMGFlYzYzYmVmMTg4MjBiN2Q4NGQ0MTk0YjQ1MjE0YzFkM2NkNDg0M2E2YTk4ODI3OWY3NzQ1YjE3YWQiLCJpYXQiOjE2MzY1MTA1MzUuMTgyNjY1LCJuYmYiOjE2MzY1MTA1MzUuMTgyNjcxLCJleHAiOjE2MzczNzQ1MzUuMTc2MzMxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.uS_GNdun9diIVL20gO92oWbjnXzWOr7zmlZXdLgi81dqXs8X8BoMIgvJnTueQPeSg_cO-NfXV73CR4bczSjYiP7vV4a1V8WxrjHJOyU6p8HeghjQsW_QpjUy4EKlaRokhQK1tMwEAUGvHqcjhlkGZaU8khgz4eObtRxL8BLyP7PwnnOAX0j4Q8usPuoMh3fxt9j8MqNPIv3XjmbAZ-MIeS1nz8YUzz3ovd4zKJIqajv3JVI6r811CjXBIMcKWxECCmkUJZ7yxBv0P7NJLhyGQ7anrAsByBODTV6OtAmaNxv5KS17oD05T4bDPj8BpxtTHQqZ_-XPkWpzDvFe1Mumaf__q5Z-OXOUoEHz03zcXgWph7hIqgEB91EflX6iZLeyQyBIOMbslTznVIKwUVA0fPRfAXkgNnJboHXJkcGgdnnbCZVwJvzhE3kA3blfpHLNQGUj8En7HXU4U9ALem10Rd6VbQCGjVWQo2RRxobBchXM-wVpDGo7WZpSb-sqT3GygDsXqRRXMPdHtdLBAWd-FvR-GwWQ7Yj_er3D504CDDZptUF6iXEqJ_9mbZr9xLOYW3M_CLmvw2xflcP3dwn_8zmW7k-y4J63yuNLuX72w8tX6EWU5NPb5uRSnGcNOJ7RpkLVIfT-gELtIV2ndnA3kp9R9KDW1bVwS5G2tDHHl98",
 							"type": "string"
 						}
 					]
@@ -188,7 +218,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiYWExYjk1NWVjMDVhMDA3NmU2MDhhOTUzODhjNjQxNmVjOWM3ODNlYzI3ODczYzJlOWNhM2M2N2Y1NTRhYmVkMWU2YmQ0NTljNGMyMjUzNjAiLCJpYXQiOjE2MzYwMDg3NzYuOTU0MTg5LCJuYmYiOjE2MzYwMDg3NzYuOTU0MTk3LCJleHAiOjE2MzczMDQ3NzYuNjQ5MTM1LCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.MMKQVOBv_ZBa4s5uW8gnhpx6CqSPUF31uHX8PbQk-DHXF6pfX333hpV_xCcxACkf2TUDbApPo00Jwa02hmKc3jVIfn1birUAQfxLwPXHgyb-gBmZKjK_vJsWtalP0JxgvA0HgeDFIIhbKDq5fr6ZrD88YAdh-x-KfoGbxTN31wvUzWpHgO_deNzb13ACv2IAW4b9VP3Yq60Bk2i5WiUtRN1vU3AHCKx6lqUinRGvs8C809H1iHCXepa8oo6141XZMwz9EN1QwozUSGsyBeAb7fJHoU9rp6GcvIbXBKNpXOKYVI8elK_wEtbPOuMVZmMpUsPFHIf3LpOApGTCylSGLQCHQ7ju531NFnaCRYi_0uW6ZC06y-BkGGpsUMv48eonAu48Y7DsEjpv08dKhfQx5ayHiPiI5xGzoo-1bZD7__mi7qMsS95lT_JwfqUOAOdOn65uJj1RKaQqOyD4PUCmXcfS6E6k_QGfQTlBvK85k2rzLfA6N71CczoJYIi4QXOdrAKRRB3OShJP_7hy-L6eVodiq5uSR5aKIqtPCDoRaHNUnkNAkp6WzMwBRXS4BdKsBsaoPopCiIIuLMpdsthUp6-DwLkA1WDnyWO2EcPVGn_oSlMtrFMxgZUoWimTpTXCgYMO_V17jynDjRnN9Xgc6qSNLlBPP5rX-ESfGsGimq8",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOThiZjBkODdhYTQ4OWEzNmMyYzRjMGFlYzYzYmVmMTg4MjBiN2Q4NGQ0MTk0YjQ1MjE0YzFkM2NkNDg0M2E2YTk4ODI3OWY3NzQ1YjE3YWQiLCJpYXQiOjE2MzY1MTA1MzUuMTgyNjY1LCJuYmYiOjE2MzY1MTA1MzUuMTgyNjcxLCJleHAiOjE2MzczNzQ1MzUuMTc2MzMxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.uS_GNdun9diIVL20gO92oWbjnXzWOr7zmlZXdLgi81dqXs8X8BoMIgvJnTueQPeSg_cO-NfXV73CR4bczSjYiP7vV4a1V8WxrjHJOyU6p8HeghjQsW_QpjUy4EKlaRokhQK1tMwEAUGvHqcjhlkGZaU8khgz4eObtRxL8BLyP7PwnnOAX0j4Q8usPuoMh3fxt9j8MqNPIv3XjmbAZ-MIeS1nz8YUzz3ovd4zKJIqajv3JVI6r811CjXBIMcKWxECCmkUJZ7yxBv0P7NJLhyGQ7anrAsByBODTV6OtAmaNxv5KS17oD05T4bDPj8BpxtTHQqZ_-XPkWpzDvFe1Mumaf__q5Z-OXOUoEHz03zcXgWph7hIqgEB91EflX6iZLeyQyBIOMbslTznVIKwUVA0fPRfAXkgNnJboHXJkcGgdnnbCZVwJvzhE3kA3blfpHLNQGUj8En7HXU4U9ALem10Rd6VbQCGjVWQo2RRxobBchXM-wVpDGo7WZpSb-sqT3GygDsXqRRXMPdHtdLBAWd-FvR-GwWQ7Yj_er3D504CDDZptUF6iXEqJ_9mbZr9xLOYW3M_CLmvw2xflcP3dwn_8zmW7k-y4J63yuNLuX72w8tX6EWU5NPb5uRSnGcNOJ7RpkLVIfT-gELtIV2ndnA3kp9R9KDW1bVwS5G2tDHHl98",
 							"type": "string"
 						}
 					]
@@ -216,9 +246,50 @@
 		{
 			"name": "ChangePassWord",
 			"request": {
-				"method": "GET",
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiOThiZjBkODdhYTQ4OWEzNmMyYzRjMGFlYzYzYmVmMTg4MjBiN2Q4NGQ0MTk0YjQ1MjE0YzFkM2NkNDg0M2E2YTk4ODI3OWY3NzQ1YjE3YWQiLCJpYXQiOjE2MzY1MTA1MzUuMTgyNjY1LCJuYmYiOjE2MzY1MTA1MzUuMTgyNjcxLCJleHAiOjE2MzczNzQ1MzUuMTc2MzMxLCJzdWIiOiIxIiwic2NvcGVzIjpbXX0.uS_GNdun9diIVL20gO92oWbjnXzWOr7zmlZXdLgi81dqXs8X8BoMIgvJnTueQPeSg_cO-NfXV73CR4bczSjYiP7vV4a1V8WxrjHJOyU6p8HeghjQsW_QpjUy4EKlaRokhQK1tMwEAUGvHqcjhlkGZaU8khgz4eObtRxL8BLyP7PwnnOAX0j4Q8usPuoMh3fxt9j8MqNPIv3XjmbAZ-MIeS1nz8YUzz3ovd4zKJIqajv3JVI6r811CjXBIMcKWxECCmkUJZ7yxBv0P7NJLhyGQ7anrAsByBODTV6OtAmaNxv5KS17oD05T4bDPj8BpxtTHQqZ_-XPkWpzDvFe1Mumaf__q5Z-OXOUoEHz03zcXgWph7hIqgEB91EflX6iZLeyQyBIOMbslTznVIKwUVA0fPRfAXkgNnJboHXJkcGgdnnbCZVwJvzhE3kA3blfpHLNQGUj8En7HXU4U9ALem10Rd6VbQCGjVWQo2RRxobBchXM-wVpDGo7WZpSb-sqT3GygDsXqRRXMPdHtdLBAWd-FvR-GwWQ7Yj_er3D504CDDZptUF6iXEqJ_9mbZr9xLOYW3M_CLmvw2xflcP3dwn_8zmW7k-y4J63yuNLuX72w8tX6EWU5NPb5uRSnGcNOJ7RpkLVIfT-gELtIV2ndnA3kp9R9KDW1bVwS5G2tDHHl98",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
 				"header": [],
-				"url": null
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "new_password",
+							"value": "123",
+							"type": "text"
+						},
+						{
+							"key": "old_password",
+							"value": "1234567",
+							"type": "text"
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8000/api/password",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"password"
+					]
+				}
 			},
 			"response": []
 		},
@@ -227,7 +298,9 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": null
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		}
