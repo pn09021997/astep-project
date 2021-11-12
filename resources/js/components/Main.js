@@ -1,11 +1,11 @@
-import React from 'react'
-import TopContent from './TopContent'
-import RelatedContent from './RelatedContent'
+import React from 'react';
+import Detail from './Detail/Detail';
+import RelatedContent from './Detail/RelatedContent';
 export default function Main() {
     return (
         <div className="main">
-            <TopContent></TopContent>
-            <RelatedContent></RelatedContent>
+            <Detail/>
+            <RelatedContent/>
         </div>
     )
 }

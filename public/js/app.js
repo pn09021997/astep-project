@@ -2120,39 +2120,36 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/Main.js":
-/*!*****************************************!*\
-  !*** ./resources/js/components/Main.js ***!
-  \*****************************************/
+/***/ "./resources/js/components/Detail/Detail.js":
+/*!**************************************************!*\
+  !*** ./resources/js/components/Detail/Detail.js ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Main)
+/* harmony export */   "default": () => (/* binding */ Detail)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _TopContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopContent */ "./resources/js/components/TopContent.js");
-/* harmony import */ var _RelatedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RelatedContent */ "./resources/js/components/RelatedContent.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TopContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopContent */ "./resources/js/components/Detail/TopContent.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
-
-
-function Main() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-    className: "main",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TopContent__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_RelatedContent__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+function Detail() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    className: "detail",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_TopContent__WEBPACK_IMPORTED_MODULE_1__["default"], {})
   });
 }
 
 /***/ }),
 
-/***/ "./resources/js/components/RelatedContent.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/RelatedContent.js ***!
-  \***************************************************/
+/***/ "./resources/js/components/Detail/RelatedContent.js":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Detail/RelatedContent.js ***!
+  \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2161,7 +2158,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ RelatedContent)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _css_RelatedContent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css/RelatedContent.css */ "./resources/css/RelatedContent.css");
+/* harmony import */ var _css_RelatedContent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../css/RelatedContent.css */ "./resources/css/RelatedContent.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2227,7 +2224,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                      children: "Gh\u1EBF \u0102n G\u1ED7 Cao Su T\u1EF1 Nhi\xEAn MOHO OSLO 601"
+                      children: "Gh\u1EBF B\u0103ng D\xE0i G\u1ED7 Cao Su T\u1EF1 nhi\xEAn MOHO VLINE 602"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "related-price",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2244,11 +2241,11 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                      children: "Gh\u1EBF \u0102n G\u1ED7 Cao Su T\u1EF1 Nhi\xEAn MOHO OSLO 601"
+                      children: "Gh\u1EBF \u0102n G\u1ED7 Cao Su T\u1EF1 Nhi\xEAn MOHO ODESSA"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "related-price",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                        children: "799,000\u20AB"
+                        children: "899,000\u20AB"
                       })
                     })]
                   })]
@@ -2261,7 +2258,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                      children: "Gh\u1EBF \u0102n G\u1ED7 Cao Su T\u1EF1 Nhi\xEAn MOHO OSLO 601"
+                      children: "Gh\u1EBF \u0102n G\u1ED7 Cao Su T\u1EF1 Nhi\xEAn MOHO MILAN 601 M\xE0u \u0110en"
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "related-price",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2272,7 +2269,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col-md-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                    src: "https://product.hstatic.net/200000065946/product/pro_mau_tu_nhien_ghe_bang_dai_go_cao_su_tu_nhien_vline_602_2a_84e297a28a5e472faf47291b08521740_master.jpg",
+                    src: "https://product.hstatic.net/200000065946/product/pro_den_noi_that_moho_ghe_an_milan_02_8220c68bac384a06b54a4a4b28d4ca0c_grande.png",
                     width: "100%",
                     height: "75%"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
@@ -2282,7 +2279,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                       className: "related-price",
                       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                        children: "799,000\u20AB"
+                        children: "899,000\u20AB"
                       })
                     })]
                   })]
@@ -2302,10 +2299,10 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
-/***/ "./resources/js/components/TopContent.js":
-/*!***********************************************!*\
-  !*** ./resources/js/components/TopContent.js ***!
-  \***********************************************/
+/***/ "./resources/js/components/Detail/TopContent.js":
+/*!******************************************************!*\
+  !*** ./resources/js/components/Detail/TopContent.js ***!
+  \******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2314,7 +2311,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ TopContent)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _css_TopContent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../css/TopContent.css */ "./resources/css/TopContent.css");
+/* harmony import */ var _css_TopContent_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../css/TopContent.css */ "./resources/css/TopContent.css");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2499,6 +2496,35 @@ var TopContent = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 
+
+/***/ }),
+
+/***/ "./resources/js/components/Main.js":
+/*!*****************************************!*\
+  !*** ./resources/js/components/Main.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Main)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Detail_Detail__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Detail/Detail */ "./resources/js/components/Detail/Detail.js");
+/* harmony import */ var _Detail_RelatedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Detail/RelatedContent */ "./resources/js/components/Detail/RelatedContent.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+function Main() {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+    className: "main",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Detail_Detail__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Detail_RelatedContent__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+  });
+}
 
 /***/ }),
 
@@ -6960,7 +6986,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".related-content{\n    text-align: left;\n  }\n  .related-content>p:hover{\n    color: rgb(3, 110, 60);\n  }\n  .related-price{\n    padding-bottom: 5%;\n    color: #545557;\n  }\n  .title-related>h3{\n    text-align: center;\n    text-transform: uppercase;\n    margin: 10px 0 50px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .title-related>h3::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #6e6b68;\n  }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".related-content{\n    text-align: left;\n    padding: 10% 0%;\n  }\n  .related-content>p:hover{\n    color: rgb(3, 110, 60);\n  }\n  .related-price{\n    padding-bottom: 5%;\n    color: #545557;\n  }\n  .title-related>h3{\n    text-align: center;\n    text-transform: uppercase;\n    margin: 10px 0 50px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .title-related>h3::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #6e6b68;\n  }\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

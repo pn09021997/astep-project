@@ -1,5 +1,6 @@
 .related-content{
     text-align: left;
+    padding: 10% 0%;
   }
   .related-content>p:hover{
     color: rgb(3, 110, 60);

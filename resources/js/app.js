@@ -1,7 +1,9 @@
 require('./bootstrap');
 import React from 'react';
 import { render } from 'react-dom';
+import Main from './components/Main'
 
-import Main from './components/Main';
 
-render(<Main />, document.getElementById('app'));
+
+
+render(<Main/>, document.getElementById('app'));
