@@ -20,6 +20,11 @@ import "../../css/Main.css";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
+import React from 'react'
+import Navbar from './CartPage/Navbar'
+import Cart from './CartPage/Cart'
+import Footer from './CartPage/FooterCart'
+
 
 export default function Main() {
     //Account Data
@@ -145,6 +150,9 @@ function NoMatch() {
             <h3>
                 No match for <code>{location.pathname}</code>
             </h3>
+            <Navbar></Navbar>
+            <Cart></Cart>
+           <Footer></Footer>
         </div>
     );
 }
