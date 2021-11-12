@@ -1,0 +1,6 @@
+composer update
+php artisan migrate:refresh
+php artisan passport:install
+npm install
+npm run dev 
+npm run watch

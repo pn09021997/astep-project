@@ -27,7 +27,7 @@ class UserController extends Controller
 {
     // Login View
     public  function loginview(){
-        return view('auth.login');
+        return view('');
     }
      // Login
     public  function  login(Request  $request){
@@ -52,7 +52,7 @@ class UserController extends Controller
     }
 
 
-    }
+
 
 
     // Register View
@@ -164,12 +164,6 @@ class UserController extends Controller
         return response()->json(['status' => 'Update Success'], 200);
     }
 
-    public function  UserLogout(Request  $request)
-    {
-        if (Auth::check()) {
-            Auth::user()->AauthAcessToken()->delete();
-        }
-    }
 
     // Logout
     public function  UserLogout(Request  $request){

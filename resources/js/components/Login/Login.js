@@ -1,7 +1,7 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../../css/Login.css";
 //Components
