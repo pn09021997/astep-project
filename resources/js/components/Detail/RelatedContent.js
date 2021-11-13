@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../css/RelatedContent.css';
+import '../../../css/RelatedContent.css';
 export default class RelatedContent extends Component {
     render() {
         return (

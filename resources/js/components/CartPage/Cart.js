@@ -3,7 +3,7 @@ import "../../../css/addcart.css";
 
 export default function Cart() {
     return (
-        <div className="container">
+        <div className="container cart mb-5 mt-5">
                 <div className="row">
                     <div className="col-md-12">
 
