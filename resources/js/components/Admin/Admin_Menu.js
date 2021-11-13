@@ -10,6 +10,7 @@ import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
 import "../../../css/Admin_Menu.css";
 
 import ProductManager from "./ProductManager/ProductManager";
+import UserManager from "./UserManager/UserManager";
 export default function Admin_Menu() {
     return (
         <div className="admin-menu">
@@ -41,7 +42,7 @@ export default function Admin_Menu() {
                                 </NavItem>
                                 <NavItem>
                                     <Link
-                                        to="/user-manager"
+                                        to="/create-manager"
                                         className="link--custom"
                                     >
                                         User Manager
@@ -59,9 +60,10 @@ export default function Admin_Menu() {
                             <Route path="/categories-manager">
                                 <CategoriesManager key="categories-manager" />
                             </Route>
-                            <Route path="/user-manager">
-                                <UserManager key="user-manager" />
-                            </Route>
+                            <Route
+                                  path="/create-manager"
+                                 component={UserManager}
+                                 />
                             <Route path="*">
                                 <NoMatch />
                             </Route>
@@ -93,10 +95,3 @@ function CategoriesManager() {
     );
 }
 
-function UserManager() {
-    return (
-        <div className="text-center">
-            <h1> User Manager</h1>
-        </div>
-    );
-}
