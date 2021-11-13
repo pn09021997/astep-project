@@ -42,7 +42,7 @@ export default function Admin_Menu() {
                                 </NavItem>
                                 <NavItem>
                                     <Link
-                                        to="/create-manager"
+                                        to="/create-user"
                                         className="link--custom"
                                     >
                                         User Manager
@@ -61,7 +61,7 @@ export default function Admin_Menu() {
                                 <CategoriesManager key="categories-manager" />
                             </Route>
                             <Route
-                                  path="/create-manager"
+                                  path="/create-user"
                                  component={UserManager}
                                  />
                             <Route path="*">
