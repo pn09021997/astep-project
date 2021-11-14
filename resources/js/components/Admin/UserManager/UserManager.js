@@ -46,11 +46,6 @@ export default function UserManager() {
                             <div className="wrapper">
                                 <Switch>
                                     <Route
-                                        exact
-                                        path="/"
-                                        component={CreateUser}
-                                    />
-                                    <Route
                                         path="/create-user"
                                         component={CreateUser}
                                     />

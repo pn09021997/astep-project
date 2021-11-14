@@ -4,7 +4,7 @@ import { Table } from 'reactstrap';
 import UserTableRow from "./UserTableRow";
 
 export default function UserList(props) {
-    const [expenses, setUser] = useState([]);
+    const [users, setUser] = useState([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -14,7 +14,7 @@ export default function UserList(props) {
         fetchData();
     }, []);
 
-    const DataTable = expenses.map((res, i) => {
+    const DataTable = users.map((res, i) => {
         return <UserTableRow obj={res} key={i} />;
     });
 

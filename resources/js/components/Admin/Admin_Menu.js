@@ -8,7 +8,8 @@ import {
 } from "react-router-dom";
 import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
 import "../../../css/Admin_Menu.css";
-
+import UserManager from "./UserManager/UserManager";
+import CategoriesManager from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
 export default function Admin_Menu() {
     return (
@@ -41,7 +42,7 @@ export default function Admin_Menu() {
                                 </NavItem>
                                 <NavItem>
                                     <Link
-                                        to="/user-manager"
+                                        to="/create-user"
                                         className="link--custom"
                                     >
                                         User Manager
@@ -59,7 +60,7 @@ export default function Admin_Menu() {
                             <Route path="/categories-manager">
                                 <CategoriesManager key="categories-manager" />
                             </Route>
-                            <Route path="/user-manager">
+                            <Route path="/create-user">
                                 <UserManager key="user-manager" />
                             </Route>
                             <Route path="*">
@@ -81,22 +82,6 @@ function NoMatch() {
             <h3>
                 No match for <code>{location.pathname}</code>
             </h3>
-        </div>
-    );
-}
-
-function CategoriesManager() {
-    return (
-        <div className="text-center">
-            <h1> Categories Manager</h1>
-        </div>
-    );
-}
-
-function UserManager() {
-    return (
-        <div className="text-center">
-            <h1> User Manager</h1>
         </div>
     );
 }

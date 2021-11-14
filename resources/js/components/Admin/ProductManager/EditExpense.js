@@ -173,7 +173,7 @@ export default function EditExpense(props) {
                 >
                     UPDATE
                 </Button>
-                <Link to="/">
+                <Link to="/create-expense">
                     <Button
                         color="danger"
                         outline

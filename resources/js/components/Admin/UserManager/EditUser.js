@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import "../../../../css/EditExpense.css";
 
 export default function EditUser(props) {
-    const [expense, setExpense] = useState({
+    const [user, setUser] = useState({
         Username: "",
         email: "",
         phone: "",
@@ -22,22 +22,22 @@ export default function EditUser(props) {
                 "http://localhost:8000/api/user/" + props.match.params.id
             );
             const { data } = await result;
-            setExpense(data);
+            setUser(data);
         };
         fetchData();
     }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setExpense((expense) => ({
-            ...expense,
+        setUser((user) => ({
+            ...user,
             [name]: value,
         }));
     };
 
     const handleOnValid = (event, value) => {
         const expenseObject = {
-            ...expense,
+            ...user,
         };
 
         Swal.fire({
@@ -92,7 +92,7 @@ export default function EditUser(props) {
                  <AvField
                     name="old_email"
                     type="hidden"
-                    // value={expense.old_email}
+                    // value={user.old_email}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -105,7 +105,7 @@ export default function EditUser(props) {
                     name="old_phone"
                     type="hidden"
                  
-                    value={expense.old_phone}
+                    value={user.old_phone}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -117,7 +117,7 @@ export default function EditUser(props) {
                  <AvField
                     name="old_address"
                     type="hidden"
-                    // value={expense.old_address}
+                    // value={user.old_address}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -130,7 +130,7 @@ export default function EditUser(props) {
                     label="Username"
                     type="text"
                     placeholder="User Name..."
-                    value={expense.Username}
+                    value={user.Username}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -144,7 +144,7 @@ export default function EditUser(props) {
                     label="email"
                     type="text"
                     placeholder="Enter Email..."
-                    value={expense.email}
+                    value={user.email}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -158,7 +158,7 @@ export default function EditUser(props) {
                     label="Phone Number"
                     type="text"
                     placeholder="Enter Phone Number..."
-                    value={expense.phone}
+                    value={user.phone}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -172,7 +172,7 @@ export default function EditUser(props) {
                     label="Password"
                     type="text"
                     placeholder="Enter Password..."
-                    value={expense.password}
+                    value={user.password}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -185,7 +185,7 @@ export default function EditUser(props) {
                     name="type"
                     label="type"
                     type="select"
-                    value={expense.type}
+                    value={user.type}
                     onChange={handleChange}
                 >
                     <option value="1">Admin</option>
@@ -197,7 +197,7 @@ export default function EditUser(props) {
                     label="address"
                     type="text"
                     placeholder="Enter addressr..."
-                    value={expense.phone}
+                    value={user.phone}
                     onChange={handleChange}
                     validate={{
                         required: {

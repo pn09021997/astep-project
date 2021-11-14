@@ -7,7 +7,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { error } from "jquery";
 
 export default function CreateUser(props) {
-    const [expense, setExpense] = useState({
+    const [user, setUser] = useState({
         Username: "",
         email: "",
         phone: "",
@@ -19,15 +19,15 @@ export default function CreateUser(props) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setExpense((expense) => ({
-            ...expense,
+        setUser((user) => ({
+            ...user,
             [name]: value,
         }));
     };
 
     const handleOnValid = (event, value) => {
         const expenseObject = {
-            ...expense,
+            ...user,
         };
         axios
             .post("http://localhost:8000/api/user/", expenseObject)
@@ -68,7 +68,7 @@ export default function CreateUser(props) {
                     label="Username"
                     type="text"
                     placeholder="User Name..."
-                    value={expense.Username}
+                    value={user.Username}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -82,7 +82,7 @@ export default function CreateUser(props) {
                     label="email"
                     type="text"
                     placeholder="Enter Email..."
-                    value={expense.email}
+                    value={user.email}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -96,7 +96,7 @@ export default function CreateUser(props) {
                     label="Phone Number"
                     type="text"
                     placeholder="Enter Phone Number..."
-                    value={expense.phone}
+                    value={user.phone}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -110,7 +110,7 @@ export default function CreateUser(props) {
                     label="Password"
                     type="text"
                     placeholder="Enter Password..."
-                    value={expense.password}
+                    value={user.password}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -123,7 +123,7 @@ export default function CreateUser(props) {
                     name="type"
                     label="type"
                     type="select"
-                    value={expense.type}
+                    value={user.type}
                     onChange={handleChange}
                 >
                     <option value="1">Admin</option>
@@ -134,8 +134,8 @@ export default function CreateUser(props) {
                     name="address"
                     label="address"
                     type="text"
-                    placeholder="Enter addressr..."
-                    value={expense.phone}
+                    placeholder="Enter address..."
+                    value={user.phone}
                     onChange={handleChange}
                     validate={{
                         required: {
