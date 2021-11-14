@@ -91,7 +91,9 @@ class UserController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
-            'type' => 0
+            'type' => 0,
+            'created_at' => new DateTime("now"),
+            'updated_at' => new DateTime("now"),
         ];
         DB::table('users')->insert($data);
         return response()->json([
