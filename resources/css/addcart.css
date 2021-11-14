@@ -45,3 +45,7 @@
   .home{
     list-style: none;
   }
+  .clearfix{
+    list-style-type: none ;
+    margin-left: -2%;
+  }

@@ -11,6 +11,7 @@ import "../../../css/Admin_Menu.css";
 import UserManager from "./UserManager/UserManager";
 import CategoriesManager from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
+import UserManager from "./UserManager/UserManager";
 export default function Admin_Menu() {
     return (
         <div className="admin-menu">
