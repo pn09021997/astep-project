@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
+import axios from "axios";
 import Swal from "sweetalert2";
 import "../../../css/Register.css";
-export default function Register({ accountData, setAccountData }) {
+export default function Register() {
     //State save Register data
     const [registerData, setRegisterData] = useState({
         email: "",
-        username: "",
+        Username: "",
         password: "",
         confirmPassword: "",
         phone: "",
@@ -17,6 +18,7 @@ export default function Register({ accountData, setAccountData }) {
 
     const history = useHistory();
 
+    //Save data when input change
     const handleChange = (e) => {
         const { name, value } = e.target;
         setRegisterData((registerData) => ({
@@ -25,54 +27,42 @@ export default function Register({ accountData, setAccountData }) {
         }));
     };
 
-    //Do Register
-    const setRegisterInfo = (registerCheck) => {
-        if (registerCheck.length !== 0) {
-            Swal.fire({
-                title: "Error!",
-                text: "Do you want to continue ?",
-                icon: "error",
-                confirmButtonText: "Cool",
-            });
-        } else {
-            setAccountData([
-                ...accountData,
-                {
-                    id: accountData[accountData.length - 1].id + 1,
-                    ...registerCheck[0],
-                },
-            ]);
-            Swal.fire(
-                "Good job!",
-                "Expense Added Successfully",
-                "success"
-            ).then(() => {
-                history.push("/login");
-            });
+    //API register
+    const doRegister = (event, values) => {
+        let infoRegister = {
+            ...registerData,
+        };
+        if (validateForm(infoRegister)) {
+            axios
+                .post("http://localhost:8000/api/register/", infoRegister)
+                .then((res) => {
+                    console.log(res.data);
+                    Swal.fire(
+                        "Good job!",
+                        "Expense Added Successfully",
+                        "success"
+                    ).then(() => {
+                        history.push("/login");
+                    });
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Do you want to continue ?",
+                        icon: "error",
+                        confirmButtonText: "Cool",
+                    });
+                    console.log(err);
+                });
         }
     };
 
-    //Get Data at Form
-    const doRegister = (event, values) => {
-        let infoRegister = [
-            {
-                ...values,
-            },
-        ];
-
-        let registerCheck = accountData.filter((value, index) => {
-            return validateForm(infoRegister, value) === false;
-        });
-        setRegisterInfo(registerCheck);
-    };
-
-    //Check Register Info
-    const validateForm = (infoRegister, accountData) => {
+    //Check Register Info password and confirm password
+    const validateForm = (infoRegister) => {
         let flag = true;
-        infoRegister.username === accountData.username
+        infoRegister.password !== infoRegister.confirmPassword
             ? (flag = false)
             : (flag = true);
-
         return flag;
     };
 
@@ -111,11 +101,11 @@ export default function Register({ accountData, setAccountData }) {
                     }}
                 />
                 <AvField
-                    name="username"
+                    name="Username"
                     label="Username"
                     type="text"
                     placeholder="Username here..."
-                    value={registerData.username}
+                    value={registerData.Username}
                     onChange={handleChange}
                     validate={{
                         required: {
@@ -152,7 +142,7 @@ export default function Register({ accountData, setAccountData }) {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 16,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
                         },
@@ -181,7 +171,7 @@ export default function Register({ accountData, setAccountData }) {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 16,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
                         },
@@ -191,7 +181,7 @@ export default function Register({ accountData, setAccountData }) {
                     name="phone"
                     label="Phone"
                     placeholder="Phone here..."
-                    type="tel"
+                    type="text"
                     value={registerData.phone}
                     onChange={handleChange}
                     validate={{
@@ -207,6 +197,10 @@ export default function Register({ accountData, setAccountData }) {
                             value: 10,
                             errorMessage: "Your phone must be 10 number",
                         },
+                        pattern: {
+                            value: "^0",
+                            errorMessage: "Your phone must be start with 0",
+                        },
                     }}
                 />
                 <AvField
@@ -216,12 +210,7 @@ export default function Register({ accountData, setAccountData }) {
                     type="textarea"
                     value={registerData.address}
                     onChange={handleChange}
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your phone",
-                        },
-                    }}
+                    validate={{}}
                 />
                 <Button
                     type="submit"
