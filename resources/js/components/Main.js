@@ -104,14 +104,6 @@ export default function Main() {
                                     Register
                                 </Link>
                             </NavItem>
-                            <NavItem className="mb-3">
-                                <Link
-                                    to="/Cart"
-                                    className="main-navbar--custom-link"
-                                >
-                                    Add Cart
-                                </Link>
-                            </NavItem>
                         </Nav>
                     </Collapse>
                 </Navbar>
@@ -137,7 +129,7 @@ export default function Main() {
                     <Route path="/product-detail">
                         <ProductDetail />
                     </Route>
-                    <Route path="/Cart">
+                    <Route path="/cart">
                         <Cart
                         key="Cart"
                         />
