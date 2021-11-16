@@ -9,8 +9,7 @@ import {
 import { Col, Nav, NavItem, NavLink, Row } from "reactstrap";
 import "../../../css/Admin_Menu.css";
 import UserManager from "./UserManager/UserManager";
-import CategoriesManager from "./CategoriesManager/CategoriesManager";
-
+import Categories from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
 export default function Admin_Menu() {
     return (
@@ -35,7 +34,7 @@ export default function Admin_Menu() {
                                 </NavItem>
                                 <NavItem>
                                     <Link
-                                        to="/categories-manager"
+                                        to="/create-categories"
                                         className="link--custom"
                                     >
                                         Categories Manager
@@ -58,8 +57,8 @@ export default function Admin_Menu() {
                                 path="/create-expense"
                                 component={ProductManager}
                             />
-                            <Route path="/categories-manager">
-                                <CategoriesManager key="categories-manager" />
+                            <Route path="/create-categories">
+                                <Categories key="categories-manager" />
                             </Route>
                             <Route path="/create-user">
                                 <UserManager key="user-manager" />
