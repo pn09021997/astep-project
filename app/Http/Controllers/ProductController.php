@@ -26,6 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $categories = categories::all();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -34,7 +36,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) //insert
+    public function store(Request $request)
     {
         $request->validate([
             'product_name' => 'required',
@@ -105,6 +107,7 @@ class ProductController extends Controller
         $request->validate([
             'product_name' => 'required',
             'price' => 'required',
+            // 'product_image' => 'required',
             'description' => 'required',
             'quantity' => 'required'
         ]);
