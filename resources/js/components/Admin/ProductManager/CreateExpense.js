@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Row, Col } from "reactstrap";
 import axios from "axios";
 import ExpensesList from "./ExpensesListing";
@@ -14,6 +14,23 @@ export default function CreateExpense(props) {
         price: "",
         category_id: "1",
         product_image: "",
+    });
+
+    const [categoryList, setCategoryList] = useState([]);
+
+    //Get categories list
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get("http://localhost:8000/api/category/");
+            const { data } = await result;
+            setCategoryList(data);
+        } 
+        fetchData();
+    }, []);
+
+    //Create Categories Select options
+    const categoriesSelect = categoryList.map((value, index) => {
+        return <option value={value.id}>{value.name}</option> 
     });
 
     const handleChange = (e) => {
@@ -87,9 +104,7 @@ export default function CreateExpense(props) {
                             value={expense.category_id}
                             onChange={handleChange}
                         >
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="3">Category 3</option>
+                            {categoriesSelect}
                         </AvField>
                     </Col>
                 </Row>
@@ -131,6 +146,7 @@ export default function CreateExpense(props) {
                             name="product_image"
                             label="Image"
                             type="file"
+                            accept="image/png, image/gif, image/jpeg"
                             value={expense.product_image}
                             onChange={handleChange}
                         />

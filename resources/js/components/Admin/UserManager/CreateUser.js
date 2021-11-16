@@ -79,7 +79,7 @@ export default function CreateUser(props) {
                 />
                 <AvField
                     name="email"
-                    label="email"
+                    label="Email"
                     type="text"
                     placeholder="Enter Email..."
                     value={user.email}
@@ -121,7 +121,7 @@ export default function CreateUser(props) {
                 />
                 <AvField
                     name="type"
-                    label="type"
+                    label="Type"
                     type="select"
                     value={user.type}
                     onChange={handleChange}
@@ -132,8 +132,8 @@ export default function CreateUser(props) {
                 </AvField>
                 <AvField
                     name="address"
-                    label="address"
-                    type="text"
+                    label="Address"
+                    type="textarea"
                     placeholder="Enter addressr..."
                     value={user.phone}
                     onChange={handleChange}

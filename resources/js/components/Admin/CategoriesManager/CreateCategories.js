@@ -10,7 +10,7 @@ export default function CreateCategories(props) {
     const [category, setExpense] = useState({
         name: "",
         description: "",
-        category_image: "",
+        image: "",
     });
 
     const handleChange = (e) => {
@@ -80,10 +80,10 @@ export default function CreateCategories(props) {
                     </Col>
                     <Col lg="4" md="4" sm="12">
                         <AvField
-                            name="categories_image"
+                            name="image"
                             label="Image"
                             type="file"
-                            value={category.category_image}
+                            value={category.image}
                             onChange={handleChange}
                         />
                     </Col>

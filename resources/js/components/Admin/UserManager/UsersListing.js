@@ -26,9 +26,9 @@ export default function UserList(props) {
                         <th>UserName</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Password</th>
                         <th>type</th>
                         <th>Address</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>{DataTable}</tbody>

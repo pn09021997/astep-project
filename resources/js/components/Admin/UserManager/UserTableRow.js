@@ -42,8 +42,7 @@ export default function UserTableRow(props) {
             <td>{props.obj.Username}</td>
             <td>{props.obj.email}</td>
             <td>{props.obj.phone}</td>
-            <td>{props.obj.password}</td>
-            <td>{props.obj.type}</td>
+            <td>{props.obj.Type}</td>
             <td>{props.obj.address}</td>
             <td>
                 <Link

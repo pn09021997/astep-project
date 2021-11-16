@@ -16,6 +16,23 @@ export default function EditExpense(props) {
         product_image: "",
     });
 
+    const [categoryList, setCategoryList] = useState([]);
+
+    //Get categories list
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios.get("http://localhost:8000/api/category/");
+            const { data } = await result;
+            setCategoryList(data);
+        } 
+        fetchData();
+    }, []);
+
+    //Create Categories Select options
+    const categoriesSelect = categoryList.map((value, index) => {
+        return <option value={value.id}>{value.name}</option> 
+    });
+
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get(
@@ -112,9 +129,7 @@ export default function EditExpense(props) {
                             value={expense.category_id}
                             onChange={handleChange}
                         >
-                            <option value="1">Category 1</option>
-                            <option value="2">Category 2</option>
-                            <option value="3">Category 3</option>
+                            {categoriesSelect}
                         </AvField>
                     </Col>
                 </Row>
@@ -154,6 +169,7 @@ export default function EditExpense(props) {
                             name="product_image"
                             label="Image"
                             type="file"
+                            accept="image/png, image/gif, image/jpeg"
                             onChange={handleChange}
                         />
                     </Col>
