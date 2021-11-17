@@ -8,7 +8,6 @@ use App\Models\users;
 
 class UserController  extends Controller
 {
-    //Methods uer viet:
     public function index()
     {
         return users::all();
