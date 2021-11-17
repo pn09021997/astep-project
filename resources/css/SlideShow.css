@@ -14,5 +14,20 @@
     position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    bottom: 20vh;
+    bottom: 50%;
+    text-align: center;
+}
+.slide-show-category-title {
+    font-size: 2.5rem;
+}
+.slide-show-category-link {
+    text-decoration: none;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 2vh 5vh;
+}
+.slide-show-category-link:hover {
+    color: #000;
+    border: none;
+    text-decoration: none;
 }

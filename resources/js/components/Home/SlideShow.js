@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Carousel,
   CarouselItem,
@@ -6,6 +7,7 @@ import {
   CarouselIndicators,
   Row,
   Col,
+  Button,
 } from "reactstrap";
 import "../../../css/SlideShow.css";
 
@@ -51,7 +53,10 @@ export default function SlideShow({ categoriesList }) {
         onExited={() => setAnimating(false)}
       >
         <div className="slide-show-carouse-info">
-          <h1>{item.caption}</h1>
+          <p className="slide-show-category-title mb-5">{item.caption}</p>
+          <Link className="slide-show-category-link">
+            Shop Collections
+          </Link>
         </div>
         <img
           src={item.img}
