@@ -97,7 +97,7 @@ class UserController extends Controller
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
-    }<
+    }
 
 
 
