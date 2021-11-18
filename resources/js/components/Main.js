@@ -20,7 +20,7 @@ import "../../css/Main.css";
 import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
-
+import Detail from "./Detail/Detail";
 export default function Main() {
     //Account Data
     const [accountData, setAccountData] = useState([
@@ -122,6 +122,9 @@ export default function Main() {
                             accountData={accountData}
                             setAccountData={setAccountData}
                         />
+                    </Route>
+                    <Route path="/product-detail">
+                        <Detail key="product-detail"/>
                     </Route>
                     <Route path="/">
                         <Home key="home" />
