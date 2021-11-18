@@ -16,6 +16,7 @@ export default function Register() {
         address: "",
     });
 
+    //use Link to login page
     const history = useHistory();
 
     //Save data when input change
