@@ -1,11 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function UserTableRow(props) {
-   
+    const history = useHistory();
+
     const deleteExpense = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -25,7 +26,7 @@ export default function UserTableRow(props) {
                             "Expense Delete Successfully",
                             "success"
                         ).then(() => {
-                            window.location.reload(false);
+                            history.push("/create-user");
                         })
                     })
                     .catch((error) => {

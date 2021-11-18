@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function ExpenseTableRow(props) {
+    const history = useHistory();
     const subDescripton = (txtDesc) => {
         let temp = txtDesc + "";
         return temp.substr(0, 92);
@@ -28,7 +29,7 @@ export default function ExpenseTableRow(props) {
                             "Expense Delete Successfully",
                             "success"
                         ).then(() => {
-                            window.location.reload(false);
+                            history.push("/create-expense");
                         })
                     })
                     .catch((error) => {

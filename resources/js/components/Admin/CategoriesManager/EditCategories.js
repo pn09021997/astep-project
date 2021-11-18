@@ -46,7 +46,7 @@ export default function EditCategories(props) {
             if (result.isConfirmed) {
                 axios
                     .patch(
-                        "http://localhost:8000/api/product/" +
+                        "http://localhost:8000/api/category/" +
                         props.match.params.id,
                         expenseObject
                     )
@@ -106,6 +106,8 @@ export default function EditCategories(props) {
                                 name="categories_image"
                                 label="Image"
                                 type="file"
+                                accept="image/png, image/gif, image/jpeg"
+                                value={category.category_image}
                                 onChange={handleChange}
                             />
                         </Col>
@@ -114,7 +116,8 @@ export default function EditCategories(props) {
                         name="description"
                         label="Description"
                         type="textarea"
-                        className="text-area-custom"
+                        className="text-area-custom"v
+                        value={category.description}
                         onChange={handleChange}
                     />
                     <Button

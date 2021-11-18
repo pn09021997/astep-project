@@ -83,6 +83,7 @@ export default function CreateCategories(props) {
                             name="image"
                             label="Image"
                             type="file"
+                            accept="image/png, image/gif, image/jpeg"
                             value={category.image}
                             onChange={handleChange}
                         />
