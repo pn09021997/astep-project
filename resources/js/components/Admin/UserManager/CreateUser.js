@@ -135,7 +135,7 @@ export default function CreateUser(props) {
                     label="Address"
                     type="textarea"
                     placeholder="Enter addressr..."
-                    value={user.phone}
+                    value={user.address}
                     onChange={handleChange}
                     validate={{
                         required: {
