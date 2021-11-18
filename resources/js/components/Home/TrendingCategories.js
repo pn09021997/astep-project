@@ -7,10 +7,10 @@ export default function TrendingCategories({ productList, categoriesList }) {
     return (
       <Col key={product.id}>
         <div className="trending-categories-info">
-          <img src={product.img} alt={product.name} />
+          <img className="trending-category-product-img img-fluid" src={product.img} alt={product.name} />
           <div className="info-detail">
-            <p># {product.category}</p>
-            <p>{product.name}</p>
+            <p className="trending-category-title"># {product.category}</p>
+            <p className="trending-category-product-title">{product.name}</p>
           </div>
         </div>
       </Col>
