@@ -8,7 +8,7 @@ export default function CategoriesTableRow(props) {
     const history = useHistory();
     const subDescripton = (txtDesc) => {
         let temp = txtDesc + "";
-        return temp.substr(0, 92);
+        return temp.substr(0, 26);
     }
     const deleteCategories = () => {
         Swal.fire({
@@ -45,7 +45,7 @@ export default function CategoriesTableRow(props) {
         <tr>
             <td></td>
             <td>{props.obj.name}</td>
-            <td>{props.obj.description}</td>
+            <td>{subDescripton(props.obj.description)}</td>
 
             <td>
                 <Link

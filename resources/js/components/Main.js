@@ -123,14 +123,15 @@ export default function Main() {
                     <Route path="/product-detail">
                         <Detail key="product-detail"/>
                     </Route>
-                    <Route path="/">
-                        <Home key="home" />
-                    </Route>
-                    <Route path="/Cart">
-                        <Register
+                    <Route path="/cart">
+                        <Cart
                             key="cart"
                         />
                     </Route>
+                    <Route path="/">
+                        <Home key="home" />
+                    </Route>
+               
                     <Route path="*">
                         <NoMatch />
                     </Route>

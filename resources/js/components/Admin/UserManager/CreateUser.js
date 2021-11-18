@@ -108,7 +108,7 @@ export default function CreateUser(props) {
                 <AvField
                     name="password"
                     label="Password"
-                    type="text"
+                    type="password"
                     placeholder="Enter Password..."
                     value={user.password}
                     onChange={handleChange}

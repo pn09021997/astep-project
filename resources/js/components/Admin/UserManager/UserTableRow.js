@@ -6,6 +6,10 @@ import Swal from "sweetalert2";
 
 export default function UserTableRow(props) {
     const history = useHistory();
+    const subAddress = (txtAddress) => {
+        let temp = txtAddress + "";
+        return temp.substr(0, 20);
+    }
 
     const deleteExpense = () => {
         Swal.fire({
@@ -44,7 +48,7 @@ export default function UserTableRow(props) {
             <td>{props.obj.email}</td>
             <td>{props.obj.phone}</td>
             <td>{props.obj.Type}</td>
-            <td>{props.obj.address}</td>
+            <td>  {subAddress(props.obj.address)}</td>
             <td>
                 <Link
                     className="edit-link"

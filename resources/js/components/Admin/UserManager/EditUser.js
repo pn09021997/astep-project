@@ -65,7 +65,7 @@ export default function EditUser(props) {
 
                 Swal.fire("Saved!", "", "success")
                 .then(() => {
-                    props.history.push(`/edit-expense/${props.match.params.id}`);
+                    props.history.push(`/edit-user/${props.match.params.id}`);
                 });
             } else if (result.isDenied) {
                 Swal.fire("Changes are not saved", "", "info")
@@ -96,7 +96,7 @@ export default function EditUser(props) {
                     onChange={handleChange}
                     validate={{
                         required: {
-                            value: true,
+                            value: false,
                         },
                     }}
                 />
@@ -109,7 +109,7 @@ export default function EditUser(props) {
                     onChange={handleChange}
                     validate={{
                         required: {
-                            value: true,
+                            value: false,
                         },
                     }}
                 />
@@ -121,7 +121,7 @@ export default function EditUser(props) {
                     onChange={handleChange}
                     validate={{
                         required: {
-                            value: true,
+                            value: false,
                         },
                     }}
                 />
@@ -170,7 +170,7 @@ export default function EditUser(props) {
                 <AvField
                     name="password"
                     label="Password"
-                    type="text"
+                    type="password"
                     placeholder="Enter Password..."
                     value={user.password}
                     onChange={handleChange}
@@ -197,7 +197,7 @@ export default function EditUser(props) {
                     label="address"
                     type="text"
                     placeholder="Enter addressr..."
-                    value={user.phone}
+                    value={user.address}
                     onChange={handleChange}
                     validate={{
                         required: {

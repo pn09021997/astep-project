@@ -13,7 +13,7 @@ export default class RelatedContent extends Component {
                             </div>
                             <div className="row my-5">
                                 <div className="col-md-3">
-                                    <img src="https://product.hstatic.net/200000065946/product/pro_nau_ghe_bang_tua_go_cao_su_tu_nhien_vline_602_1_2_237fdbb588034714948022f20854e158_grande.png" width="100%" height="75%"></img>
+                                    <img src="https://product.hstatic.net/200000065946/product/pro_nau_ghe_bang_dai_vline_601_noi_that_moho_7_22b003008324475dbebfca89386cf72e_grande.png" width="100%" height="75%"></img>
                                     <div className="related-content">
                                         <p>Ghế Băng Dài Gỗ Cao Su Tự nhiên MOHO VLINE 602</p>
                                         <div className="related-price">
