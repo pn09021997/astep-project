@@ -1,65 +1,68 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
+import axios from "axios";
 import Swal from "sweetalert2";
 import "../../../css/Register.css";
-export default function Register({ accountData, setAccountData }) {
+export default function Register() {
+    //State save Register data
+    const [registerData, setRegisterData] = useState({
+        email: "",
+        Username: "",
+        password: "",
+        confirmPassword: "",
+        phone: "",
+        address: "",
+    });
+
     const history = useHistory();
-    //Do Register
-    const setRegisterInfo = (registerCheck) => {
-        if (registerCheck.length !== 0) {
-            Swal.fire({
-                title: "Error!",
-                text: "Do you want to continue ?",
-                icon: "error",
-                confirmButtonText: "Cool",
-            });
-        } else {
-            setAccountData([
-                ...accountData,
-                {
-                    id: accountData[accountData.length - 1].id + 1,
-                    ...registerCheck[0],
-                },
-            ]);
-            history.push('/login');
+
+    //Save data when input change
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setRegisterData((registerData) => ({
+            ...registerData,
+            [name]: value,
+        }));
+    };
+
+    //API register
+    const doRegister = (event, values) => {
+        let infoRegister = {
+            ...registerData,
+        };
+        if (validateForm(infoRegister)) {
+            axios
+                .post("http://localhost:8000/api/register/", infoRegister)
+                .then((res) => {
+                    console.log(res.data);
+                    Swal.fire(
+                        "Good job!",
+                        "Expense Added Successfully",
+                        "success"
+                    ).then(() => {
+                        history.push("/login");
+                    });
+                })
+                .catch((err) => {
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Do you want to continue ?",
+                        icon: "error",
+                        confirmButtonText: "Cool",
+                    });
+                    console.log(err);
+                });
         }
     };
 
-    //Get Data at Form
-    const doRegister = (event, values) => {
-        let email = values.email;
-        let password = values.password;
-        let confirmPassword = values.confirmPassword;
-        let birthday = values.birthday;
-        let phone = values.phone;
-        let fullname = values.fullname;
-
-        let infoRegister = [
-            {
-                username: email,
-                password: password,
-                confirmPassword: confirmPassword,
-                fullname: fullname,
-                birthday: birthday,
-                phone: phone,
-            },
-        ];
-
-        let registerCheck = accountData.filter((value, index) => {
-            return validateForm(infoRegister, value) === true;
-        });
-        setRegisterInfo(registerCheck);
-    };
-
-    //Check Register Info
-    const validateForm = (infoRegister, accountData) => {
+    //Check Register Info password and confirm password
+    const validateForm = (infoRegister) => {
         let flag = true;
-        infoRegister.username === accountData.username
+        infoRegister.password !== infoRegister.confirmPassword
             ? (flag = false)
             : (flag = true);
-
         return flag;
     };
 
@@ -72,7 +75,7 @@ export default function Register({ accountData, setAccountData }) {
         });
     };
 
-    return ( 
+    return (
         <div className="register container mt-5 mb-5">
             <h1 className="register-title text-center">REGISTER</h1>
             <AvForm
@@ -84,6 +87,8 @@ export default function Register({ accountData, setAccountData }) {
                     label="Email"
                     type="text"
                     placeholder="Email here..."
+                    value={registerData.email}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
@@ -96,10 +101,31 @@ export default function Register({ accountData, setAccountData }) {
                     }}
                 />
                 <AvField
+                    name="Username"
+                    label="Username"
+                    type="text"
+                    placeholder="Username here..."
+                    value={registerData.Username}
+                    onChange={handleChange}
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter your email",
+                        },
+                        pattern: {
+                            value: "^[A-Za-z0-9]+$",
+                            errorMessage:
+                                "Your name must be composed only with letter and numbers",
+                        },
+                    }}
+                />
+                <AvField
                     name="password"
                     label="Password"
                     type="password"
                     placeholder="Password here..."
+                    value={registerData.password}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
@@ -116,7 +142,7 @@ export default function Register({ accountData, setAccountData }) {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 16,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
                         },
@@ -126,6 +152,8 @@ export default function Register({ accountData, setAccountData }) {
                     name="confirmPassword"
                     label="Confirm Password"
                     placeholder="Confirm Password here..."
+                    value={registerData.confirmPassword}
+                    onChange={handleChange}
                     type="password"
                     validate={{
                         required: {
@@ -143,47 +171,9 @@ export default function Register({ accountData, setAccountData }) {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 16,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
-                        },
-                    }}
-                />
-                <AvField
-                    name="fullname"
-                    label="Fullname"
-                    placeholder="Fullname here..."
-                    type="text"
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your fullname",
-                        },
-                        pattern: {
-                            value: "^[A-Za-z]+$",
-                            errorMessage:
-                                "Your password must be composed only with letter",
-                        },
-                        minLength: {
-                            value: 6,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
-                        },
-                        maxLength: {
-                            value: 16,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
-                        },
-                    }}
-                />
-                <AvField
-                    name="birthday"
-                    label="Birthday"
-                    type="date"
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your birthday",
                         },
                     }}
                 />
@@ -191,13 +181,36 @@ export default function Register({ accountData, setAccountData }) {
                     name="phone"
                     label="Phone"
                     placeholder="Phone here..."
-                    type="tel"
+                    type="text"
+                    value={registerData.phone}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
                             errorMessage: "Please enter your phone",
                         },
+                        minLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        maxLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        pattern: {
+                            value: "^0",
+                            errorMessage: "Your phone must be start with 0",
+                        },
                     }}
+                />
+                <AvField
+                    name="address"
+                    label="Address"
+                    placeholder="Address here..."
+                    type="textarea"
+                    value={registerData.address}
+                    onChange={handleChange}
+                    validate={{}}
                 />
                 <Button
                     type="submit"
