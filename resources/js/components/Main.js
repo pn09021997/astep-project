@@ -21,6 +21,7 @@ import Home from "./Home/Home";
 import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Detail from "./Detail/Detail";
+import Cart from "./CartPage/Cart";
 export default function Main() {
     //Account Data
     const [accountData, setAccountData] = useState([
@@ -124,6 +125,11 @@ export default function Main() {
                     </Route>
                     <Route path="/">
                         <Home key="home" />
+                    </Route>
+                    <Route path="/Cart">
+                        <Register
+                            key="cart"
+                        />
                     </Route>
                     <Route path="*">
                         <NoMatch />
