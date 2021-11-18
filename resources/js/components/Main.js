@@ -56,54 +56,50 @@ export default function Main() {
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
 
-    return (
-        <div className="main">
-            <Router>
-                <Navbar
-                    color="dark"
-                    dark
-                    key="navbar"
-                    className="main-navbar container-fluid"
-                >
-                    <NavbarBrand href="/" className="mr-auto">
-                        <img
-                            src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
-                            alt="uneox logo"
-                            className="img-fluid navbar--custom-logo"
-                        />
-                    </NavbarBrand>
-                    <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-                    <Collapse isOpen={!collapsed} navbar>
-                        <Nav navbar>
-                            <NavItem className="mb-3">
-                                <Link
-                                    to="/"
-                                    className="main-navbar--custom-link"
-                                >
-                                    Home
-                                </Link>
-                            </NavItem>
-                            <NavItem className="mb-3">
-                                <Link
-                                    to="/login"
-                                    className="main-navbar--custom-link"
-                                >
-                                    {isLogin.isLoginStatus
-                                        ? isLogin.username
-                                        : "Login"}
-                                </Link>
-                            </NavItem>
-                            <NavItem className="mb-3">
-                                <Link
-                                    to="/register"
-                                    className="main-navbar--custom-link"
-                                >
-                                    Register
-                                </Link>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
+  return (
+    <div className="main">
+      <Router>
+        <Navbar
+          color="dark"
+          dark
+          key="navbar"
+          className="main-navbar container-fluid"
+        >
+          <NavbarBrand href="/" className="mr-auto">
+            <img
+              src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
+              alt="uneox logo"
+              className="img-fluid navbar--custom-logo"
+            />
+          </NavbarBrand>
+          {/* search bar */}
+          <div className = "search-box">
+          <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="text" placeholder="Search"/>
+                <button class="btn btn-outline-warning mr-4 my-sm-0" type="submit">Search</button>
+            </form>
+          </div>
+          <NavbarToggler onClick={toggleNavbar} className="mr-2" />
+          <Collapse isOpen={!collapsed} navbar>
+            <Nav navbar>
+              <NavItem className="mb-3">
+                <Link to="/" className="main-navbar--custom-link">
+                  Home
+                </Link>
+              </NavItem>
+              <NavItem className="mb-3">
+                <Link to="/login" className="main-navbar--custom-link">
+                  {isLogin.isLoginStatus ? isLogin.username : "Login"}
+                </Link>
+              </NavItem>
+              <NavItem className="mb-3">
+                <Link to="/register" className="main-navbar--custom-link">
+                  Register
+                </Link>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
 
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
