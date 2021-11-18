@@ -26,7 +26,12 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        return categories::create($request->all());
+        $category = categories::create($request->all());
+        return response()->json([
+            'message' => 'category created',
+            'category' => $category
+        ]);
+       // return products::create($request->all());
     }
 
     /**
@@ -47,10 +52,22 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, categories $category)
+    public function update(Request $request, $id)
     {
-        $category->update($request->all());
-        return $category;
+        $category = categories::find($id);
+        if ($category) {
+            $category->update($request->all());
+            return response()->json([
+                'message' => 'category updated!',
+                'category' => $category
+            ]);
+        } 
+        return response()->json([
+            'message' => ' category not found !!!'
+        ]);
+      
+        // $product->update($request->all());
+        // return $product;
     }
 
     /**
@@ -59,8 +76,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(categories $category)
+    public function destroy($id)
     {
-        return $category->delete();
+        $category = categories::find($id);
+        if ($category) {
+            $category->delete();
+            return response()->json([
+                'message' => 'category deleted'
+            ]);
+        } 
+        return response()->json([
+            'message' => 'category not found !!!'
+        ]);
+     
     }
 }
