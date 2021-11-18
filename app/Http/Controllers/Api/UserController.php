@@ -20,7 +20,12 @@ class UserController  extends Controller
      */
     public function store(Request $request)
     {
-        return users::create($request->all());
+        $user = users::create($request->all());
+        return response()->json([
+            'message' => 'user created',
+            'user' => $user
+        ]);
+       // return products::create($request->all());
     }
 
     /**
@@ -41,10 +46,22 @@ class UserController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, users $user)
+    public function update(Request $request, $id)
     {
-        $user->update($request->all());
-        return $user;
+        $user = users::find($id);
+        if ($user) {
+            $user->update($request->all());
+            return response()->json([
+                'message' => 'user updated!',
+                'user' => $user
+            ]);
+        } 
+        return response()->json([
+            'message' => 'user not found !!!'
+        ]);
+      
+        // $product->update($request->all());
+        // return $product;
     }
 
     /**
@@ -53,8 +70,18 @@ class UserController  extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(users $user)
+    public function destroy($id)
     {
-       return $user->delete();
+        $user = users::find($id);
+        if ($user) {
+            $user->delete();
+            return response()->json([
+                'message' => 'deleted user'
+            ]);
+        } 
+        return response()->json([
+            'message' => 'user not found !!!'
+        ]);
+     //  return $product->delete();
     }
 }
