@@ -26,7 +26,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        return products::create($request->all());
+        $product = products::create($request->all());
+        return response()->json([
+            'message' => 'product created',
+            'product' => $product
+        ]);
+       // return products::create($request->all());
     }
 
     /**
@@ -47,10 +52,22 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, products $product)
+    public function update(Request $request, $id)
     {
-        $product->update($request->all());
-        return $product;
+        $product = products::find($id);
+        if ($product) {
+            $product->update($request->all());
+            return response()->json([
+                'message' => 'product updated!',
+                'product' => $product
+            ]);
+        } 
+        return response()->json([
+            'message' => 'product not found !!!'
+        ]);
+      
+        // $product->update($request->all());
+        // return $product;
     }
 
     /**
@@ -59,8 +76,18 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(products $product)
+    public function destroy($id)
     {
-       return $product->delete();
+        $product = products::find($id);
+        if ($product) {
+            $product->delete();
+            return response()->json([
+                'message' => 'product deleted'
+            ]);
+        } 
+        return response()->json([
+            'message' => 'product not found !!!'
+        ]);
+     //  return $product->delete();
     }
 }
