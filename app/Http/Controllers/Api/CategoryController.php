@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\categories;
 
+//Duyen Controller
 class CategoryController extends Controller
 {
     /**
@@ -31,7 +32,7 @@ class CategoryController extends Controller
             'message' => 'category created',
             'category' => $category
         ]);
-       // return products::create($request->all());
+       // return categories::create($request->all());
     }
 
     /**
@@ -66,8 +67,8 @@ class CategoryController extends Controller
             'message' => ' category not found !!!'
         ]);
       
-        // $product->update($request->all());
-        // return $product;
+        // $category->update($request->all());
+        // return $category;
     }
 
     /**
