@@ -2133,14 +2133,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _TopContent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopContent */ "./resources/js/components/Detail/TopContent.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RelatedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RelatedContent */ "./resources/js/components/Detail/RelatedContent.js");
+/* harmony import */ var _ReviewComment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ReviewComment */ "./resources/js/components/Detail/ReviewComment.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
 
 
 
 function Detail() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
     className: "detail",
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_TopContent__WEBPACK_IMPORTED_MODULE_1__["default"], {})
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_TopContent__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RelatedContent__WEBPACK_IMPORTED_MODULE_2__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ReviewComment__WEBPACK_IMPORTED_MODULE_3__["default"], {})]
   });
 }
 
@@ -2218,9 +2223,9 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                   className: "col-md-3",
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
-                    src: "https://product.hstatic.net/200000065946/product/pro_nau_ghe_bang_tua_go_cao_su_tu_nhien_vline_602_1_2_237fdbb588034714948022f20854e158_grande.png",
+                    src: "https://product.hstatic.net/200000065946/product/pro_nau_ghe_bang_dai_vline_601_noi_that_moho_7_22b003008324475dbebfca89386cf72e_grande.png",
                     width: "100%",
-                    height: "75%"
+                    height: "65%"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2237,7 +2242,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                     src: "https://product.hstatic.net/200000065946/product/pro_mau_tu_nhien_noi_that_moho_ghe_an_odessa_2e9569c22c6d45749107e0a44f6c4d9c_master.png",
                     width: "100%",
-                    height: "75%"
+                    height: "65%"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2254,7 +2259,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                     src: "https://product.hstatic.net/200000065946/product/pro_mau_tu_nhien_ghe_an_go_torino_11092c6f4b2d40c9a4587b48f49268b7_master.png",
                     width: "100%",
-                    height: "75%"
+                    height: "65%"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2271,7 +2276,7 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
                   children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
                     src: "https://product.hstatic.net/200000065946/product/pro_den_noi_that_moho_ghe_an_milan_02_8220c68bac384a06b54a4a4b28d4ca0c_grande.png",
                     width: "100%",
-                    height: "75%"
+                    height: "65%"
                   }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                     className: "related-content",
                     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
@@ -2293,6 +2298,92 @@ var RelatedContent = /*#__PURE__*/function (_Component) {
   }]);
 
   return RelatedContent;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Detail/ReviewComment.js":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/Detail/ReviewComment.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ ReviewComment)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _css_ReviewComment_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../css/ReviewComment.css */ "./resources/css/ReviewComment.css");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var ReviewComment = /*#__PURE__*/function (_Component) {
+  _inherits(ReviewComment, _Component);
+
+  var _super = _createSuper(ReviewComment);
+
+  function ReviewComment() {
+    _classCallCheck(this, ReviewComment);
+
+    return _super.apply(this, arguments);
+  }
+
+  _createClass(ReviewComment, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        className: "review-comment",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          className: "container",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            className: "review-title",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+              children: "Review"
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            className: "btnCmt-review",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "btnCmt",
+              children: "Write a Review"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              className: "btnReview",
+              children: "View"
+            })]
+          })]
+        })
+      });
+    }
+  }]);
+
+  return ReviewComment;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 
@@ -2366,7 +2457,7 @@ var TopContent = /*#__PURE__*/function (_Component) {
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
             className: "row",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-              className: "col-md-6",
+              className: "col-lg-6 col-md-12",
               children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                 className: "img-detail",
                 children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("img", {
@@ -2375,59 +2466,36 @@ var TopContent = /*#__PURE__*/function (_Component) {
                   height: "100%"
                 })
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-              className: "col-md-6",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              className: "col-lg-6 col-md-12",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
                 className: "header-detail",
                 children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                   className: "titlle-detail my-3",
                   children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h3", {
                     children: "Gh\u1EBF \u0102n G\u1ED7 T\u1EA7n B\xEC T\u1EF1 Nhi\xEAn PALLERMO"
                   })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                   className: "quantity-review",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
                     children: "\u0110\xE1nh gi\xE1: "
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    className: "like",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
-                      type: "button",
-                      id: "btn-like",
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "far fa-thumbs-up",
-                        "aria-hidden": "true"
-                      })
-                    })
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "description-detail",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                      children: "K\xEDch th\u01B0\u1EDBc:"
-                    }), " D\xE0i 52cm x R\u1ED9ng 58cm x Cao \u0111\u1EBFn \u0111\u1EC7m ng\u1ED3i/l\u01B0ng t\u1EF1a 50cm/78cm ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
-                      children: " Ch\u1EA5t li\u1EC7u:"
-                    }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "- G\u1ED7 t\u1EA7n b\xEC t\u1EF1 nhi\xEAn ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "- V\u1EA3i b\u1ECDc polyester ch\u1ED1ng nh\u0103n, kh\xE1ng b\u1EE5i b\u1EA9n v\xE0 n\u1EA5m m\u1ED1c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Ch\u1ED1ng th\u1EA5m, cong v\xEAnh, tr\u1EA7y x\u01B0\u1EDBc, m\u1ED1i m\u1ECDt"]
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "price-detail",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
-                    children: "1,390,000\u20AB"
                   })
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  className: "quantity",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                    type: "button",
-                    value: "+",
-                    className: "qty-btn"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                    type: "text",
-                    value: "1",
-                    min: "1",
-                    "class": "select-quantity"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
-                    type: "button",
-                    value: "-",
-                    className: "qty-btn"
+                  className: "description-detail",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "title-description",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("p", {
+                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+                        children: "K\xEDch th\u01B0\u1EDBc:"
+                      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "D\xE0i 52cm x R\u1ED9ng 58cm x Cao \u0111\u1EBFn \u0111\u1EC7m ng\u1ED3i/l\u01B0ng t\u1EF1a 50cm/78cm ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("b", {
+                        children: " Ch\u1EA5t li\u1EC7u:"
+                      }), " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "- G\u1ED7 t\u1EA7n b\xEC t\u1EF1 nhi\xEAn ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "- V\u1EA3i b\u1ECDc polyester ch\u1ED1ng nh\u0103n, kh\xE1ng b\u1EE5i b\u1EA9n v\xE0 n\u1EA5m m\u1ED1c ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Ch\u1ED1ng th\u1EA5m, cong v\xEAnh, tr\u1EA7y x\u01B0\u1EDBc, m\u1ED1i m\u1ECDt"]
+                    })
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                    className: "price-detail",
+                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+                      children: "1,390,000\u20AB"
+                    })
                   })]
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
                   className: "add-product-cart",
@@ -2435,56 +2503,12 @@ var TopContent = /*#__PURE__*/function (_Component) {
                     type: "button",
                     className: "btn-3",
                     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
+                      className: "fs-3",
                       children: "Th\xEAm v\xE0o gi\u1ECF"
                     })
                   })
                 })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                className: "review-product",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                  className: "review-title",
-                  children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h4", {
-                    "class": "mt-5",
-                    children: "Review"
-                  })
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                  className: "user-review",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    className: "name-user",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                      children: "Nhu"
-                    })
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
-                    className: "icon-review",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "fas fa-star"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "fas fa-star"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "fas fa-star"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "fas fa-star"
-                      })
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("span", {
-                      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
-                        "class": "fas fa-star"
-                      })
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
-                    className: "review-content mt-3",
-                    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
-                      children: "S\u1EA3n ph\u1EA9m tuy\u1EC7t v\u1EDDi"
-                    })
-                  })]
-                })]
-              })]
+              })
             })]
           })
         })]
@@ -2512,17 +2536,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _Detail_Detail__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Detail/Detail */ "./resources/js/components/Detail/Detail.js");
-/* harmony import */ var _Detail_RelatedContent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Detail/RelatedContent */ "./resources/js/components/Detail/RelatedContent.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
 function Main() {
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
     className: "main",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Detail_Detail__WEBPACK_IMPORTED_MODULE_1__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_Detail_RelatedContent__WEBPACK_IMPORTED_MODULE_2__["default"], {})]
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_Detail_Detail__WEBPACK_IMPORTED_MODULE_1__["default"], {})
   });
 }
 
@@ -6986,7 +7007,31 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".related-content{\n    text-align: left;\n    padding: 10% 0%;\n  }\n  .related-content>p:hover{\n    color: rgb(3, 110, 60);\n  }\n  .related-price{\n    padding-bottom: 5%;\n    color: #545557;\n  }\n  .title-related>h3{\n    text-align: center;\n    text-transform: uppercase;\n    margin: 10px 0 50px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .title-related>h3::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #6e6b68;\n  }\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".related-content{\n    text-align: left;\n    font-size: 1.1rem;\n    padding: 10% 0%;\n  }\n  .related-content>p:hover{\n    color: #eb7025;;\n  }\n  .related-price{\n    padding-bottom: 5%;\n    font-size: 1.25rem;\n    color: #545557;\n  }\n  .related-price:hover{\n    color: #eb7025;;\n  }\n  .title-related>h3{\n    text-align: center;\n    text-transform: uppercase;\n    margin: 10px 0 50px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .title-related>h3::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #6e6b68;\n  }\n", ""]);
+// Exports
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/ReviewComment.css":
+/*!***************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/ReviewComment.css ***!
+  \***************************************************************************************************************************************************************************************************/
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+/* harmony import */ var _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0__);
+// Imports
+
+var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
+// Module
+___CSS_LOADER_EXPORT___.push([module.id, ".review-title{\n    font-size: 1.5rem;\n    text-align: center;\n}\n.user-review{\n    border: 1px solid #d6d3d3 ;\n    background: #ffeee8;\n}\n.btnCmt-review{\n    padding-bottom: 5%;\n}\n.btnCmt{\n    background: #000000;\n    font-size: 1.1rem;\n    border: none;\n    color: #fff;\n    padding: 1% 1%;\n    margin: auto 1%;\n    transition: 1.2s;\n}\n.btnReview{\n    background: #000000;\n    font-size: 1.1rem;\n    border: none;\n    padding: 1% 1%;\n    color: #fff;\n    transition: 1.2s;\n}\n.btnCmt-review{\n    text-align: center;\n}\n.btnCmt:hover{\n    background: #eb7025;\n}\n.btnReview:hover{\n    background: #eb7025;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -7010,7 +7055,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".detail{\n    background: linear-gradient(rgb(255, 255, 241),rgb(248, 248, 235));\n    background-size:cover ;\n    margin: 0 0;\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n}\n.detail-header>h1{\n    text-transform: uppercase;\n    margin: 10px 0 10px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .detail-header>h1::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #fa7a02;\n  }\n.img-detail{\n    padding: 4% 0%;\n}\n.price-detail{\n    color: #f26524;\n}\n.price-detail:hover{\n    color: #fc2158;\n}\n.btn-3 {\n    position: relative;\n    color: white;\n    background: linear-gradient(0deg, rgb(33, 90, 245) 0%, rgba(2,126,251,1) 100%);\n    width: 130px;\n    height: 40px;\n    line-height: 42px;\n    padding: 0;\n    border: none;\n\n  }\n  .btn-3 span {\n    display: block;\n    width: 100%;\n    height: 100%;\n  }\n  .btn-3:before,\n  .btn-3:after {\n    position: absolute;\n    content: \"\";\n    right: 0;\n    top: 0;\n    background: rgba(2,126,251,1);\n    transition: all 0.3s ease;\n  }\n  .btn-3:before {\n    height: 0%;\n    width: 2px;\n  }\n  .btn-3:after {\n    width: 0%;\n    height: 2px;\n  }\n  .btn-3:hover{\n    background: transparent;\n    box-shadow: none;\n  }\n  .btn-3:hover:before {\n    height: 100%;\n  }\n  .btn-3:hover:after {\n    width: 100%;\n  }\n  .btn-3 span:hover{\n     color: rgba(2,126,251,1);\n  }\n  .btn-3 span:before,\n  .btn-3 span:after {\n    position: absolute;\n    content: \"\";\n    left: 0;\n    bottom: 0;\n     background: rgba(2,126,251,1);\n    transition: all 0.3s ease;\n  }\n  .btn-3 span:before {\n    width: 2px;\n    height: 0%;\n  }\n  .btn-3 span:after {\n    width: 0%;\n    height: 2px;\n  }\n  .btn-3 span:hover:before {\n    height: 100%;\n  }\n  .btn-3 span:hover:after {\n    width: 100%;\n  }\n\n/* .btn-add:hover{\n    border-radius: 10px;\n    background-color: transparent;\n    transition: color 0.45s;\n    z-index: 1;\n    color: #434343;\n } */\n .titlle-detail{\n   border-bottom: 1px dotted #dfe0e1;\n }\n .quantity-review{\n   display: flex;\n   font-weight: bold;\n  border-bottom: 1px dotted #dfe0e1;\n }\n.add-product-cart{\n    padding: 5% 0%;\n}\n.quantity{\n    padding: 5% 0%;\n}\n.qty-btn{\n    float: left;\n    background: #f5f5f5;\n    border: solid 1px #f5f5f5;\n    cursor: pointer;\n    font-weight: 600;\n    font-size: 16px;\n    outline: none;\n    height: 32px;\n    width: 32px;\n    text-align: center;\n    border-radius: 0;\n}\n.select-quantity{\n    background: #fff;\n    font-weight: 600;\n    height: 32px;\n    padding: 0;\n    text-align: center;\n    width: 70px;\n    border: 1px solid #f5f5f5;\n    border-left: none;\n    border-right: none;\n    border-radius: 1px;\n    float: left;\n    -webkit-appearance: none;\n}\n.detail-header{\n  color: #f70122;\n  text-align: center;\n  padding: 1% 0%;\n}\n.like{\n  padding: 0% 30%;\n}\n#btn-like{\n  border: none;\n}\n#btn-like>i:hover{\n  border: none;\n  background: rgb(96, 96, 236);\n}\n.user-review{\n    border: 1px solid #d6d3d3 ;\n    background: #ffeee8;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".detail{\n    background: linear-gradient(rgb(255, 255, 241),rgb(248, 248, 235));\n    background-size:cover ;\n    margin: 0 0;\n    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;\n}\n.detail-header>h1{\n    text-transform: uppercase;\n    margin: 10px 0 10px;\n    padding: 0 0 15px;\n    position: relative;\n  }\n  .detail-header>h1::before{\n    position: absolute;\n    content: \"\";\n    display: block;\n    width: 55px;\n    height: 1px;\n    bottom: 0px;\n    left: 0;\n    right: 0;\n    margin: 0 auto;\n    background: #fa7a02;\n  }\n.img-detail{\n    padding: 4% 0%;\n}\n.price-detail{\n    font-size: 1.7rem;\n    font-weight: bold;\n    color: #f70122;\n    transition: all 1.5s;\n}\n.price-detail:hover{\n    color: #eb7025;\n}\n.btn-3 {\n    position: relative;\n    color: white;\n    background: linear-gradient(0deg, rgb(33, 90, 245) 0%, rgba(2,126,251,1) 100%);\n    width: 100%;\n    height: 50px;\n    line-height: 42px;\n    padding: 0;\n    border: none;\n\n  }\n  .btn-3 span {\n    display: block;\n    width: 100%;\n    height: 100%;\n    font-size: 1.2rem;\n    margin:3px auto;\n  }\n  .btn-3:before,\n  .btn-3:after {\n    position: absolute;\n    content: \"\";\n    right: 0;\n    top: 0;\n    background: rgba(2,126,251,1);\n    transition: all 0.3s ease;\n  }\n  .btn-3:before {\n    height: 0%;\n    width: 2px;\n  }\n  .btn-3:after {\n    width: 0%;\n    height: 2px;\n  }\n  .btn-3:hover{\n    background: transparent;\n    box-shadow: none;\n  }\n  .btn-3:hover:before {\n    height: 100%;\n  }\n  .btn-3:hover:after {\n    width: 100%;\n  }\n  .btn-3 span:hover{\n     color: rgba(2,126,251,1);\n  }\n  .btn-3 span:before,\n  .btn-3 span:after {\n    position: absolute;\n    content: \"\";\n    left: 0;\n    bottom: 0;\n    background: rgba(2,126,251,1);\n    transition: all 0.3s ease;\n  }\n  .btn-3 span:before {\n    width: 2px;\n    height: 0%;\n  }\n  .btn-3 span:after {\n    width: 0%;\n    height: 2px;\n  }\n  .btn-3 span:hover:before {\n    height: 100%;\n  }\n  .btn-3 span:hover:after {\n    width: 100%;\n  }\n\n/* .btn-add:hover{\n    border-radius: 10px;\n    background-color: transparent;\n    transition: color 0.45s;\n    z-index: 1;\n    color: #434343;\n } */\n .titlle-detail{\n   border-bottom: 1px dotted #dfe0e1;\n }\n .quantity-review{\n   display: flex;\n   font-weight: bold;\n   font-size: 1.05rem;\n  border-bottom: 1px dotted #dfe0e1;\n }\n.add-product-cart{\n    padding: 5% 0%;\n}\n.quantity{\n    padding: 5% 0%;\n}\n.qty-btn{\n    float: left;\n    background: #f5f5f5;\n    border: solid 1px #f5f5f5;\n    cursor: pointer;\n    font-weight: 600;\n    outline: none;\n    height: 32px;\n    width: 32px;\n    text-align: center;\n    border-radius: 0;\n}\n.detail-header{\n  color: #f70122;\n  text-align: center;\n  padding: 1% 0%;\n}\n.description-detail\n{\n    padding: 3% 0%;\n    font-size: 1.1rem;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -69130,6 +69175,36 @@ var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_RelatedContent_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
+
+/***/ }),
+
+/***/ "./resources/css/ReviewComment.css":
+/*!*****************************************!*\
+  !*** ./resources/css/ReviewComment.css ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! !../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+/* harmony import */ var _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_ReviewComment_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! !!../../node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!../../node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./ReviewComment.css */ "./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[6].oneOf[1].use[2]!./resources/css/ReviewComment.css");
+
+            
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = _node_modules_style_loader_dist_runtime_injectStylesIntoStyleTag_js__WEBPACK_IMPORTED_MODULE_0___default()(_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_ReviewComment_css__WEBPACK_IMPORTED_MODULE_1__["default"], options);
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_css_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_1_node_modules_postcss_loader_dist_cjs_js_ruleSet_1_rules_6_oneOf_1_use_2_ReviewComment_css__WEBPACK_IMPORTED_MODULE_1__["default"].locals || {});
 
 /***/ }),
 
