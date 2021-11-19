@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\products;
 
+//Duyen Controller
 class ProductController extends Controller
 {
     /**
