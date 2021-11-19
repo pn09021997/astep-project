@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\users;
 
+//Duyen Controller
 class UserController  extends Controller
 {
     public function index()
@@ -25,7 +26,7 @@ class UserController  extends Controller
             'message' => 'user created',
             'user' => $user
         ]);
-       // return products::create($request->all());
+       // return users::create($request->all());
     }
 
     /**
@@ -60,8 +61,8 @@ class UserController  extends Controller
             'message' => 'user not found !!!'
         ]);
       
-        // $product->update($request->all());
-        // return $product;
+        // $user->update($request->all());
+        // return $user;
     }
 
     /**
@@ -82,6 +83,6 @@ class UserController  extends Controller
         return response()->json([
             'message' => 'user not found !!!'
         ]);
-     //  return $product->delete();
+     //  return $user->delete();
     }
 }
