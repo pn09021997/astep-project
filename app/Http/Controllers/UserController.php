@@ -24,6 +24,7 @@ use Laravel\Passport\TokenRepository;
 
 
 
+// Tuấn User Controller
 class UserController extends Controller
 {
     // Login View
@@ -156,7 +157,7 @@ class UserController extends Controller
     public  function  PasswordUpdate(Request  $request)
     {
         $validator = Validator::make($request->all(), [
-            'new_password' => 'required|min:6|max:12', 
+            'new_password' => 'required|min:6|max:12',
         ]);
 
         if ($validator->fails()) {
@@ -193,7 +194,7 @@ class UserController extends Controller
     public function index()
     {
         $user = users::all();
-     
+
         return response()->json($user);
     }
 
@@ -299,11 +300,11 @@ class UserController extends Controller
         $user->password = $request->get('password');
         $user->type = $request->get('type');
         $user->address = $request->get('address');
-       
+
 
         //3 Luu
         $user->save();
-        
+
         return response()->json([
             'message' => 'user updated!',
             'users' => $user
@@ -324,7 +325,7 @@ class UserController extends Controller
             return response()->json([
                 'message' => 'user deleted'
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'user not found !!!'
         ]);
@@ -338,5 +339,5 @@ class UserController extends Controller
     // }
 
 
-   
+
 }
