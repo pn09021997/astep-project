@@ -18,8 +18,6 @@ class CartController extends Controller
             'products.id','=','user_cart.product_id')->get();
         $array_product_id = [];
         foreach($data_product_follow_user_id as $id_product){
-            $id_product->id = $this->Xulyid($id_product->id);
-            $id_product->product_id = $id_product->id;
             $array_product_id[] = $id_product->id;
         }
         $data_quantity = DB::table('user_cart')->select('product_id','quantity')->where('user_id','=',$user_id)->get();
@@ -30,7 +28,6 @@ class CartController extends Controller
     }
 
     public  function  Delete(Request  $request){
-        $request->product_id = $this->DichId($request->product_id);
         if ($this->private_delete($request->product_id,Auth::id())){
             return response()->json(['status'=>'ok'],200);
         }
@@ -41,7 +38,6 @@ class CartController extends Controller
 
     public function Edit(Request  $request){
         // Edit - productid + quantity
-        $request->product_id = $this->DichId($request->product_id);
 
         $datacheck  = [
             'product_id' => $request->product_id,
@@ -90,7 +86,6 @@ class CartController extends Controller
         // Create function use when user click on product and click add to cart in screen
         // If don't have in database will create and quantity of that is 1
         // If have we will  +1 for that and update to database
-        $request->product_id = $this->DichId($request->product_id);
 
 
         if (!ctype_digit($request->product_id)){
