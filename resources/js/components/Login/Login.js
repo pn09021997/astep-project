@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -8,7 +8,13 @@ import "../../../css/Login.css";
 //Components
 import Info from "./Info";
 
-export default function Login({ isLogin, setIsLogin, accountData }) {
+export default function Login({ isLogin, setIsLogin, setInfoUser }) {
+    useLayoutEffect(() => {
+        if (localStorage.getItem("loginToken")) {
+            setIsLogin({isLoginStatus: true});
+        }
+    }, []);
+
     const [loginData, setLoginData] = useState({
         Username: "",
         password: "",
@@ -26,15 +32,13 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
         let infoLogin = {
             ...loginData,
         };
-
-        console.table(infoLogin);
         axios
             .post("http://localhost:8000/api/login/", infoLogin)
             .then((res) => {
                 localStorage.setItem("loginToken", res.data.token);
                 Swal.fire(
-                    "Good job!",
-                    "Expense Added Successfully",
+                    "Login Successfully !",
+                    "Welcome Back To Uneo !!!",
                     "success"
                 ).then(() => {
                     setIsLogin({isLoginStatus: true});
@@ -62,7 +66,7 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
 
     //If isLogin -> Info, !isLogin -> Login
     if (isLogin.isLoginStatus) {
-        return <Info isLogin={isLogin} accountData={accountData} />;
+        return <Info setInfoUser={setInfoUser} setIsLogin={setIsLogin} />;
     } else {
         return (
             <div className="login container mt-5 mb-5">
@@ -126,14 +130,14 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
                     />
                     <Button
                         type="submit"
-                        color="secondary"
+                        color="success"
                         className="btn-md btn-block"
                     >
                         Submit
                     </Button>
                     <Link to="/register">
                         <Button
-                            color="outline-secondary"
+                            color="outline-info"
                             className="btn-md btn-block mt-2"
                         >
                             Register

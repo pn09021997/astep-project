@@ -41,6 +41,7 @@ class UserController extends Controller
             'password' => $request['password']
         ];
 
+        //Note check username !== db || password !== db
         if (Auth::attempt($datax))
         {
          $user =  User::where('Username',$datax['Username'])->first();
@@ -48,7 +49,7 @@ class UserController extends Controller
             return  response()->json(['token'=> $token],200);
         }
         else{
-            return abort(401);
+            return response(['errors'=> "Not found"]);
         }
     }
 
@@ -92,6 +93,7 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
             'type' => 0,
+            'address' => "",
         ];
         DB::table('users')->insert($data);
         return response()->json([
@@ -116,10 +118,10 @@ class UserController extends Controller
     public  function  infoPost(Request  $request){
         $checkrule = array() ;
         $data = Auth::user();
-        if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
+        /*if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
             || $data ['address'] != $request->old_address){
             return response(['error' => 'Not Update Success']);
-        }
+        }*/
         $phone = $request->phone;
         if ($data['email'] != $request->email) {
             $email = ['email' => 'required|email|unique:users,email'];
