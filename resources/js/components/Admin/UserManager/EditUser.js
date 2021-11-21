@@ -213,7 +213,7 @@ export default function EditUser(props) {
                 >
                     UPDATE
                 </Button>
-                <Link to="/">
+                <Link to="/user-listing">
                     <Button
                         color="danger"
                         outline

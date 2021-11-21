@@ -127,7 +127,7 @@ export default function EditCategories(props) {
                     >
                         UPDATE
                     </Button>
-                    <Link to="/">
+                    <Link to="/categories-listing">
                         <Button
                             color="danger"
                             outline
