@@ -45,11 +45,6 @@ export default function Main() {
 
     //Local Info Login User
     const [isLogin, setIsLogin] = useState({
-        id: "none",
-        username: "none",
-        password: "none",
-        fullname: "none",
-        birthday: "none",
         isLoginStatus: false,
     });
 
