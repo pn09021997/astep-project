@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomePageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\ProductisHighLight;
 
 
 /*
@@ -27,3 +29,7 @@ Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->
 Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api');
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api');
+Route::get('/home-page-lastest-product',[HomePageController::class,'GetProductIsLastest']);
+Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom']);
+Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
+
