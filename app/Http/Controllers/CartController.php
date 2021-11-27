@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\products;
 use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\User;
+use Illuminate\Support\Facades\Validator;
+
 
 // Tuấn Cart Controller
 class CartController extends Controller
@@ -97,7 +101,7 @@ class CartController extends Controller
 
         try { // Not found will appear 404
             products::findOrFail($product_id);
-        }catch (Exception $exception){
+        }catch (\Exception $exception){
 
             return  response()->json(['status'=>"Have a problem with data can't update your data"]);
         }
@@ -130,7 +134,7 @@ class CartController extends Controller
 
         try { // Not found will appear 404
             products::findOrFail($product_id);
-        }catch (Exception $exception){
+        }catch (\Exception $exception){
             return  false;
         }
         $cart =  user_cart::where('user_id','=',$id_user)->where('product_id','=',$product_id)->first();
