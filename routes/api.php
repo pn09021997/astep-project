@@ -1,12 +1,15 @@
 <?php
 
 use App\Models\user_cart;
+use App\Http\Controllers\HomePageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ProductisHighLight;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,3 +39,6 @@ Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::resource('/user', 'App\Http\Controllers\Api\UserController');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+Route::get('/home-page-lastest-product',[HomePageController::class,'GetProductIsLastest']);
+Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom']);
+Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
