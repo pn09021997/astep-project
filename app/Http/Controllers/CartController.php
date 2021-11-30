@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order;
 use App\Models\products;
 use App\Models\user_cart;
 use Illuminate\Http\Request;
@@ -18,8 +19,23 @@ class CartController extends Controller
     public  function Show(Request  $request){
         // display data of that user when user go to cart page
         $user_id = Auth::id();
+        $address = "";
+        $address_value_macdinh = " ";
+        // Lấy đơn cuối add giá trị vào !
+        if (order::where('user_id','=',$user_id)->first() != null){
+            $address = order::where('user_id','=',$user_id)->orderBy('id','DESC')->first()->address;
+        }
+        // Nếu người dùng chưa mua  nhưng đã cập nhật address rồi thì gọi address vào
+        elseif(order::where('user_id','=',$user_id)->first() == null && Auth::user()->address!=$address_value_macdinh){
+            $address = Auth::user()->address;
+        }
+        // Nếu cả chưa mua và  address = gtri mặc định thì  thôi cho nó  là giá trị mặc định
+        elseif(order::where('user_id','=',$user_id)->first() == null && Auth::user()->address==$address_value_macdinh){
+            $address = " ";
+        }
         $data_product_follow_user_id = User::find($user_id)->product_cart()->join('products',
             'products.id','=','user_cart.product_id')->get();
+        $data_product_follow_user_id = $data_product_follow_user_id->makeHidden(['user_id']);
         $array_product_id = [];
         foreach($data_product_follow_user_id as $id_product){
             $array_product_id[] = $id_product->id;
@@ -28,7 +44,7 @@ class CartController extends Controller
         for ($i = 0 ; $i<count($data_quantity);$i++){
             $data_quantity[$i]->product_id = $array_product_id[$i];
         }
-        return response()->json(['product'=>$data_product_follow_user_id , 'quantity'=>$data_quantity]);
+        return response()->json(['address'=>$address,'product'=>$data_product_follow_user_id , 'quantity'=>$data_quantity]);
     }
 
     public  function  Delete(Request  $request){
@@ -58,7 +74,7 @@ class CartController extends Controller
         //  Regex handle data for just number in product id don't have negative
         $pattern_quantity = '/(^\-\d{1,}$|^\d{1,}$)/';
         $pattern_product_id = '/^\d{1,}$/';
-        if (!preg_match($pattern_product_id,$request->product_id) || !preg_match($pattern_quantity,$request->quantity)  ){
+        if (gettype($request->product_id)!='integer'|| !preg_match($pattern_quantity,$request->quantity)  ){
             return  response()->json(['status'=>"Have a problem with data can't update your data"]);
         }
         $user_id = Auth::id();
