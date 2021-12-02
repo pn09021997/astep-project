@@ -8,7 +8,7 @@ use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use App\Http\Controllers\EncryptId;
 class BuyController extends Controller
 {
     public function Buy(Request $request){
@@ -73,6 +73,17 @@ class BuyController extends Controller
     }
 
     public  function   DisplayProductBuy(){
-
+        $dulieuget = ['order.id','order.address','users.phone','instruction','confirm'];
+        $data = order::where('confirm','=','0')->join('users','order.user_id','=','users.id')->select($dulieuget)->get()->toArray();
+        $encryptController = new EncryptId();
+        $ArrayAfterHandleId = [];
+         foreach ($data as $value){
+            $id_temp =  strval($value['id']);
+           $value['id'] = $encryptController->Xulyid($id_temp);
+            $ArrayAfterHandleId[]=$value;
+        };
+        return response()->json(['order'=>$ArrayAfterHandleId]);
     }
+
+
 }
