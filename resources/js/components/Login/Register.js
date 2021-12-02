@@ -38,8 +38,8 @@ export default function Register() {
                 .then((res) => {
                     console.log(res.data);
                     Swal.fire(
-                        "Register Successfully !",
-                        "Now you can login with this account !!!",
+                        "Good job!",
+                        "Expense Added Successfully",
                         "success"
                     ).then(() => {
                         history.push("/login");
@@ -142,7 +142,7 @@ export default function Register() {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 13,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
                         },
@@ -171,7 +171,7 @@ export default function Register() {
                                 "Your password must be between 6 and 16 characters",
                         },
                         maxLength: {
-                            value: 13,
+                            value: 12,
                             errorMessage:
                                 "Your password must be between 6 and 16 characters",
                         },
@@ -214,14 +214,14 @@ export default function Register() {
                 />
                 <Button
                     type="submit"
-                    color="success"
+                    color="secondary"
                     className="btn-md btn-block"
                 >
                     Register
                 </Button>
                 <Link to="/login">
                     <Button
-                        color="outline-info"
+                        color="outline-secondary"
                         className="btn-md btn-block mt-2"
                     >
                         Back to Login

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     Collapse,
     Navbar,
@@ -23,13 +23,33 @@ import Register from "./Login/Register";
 import Detail from "./Detail/Detail";
 import Cart from "./CartPage/Cart";
 export default function Main() {
-    const [infoUser, setInfoUser] = useState({
-      email: "",
-      phone: "",
-      address: "",
-    });
+    //Account Data
+    const [accountData, setAccountData] = useState([
+        {
+            id: 0,
+            username: "pn0921997@gmail.com",
+            password: "1234567",
+            fullname: "Phuong Nguyen",
+            birthday: "1997-02-09",
+            phone: "0123456789",
+        },
+        {
+            id: 1,
+            username: "vyvy09021997@gmail.com",
+            password: "321",
+            fullname: "Nguyen Phuong",
+            birthday: "1997-02-09",
+            phone: "9876543210",
+        },
+    ]);
+
     //Local Info Login User
     const [isLogin, setIsLogin] = useState({
+        id: "none",
+        username: "none",
+        password: "none",
+        fullname: "none",
+        birthday: "none",
         isLoginStatus: false,
     });
 
@@ -70,7 +90,7 @@ export default function Main() {
               </NavItem>
               <NavItem className="mb-3">
                 <Link to="/login" className="main-navbar--custom-link">
-                  {(isLogin.isLoginStatus) ? infoUser.email : "Login"}
+                  {isLogin.isLoginStatus ? isLogin.username : "Login"}
                 </Link>
               </NavItem>
               <NavItem className="mb-3">
@@ -88,7 +108,7 @@ export default function Main() {
                     <Route path="/login">
                         <Login
                             key="login"
-                            setInfoUser={setInfoUser}
+                            accountData={accountData}
                             setIsLogin={setIsLogin}
                             isLogin={isLogin}
                         />
@@ -96,6 +116,8 @@ export default function Main() {
                     <Route path="/register">
                         <Register
                             key="register"
+                            accountData={accountData}
+                            setAccountData={setAccountData}
                         />
                     </Route>
                     <Route path="/product-detail">
