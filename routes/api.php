@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\BuyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
 Route::resource('/user', 'App\Http\Controllers\Api\UserController');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+Route::post('/buy',[BuyController::class,'Buy'])->middleware('auth:api'); // Api Buy !
+Route::get('/ProductBuy',[BuyController::class,'DisplayProductBuy'])->middleware(['auth:api','role']);
