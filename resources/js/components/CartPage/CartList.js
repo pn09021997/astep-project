@@ -5,19 +5,19 @@ import CartTableRow from "./CartTableRow";
 import "../../../css/CartList.css";
 
 export default function CartList() {
-    const [cart, setCart] = useState([]);
+    // const [cart, setCart] = useState([]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios("http://localhost:8000/api/cart/");
-            setCart(result.data);
-        };
-        fetchData();
-    }, []);
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const result = await axios("http://localhost:8000/api/cart_user/");
+    //         setCart(result.data);
+    //     };
+    //     fetchData();
+    // }, []);
 
-    const DataTable = cart.map((res, i) => {
-        return <CartTableRow obj={res} key={i} />;
-    });
+    // const DataTable = cart.map((res, i) => {
+    //     return <CartTableRow obj={res} key={i} />;
+    // });
 
     return (
         <div className="cart-page">
@@ -34,7 +34,7 @@ export default function CartList() {
 
                         </tr>
                     </thead>
-                    <tbody>{DataTable}</tbody>
+                    {/* <tbody>{DataTable}</tbody> */}
                 </Table>
             </div>
           

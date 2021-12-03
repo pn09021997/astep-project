@@ -9,7 +9,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\ProductisHighLight;
+// use App\Http\Controllers\ProductisHighLight;
 
 
 /*
@@ -46,4 +46,4 @@ Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
 Route::get('/home-page-lastest-product',[HomePageController::class,'GetProductIsLastest']);
 Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom']);
-Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
+// Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
