@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductisHighLight;
 use App\Models\user_cart;
 use App\Http\Controllers\HomePageController;
 use Illuminate\Http\Request;
@@ -33,9 +34,13 @@ Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->
 Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api'); // Api  Update info user
 Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');// APi Update PassWord
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api'); // Api Logout user
-Route::get('/user_cart',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart
-
-Route::resource('/product', 'App\Http\Controllers\ProductController');
+Route::get('/cart_user',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart
+Route::post('/cart_create',[CartController::class,'Create'])->middleware('auth:api'); // Api Create
+Route::post('/cart_update',[CartController::class,'Edit'])->middleware('auth:api'); // Api cart Update
+Route::get('/cart_delete',[CartController::class,'Delete'])->middleware('auth:api'); // Api Cart Delete
+Route::get('/productIsInteresting',[ProductisHighLight::class,'getProductisInteresting']); // Api get product is cart much
+Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
+Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
 Route::resource('/user', 'App\Http\Controllers\Api\UserController');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
