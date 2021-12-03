@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table } from 'reactstrap';
-import CartTableRow from "./CartTableRow";
+import { Table,Container } from 'reactstrap';
+// import CartTableRow from "./CartTableRow";
 import "../../../css/CartList.css";
 
 export default function CartList() {
@@ -24,20 +24,22 @@ export default function CartList() {
             <div className="page-width">
                 <h2 className="text-center h3 mb-5">Shopping Cart</h2>
             </div>
-            <div className="table-wrapper">
-                <Table striped hover>
-                    <thead>
-                        <tr>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>total</th>
+            <Container>
+                <div className="table-wrapper">
+                    <Table striped hover>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th className="quantity_tittle">Quantity</th>
+                                <th className="total_tittle">total</th>
+                            </tr>
+                        </thead>
+                        {/* <tbody>{DataTable}</tbody> */}
+                    </Table>
+                </div>
+            </Container>
 
-                        </tr>
-                    </thead>
-                    {/* <tbody>{DataTable}</tbody> */}
-                </Table>
-            </div>
-          
+
         </div>
 
     );
