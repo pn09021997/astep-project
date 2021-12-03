@@ -74,7 +74,7 @@ class CartController extends Controller
         //  Regex handle data for just number in product id don't have negative
         $pattern_quantity = '/(^\-\d{1,}$|^\d{1,}$)/';
         $pattern_product_id = '/^\d{1,}$/';
-        if (gettype($request->product_id)!='integer'|| !preg_match($pattern_quantity,$request->quantity)  ){
+        if (!preg_match($pattern_product_id,$request->product_id) || !preg_match($pattern_quantity,$request->quantity)  ){
             return  response()->json(['status'=>"Have a problem with data can't update your data"]);
         }
         $user_id = Auth::id();
