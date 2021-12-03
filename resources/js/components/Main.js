@@ -22,6 +22,7 @@ import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Detail from "./Detail/Detail";
 import Cart from "./CartPage/Cart";
+import CategoriesTotall from "./CategoriesPage/CategoriesTotal";
 export default function Main() {
     const [infoUser, setInfoUser] = useState({
       email: "",
@@ -106,10 +107,15 @@ export default function Main() {
                             key="cart"
                         />
                     </Route>
+                    <Route path="/categories-page">
+                        <CategoriesTotall
+                            key="categories-page"
+                        />
+                    </Route>
                     <Route path="/">
                         <Home key="home" />
                     </Route>
-               
+
                     <Route path="*">
                         <NoMatch />
                     </Route>
