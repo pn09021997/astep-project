@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Container } from "reactstrap";
+import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Modal, Form, Row, Col, FloatingLabel } from 'react-bootstrap';
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -82,12 +83,85 @@ export default function CartTableRow() {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <Col md>
-                                <Form.Control type="email" placeholder="Address buy" />
-                            </Col>
-                            <Col md>
-                            <Form.Control type="email" placeholder="note product cart" />
-                            </Col>
+                        <AvForm
+            >
+                <AvField
+                    hidden
+                    name="old_email"
+                    type="text"
+                />
+                <AvField
+                    name="email"
+                    label="Email"
+                    type="text"
+                    placeholder="Email here..."
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter your email",
+                        },
+                        email: {
+                            value: true,
+                            errorMessage: "Your email not correct",
+                        },
+                    }}
+                />
+                <AvField
+                    hidden
+                    name="old_phone"
+                    type="text"
+                />
+                <AvField
+                    name="phone"
+                    label="Phone"
+                    placeholder="Phone here..."
+                    type="text"
+                    validate={{
+                        required: {
+                            value: true,
+                            errorMessage: "Please enter your phone",
+                        },
+                        minLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        maxLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        pattern: {
+                            value: "^0",
+                            errorMessage: "Your phone must be start with 0",
+                        },
+                    }}
+                />
+                <AvField
+                    hidden
+                    name="old_address"
+                    type="textarea"
+                />
+                <AvField
+                    name="address"
+                    label="Address"
+                    placeholder="Address here..."
+                    type="textarea"
+                    validate={{}}
+                />
+                <Button
+                    type="submit"
+                    color="success"
+                    className="btn-md btn-block"
+                >
+                    Update
+                </Button>
+                <Button
+                    color="outline-danger"
+                    className="btn-md btn-block mt-2"
+                    id="btnBack"
+                >
+                    Logout
+                </Button>
+            </AvForm>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
