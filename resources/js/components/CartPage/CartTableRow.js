@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Modal, Form, Row, Col  } from "reactstrap";
-import { Container } from "reactstrap";
+import { Button, Container } from "reactstrap";
+import { Modal, Form, Row, Col, FloatingLabel } from 'react-bootstrap';
 import axios from "axios";
 import Swal from "sweetalert2";
 
