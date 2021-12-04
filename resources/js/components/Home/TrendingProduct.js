@@ -24,7 +24,7 @@ export default function TrendingProduct() {
                             alt={product.product_name}
                             className="img-fluid"
                         />
-                        <div class="action-cart">
+                        <div className="action-cart">
                             <Button color="danger" outline className="btn-block">
                                 Add Cart
                             </Button>
