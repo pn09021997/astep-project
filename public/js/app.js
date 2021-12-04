@@ -3360,6 +3360,11 @@ function TrendingCategories() {
       productList = _useState2[0],
       setProductList = _useState2[1];
 
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+      _useState4 = _slicedToArray(_useState3, 2),
+      categoriesList = _useState4[0],
+      setCategoriesList = _useState4[1];
+
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var fetchData = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
@@ -3373,9 +3378,10 @@ function TrendingCategories() {
 
               case 2:
                 result = _context.sent;
-                setProductList(result.data);
+                setProductList(result.data.products);
+                setCategoriesList(result.data.categories);
 
-              case 4:
+              case 5:
               case "end":
                 return _context.stop();
             }
@@ -3390,6 +3396,14 @@ function TrendingCategories() {
 
     fetchData();
   }, []);
+
+  var findCategory = function findCategory(arr, query) {
+    var result = arr.find(function (el) {
+      return el.id === query.category_id;
+    });
+    return result ? result.name : null;
+  };
+
   var trendingCategory = productList.map(function (product) {
     return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
@@ -3402,7 +3416,7 @@ function TrendingCategories() {
           className: "info-detail",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
             className: "trending-category-title",
-            children: ["# ", product.category_id]
+            children: ["# ", findCategory(categoriesList, product)]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
             className: "trending-category-product-title",
             children: product.product_name
@@ -3513,7 +3527,7 @@ function TrendingProduct() {
             alt: product.product_name,
             className: "img-fluid"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-            "class": "action-cart",
+            className: "action-cart",
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
               color: "danger",
               outline: true,
