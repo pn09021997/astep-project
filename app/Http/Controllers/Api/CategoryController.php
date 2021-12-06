@@ -32,7 +32,7 @@ class CategoryController extends Controller
             'message' => 'category created',
             'category' => $category
         ]);
-       // return categories::create($request->all());
+       // return products::create($request->all());
     }
 
     /**
@@ -67,8 +67,8 @@ class CategoryController extends Controller
             'message' => ' category not found !!!'
         ]);
       
-        // $category->update($request->all());
-        // return $category;
+        // $product->update($request->all());
+        // return $product;
     }
 
     /**
