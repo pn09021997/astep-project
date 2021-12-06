@@ -11,7 +11,7 @@ import Info from "./Info";
 export default function Login({ isLogin, setIsLogin, setInfoUser }) {
     useLayoutEffect(() => {
         if (localStorage.getItem("loginToken")) {
-            setIsLogin({isLoginStatus: true});
+            setIsLogin({ isLoginStatus: true });
         }
     }, []);
 
@@ -35,14 +35,23 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
         axios
             .post("http://localhost:8000/api/login/", infoLogin)
             .then((res) => {
-                localStorage.setItem("loginToken", res.data.token);
-                Swal.fire(
-                    "Login Successfully !",
-                    "Welcome Back To Uneo !!!",
-                    "success"
-                ).then(() => {
-                    setIsLogin({isLoginStatus: true});
+                if (res.data.token !== undefined) {
+                    localStorage.setItem("loginToken", res.data.token);
+                    Swal.fire(
+                        "Login Successfully !",
+                        "Welcome Back To Uneo !!!",
+                        "success"
+                    ).then(() => {
+                        setIsLogin({ isLoginStatus: true });
+                    });
+                } else {
+                  Swal.fire({
+                    title: "Your Username and Password wrong !",
+                    text: "Do you want to continue ?",
+                    icon: "error",
+                    confirmButtonText: "Cool",
                 });
+                }
             })
             .catch((err) => {
                 Swal.fire({
