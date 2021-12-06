@@ -26,8 +26,6 @@ export default function Login({ isLogin, setIsLogin, accountData }) {
         let infoLogin = {
             ...loginData,
         };
-
-        console.table(infoLogin);
         axios
             .post("http://localhost:8000/api/login/", infoLogin)
             .then((res) => {
