@@ -51,11 +51,10 @@ const categories_images = [
 ]
 const menu = [
     { item: "All items", class: "active" },
+    { item: "Shelf" },
     { item: "Table" },
-    { item: "Lamp" },
     { item: "Bed" },
-    { item: "Chair" },
-    { item: "Cabinet" },
+    { item: "Stools & Chair" },
 ];
 export default function CategoriesHome() {
     const [active, setActive] = useState(0);
