@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import "../../../css/Info.css";
 export default function Info({ setInfoUser, setIsLogin }) {
+    const [oldInfoData, setOldInfoData] = useState({});
     const [infoData, setInfoData] = useState({
         email: "",
         phone: "",
@@ -58,6 +59,9 @@ export default function Info({ setInfoUser, setIsLogin }) {
                 setInfoUser({
                     ...result.data,
                 });
+                setOldInfoData({
+                    ...result.data,
+                });
             };
             fetchData();
         }
@@ -71,36 +75,55 @@ export default function Info({ setInfoUser, setIsLogin }) {
             icon: "question",
         }).then((result) => {
             if (result.isConfirmed) {
-                let infoUpdate = {
-                    old_email: values.old_email,
-                    old_phone: values.old_phone,
-                    old_address: values.old_address,
-                    ...infoData,
-                };
+                if (checkOldInfoData(infoData, oldInfoData)) {
+                    let infoUpdate = {
+                        old_email: values.old_email,
+                        old_phone: values.old_phone,
+                        old_address: values.old_address,
+                        ...infoData,
+                    };
 
-                let tokenStr = localStorage.getItem("loginToken");
-                axios
-                    .post("http://localhost:8000/api/info/", infoUpdate, {
-                        headers: { Authorization: `Bearer ${tokenStr}` },
-                    })
-                    .then((res) => {
-                        Swal.fire(
-                            "Good job!",
-                            "Updated Successfully",
-                            "success"
-                        );
-                    })
-                    .catch((err) => {
-                        Swal.fire({
-                            title: "Error!",
-                            text: "Do you want to continue ?",
-                            icon: "error",
-                            confirmButtonText: "Cool",
+                    let tokenStr = localStorage.getItem("loginToken");
+                    axios
+                        .post("http://localhost:8000/api/info/", infoUpdate, {
+                            headers: { Authorization: `Bearer ${tokenStr}` },
+                        })
+                        .then((res) => {
+                            Swal.fire(
+                                "Good job!",
+                                "Updated Successfully",
+                                "success"
+                            );
+                        })
+                        .catch((err) => {
+                            Swal.fire({
+                                title: "Error!",
+                                text: "Do you want to continue ?",
+                                icon: "error",
+                                confirmButtonText: "Cool",
+                            });
+                            console.log(err);
                         });
-                        console.log(err);
+                } else {
+                    Swal.fire({
+                        title: "Pls type anything you want to update!",
+                        text: "Do you want to continue ?",
+                        icon: "error",
+                        confirmButtonText: "Cool",
                     });
+                }
             }
         });
+    };
+
+    const checkOldInfoData = (infoData, oldInfoData) => {
+        let flag = true;
+        infoData.email === oldInfoData.email ? (flag = false) : (flag = true);
+        infoData.phone === oldInfoData.phone ? (flag = false) : (flag = true);
+        infoData.address === oldInfoData.address
+            ? (flag = false)
+            : (flag = true);
+        return flag;
     };
 
     const handleInvalidSubmit = (event, errors, values) => {
