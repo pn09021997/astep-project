@@ -55,9 +55,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(categories $category)
+    public function show(Request $request, $id)
     {
-        return $category;
+        $category = categories::find($id);
+        if ($category) {
+            return response()->json([
+                'message' => 'category found!',
+                'category' => $category,
+            ]);
+        }
+        return response()->json([
+            'message' => 'category not found!',
+        ]);
     }
 
 
@@ -114,17 +123,33 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = categories::find($id);
-        $category->delete();
+
+        if ($category) {
+            $category->delete();
+            return response()->json([
+                'message' => 'category deleted successfully !!!',
+            ]);
+        } 
         return response()->json([
-            'message' => 'categories deleted successfully !!!',
-            'item' => $category
+            'message' => 'category not found !!!'
         ]);
     }
     public function getSearch(Request $request){
-        $category = categories::where('name','like','%'.$request->keyword.'%')->get();
-        return response()->json([
-            'message' => 'categories find it !!!',
-            'item' => $category
-        ]);
+        $category = categories::where('name','like','%'.$request->key.'%')->get();
+        if($category){
+            if(empty(count($category))){
+                return response()->json([
+                    'message' => 'category not found!',
+                ]);
+            }
+            else{
+                return response()->json([
+                    'message' => count($category). ' category found!!!',
+                    'item' => $category
+                ]);
+            }
+           
+        }
+        
     }
 }

@@ -16,5 +16,8 @@ class users extends Model
         'type',
         'address',
     ];
-   
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
 }

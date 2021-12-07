@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -333,13 +334,25 @@ class UserController extends Controller
         ]);
     }
 
-    // public function getSearch(Request $request){
-    //     $user = users::where('Username','like','%'.$request->key.'%')
-    //                         ->orwhere('price','like','%'.$request->key.'%')
-    //                         ->get();
-    //                         return view('admin.product.search', compact('product'));
-    // }
+    public function getSearch(Request $request){
+        $user = users::where('Username','like','%'.$request->key.'%')
+                       ->orwhere('email','like','%'.$request->key.'%')
+                       ->orwhere('address','like', '%' .$request->key.'%')
+                       ->get();
+                            //return view('admin.user.search', compact('user'));
+                            if($user){
+                               if(empty(count($user))){
+                                   return response()->json([
+                                       'message' => 'user not found!',
+                                   ]);
+                               }
+                               else{
+                                   return response()->json([
+                                       'message' => count($user). ' user found!!!',
+                                       'item' => $user
+                                   ]);
+                                }
+                            }
+                        }
+                    }
 
-
-
-}
