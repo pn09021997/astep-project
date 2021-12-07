@@ -1,18 +1,13 @@
 .related-content{
     text-align: left;
-    font-size: 1.1rem;
     padding: 10% 0%;
   }
   .related-content>p:hover{
-    color: #eb7025;;
+    color: rgb(3, 110, 60);
   }
   .related-price{
     padding-bottom: 5%;
-    font-size: 1.25rem;
     color: #545557;
-  }
-  .related-price:hover{
-    color: #eb7025;;
   }
   .title-related>h3{
     text-align: center;

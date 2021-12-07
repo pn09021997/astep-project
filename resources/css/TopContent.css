@@ -1,3 +1,4 @@
+
 .detail{
     background: linear-gradient(rgb(255, 255, 241),rgb(248, 248, 235));
     background-size:cover ;
@@ -26,20 +27,17 @@
     padding: 4% 0%;
 }
 .price-detail{
-    font-size: 1.7rem;
-    font-weight: bold;
-    color: #f70122;
-    transition: all 1.5s;
+    color: #f26524;
 }
 .price-detail:hover{
-    color: #eb7025;
+    color: #fc2158;
 }
 .btn-3 {
     position: relative;
     color: white;
     background: linear-gradient(0deg, rgb(33, 90, 245) 0%, rgba(2,126,251,1) 100%);
-    width: 100%;
-    height: 50px;
+    width: 130px;
+    height: 40px;
     line-height: 42px;
     padding: 0;
     border: none;
@@ -49,8 +47,6 @@
     display: block;
     width: 100%;
     height: 100%;
-    font-size: 1.2rem;
-    margin:3px auto;
   }
   .btn-3:before,
   .btn-3:after {
@@ -88,7 +84,7 @@
     content: "";
     left: 0;
     bottom: 0;
-    background: rgba(2,126,251,1);
+     background: rgba(2,126,251,1);
     transition: all 0.3s ease;
   }
   .btn-3 span:before {
@@ -119,7 +115,6 @@
  .quantity-review{
    display: flex;
    font-weight: bold;
-   font-size: 1.05rem;
   border-bottom: 1px dotted #dfe0e1;
  }
 .add-product-cart{
@@ -134,19 +129,43 @@
     border: solid 1px #f5f5f5;
     cursor: pointer;
     font-weight: 600;
+    font-size: 16px;
     outline: none;
     height: 32px;
     width: 32px;
     text-align: center;
     border-radius: 0;
 }
+.select-quantity{
+    background: #fff;
+    font-weight: 600;
+    height: 32px;
+    padding: 0;
+    text-align: center;
+    width: 70px;
+    border: 1px solid #f5f5f5;
+    border-left: none;
+    border-right: none;
+    border-radius: 1px;
+    float: left;
+    -webkit-appearance: none;
+}
 .detail-header{
   color: #f70122;
   text-align: center;
   padding: 1% 0%;
 }
-.description-detail
-{
-    padding: 3% 0%;
-    font-size: 1.1rem;
+.like{
+  padding: 0% 30%;
+}
+#btn-like{
+  border: none;
+}
+#btn-like>i:hover{
+  border: none;
+  background: rgb(96, 96, 236);
+}
+.user-review{
+    border: 1px solid #d6d3d3 ;
+    background: #ffeee8;
 }

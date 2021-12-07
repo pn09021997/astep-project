@@ -14,7 +14,5 @@ class user_cart extends Seeder
      */
     public function run()
     {
-
-
     }
 }
