@@ -25,6 +25,9 @@
 .view_cart{
     max-width: 1920px;
 }
+.form_input{
+   margin-left: 20%;
+}
 /* responsive nho hon 750px */
 @media(max-width: 1290px){
 .Container{
