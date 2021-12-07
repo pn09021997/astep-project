@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -15,8 +16,10 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+Route::get('/sendmail',[MailController::class,'SendMail']);
+
 Route::get('/{path?}', function () {
-    return view('welcome');
+   return view('welcome');
 });
 
 Route::get('/login',[UserController::class,'loginview'])->middleware('checklogin')->name('login');
@@ -28,4 +31,5 @@ Route::get('/password',function (){
 
 Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
+Route::get('/verify/verify',[UserController::class,'UserVerifyEmail']);
 

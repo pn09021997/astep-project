@@ -82,7 +82,6 @@ export default function CartTableRow() {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-<<<<<<< HEAD
                             <AvForm className="form_input">
                                 <AvField
                                     hidden
@@ -128,14 +127,6 @@ export default function CartTableRow() {
                                 />
                                
                             </AvForm>
-=======
-                            <Col md>
-                                <Form.Control type="email" placeholder="Address buy" />
-                            </Col>
-                            <Col md>
-                            <Form.Control type="email" placeholder="note product cart" />
-                            </Col>
->>>>>>> bbbf9589361f26d0d7c45596f392335a98a77e02
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

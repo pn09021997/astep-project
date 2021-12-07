@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
 import "../../../css/TrendingProduct.css";
-export default function TrendingProduct() {
-    const [productList, setProductList] = useState([]); 
-
-    useEffect (() => {
-        const fetchData = async () => {
-          const result = await axios(
-              "http://localhost:8000/api/productIsBoughtMuch/"
-          );
-          setProductList(result.data[1]);
-      };
-      fetchData();
-      }, []);
-      
+export default function TrendingProduct({ productList }) {
     const trendingList = productList.slice(0, 4).map((product) => {
         return (
             <Col key={product.id}>
                 <div className="trending-product-info">
                     <div className="product-action--action">
                         <img
-                            src={product.product_image}
-                            alt={product.product_name}
+                            src={product.img}
+                            alt={product.name}
                             className="img-fluid"
                         />
                         <div className="action-cart">
@@ -32,8 +19,8 @@ export default function TrendingProduct() {
                     </div>
 
                     <div className="info-detail">
-                        <p className="info-detail-name">{product.product_name}</p>
-                        <p className="info-detail-price">$ {product.price}</p>
+                        <p className="info-detail-name">{product.name}</p>
+                        <p className="info-detail-price">{product.price}</p>
                     </div>
                 </div>
             </Col>

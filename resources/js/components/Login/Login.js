@@ -1,9 +1,8 @@
-import React, { useState, useLayoutEffect } from "react";
+import React from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
-import axios from "axios";
 import "../../../css/Login.css";
 //Components
 import Info from "./Info";
@@ -27,10 +26,14 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
             [name]: value,
         }));
     };
+
     //Get Data at Form
     const doLogin = (event, values) => {
+        let email = values.email;
+        let password = values.password;
         let infoLogin = {
-            ...loginData,
+            username: email,
+            password: password,
         };
         axios
             .post("http://localhost:8000/api/login/", infoLogin)
@@ -75,7 +78,7 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
 
     //If isLogin -> Info, !isLogin -> Login
     if (isLogin.isLoginStatus) {
-        return <Info setInfoUser={setInfoUser} setIsLogin={setIsLogin} />;
+        return <Info isLogin={isLogin} accountData={accountData} />;
     } else {
         return (
             <div className="login container mt-5 mb-5">
@@ -85,26 +88,18 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
                     onInvalidSubmit={handleInvalidSubmit}
                 >
                     <AvField
-                        name="Username"
-                        label="Username"
+                        name="email"
+                        label="Email"
                         type="text"
-                        placeholder="Your username..."
-                        value={loginData.Username}
-                        onChange={handleChange}
+                        placeholder="Your email..."
                         validate={{
                             required: {
                                 value: true,
                                 errorMessage: "Please enter your email",
                             },
-                            minLength: {
-                                value: 6,
-                                errorMessage:
-                                    "Your password must be between 6 and 16 characters",
-                            },
-                            maxLength: {
-                                value: 13,
-                                errorMessage:
-                                    "Your password must be between 6 and 16 characters",
+                            email: {
+                                value: true,
+                                errorMessage: "Your email not correct",
                             },
                         }}
                     />
@@ -113,8 +108,6 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
                         label="Password"
                         type="password"
                         placeholder="Your password..."
-                        value={loginData.password}
-                        onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,
@@ -131,7 +124,7 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
                                     "Your password must be between 6 and 16 characters",
                             },
                             maxLength: {
-                                value: 13,
+                                value: 16,
                                 errorMessage:
                                     "Your password must be between 6 and 16 characters",
                             },
@@ -139,14 +132,14 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
                     />
                     <Button
                         type="submit"
-                        color="success"
+                        color="secondary"
                         className="btn-md btn-block"
                     >
                         Submit
                     </Button>
                     <Link to="/register">
                         <Button
-                            color="outline-info"
+                            color="outline-secondary"
                             className="btn-md btn-block mt-2"
                         >
                             Register
