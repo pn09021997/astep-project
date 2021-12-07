@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { Button, Container } from "reactstrap";
-import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Modal, Form, Row, Col, FloatingLabel } from 'react-bootstrap';
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -83,6 +82,7 @@ export default function CartTableRow() {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
+<<<<<<< HEAD
                             <AvForm className="form_input">
                                 <AvField
                                     hidden
@@ -128,6 +128,14 @@ export default function CartTableRow() {
                                 />
                                
                             </AvForm>
+=======
+                            <Col md>
+                                <Form.Control type="email" placeholder="Address buy" />
+                            </Col>
+                            <Col md>
+                            <Form.Control type="email" placeholder="note product cart" />
+                            </Col>
+>>>>>>> bbbf9589361f26d0d7c45596f392335a98a77e02
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>
