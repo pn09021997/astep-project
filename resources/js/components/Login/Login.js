@@ -7,8 +7,15 @@ import axios from "axios";
 import "../../../css/Login.css";
 //Components
 import Info from "./Info";
+import Admin from "../../components/Admin/Admin";
 
-export default function Login({ isLogin, setIsLogin, setInfoUser }) {
+export default function Login({
+    isLogin,
+    setIsLogin,
+    setInfoUser,
+    role,
+    setRoleChange,
+}) {
     useLayoutEffect(() => {
         if (localStorage.getItem("loginToken")) {
             setIsLogin({ isLoginStatus: true });
@@ -45,12 +52,12 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
                         setIsLogin({ isLoginStatus: true });
                     });
                 } else {
-                  Swal.fire({
-                    title: "Your Username and Password wrong !",
-                    text: "Do you want to continue ?",
-                    icon: "error",
-                    confirmButtonText: "Cool",
-                });
+                    Swal.fire({
+                        title: "Your Username and Password wrong !",
+                        text: "Do you want to continue ?",
+                        icon: "error",
+                        confirmButtonText: "Cool",
+                    });
                 }
             })
             .catch((err) => {
@@ -73,9 +80,17 @@ export default function Login({ isLogin, setIsLogin, setInfoUser }) {
         });
     };
 
+
     //If isLogin -> Info, !isLogin -> Login
     if (isLogin.isLoginStatus) {
-        return <Info setInfoUser={setInfoUser} setIsLogin={setIsLogin} />;
+        return (
+            <Info
+                setInfoUser={setInfoUser}
+                setIsLogin={setIsLogin}
+                role={role}
+                setRoleChange={setRoleChange}
+            />
+        );
     } else {
         return (
             <div className="login container mt-5 mb-5">

@@ -1,7 +1,6 @@
 require('./bootstrap');
 import React from 'react';
 import { render } from 'react-dom';
-import Main from './components/Main'
-import Admin from './components/Admin/Admin';
+import Main_Menu from "./Main_Menu";
 
-render(<Main />, document.getElementById('app'));
+render(<Main_Menu />, document.getElementById('app'));
