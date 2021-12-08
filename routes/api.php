@@ -1,15 +1,16 @@
 <?php
 
 use App\Http\Controllers\ProductisHighLight;
-use App\Http\Controllers\HomePageController;
 use App\Models\user_cart;
+use App\Http\Controllers\HomePageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\BuyController;
+// use App\Http\Controllers\ProductisHighLight;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -36,17 +37,13 @@ Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api
 Route::get('/cart_user',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart
 Route::post('/cart_create',[CartController::class,'Create'])->middleware('auth:api'); // Api Create
 Route::post('/cart_update',[CartController::class,'Edit'])->middleware('auth:api'); // Api cart Update
-Route::post('/cart_delete',[CartController::class,'Delete'])->middleware('auth:api'); // Api Cart Delete
+Route::get('/cart_delete',[CartController::class,'Delete'])->middleware('auth:api'); // Api Cart Delete
 Route::get('/productIsInteresting',[ProductisHighLight::class,'getProductisInteresting']); // Api get product is cart much
 Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much
-Route::resource('/product', 'App\Http\Controllers\ProductController');
-Route::resource('/user', 'App\Http\Controllers\UserController');
+Route::resource('/product', 'App\Http\Controllers\Api\ProductController');
+Route::resource('/user', 'App\Http\Controllers\Api\UserController');
 Route::resource('/category', 'App\Http\Controllers\CategoryController');
+Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
 Route::get('/home-page-lastest-product',[HomePageController::class,'GetProductIsLastest']);
 Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom']);
-Route::post('/buy',[BuyController::class,'Buy'])->middleware('auth:api'); // Api Buy !
-Route::get('/ProductBuy',[BuyController::class,'DisplayProductBuy'])->middleware(['auth:api','role']);
-Route::get('/searchProduct/{key}',[ProductController::class,'getSearch'])->name('product.search');
-Route::get('/searchCategory/{key}',[CategoryController::class,'getSearch'])->name('category.search');
-Route::get('/searchUser/{key}',[UserController::class,'getSearch'])->name('user.search');
-
+// Route::get('/productIsBoughtMuch',[ProductisHighLight::class,'getProductIsBoughtMuch']); // Api get product is Bought Much

@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState, useLayoutEffect } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import axios from "axios";
 import "../../../css/Login.css";
 //Components
 import Info from "./Info";
@@ -33,14 +34,10 @@ export default function Login({
             [name]: value,
         }));
     };
-
     //Get Data at Form
     const doLogin = (event, values) => {
-        let email = values.email;
-        let password = values.password;
         let infoLogin = {
-            username: email,
-            password: password,
+            ...loginData,
         };
         axios
             .post("http://localhost:8000/api/login/", infoLogin)
@@ -103,18 +100,26 @@ export default function Login({
                     onInvalidSubmit={handleInvalidSubmit}
                 >
                     <AvField
-                        name="email"
-                        label="Email"
+                        name="Username"
+                        label="Username"
                         type="text"
-                        placeholder="Your email..."
+                        placeholder="Your username..."
+                        value={loginData.Username}
+                        onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,
                                 errorMessage: "Please enter your email",
                             },
-                            email: {
-                                value: true,
-                                errorMessage: "Your email not correct",
+                            minLength: {
+                                value: 6,
+                                errorMessage:
+                                    "Your password must be between 6 and 16 characters",
+                            },
+                            maxLength: {
+                                value: 13,
+                                errorMessage:
+                                    "Your password must be between 6 and 16 characters",
                             },
                         }}
                     />
@@ -123,6 +128,8 @@ export default function Login({
                         label="Password"
                         type="password"
                         placeholder="Your password..."
+                        value={loginData.password}
+                        onChange={handleChange}
                         validate={{
                             required: {
                                 value: true,
@@ -139,7 +146,7 @@ export default function Login({
                                     "Your password must be between 6 and 16 characters",
                             },
                             maxLength: {
-                                value: 16,
+                                value: 13,
                                 errorMessage:
                                     "Your password must be between 6 and 16 characters",
                             },
@@ -147,14 +154,14 @@ export default function Login({
                     />
                     <Button
                         type="submit"
-                        color="secondary"
+                        color="success"
                         className="btn-md btn-block"
                     >
                         Submit
                     </Button>
                     <Link to="/register">
                         <Button
-                            color="outline-secondary"
+                            color="outline-info"
                             className="btn-md btn-block mt-2"
                         >
                             Register

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,17 +42,15 @@ class UserController extends Controller
             'password' => $request['password']
         ];
 
+        //Note check username !== db || password !== db
         if (Auth::attempt($datax))
         {
-            if (Auth::user()->is_verify!= 1){
-               return response()->json(["error"=>'Please Check your email to verify account']);
-            }
          $user =  User::where('Username',$datax['Username'])->first();
          $token = $user->createToken('user')->accessToken;
             return  response()->json(['token'=> $token],200);
         }
         else{
-            return abort(401);
+            return response(['errors'=> "Not found"]);
         }
     }
 
@@ -97,10 +94,9 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
             'type' => 0,
-            'verify_code'=>sha1(time()),
+            'address' => "",
         ];
         DB::table('users')->insert($data);
-        MailController::SendMailRegister($data['email'],$data['verify_code']);
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
@@ -123,10 +119,10 @@ class UserController extends Controller
     public  function  infoPost(Request  $request){
         $checkrule = array() ;
         $data = Auth::user();
-        if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
+        /*if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
             || $data ['address'] != $request->old_address){
             return response(['error' => 'Not Update Success']);
-        }
+        }*/
         $phone = $request->phone;
         if ($data['email'] != $request->email) {
             $email = ['email' => 'required|email|unique:users,email'];
@@ -188,19 +184,6 @@ class UserController extends Controller
                 ->update(['revoked' => true]);
             return response()->json(['status' => 'logout success'], 200);
         }
-    }
-
-    public  function  UserVerifyEmail(Request $request){
-     $verify_code =  $request->query('code');
-    $user = User::where('verify_code','=',$verify_code)->first();
-    if ($user == null){
-        return "Your Verify code is wrong";
-    }
-    else{
-        $user['is_verify']= 1;
-        $user->save();
-        return "Your Account is Verify ! Please Login ";
-    }
     }
 
 /////Viet usercontroller
@@ -350,25 +333,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function getSearch(Request $request){
-        $user = users::where('Username','like','%'.$request->key.'%')
-                       ->orwhere('email','like','%'.$request->key.'%')
-                       ->orwhere('address','like', '%' .$request->key.'%')
-                       ->get();
-                            //return view('admin.user.search', compact('user'));
-                            if($user){
-                               if(empty(count($user))){
-                                   return response()->json([
-                                       'message' => 'user not found!',
-                                   ]);
-                               }
-                               else{
-                                   return response()->json([
-                                       'message' => count($user). ' user found!!!',
-                                       'item' => $user
-                                   ]);
-                                }
-                            }
-                        }
-                    }
+    // public function getSearch(Request $request){
+    //     $user = users::where('Username','like','%'.$request->key.'%')
+    //                         ->orwhere('price','like','%'.$request->key.'%')
+    //                         ->get();
+    //                         return view('admin.product.search', compact('product'));
+    // }
 
+
+
+}

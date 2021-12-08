@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import { Button, Row, Col  } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Button, Row, Col } from "reactstrap";
 import Swal from "sweetalert2";
+import axios from "axios";
 import "../../../css/Info.css";
 export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
     const [oldInfoData, setOldInfoData] = useState({});
@@ -162,11 +162,18 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
                 onInvalidSubmit={handleInvalidSubmit}
             >
                 <AvField
+                    hidden
+                    name="old_email"
+                    type="text"
+                    value={infoData.email}
+                />
+                <AvField
                     name="email"
                     label="Email"
                     type="text"
                     placeholder="Email here..."
-                    value={infoLogin.username}
+                    value={infoData.email}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
@@ -179,61 +186,55 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
                     }}
                 />
                 <AvField
-                    name="fullname"
-                    label="Fullname"
-                    placeholder="Fullname here..."
+                    hidden
+                    name="old_phone"
                     type="text"
-                    value={infoLogin.fullname}
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your fullname",
-                        },
-                        pattern: {
-                            value: "^[A-Za-z]+$",
-                            errorMessage:
-                                "Your password must be composed only with letter",
-                        },
-                        minLength: {
-                            value: 6,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
-                        },
-                        maxLength: {
-                            value: 16,
-                            errorMessage:
-                                "Your password must be between 6 and 16 characters",
-                        },
-                    }}
-                />
-                <AvField
-                    name="birthday"
-                    label="Birthday"
-                    type="date"
-                    value={infoLogin.birthday}
-                    validate={{
-                        required: {
-                            value: true,
-                            errorMessage: "Please enter your birthday",
-                        },
-                    }}
+                    value={infoData.phone}
                 />
                 <AvField
                     name="phone"
                     label="Phone"
                     placeholder="Phone here..."
-                    type="tel"
-                    value={infoLogin.phone}
+                    type="text"
+                    value={infoData.phone}
+                    onChange={handleChange}
                     validate={{
                         required: {
                             value: true,
                             errorMessage: "Please enter your phone",
                         },
+                        minLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        maxLength: {
+                            value: 10,
+                            errorMessage: "Your phone must be 10 number",
+                        },
+                        pattern: {
+                            value: "^0",
+                            errorMessage: "Your phone must be start with 0",
+                        },
                     }}
+                />
+                <AvField
+                    hidden
+                    name="old_address"
+                    type="textarea"
+                    value={infoData.address}
+                />
+                <AvField
+                    name="address"
+                    label="Address"
+                    placeholder="Address here..."
+                    type="textarea"
+                    value={infoData.address}
+                    onChange={handleChange}
+                    validate={{}}
                 />
                 <Button
                     type="submit"
-                    color="secondary"
+                    color="success"
                     className="btn-md btn-block"
                 >
                     Update

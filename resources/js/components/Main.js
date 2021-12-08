@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Collapse,
     Navbar,
@@ -32,11 +32,6 @@ export default function Main({ role, setRoleChange }) {
     });
     //Local Info Login User
     const [isLogin, setIsLogin] = useState({
-        id: "none",
-        username: "none",
-        password: "none",
-        fullname: "none",
-        birthday: "none",
         isLoginStatus: false,
     });
 
@@ -118,6 +113,7 @@ export default function Main({ role, setRoleChange }) {
                     <Route path="/login">
                         <Login
                             key="login"
+                            setInfoUser={setInfoUser}
                             setIsLogin={setIsLogin}
                             isLogin={isLogin}
                             role={role}

@@ -82,51 +82,12 @@ export default function CartTableRow() {
                     </Modal.Header>
                     <Modal.Body>
                         <Row>
-                            <AvForm className="form_input">
-                                <AvField
-                                    hidden
-                                    name="Address"
-                                    type="text"
-                                />
-                                <AvField
-                                    name="Address"
-                                    label="Address"
-                                    type="text"
-                                    placeholder="Address here..."
-                                    validate={{
-                                        required: {
-                                            value: true,
-                                            errorMessage: "Please enter your Address",
-                                        },
-                                        email: {
-                                            value: true,
-                                            errorMessage: "Your Address not correct",
-                                        },
-                                    }}
-                                />
-                                <AvField
-                                    hidden
-                                    name="note"
-                                    type="text"
-                                />
-                                <AvField
-                                    name="note"
-                                    label="note"
-                                    placeholder="note here..."
-                                    type="textarea"
-                                    validate={{
-                                        required: {
-                                            value: true,
-                                            errorMessage: "Please enter your notes",
-                                        },
-                                        email: {
-                                            value: true,
-                                            errorMessage: "Your Address not note",
-                                        },
-                                    }}
-                                />
-                               
-                            </AvForm>
+                            <Col md>
+                                <Form.Control type="email" placeholder="Address buy" />
+                            </Col>
+                            <Col md>
+                            <Form.Control type="email" placeholder="note product cart" />
+                            </Col>
                         </Row>
                     </Modal.Body>
                     <Modal.Footer>

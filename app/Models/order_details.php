@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class order_details extends Model
 {
-    public $timestamps = false;
     use HasFactory;
 }
