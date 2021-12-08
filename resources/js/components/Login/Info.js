@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import { Button } from "reactstrap";
-import { Link, useHistory } from "react-router-dom";
+import { Button, Row, Col  } from "reactstrap";
+import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../../../css/Info.css";
-export default function Info({ setInfoUser, setIsLogin }) {
+export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
     const [oldInfoData, setOldInfoData] = useState({});
     const [infoData, setInfoData] = useState({
         email: "",
@@ -36,6 +36,7 @@ export default function Info({ setInfoUser, setIsLogin }) {
             }
         });
     };
+
     //Save data when input change
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -43,6 +44,25 @@ export default function Info({ setInfoUser, setIsLogin }) {
             ...infoData,
             [name]: value,
         }));
+    };
+
+    //Display Admin btn change
+    const displayAdminRole = () => {
+        if (role.roleUser === "admin")
+            return (
+                <Button
+                    color="outline-success"
+                    className="btn-md btn-block mt-2"
+                    onClick={handleAdminChange}
+                >
+                    Go Admin
+                </Button>
+            );  
+    };
+
+    //Handle change state to go Admin page
+    const handleAdminChange = (e) => {
+        setRoleChange({role: "admin"});
     };
 
     useEffect(() => {
@@ -136,7 +156,7 @@ export default function Info({ setInfoUser, setIsLogin }) {
     };
     return (
         <div className="info container mt-5 mb-5">
-            <h1 className="info-title text-center">WELCOME BACK</h1>
+            <h1 className="info-title text-center">Welcome Back</h1>
             <AvForm
                 onValidSubmit={doUpdateInfo}
                 onInvalidSubmit={handleInvalidSubmit}
@@ -218,15 +238,15 @@ export default function Info({ setInfoUser, setIsLogin }) {
                 >
                     Update
                 </Button>
-                <Link to="/">
-                    <Button
-                        color="outline-secondary"
-                        className="btn-md btn-block mt-2"
-                        id="btnBack"
-                    >
-                        Back to Home
-                    </Button>
-                </Link>
+                {displayAdminRole()}
+                <Button
+                    color="outline-danger"
+                    className="btn-md btn-block mt-2"
+                    id="btnBack"
+                    onClick={doLogout}
+                >
+                    Logout
+                </Button>
             </AvForm>
         </div>
     );

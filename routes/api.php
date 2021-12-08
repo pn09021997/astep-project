@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProductisHighLight;
+use App\Http\Controllers\HomePageController;
 use App\Models\user_cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

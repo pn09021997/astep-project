@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Col, Row } from "reactstrap";
 import "../../../css/TrendingCategories.css";
 export default function TrendingCategories() {
