@@ -84,7 +84,7 @@ class CommentController extends Controller
 
 
     public function postComment(Request $request,$product_id){
-        if(Auth::check()){
+    
         $product = products::where('id',$product_id)->first();
         if($product){
             $validator = Validator::make($request->all(),[
@@ -115,7 +115,7 @@ class CommentController extends Controller
                 'message' => 'Product not found',
             ],400);
         }
-    }
+    
 }
 
     public function editComment(Request $request,$id){
