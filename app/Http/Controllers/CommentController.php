@@ -84,7 +84,10 @@ class CommentController extends Controller
 
 
     public function postComment(Request $request,$product_id){
+<<<<<<< HEAD
         if(Auth::check()){
+=======
+>>>>>>> origin/comment
         $product = products::where('id',$product_id)->first();
         if($product){
             $validator = Validator::make($request->all(),[
@@ -97,12 +100,18 @@ class CommentController extends Controller
                     'status' => 500,
                     'errors' => $validator->message()],422);
             }
-      
+
+            $rate;
+            if($request->rate == null){
+                $rate = 1;
+            }else{
+                $rate = $request->rate;
+            }
                 $comment = comment::create([
                     'content' => $request->content,
                     'product_id' => $product->id,
                     'user_id' => $request->user()->id,
-                    'rate' => $request->rate
+                    'rate' => $rate
                     ]);
               
             $comment->load('user');
@@ -115,7 +124,10 @@ class CommentController extends Controller
                 'message' => 'Product not found',
             ],400);
         }
+<<<<<<< HEAD
     }
+=======
+>>>>>>> origin/comment
 }
 
     public function editComment(Request $request,$id){
@@ -154,7 +166,6 @@ class CommentController extends Controller
         }
     }
 
-    
     public function deleteComment(Request $request,$id){
         $comment = comment::with(['user'])->where('id',$id)->first();
         if($comment){
