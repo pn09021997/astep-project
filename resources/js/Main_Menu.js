@@ -19,7 +19,9 @@ export default function Main_Menu() {
         );
     } else {
         return (
-            <Admin/>
+            <Admin 
+                setRoleChange={setRoleChange}
+            />
         );
     }
 }

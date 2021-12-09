@@ -61,8 +61,8 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
     };
 
     //Handle change state to go Admin page
-    const handleAdminChange = (e) => {
-        setRoleChange({role: "admin"});
+    const handleAdminChange = (e) => {  
+        setRoleChange({ role: "admin" });
     };
 
     useEffect(() => {
