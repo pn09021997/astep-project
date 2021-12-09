@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProductisHighLight;
 use App\Models\user_cart;
-use App\Http\Controllers\HomePageConntroller;
+use App\Http\Controllers\HomePageController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
