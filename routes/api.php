@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\BuyController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,7 +26,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+Route::resource('/comment', 'App\Http\Controllers\CommentController');
+Route::post('/product/{product_id}/postComment', [CommentController::class,'postComment'])->middleware('auth:api');
+Route::put('/editComment/{id}', [CommentController::class,'editComment'])->middleware('auth:api');
+Route::delete('/deleteComment/{id}', [CommentController::class,'deleteComment'])->middleware('auth:api');
+Route::get('/watch-comment-auth',[CommentController::class,'WatchComment'])->middleware('auth:api');// Comment Auth
+Route::get('/watch-comment',[CommentController::class,'WatchCommentNotAuth']); 
 Route::post('/login',[UserController::class,'login']); // Api Login
 Route::post('/register',[UserController::class,'register']); // Api Register
 Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->name('userinfo'); // Api Get info user
