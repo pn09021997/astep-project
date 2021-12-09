@@ -118,6 +118,8 @@ class CommentController extends Controller
     
 }
 
+
+
     public function editComment(Request $request,$id){
         $comment = comment::with(['user'])->where('id',$id)->first();
       
@@ -154,6 +156,7 @@ class CommentController extends Controller
         }
     }
 
+    
     public function deleteComment(Request $request,$id){
         $comment = comment::with(['user'])->where('id',$id)->first();
         if($comment){

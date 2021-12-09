@@ -27,9 +27,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::resource('/comment', 'App\Http\Controllers\CommentController');
-Route::post('/product/{product_id}/postComment', [CommentController::class,'postComment'])->middleware('auth:api');
-Route::put('/editComment/{id}', [CommentController::class,'editComment'])->middleware('auth:api');
-Route::delete('/deleteComment/{id}', [CommentController::class,'deleteComment'])->middleware('auth:api');
+Route::post('/product/{product_id}/postComment', [CommentController::class,'postComment'])->middleware('auth:api'); //post comment
+Route::put('/editComment/{id}', [CommentController::class,'editComment'])->middleware('auth:api'); //edit comment
+Route::delete('/deleteComment/{id}', [CommentController::class,'deleteComment'])->middleware('auth:api'); //delete comment
 Route::get('/watch-comment-auth',[CommentController::class,'WatchComment'])->middleware('auth:api');// Comment Auth
 Route::get('/watch-comment',[CommentController::class,'WatchCommentNotAuth']); 
 Route::post('/login',[UserController::class,'login']); // Api Login
