@@ -218,6 +218,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'Username'=>'required|min:6|max:12|unique:users,Username', 
+            'password'=>'required|min:6|max:12', 
+            'email' => 'required|email|unique:users,email', 
+            'phone'=>'required|digits:10|unique:users,phone', 
+        ]);
+    
+            if ($validator->fails()){
+                return response(['errors'=>$validator->errors()->all()], 422);
+            }
         $request->validate([
             'Username' => 'required',
             'email' => 'required',
@@ -294,8 +304,10 @@ class UserController extends Controller
             'address' => 'required'
         ]);
 
-        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
         $user = users::find($id);
+        if ($user['email'] != $request->old_email){
+            return response(['message' => 'Update failed']);
+        }
         $user->Username = $request->get('Username');
         $user->email = $request->get('email');
         $user->phone = $request->get('phone');
