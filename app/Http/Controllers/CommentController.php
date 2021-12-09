@@ -118,8 +118,6 @@ class CommentController extends Controller
     
 }
 
-
-
     public function editComment(Request $request,$id){
         $comment = comment::with(['user'])->where('id',$id)->first();
       
