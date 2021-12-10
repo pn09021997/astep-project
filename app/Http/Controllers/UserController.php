@@ -53,7 +53,7 @@ class UserController extends Controller
             return  response()->json(['token'=> $token],200);
         }
         else{
-            return abort(401);
+            return response(['errors'=> "Not found"]);
         }
     }
 

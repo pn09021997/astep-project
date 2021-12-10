@@ -124,7 +124,6 @@ class ProductController extends Controller
 
         //3 Luu
         $product->save();
-
         return response()->json([
             'message' => 'products updated!',
             'products' => $product
