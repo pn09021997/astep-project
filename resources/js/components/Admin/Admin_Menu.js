@@ -7,7 +7,7 @@ import Categories from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
 import NoMatch from "../NoMatch/NoMatch";
 export default function Admin_Menu({ setRoleChange }) {
-    //Handle change state to go Admin page
+    //Handle change state to go Admin page 1
     const handleAdminChange = (e) => {
         let txtNumUrl = window.location.href.indexOf("/", 10);   
         let currentUrl = window.location.href;
