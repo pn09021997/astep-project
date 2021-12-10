@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\products;
+use Illuminate\Support\Facades\DB;
 use App\Models\categories;
 class ProductController extends Controller
 {
@@ -122,7 +123,7 @@ class ProductController extends Controller
 
         //3 Luu
         $product->save();
-        
+
         return response()->json([
             'message' => 'products updated!',
             'products' => $product
@@ -143,7 +144,7 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'products deleted'
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'products not found !!!'
         ]);
@@ -168,4 +169,27 @@ class ProductController extends Controller
                             }
                         }
                     }
+                    public function GetProductById(Request $request){
+                        if (!$request->has('id')){return  response()->json(['error'=>'Please Type id product ']);};
+                        $id = $request->query('id');
+                        // Todo fix id không phải là số , số âm , số thực , là chuỗi , null , empty
+
+                        $pattern_product_id = '/^\d{1,}$/';
+                        if (!preg_match($pattern_product_id,$id)){
+                            return  response()->json(['status'=>"Please Type Id is Correct is a Number"]);
+                        }
+                        try { // Tìm kiếm product id nếu không ra thì vô cái cục catch thôi
+                         $product = products::findOrFail($id);
+                        $catename = categories::find($product->category_id);
+                         $category_SameType = $product->category_id;
+                         $sosp1trang = 4 ;
+                         $productSameType = DB::select("    SELECT * FROM `products` WHERE products.category_id = $category_SameType  ORDER BY RAND() LIMIT $sosp1trang;");
+                        }catch (\Exception $exception){
+                            return  response()->json(['status'=>"Not Found Product "]);
+                        }
+                        return  response()->json(['product'=>$product,'category'=>$catename,'SanphamcungLoai'=>$productSameType]);
+
+
+                    }
+
 }

@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import "../../../css/TopContent.css";
 export default class TopContent extends Component {
     render() {
+       /*  useEffect (() => {
+            const fetchData = async () => {
+                const result = await axios(
+                    "http://127.0.0.1:8000/api/product_detail?id"
+                );
+              setProductList(result.data[1]);
+          };
+          fetchData();
+          }, []); */
         return (
             <div className="detail">
                 <div className="detail-header">
@@ -23,7 +32,7 @@ export default class TopContent extends Component {
                                     <p>Đánh giá: </p>
                                     <div className="like">
                                         <button type="button" id="btn-like">
-                                            <i class="far fa-thumbs-up" aria-hidden="true"></i>
+                                            <i className="far fa-thumbs-up" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -41,7 +50,7 @@ export default class TopContent extends Component {
                                 </div>
                                 <div className="quantity">
                                     <input type="button" value="+" className="qty-btn" />
-                                    <input type="text" value="1" min="1" class="select-quantity" />
+                                    <input type="text" value="1" min="1" className="select-quantity" />
                                     <input type="button" value="-" className="qty-btn" />
                                 </div>
                                 <div className="add-product-cart">
@@ -58,11 +67,11 @@ export default class TopContent extends Component {
                                         <p>Nhu</p>
                                     </div>
                                     <div className="icon-review">
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
                                     </div>
                                     <div className="review-content mt-3">
                                         <p>Sản phẩm tuyệt vời</p>

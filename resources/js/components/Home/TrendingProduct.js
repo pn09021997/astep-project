@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
 import "../../../css/TrendingProduct.css";
 export default function TrendingProduct() {
-    const [productList, setProductList] = useState([]); 
+    const [productList, setProductList] = useState([]);
 
     useEffect (() => {
         const fetchData = async () => {
@@ -13,7 +13,7 @@ export default function TrendingProduct() {
       };
       fetchData();
       }, []);
-      
+
     const trendingList = productList.slice(0, 4).map((product) => {
         return (
             <Col key={product.id}>
