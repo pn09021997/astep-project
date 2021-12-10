@@ -33,7 +33,7 @@ Route::post('/product/{product_id}/postComment', [CommentController::class,'post
 Route::put('/editComment/{id}', [CommentController::class,'editComment'])->middleware('auth:api'); //edit comment
 Route::delete('/deleteComment/{id}', [CommentController::class,'deleteComment'])->middleware('auth:api'); //delete comment
 Route::get('/watch-comment-auth',[CommentController::class,'WatchComment'])->middleware('auth:api');// Comment Auth
-Route::get('/watch-comment',[CommentController::class,'WatchCommentNotAuth']); 
+Route::get('/watch-comment',[CommentController::class,'WatchCommentNotAuth']);
 Route::post('/login',[UserController::class,'login']); // Api Login
 Route::post('/register',[UserController::class,'register']); // Api Register
 Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->name('userinfo'); // Api Get info user
@@ -55,3 +55,4 @@ Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom
 Route::get('/searchProduct/{key}',[ProductController::class,'getSearch'])->name('product.search');
 Route::get('/searchCategory/{key}',[CategoryController::class,'getSearch'])->name('category.search');
 Route::get('/searchUser/{key}',[UserController::class,'getSearch'])->name('user.search');
+Route::get('/product_detail',[ProductController::class,'GetProductById']);
