@@ -26,7 +26,7 @@ class UserController  extends Controller
             'message' => 'user created',
             'user' => $user
         ]);
-       // return users::create($request->all());
+ 
     }
 
     /**
@@ -61,8 +61,6 @@ class UserController  extends Controller
             'message' => 'user not found !!!'
         ]);
       
-        // $user->update($request->all());
-        // return $user;
     }
 
     /**
@@ -83,6 +81,6 @@ class UserController  extends Controller
         return response()->json([
             'message' => 'user not found !!!'
         ]);
-     //  return $user->delete();
+  
     }
 }

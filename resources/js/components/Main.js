@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Collapse,
     Navbar,
@@ -23,7 +23,8 @@ import Register from "./Login/Register";
 import Detail from "./Detail/Detail";
 import CartManager from "./CartPage/CartManager";
 import CategoriesTotall from "./CategoriesPage/CategoriesTotal";
-export default function Main() {
+import NoMatch from "./NoMatch/NoMatch";
+export default function Main({ role, setRoleChange }) {
     const [infoUser, setInfoUser] = useState({
         email: "",
         phone: "",
@@ -31,11 +32,6 @@ export default function Main() {
     });
     //Local Info Login User
     const [isLogin, setIsLogin] = useState({
-        id: "none",
-        username: "none",
-        password: "none",
-        fullname: "none",
-        birthday: "none",
         isLoginStatus: false,
     });
 
@@ -111,12 +107,17 @@ export default function Main() {
                 {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
                 <Switch>
+                    <Route exact path="/">
+                        <Home key="home" />
+                    </Route>
                     <Route path="/login">
                         <Login
                             key="login"
-                            accountData={accountData}
+                            setInfoUser={setInfoUser}
                             setIsLogin={setIsLogin}
                             isLogin={isLogin}
+                            role={role}
+                            setRoleChange={setRoleChange}
                         />
                     </Route>
                     <Route path="/register">
@@ -131,26 +132,11 @@ export default function Main() {
                     <Route path="/categories-page">
                         <CategoriesTotall key="categories-page" />
                     </Route>
-                    <Route path="/">
-                        <Home key="home" />
-                    </Route>
                     <Route path="*">
-                        <NoMatch />
+                        <NoMatch/>
                     </Route>
                 </Switch>
             </Router>
-        </div>
-    );
-}
-
-function NoMatch() {
-    let location = useLocation();
-
-    return (
-        <div>
-            <h3>
-                No match for <code>{location.pathname}</code>
-            </h3>
         </div>
     );
 }

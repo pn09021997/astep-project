@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -43,11 +42,9 @@ class UserController extends Controller
             'password' => $request['password']
         ];
 
+        //Note check username !== db || password !== db
         if (Auth::attempt($datax))
         {
-            if (Auth::user()->is_verify!= 1){
-               return response()->json(["error"=>'Please Check your email to verify account']);
-            }
          $user =  User::where('Username',$datax['Username'])->first();
          $token = $user->createToken('user')->accessToken;
             return  response()->json(['token'=> $token],200);
@@ -97,10 +94,9 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
             'type' => 0,
-            'verify_code'=>sha1(time()),
+            'address' => "",
         ];
         DB::table('users')->insert($data);
-        MailController::SendMailRegister($data['email'],$data['verify_code']);
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
@@ -123,10 +119,10 @@ class UserController extends Controller
     public  function  infoPost(Request  $request){
         $checkrule = array() ;
         $data = Auth::user();
-        if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
+        /*if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
             || $data ['address'] != $request->old_address){
             return response(['error' => 'Not Update Success']);
-        }
+        }*/
         $phone = $request->phone;
         if ($data['email'] != $request->email) {
             $email = ['email' => 'required|email|unique:users,email'];
@@ -190,19 +186,6 @@ class UserController extends Controller
         }
     }
 
-    public  function  UserVerifyEmail(Request $request){
-     $verify_code =  $request->query('code');
-    $user = User::where('verify_code','=',$verify_code)->first();
-    if ($user == null){
-        return "Your Verify code is wrong";
-    }
-    else{
-        $user['is_verify']= 1;
-        $user->save();
-        return "Your Account is Verify ! Please Login ";
-    }
-    }
-
 /////Viet usercontroller
 
       /**
@@ -235,6 +218,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(),[
+            'Username'=>'required|min:6|max:12|unique:users,Username', 
+            'password'=>'required|min:6|max:12', 
+            'email' => 'required|email|unique:users,email', 
+            'phone'=>'required|digits:10|unique:users,phone', 
+        ]);
+    
+            if ($validator->fails()){
+                return response(['errors'=>$validator->errors()->all()], 422);
+            }
         $request->validate([
             'Username' => 'required',
             'email' => 'required',
@@ -311,8 +304,10 @@ class UserController extends Controller
             'address' => 'required'
         ]);
 
-        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
         $user = users::find($id);
+        if ($user['email'] != $request->old_email){
+            return response(['message' => 'Update failed']);
+        }
         $user->Username = $request->get('Username');
         $user->email = $request->get('email');
         $user->phone = $request->get('phone');
@@ -350,7 +345,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function getSearch(Request $request){
+   public function getSearch(Request $request){
         $user = users::where('Username','like','%'.$request->key.'%')
                        ->orwhere('email','like','%'.$request->key.'%')
                        ->orwhere('address','like', '%' .$request->key.'%')
@@ -370,5 +365,7 @@ class UserController extends Controller
                                 }
                             }
                         }
-                    }
 
+
+
+}

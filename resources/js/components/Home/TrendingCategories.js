@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row } from "reactstrap";
 import "../../../css/TrendingCategories.css";
 export default function TrendingCategories() {
@@ -27,7 +27,7 @@ export default function TrendingCategories() {
     return (
       <Col key={product.id}>
         <div className="trending-categories-info">
-          <img className="trending-category-product-img img-fluid" src={product.img} alt={product.name} />
+          <img className="trending-category-product-img img-fluid" src={product.product_image} alt={product.product_name} />
           <div className="info-detail">
             <p className="trending-category-title"># {findCategory(categoriesList, product)}</p>
             <p className="trending-category-product-title">{product.product_name}</p>

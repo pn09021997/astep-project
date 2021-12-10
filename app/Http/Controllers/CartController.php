@@ -91,10 +91,11 @@ class CartController extends Controller
         else if ($UpdateValue == 0)
         {
             if ($this->private_delete($request->product_id,Auth::id())){
-                return  response()->json(['status'=>'Delete  Success'],200);
+                return  response()->json(['status'=>'Update Success'],200);
             }
             else{
                 return response()->json(['status'=>"Can't Delete "],404);
+
             }
         }
         user_cart::where('user_id','=',$user_id)->where('product_id','=',$request->product_id)->update(['quantity' => $UpdateValue]);
@@ -140,26 +141,55 @@ class CartController extends Controller
 
 
     private  function  private_delete($product_idx,$user_id){
-        $pattern_product_id = '/^\d{1,}$/';
-        if (!preg_match($pattern_product_id,$product_idx)){
+        if (!ctype_digit($product_idx)){
             return  false;
         }
         // End check data
         $id_user = $user_id;
         $product_id = $product_idx;
+
         try { // Not found will appear 404
             products::findOrFail($product_id);
         }catch (\Exception $exception){
             return  false;
         }
         $cart =  user_cart::where('user_id','=',$id_user)->where('product_id','=',$product_id)->first();
-        if ($cart != null){
-            user_cart::where(['user_id'=>$id_user,'product_id'=>$product_id])->delete();
-            }
+        if ($cart == null){
+            DB::table('user_cart')->delete(['user_id'=>$id_user,'product_id'=>$product_id,'quantity'=>1]);
+        }
         return  true;
     }
 
 
+
+    private function getName($n) {
+        $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
+    }
+
+    private function Xulyid($id){
+        $dodaichuoi = strlen($id);
+        $chuoitruoc = $this->getName(10);
+        $chuoisau = $this->getName(22);
+        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        return $handle_id;
+    }
+
+    private function DichId($id){
+        $id = base64_decode($id);
+        $handleFirst = substr($id,10);
+        $idx = "";
+        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
+            $idx.=$handleFirst[$i];
+        }
+        return  $idx;
+    }
 
 
 
