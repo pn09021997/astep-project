@@ -84,7 +84,7 @@ export default function CategoriesHome() {
                                 <div className="product-images-catagories">
                                     <img src={e.img} />
                                     <div class="btn-add-cart">
-                                        <Button outline className="btn-block">
+                                        <Button className="btn-block btn">
                                             Add Cart
                                         </Button>
                                     </div>

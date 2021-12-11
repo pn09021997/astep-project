@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react";    
 import {
     Collapse,
     Navbar,
@@ -38,7 +38,6 @@ export default function Main({ role, setRoleChange }) {
     //State of navbar
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
-
     return (
         <div className="main">
             <Router>
@@ -70,6 +69,7 @@ export default function Main({ role, setRoleChange }) {
                                 Search
                             </button>
                         </form>
+
                     </div>
                     <NavbarToggler onClick={toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!collapsed} navbar>
@@ -133,7 +133,7 @@ export default function Main({ role, setRoleChange }) {
                         <CategoriesTotall key="categories-page" />
                     </Route>
                     <Route path="*">
-                        <NoMatch/>
+                        <NoMatch />
                     </Route>
                 </Switch>
             </Router>

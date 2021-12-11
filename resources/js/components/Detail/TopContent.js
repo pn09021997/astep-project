@@ -1,16 +1,17 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import "../../../css/TopContent.css";
 export default class TopContent extends Component {
+
     render() {
-       /*  useEffect (() => {
-            const fetchData = async () => {
-                const result = await axios(
-                    "http://127.0.0.1:8000/api/product_detail?id"
-                );
-              setProductList(result.data[1]);
-          };
-          fetchData();
-          }, []); */
+      /*   try{
+            const url = 'http://127.0.0.1:8000/api/product_detail?id';
+            const reponse = await axios.get(url);
+            console.log(reponse);
+        }
+        catch(error){
+            console.log('Failed to fetch products: ', error);
+        } */
         return (
             <div className="detail">
                 <div className="detail-header">
