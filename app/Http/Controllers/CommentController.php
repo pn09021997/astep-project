@@ -83,6 +83,122 @@ class CommentController extends Controller
     }
 
 
+    //Tạm thời dùng phần này, sau này sẽ dùng phần của resource vì phần mã hóa sẽ tiện hơn
+
+    public function postComment(Request $request,$product_id){
+     
+        $product = products::where('id',$product_id)->first();
+      
+        if($product){
+            $validator = Validator::make($request->all(),[
+                'content' => 'required',
+                'rate'=> ''
+            ]);
+            if($validator->fails()){
+                return response()->json([
+                    'message' => 'Validation errors',
+                    'status' => 500,
+                    'errors' => $validator->message()],422);
+            }
+            
+            $rate;
+            if($request->rate == null){
+                $rate = 1;
+            }else{
+                $rate = $request->rate;
+            }
+                    $comment = comment::create([
+                        'content' => $request->content,
+                        'product_id' => $product->id,
+                        'user_id' => $request->user()->id,
+                        'rate' => $rate
+                        ]);
+                      
+                    
+                $comment->load('user');
+                return response()->json([
+                    'message'=>'comment successfully',
+                    'comment' => $comment
+                ],200); 
+    
+        }else{
+            return response()->json([
+                'message' => 'Product not found',
+            ],400);
+
+        }
+
+}
+
+    public function editComment(Request $request,$id){
+        $comment = comment::with(['user'])->where('id',$id)->first();
+        if($comment){
+            if($comment->user_id == $request->user()->id){
+                $validator = Validator::make($request->all(),[
+                    'content' => 'required',
+                    'rate'=> ''
+                ]);
+                if($validator->fails()){
+                    return response()->json([
+                        'message' => 'Validation errors',
+                        'status' => 500,
+                        'errors' => $validator->message()],422);
+                }
+
+                $comment->update([
+                    'content' => $request->content,
+                    'rate'=> $request->rate,
+                    
+                ]);
+                return response()->json([
+                    'message' => "Comment successfully updated",
+                    'comment' => $comment
+                ],200);
+            }else{
+                return response()->json([
+                    'message' => "You can't edit this comment",
+                ],403);
+            }
+        }else{
+            return response()->json([
+                'message' => 'Comment not found',
+            ],400);
+        }
+    }
+
+    public function deleteComment(Request $request,$id){
+        $comment = comment::with(['user'])->where('id',$id)->first();
+        if($comment){
+            if (Auth::user()->type == 1){
+                $comment->delete();
+                return response()->json([
+                    'message' => "Comment successfully deleted",
+                ],200);
+            }
+            else{
+                if($comment->user_id==$request->user()->id){
+                    $comment->delete();
+                    return response()->json([
+                        'message' => "Comment successfully deleted",
+                    ],200);
+                }
+                else{
+                    return response()->json([
+                        'message' => "You can't delete this comment",
+                    ],403);
+                }
+            }
+           
+        }else{
+            return response()->json([
+                'message' => 'Comment not found',
+            ],400);
+        }
+    }
+	
+
+    //Resource comment
+
  
     /**
      * Display a listing of the resource.
