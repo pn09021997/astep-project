@@ -83,110 +83,7 @@ class CommentController extends Controller
     }
 
 
-    public function postComment(Request $request,$product_id){
-        $product = products::where('id',$product_id)->first();
-        if($product){
-            $validator = Validator::make($request->all(),[
-                'content' => 'required',
-                'rate'=> ''
-            ]);
-            if($validator->fails()){
-                return response()->json([
-                    'message' => 'Validation errors',
-                    'status' => 500,
-                    'errors' => $validator->message()],422);
-            }
-
-            $rate;
-            if($request->rate == null){
-                $rate = 1;
-            }else{
-                $rate = $request->rate;
-            }
-                $comment = comment::create([
-                    'content' => $request->content,
-                    'product_id' => $product->id,
-                    'user_id' => $request->user()->id,
-                    'rate' => $rate
-                    ]);
-              
-            $comment->load('user');
-            return response()->json([
-                'message'=>'comment successfully',
-                'comment' => $comment
-            ],200);
-        }else{
-            return response()->json([
-                'message' => 'Product not found',
-            ],400);
-        }
-}
-
-    public function editComment(Request $request,$id){
-        $comment = comment::with(['user'])->where('id',$id)->first();
-      
-        if($comment){
-            if($comment->user_id==$request->user()->id){
-                $validator = Validator::make($request->all(),[
-                    'content' => 'required',
-                    'rate'=> ''
-                ]);
-                if($validator->fails()){
-                    return response()->json([
-                        'message' => 'Validation errors',
-                        'status' => 500,
-                        'errors' => $validator->message()],422);
-                }
-                $comment->update([
-                    'content' => $request->content,
-                    'rate'=> $request->rate
-                    
-                ]);
-                return response()->json([
-                    'message' => "Comment successfully updated",
-                    'comment' => $comment
-                ],200);
-            }else{
-                return response()->json([
-                    'message' => "You can't edit this comment",
-                ],403);
-            }
-        }else{
-            return response()->json([
-                'message' => 'Comment not found',
-            ],400);
-        }
-    }
-
-    public function deleteComment(Request $request,$id){
-        $comment = comment::with(['user'])->where('id',$id)->first();
-        if($comment){
-            if (Auth::user()->type == 1){
-                $comment->delete();
-                return response()->json([
-                    'message' => "Comment successfully deleted",
-                ],200);
-            }
-            else{
-                if($comment->user_id==$request->user()->id){
-                    $comment->delete();
-                    return response()->json([
-                        'message' => "Comment successfully deleted",
-                    ],200);
-                }
-                else{
-                    return response()->json([
-                        'message' => "You can't delete this comment",
-                    ],403);
-                }
-            }
-           
-        }else{
-            return response()->json([
-                'message' => 'Comment not found',
-            ],400);
-        }
-    }
+ 
     /**
      * Display a listing of the resource.
      *
@@ -196,8 +93,13 @@ class CommentController extends Controller
 
     public function index()
     {
-                $comment = comment::all();
-                return response()->json($comment);
+        $comments = comment::all()->toArray();
+        $return = [];
+        foreach($comments as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        return response()->json($return);
     }
 
     /**
@@ -218,7 +120,47 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
+        $product_id = $request->product_id;
+        $product = products::where('id',$product_id)->first();
+      
+        if($product){
+            $validator = Validator::make($request->all(),[
+                'content' => 'required',
+                'rate'=> ''
+            ]);
+            if($validator->fails()){
+                return response()->json([
+                    'message' => 'Validation errors',
+                    'status' => 500,
+                    'errors' => $validator->message()],422);
+            }
             
+            $rate;
+            if($request->rate == null){
+                $rate = 1;
+            }else{
+                $rate = $request->rate;
+            }
+                    $comment = comment::create([
+                        'content' => $request->content,
+                        'product_id' => $product->id,
+                        'user_id' => $request->user()->id,
+                        'rate' => $rate
+                        ]);
+                      
+                    
+                $comment->load('user');
+                return response()->json([
+                    'message'=>'comment successfully',
+                    'comment' => $comment
+                ],200); 
+    
+        }else{
+            return response()->json([
+                'message' => 'Product not found',
+            ],400);
+
+        }
     }
 
     /**
@@ -229,7 +171,9 @@ class CommentController extends Controller
      */
     public function show(Request $request,$id)
     {
-        $comment = comment::find($id);    
+      
+        $com_id = $this->DichId($id);
+        $comment = comment::find($com_id); 
         if ($comment) {
                 return response()->json([
                     'message' => 'comment found by id!',
@@ -261,7 +205,39 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-
+        $com_id = $this->DichId($id);
+        $comment = comment::with(['user'])->where('id',$com_id)->first();
+        if($comment){
+            if($comment->user_id == Auth::user()->id){
+                $validator = Validator::make($request->all(),[
+                    'content' => 'required',
+                    'rate'=> ''
+                ]);
+                if($validator->fails()){
+                    return response()->json([
+                        'message' => 'Validation errors',
+                        'status' => 500,
+                        'errors' => $validator->message()],422);
+                }
+                $comment->update([
+                    'content' => $request->content,
+                    'rate'=> $request->rate
+                    
+                ]);
+                return response()->json([
+                    'message' => "Comment successfully updated",
+                    'comment' => $comment
+                ],200);
+            }else{
+                return response()->json([
+                    'message' => "You can't edit this comment",
+                ],403);
+            }
+        }else{
+            return response()->json([
+                'message' => 'Comment not found',
+            ],400);
+        }
     }
 
     /**
@@ -270,8 +246,65 @@ class CommentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
+        $com_id = $this->DichId($id);
+        $comment = comment::with(['user'])->where('id',$com_id)->first();
+   
+        if($comment){
+            if (Auth::user()->type == 1){
+                $comment->delete();
+                return response()->json([
+                    'message' => "Comment successfully deleted",
+                ],200);
+            }
+            else{
+                if($comment->user_id==$request->user()->id){
+                    $comment->delete();
+                    return response()->json([
+                        'message' => "Comment successfully deleted",
+                    ],200);
+                }
+                else{
+                    return response()->json([
+                        'message' => "You can't delete this comment",
+                    ],403);
+                }
+            }
+           
+        }else{
+            return response()->json([
+                'message' => 'Comment not found',
+            ],400);
+        }
+    }
 
+    private function getName($n) {
+        $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
+    }
+
+    public  function Xulyid($id):String {
+        $dodaichuoi = strlen($id);
+        $chuoitruoc = $this->getName(10);
+        $chuoisau = $this->getName(22);
+        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        return $handle_id;
+    }
+
+    public function DichId($id){
+        $id = base64_decode($id);
+        $handleFirst = substr($id,10);
+        $idx = "";
+        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
+            $idx.=$handleFirst[$i];
+        }
+        return  $idx;
     }
 }

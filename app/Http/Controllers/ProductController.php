@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\products;
 use App\Models\categories;
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     /**
@@ -14,9 +15,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = products::all();
-        $categories = categories::all();
-        return response()->json($products);
+        $products = products::all()->toArray();
+        $return = [];
+        foreach($products as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        return response()->json($return);
     }
 
     /**
@@ -26,8 +31,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = categories::all();
-        return view('admin.product.create', compact('categories'));
+       
     }
 
     /**
@@ -38,21 +42,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required',
-            'price' => 'required',
-            'product_image' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+        $validator = Validator::make($request->all(),[
+            'product_name'=>'required|unique:products,product_name', 
         ]);
+    
+            if ($validator->fails()){
+                return response(['errors'=>$validator->errors()->all()], 422);
+            }
 
         $product = new products([
             'product_name' => $request->get('product_name'),
             'price' => $request->get('price'),
             'description' => $request->get('description'),
             'quantity' => $request->get('quantity'),
-            'product_image' => basename($request->file('product_image')->store('public/images')),
+          //  'product_image' => basename($request->file('product_image')->store('public/images')),
             'category_id' => $request->get('category_id'),
+            'product_image' => $request->product_image
         ]);
 
         $product->save();
@@ -70,12 +75,13 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id) //get item by id
     {
-        $products = products::find($id);
-        if ($products) {
+        $pro_id = $this->DichId($id);
+        $product = products::find($pro_id); 
+        if ($product) {
 
             return response()->json([
                 'message' => 'product found!',
-                'products' => $products,
+                'product' => $product,
             ]);
         }
         return response()->json([
@@ -91,8 +97,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $products = products::find($id);
-        return response()->json($products);
+       
     }
 
     /**
@@ -104,28 +109,59 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id) //update
     {
-        $request->validate([
-            'product_name' => 'required',
-            'price' => 'required',
-            // 'product_image' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+        $list = products::all()->toArray();
+        $return = [];
+        foreach($list as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        
+      $pro_id = $this->DichId($id);
+      $product = products::find($pro_id);
+
+      
+      if($product){
+    
+
+      $validator = Validator::make($request->all(),[
+        'product_name'=>'required', 
+
+    ]);
+
+        if ($validator->fails()){
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
+
+        $pro_name;
+          //Kiem tra product_name da co hay chua, co bi trung khong
+          if($request->product_name == $list[0]['product_name']){
+            return response()->json([
+                'message' => 'The product_name has been exits!!!',
+            ]);
+        }else{
+            $pro_name = $request->product_name;
+        }
+
+        
+        $product->update([
+        $product->product_name = $pro_name,
+        $product->price = $request->get('price'),
+        $product->description = $request->get('description'),
+        $product->quantity = $request->get('quantity'),
+        // $product->pro_image = $request->get('pro_image');
+        ]);
+        
+
+        $product->save();
+        return response()->json([
+            'message' => 'product updated!',
+            'product' => $product
         ]);
 
-        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
-        $product = products::find($id);
-        $product->product_name = $request->get('product_name');
-        $product->price = $request->get('price');
-        $product->description = $request->get('description');
-        $product->quantity = $request->get('quantity');
-        // $product->pro_image = $request->get('pro_image');
-
-        //3 Luu
-        $product->save();
-        
+      }
+      
         return response()->json([
-            'message' => 'products updated!',
-            'products' => $product
+            'message' => 'product not found !!!'
         ]);
     }
 
@@ -137,18 +173,50 @@ class ProductController extends Controller
      */
     public function destroy($id) //remove
     {
-        $product = products::find($id);
+        $pro_id = $this->DichId($id);
+        $product = products::find($pro_id);
+
         if ($product) {
             $product->delete();
             return response()->json([
-                'message' => 'products deleted'
+                'message' => 'product deleted'
             ]);
         } 
         return response()->json([
-            'message' => 'products not found !!!'
+            'message' => 'product not found !!!'
         ]);
     }
 
+    private function getName($n) {
+        $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
+    }
+
+    public  function Xulyid($id):String {
+        $dodaichuoi = strlen($id);
+        $chuoitruoc = $this->getName(10);
+        $chuoisau = $this->getName(22);
+        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        return $handle_id;
+    }
+
+    public function DichId($id){
+        $id = base64_decode($id);
+        $handleFirst = substr($id,10);
+        $idx = "";
+        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
+            $idx.=$handleFirst[$i];
+        }
+        return  $idx;
+    }
+
+    
     public function getSearch(Request $request){
         $product = products::where('product_name','like','%'.$request->key.'%')
                             ->orwhere('price','like','%'.$request->key.'%')
