@@ -50,7 +50,7 @@ export default function CreateExpense(props) {
             .then((res) => {
                 Swal.fire("Good job!", "Expense Added Successfully", "success")
                 .then(() => {
-                    window.location.reload(false);
+                    props.history.push(`/create-expense`);
                 });   
             })
             .catch((error) => {

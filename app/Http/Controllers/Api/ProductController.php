@@ -32,18 +32,24 @@ class ProductController extends Controller
             'message' => 'product created',
             'product' => $product
         ]);
-       // return products::create($request->all());
+        // return products::create($request->all());
     }
 
-    /**
+  /**
      * Display the specified resource.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(products $product)
+    public function show(Request $request, $id)
     {
-        return $product;
+        $products = products::find($id);
+        if ($products) {
+            return $products;
+        }
+        return response()->json([
+            'message' => 'products not found!',
+        ]);
     }
 
     /**
@@ -62,11 +68,11 @@ class ProductController extends Controller
                 'message' => 'product updated!',
                 'product' => $product
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'product not found !!!'
         ]);
-      
+
         // $product->update($request->all());
         // return $product;
     }
@@ -85,10 +91,10 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'product deleted'
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'product not found !!!'
         ]);
-     //  return $product->delete();
+        //  return $product->delete();
     }
 }
