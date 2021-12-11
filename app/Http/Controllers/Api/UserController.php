@@ -72,6 +72,12 @@ class UserController  extends Controller
      */
     public function destroy($id)
     {
+
+        $pattern_id = '/^\d{1,}$/';
+        // Chỉ được nhập số nhập chữ báo lỗi ngay số âm con khỉ gì đi bụi hết
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number']);
+        }
         $flag = true;
         $user = users::find($id);
         if (!$user) {

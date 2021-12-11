@@ -21,7 +21,6 @@ class CommentController extends Controller
     public function  WatchComment(Request $request)
     {
         $product_id = $request->query('product_id');
-        dd($product_id);
         if (!$request->has('product_id')) {
             return  response()->json(['status' => 'Please add product id to find comment'], 404);
         }

@@ -116,7 +116,17 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         //Complete check dependent products
+        $pattern_id = '/^\d{1,}$/';
+        // Check số id
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number ']);
+        }
+        // check id not found
         $category = categories::find($id);
+        if ($category == null){
+            return response()->json(['message'=>'Not found your category id']);
+        }
+
         $productListTemp =  products::where("category_id", "=", $id)->get();
         if (count($productListTemp) === 0) {
             $category->delete();
