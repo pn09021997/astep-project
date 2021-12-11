@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\order_details;
 use Illuminate\Http\Request;
 use App\Models\products;
+use App\Models\review;
+use App\Models\user_cart;
 
 //Duyen Controller
 class ProductController extends Controller
@@ -79,16 +82,33 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        $flag = true;
         $product = products::find($id);
-        if ($product) {
+        if (!$product) {
+            return response()->json([
+                'message' => 'product not found !!!'
+            ]);
+        }
+
+        $userCartListTemp = user_cart::where("product_id", "=", $id)->get();
+        $ordersDetailListTemp = order_details::where("product_id", "=", $id)->get();
+
+        if (count($userCartListTemp) !== 0) {
+            $flag = false;
+        }
+        if (count($ordersDetailListTemp) !== 0) {
+            $flag = false;
+        }
+
+        if ($flag) {
+            $reviewsListRemove = review::where("product_id", "=", $id)->delete();
             $product->delete();
             return response()->json([
-                'message' => 'product deleted'
+                'message' => 'product and reviews depended deleted'
             ]);
-        } 
+        }
         return response()->json([
-            'message' => 'product not found !!!'
+            'message' => "can't delete product because have related ingredients."
         ]);
-     //  return $product->delete();
     }
 }

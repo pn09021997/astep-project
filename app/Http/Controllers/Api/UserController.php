@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\order;
+use App\Models\review;
 use Illuminate\Http\Request;
 use App\Models\users;
+use App\Models\user_cart;
 
 //Duyen Controller
 class UserController  extends Controller
@@ -13,7 +16,7 @@ class UserController  extends Controller
     {
         return users::all();
     }
-      /**
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -26,7 +29,6 @@ class UserController  extends Controller
             'message' => 'user created',
             'user' => $user
         ]);
- 
     }
 
     /**
@@ -56,11 +58,10 @@ class UserController  extends Controller
                 'message' => 'user updated!',
                 'user' => $user
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'user not found !!!'
         ]);
-      
     }
 
     /**
@@ -71,16 +72,36 @@ class UserController  extends Controller
      */
     public function destroy($id)
     {
+        $flag = true;
         $user = users::find($id);
-        if ($user) {
+        if (!$user) {
+            return response()->json([
+                'message' => 'user not found !!!'
+            ]);
+        }
+
+        $userCartListTemp = user_cart::where("user_id", "=", $id)->get();
+        $ordersListTemp = order::where("user_id", "=", $id)->get();
+        $reviewsListTemp = review::where("user_id", "=", $id)->get();
+
+        if (count($userCartListTemp) !== 0) {
+            $flag = false;
+        }
+        if (count($ordersListTemp) !== 0) {
+            $flag = false;
+        }
+        if (count($reviewsListTemp) !== 0) {
+            $flag = false;
+        }
+
+        if ($flag) {
             $user->delete();
             return response()->json([
                 'message' => 'deleted user'
             ]);
-        } 
+        }
         return response()->json([
-            'message' => 'user not found !!!'
+            'message' => "can't delete user because have related ingredients."
         ]);
-  
     }
 }

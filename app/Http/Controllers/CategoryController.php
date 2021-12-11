@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\categories;
 use App\Models\products;
+
+use function PHPUnit\Framework\isEmpty;
+
 class CategoryController extends Controller
 {
     /**
@@ -26,7 +29,6 @@ class CategoryController extends Controller
      */
     public function create()
     {
-       
     }
 
     /**
@@ -68,7 +70,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {    
+    {
         $item = categories::find($id);
         return response()->json([
             'message' => 'Categories find it !!!',
@@ -113,31 +115,36 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        //Complete check dependent products
         $category = categories::find($id);
-        $category->delete();
+        $productListTemp =  products::where("category_id", "=", $id)->get();
+        if (count($productListTemp) === 0) {
+            $category->delete();
+            return response()->json([
+                'message' => 'categories deleted successfully !!!',
+                'item' => $category
+            ]);
+        }
         return response()->json([
-            'message' => 'categories deleted successfully !!!',
-            'item' => $category
+            'message' => "can't delete because have a dependent products",
         ]);
     }
-    
-    
-   public function getSearch(Request $request){
-        $category = categories::where('name','like','%'.$request->key.'%')->get();
-        if($category){
-            if(empty(count($category))){
+
+
+    public function getSearch(Request $request)
+    {
+        $category = categories::where('name', 'like', '%' . $request->key . '%')->get();
+        if ($category) {
+            if (empty(count($category))) {
                 return response()->json([
                     'message' => 'category not found!',
                 ]);
-            }
-            else{
+            } else {
                 return response()->json([
-                    'message' => count($category). ' category found!!!',
+                    'message' => count($category) . ' category found!!!',
                     'item' => $category
                 ]);
             }
-           
         }
-        
     }
 }
