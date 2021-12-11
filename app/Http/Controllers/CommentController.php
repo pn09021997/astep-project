@@ -20,8 +20,6 @@ class CommentController extends Controller
 
     public function  WatchComment(Request $request)
     {
-        $product_id = $request->query('product_id');
-        dd($product_id);
         if (!$request->has('product_id')) {
             return  response()->json(['status' => 'Please add product id to find comment'], 404);
         }
@@ -165,7 +163,7 @@ class CommentController extends Controller
     public function deleteComment(Request $request, $id)
     {
         $comment = comment::with(['user'])->where('id', $id)->first();
-        if ($comment) {
+        if ($comment) {   
             if (Auth::user()->type == 1) {
                 $comment->delete();
                 return response()->json([
@@ -187,7 +185,7 @@ class CommentController extends Controller
             return response()->json([
                 'message' => 'Comment not found',
             ], 400);
-        }
+        }   
     }
     /**
      * Display a listing of the resource.
@@ -250,7 +248,11 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = comment::find($id);
+        return response()->json([
+            'message' => 'comment found !',
+            'comment' => $comment,
+        ]);
     }
 
     /**

@@ -48,28 +48,6 @@ export default class TopContent extends Component {
                                     <button type="button" className="btn-3"><span>Thêm vào giỏ</span></button>
                                 </div>
                             </div>
-                            {/* Xem đánh giá sản phẩm */}
-                             <div className="review-product">
-                                <div className="review-title">
-                                <h4 class="mt-5">Review</h4>
-                                </div>
-                                <div className="user-review">
-                                    <div className="name-user">
-                                        <p>Nhu</p>
-                                    </div>
-                                    <div className="icon-review">
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                        <span><i class="fas fa-star"></i></span>
-                                    </div>
-                                    <div className="review-content mt-3">
-                                        <p>Sản phẩm tuyệt vời</p>
-                                    </div>
-                                </div>
-
-                            </div>
                         </div>
                     </div>
                 </div>

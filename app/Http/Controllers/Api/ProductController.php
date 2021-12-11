@@ -49,6 +49,21 @@ class ProductController extends Controller
         return $product;
     }
 
+       /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $products = products::find($id);
+        return response()->json([
+            'message' => 'product found!',
+            'product' => $products,
+        ]);
+    }
+
     /**
      * Update the specified resource in storage.
      *

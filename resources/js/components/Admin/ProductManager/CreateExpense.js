@@ -4,7 +4,6 @@ import axios from "axios";
 import ExpensesList from "./ExpensesListing";
 import Swal from "sweetalert2";
 import { AvForm, AvField } from "availity-reactstrap-validation";
-import { error } from "jquery";
 
 export default function CreateExpense(props) {
     const [expense, setExpense] = useState({

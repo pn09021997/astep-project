@@ -11,6 +11,7 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
         phone: "",
         address: "",
     });
+    
     //Call API logout
     const doLogout = () => {
         Swal.fire({

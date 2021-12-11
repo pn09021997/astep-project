@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\products;
 use App\Models\categories;
+
 class ProductController extends Controller
 {
     /**
@@ -92,7 +93,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $products = products::find($id);
-        return response()->json($products);
+        return response()->json([
+            'message' => 'product found!',
+            'product' => $products,
+        ]);
     }
 
     /**
@@ -104,7 +108,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id) //update
     {
-        
+
 
         $request->validate([
             'product_name' => 'required',
@@ -124,7 +128,7 @@ class ProductController extends Controller
 
         //3 Luu
         $product->save();
-        
+
         return response()->json([
             'message' => 'products updated!',
             'products' => $product
@@ -145,29 +149,29 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'products deleted'
             ]);
-        } 
+        }
         return response()->json([
             'message' => 'products not found !!!'
         ]);
     }
 
-   public function getSearch(Request $request){
-        $product = products::where('product_name','like','%'.$request->key.'%')
-                            ->orwhere('price','like','%'.$request->key.'%')
-                            ->get();
-                         //   return view('admin.product.search', compact('product'));
-                           if($product){
-                            if(empty(count($product))){
-                                return response()->json([
-                                    'message' => 'product not found!',
-                                ]);
-                            }
-                            else{
-                                return response()->json([
-                                    'message' => count($product). ' product found!!!',
-                                    'item' => $product
-                                ]);
-                            }
-                        }
-                    }
+    public function getSearch(Request $request)
+    {
+        $product = products::where('product_name', 'like', '%' . $request->key . '%')
+            ->orwhere('price', 'like', '%' . $request->key . '%')
+            ->get();
+        //   return view('admin.product.search', compact('product'));
+        if ($product) {
+            if (empty(count($product))) {
+                return response()->json([
+                    'message' => 'product not found!',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => count($product) . ' product found!!!',
+                    'item' => $product
+                ]);
+            }
+        }
+    }
 }
