@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order;
+use App\Models\review;
 use App\Models\User;
+use App\Models\user_cart;
+use App\Models\users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -224,7 +228,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -234,14 +238,14 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {  
+    {
         $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|max:12|unique:users,Username', 
-            'password'=>'required|min:6|max:12', 
-            'email' => 'required|email|unique:users,email', 
-            'phone'=>'required|digits:10|unique:users,phone', 
+            'Username'=>'required|min:6|max:12|unique:users,Username',
+            'password'=>'required|min:6|max:12',
+            'email' => 'required|email|unique:users,email',
+            'phone'=>'required|digits:10|unique:users,phone',
         ]);
-    
+
             if ($validator->fails()){
                 return response(['errors'=>$validator->errors()->all()], 422);
             }
@@ -277,7 +281,7 @@ class UserController extends Controller
     public function show(Request $request, $id)
     {
       $user_id = $this->DichId($id);
-      $user = users::find($user_id); 
+      $user = users::find($user_id);
         if ($user) {
             return response()->json([
                 'message' => 'user found!',
@@ -297,7 +301,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        
+
     }
 
     /**
@@ -318,28 +322,28 @@ class UserController extends Controller
 
         $user_id = $this->DichId($id);
         $user = users::find($user_id);
-      
+
       if($user){
 
 
         $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|', 
-            'password'=>'required|min:6|max:12', 
-            'email' => 'required|email|', 
-            'phone'=>'required|digits:10|', 
+            'Username'=>'required|min:6|',
+            'password'=>'required|min:6|max:12',
+            'email' => 'required|email|',
+            'phone'=>'required|digits:10|',
         ]);
-    
+
             if ($validator->fails()){
                 return response(['errors'=>$validator->errors()->all()], 422);
             }
-        
+
         $Username; $email; $phone; $type;
 
 
         if ($user['email'] != $request->old_email){
             return response(['message' => 'Update failed']);
         }
-      
+
         if($request->type == null){
             $type = 0;
         }else{
@@ -374,7 +378,7 @@ class UserController extends Controller
             }
 
 
-   
+
            $user->update([
             $user->Username = $Username,
             $user->email = $email,
@@ -403,19 +407,42 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        $user_id = $this->DichId($id);
-        $user = users::find($user_id);
-        
+        $id = $this->DichId($id);
+        $flag = true;
+        $user = users::find($id);
         if ($user) {
-            $user->delete();
-            return response()->json([
-                'message' => 'user deleted'
-            ]);
+            if (!$user) {
+                return response()->json([
+                    'message' => 'user not found !!!'
+                ]);
+            }
+            $userCartListTemp = user_cart::where("user_id", "=", $id)->get();
+            $ordersListTemp = order::where("user_id", "=", $id)->get();
+            $reviewsListTemp = review::where("user_id", "=", $id)->get();
+
+            if (count($userCartListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($ordersListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($reviewsListTemp) !== 0) {
+                $flag = false;
+            }
+            if ($flag) {
+                $user->delete();
+                return response()->json([
+                    'message' => 'deleted user'
+                ]);
+            }
         }
         return response()->json([
-            'message' => 'user not found !!!'
+            'message' => "can't delete user because have related ingredients."
         ]);
+
     }
+
+
     private function getName($n) {
         $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
         $randomString = '';

@@ -45,9 +45,9 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'name'=>'required|unique:categories,name', 
+            'name'=>'required|unique:categories,name',
         ]);
-    
+
             if ($validator->fails()){
                 return response(['errors'=>$validator->errors()->all()], 422);
             }
@@ -69,11 +69,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(categories $category)
+    public function show(Request  $request,$id)
     {
 
         $cat_id = $this->DichId($id);
-        $category = categories::find($cat_id); 
+        $category = categories::find($cat_id);
         if ($category) {
             return response()->json([
                 'message' => 'category found!',
@@ -93,8 +93,8 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {    
-        
+    {
+
     }
 
     /**
@@ -116,10 +116,10 @@ class CategoryController extends Controller
       $cat_id = $this->DichId($id);
       $category = categories::find($cat_id);
 
-      
+
       if($category){
       $validator = Validator::make($request->all(),[
-        'name'=>'required', 
+        'name'=>'required',
     ]);
 
         if ($validator->fails()){
@@ -141,7 +141,7 @@ class CategoryController extends Controller
         $category->name = $cat_name,
         // $category->image = $request->get('image');
         ]);
-        
+
 
         $category->save();
         return response()->json([
@@ -150,12 +150,12 @@ class CategoryController extends Controller
         ]);
 
       }
-      
+
         return response()->json([
             'message' => 'category not found !!!'
         ]);
     }
-   
+
 
     /**
      * Remove the specified resource from storage.
@@ -165,9 +165,14 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $cat_id = $this->DichId($id);
-        $category = categories::find($cat_id);
-        if ($category) {
+        $id = $this->DichId($id);
+        $pattern_id = '/^\d{1,}$/';
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number']);
+        }
+        $category = categories::find($id);
+        $productListTemp =  products::where("category_id", "=", $id)->get();
+        if (count($productListTemp) === 0) {
             $category->delete();
             return response()->json([
                 'message' => 'categories deleted successfully !!!',

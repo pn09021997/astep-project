@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order_details;
+use App\Models\review;
+use App\Models\user_cart;
 use Illuminate\Http\Request;
 use App\Models\products;
 use Illuminate\Support\Facades\DB;
@@ -32,7 +35,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**
@@ -44,9 +47,9 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'product_name'=>'required|unique:products,product_name', 
+            'product_name'=>'required|unique:products,product_name',
         ]);
-    
+
             if ($validator->fails()){
                 return response(['errors'=>$validator->errors()->all()], 422);
             }
@@ -77,7 +80,7 @@ class ProductController extends Controller
     public function show(Request $request, $id) //get item by id
     {
         $pro_id = $this->DichId($id);
-        $product = products::find($pro_id); 
+        $product = products::find($pro_id);
         if ($product) {
 
             return response()->json([
@@ -98,7 +101,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-       
+
     }
 
     /**
@@ -116,16 +119,16 @@ class ProductController extends Controller
             $item['id'] = $this->Xulyid($item['id']);
             $return[] = $item;
         }
-        
+
       $pro_id = $this->DichId($id);
       $product = products::find($pro_id);
 
-      
+
       if($product){
-    
+
 
       $validator = Validator::make($request->all(),[
-        'product_name'=>'required', 
+        'product_name'=>'required',
 
     ]);
 
@@ -143,7 +146,7 @@ class ProductController extends Controller
             $pro_name = $request->product_name;
         }
 
-        
+
         $product->update([
         $product->product_name = $pro_name,
         $product->price = $request->get('price'),
@@ -151,7 +154,7 @@ class ProductController extends Controller
         $product->quantity = $request->get('quantity'),
         // $product->pro_image = $request->get('pro_image');
         ]);
-        
+
 
         $product->save();
         return response()->json([
@@ -160,7 +163,7 @@ class ProductController extends Controller
         ]);
 
       }
-      
+
         return response()->json([
             'message' => 'product not found !!!'
         ]);
@@ -174,17 +177,40 @@ class ProductController extends Controller
      */
     public function destroy($id) //remove
     {
-        $pro_id = $this->DichId($id);
-        $product = products::find($pro_id);
-
+        $id = $this->DichId($id);
+        $pattern_id = '/^\d{1,}$/';
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number']);
+        }
+        $flag = true;
+        $product = products::find($id);
         if ($product) {
-            $product->delete();
-            return response()->json([
-                'message' => 'product deleted'
+            if (!$product) {
+                return response()->json([
+                    'message' => 'product not found !!!'
+                ]);
+            }
+
+            $userCartListTemp = user_cart::where("product_id", "=", $id)->get();
+            $ordersDetailListTemp = order_details::where("product_id", "=", $id)->get();
+
+            if (count($userCartListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($ordersDetailListTemp) !== 0) {
+                $flag = false;
+            }
+
+            if ($flag) {
+                $reviewsListRemove = review::where("product_id", "=", $id)->delete();
+                $product->delete();
+                return response()->json([
+                'message' => 'product and reviews depended deleted'
             ]);
         }
+        }
         return response()->json([
-            'message' => 'product not found !!!'
+            'message' => "can't delete product because have related ingredients."
         ]);
     }
 
@@ -217,7 +243,7 @@ class ProductController extends Controller
         return  $idx;
     }
 
-    
+
     public function getSearch(Request $request){
         $product = products::where('product_name','like','%'.$request->key.'%')
                             ->orwhere('price','like','%'.$request->key.'%')
