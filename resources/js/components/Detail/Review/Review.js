@@ -26,6 +26,7 @@ import classnames from "classnames";
 import "../../../../css/Review.css";
 import Rating from "./Rating/Rating";
 import { isArray } from "lodash";
+import Rate from "./Rate/Rate";
 export default function Review() {
     const [reviews, setReviews] = useState([]);
     const [products, setProducts] = useState([]);
@@ -131,7 +132,7 @@ export default function Review() {
     });
 
     return (
-        <div className="review">
+        <div className="review mt-5">
             <h2 className="review-title">REVIEWS</h2>
             <Container>
                 <div>
@@ -281,7 +282,12 @@ function ReviewContent(props) {
                                     });
                                 })
                                 .catch((error) => {
-                                    console.log(error);
+                                    Swal.fire({
+                                        title: "You can't delete this comment !!!",
+                                        text: "Do you want to continue ?",
+                                        icon: "error",
+                                        confirmButtonText: "Cool",
+                                    })
                                 });
                         }
                     });
@@ -303,10 +309,8 @@ function ReviewContent(props) {
 
     const checkOldReviewData = (reviewData, oldReviewData, rating) => {
         let flag = true;
-        reviewData.content === oldReviewData.content
-            ? (flag = false)
-            : (flag = true);
-        rating === oldReviewData.rate ? (flag = false) : (flag = true);
+        if ( reviewData.content === oldReviewData.content
+            && rating === oldReviewData.rate) flag = false;
         return flag;
     };
 
@@ -326,7 +330,7 @@ function ReviewContent(props) {
                         rate: rating,
                     };
 
-                    if (checkOldReviewData(reviewInfo, oldReviewData, rating)) {
+                    if (checkOldReviewData(reviewObj, oldReviewData, rating)) {
                         Swal.fire({
                             title: "Do you want to save the changes?",
                             showDenyButton: true,
@@ -357,7 +361,7 @@ function ReviewContent(props) {
                                     })
                                     .catch((error) => {
                                         Swal.fire({
-                                            title: "Error!",
+                                            title: "You can't update this comment",
                                             text: "Do you want to continue ?",
                                             icon: "error",
                                             confirmButtonText: "Cool",
@@ -454,9 +458,9 @@ function ReviewContent(props) {
 
             <Row>
                 <Col lg={11}>
-                    <p>{new Date(props.obj.updated_at).toDateString()}</p>
-                    <h5>Rate - {props.obj.rate}/5</h5>
-                    <p>{props.obj.content}</p>
+                    <p className="review-date">{new Date(props.obj.updated_at).toDateString()}</p>
+                    <h5 className="review-rating">Rate - <span className="review-rating-detail">{props.obj.rate}/5</span></h5>
+                    <p className="review-content">{props.obj.content}</p>
                 </Col>
                 <Col lg={1}>
                     <Button
