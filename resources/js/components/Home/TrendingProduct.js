@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
 import "../../../css/TrendingProduct.css";
+import Swal from "sweetalert2";
 export default function TrendingProduct() {
     const [productList, setProductList] = useState([]); 
+    const [product_qty, setQuantity] = useState(1);
 
     useEffect (() => {
         const fetchData = async () => {
@@ -15,6 +17,28 @@ export default function TrendingProduct() {
       }, []);
       
     const trendingList = productList.slice(0, 4).map((product) => {
+        const submitAddcart = (e) => {
+            e.preventDefault();
+            const data = {
+                product_id: product.id,
+                quantity:product_qty
+                
+            }
+           
+            let tokenStr = localStorage.getItem("loginToken");
+            axios.post("http://localhost:8000/api/cart_create/", data, {
+                headers: { Authorization: `Bearer ${tokenStr}` },
+    
+            }).then((res) => {
+                Swal.fire(
+                    "Good job!",
+                    "Create cart Successfully",
+                    "success"
+                );
+               
+            })
+    
+        }
         return (
             <Col key={product.id}>
                 <div className="trending-product-info">
@@ -25,7 +49,7 @@ export default function TrendingProduct() {
                             className="img-fluid"
                         />
                         <div className="action-cart">
-                            <Button color="danger" outline className="btn-block">
+                            <Button onClick={submitAddcart} color="danger" outline className="btn-block">
                                 Add Cart
                             </Button>
                         </div>

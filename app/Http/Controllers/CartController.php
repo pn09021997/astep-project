@@ -108,8 +108,9 @@ class CartController extends Controller
         // If have we will  +1 for that and update to database
 
 
-        if (!ctype_digit($request->product_id)){
-            return  response()->json(['status'=>'Not Create Success']);
+        $pattern_id = '/^\d{1,}$/';
+        if (!preg_match($pattern_id,$request->product_id)){
+            return  response()->json(['status'=>'So bi loi ? ']);
         }
         // End check data
         $id_user = Auth::id();
