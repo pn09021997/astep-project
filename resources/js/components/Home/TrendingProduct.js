@@ -15,7 +15,7 @@ export default function TrendingProduct() {
       };
       fetchData();
       }, []);
-      
+
     const trendingList = productList.slice(0, 4).map((product) => {
         const submitAddcart = (e) => {
             e.preventDefault();

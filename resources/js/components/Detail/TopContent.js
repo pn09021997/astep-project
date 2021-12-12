@@ -1,7 +1,17 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 import "../../../css/TopContent.css";
 export default class TopContent extends Component {
+
     render() {
+      /*   try{
+            const url = 'http://127.0.0.1:8000/api/product_detail?id';
+            const reponse = await axios.get(url);
+            console.log(reponse);
+        }
+        catch(error){
+            console.log('Failed to fetch products: ', error);
+        } */
         return (
             <div className="detail">
                 <div className="detail-header">
@@ -23,7 +33,7 @@ export default class TopContent extends Component {
                                     <p>Đánh giá: </p>
                                     <div className="like">
                                         <button type="button" id="btn-like">
-                                            <i class="far fa-thumbs-up" aria-hidden="true"></i>
+                                            <i className="far fa-thumbs-up" aria-hidden="true"></i>
                                         </button>
                                     </div>
                                 </div>
@@ -41,12 +51,34 @@ export default class TopContent extends Component {
                                 </div>
                                 <div className="quantity">
                                     <input type="button" value="+" className="qty-btn" />
-                                    <input type="text" value="1" min="1" class="select-quantity" />
+                                    <input type="text" value="1" min="1" className="select-quantity" />
                                     <input type="button" value="-" className="qty-btn" />
                                 </div>
                                 <div className="add-product-cart">
                                     <button type="button" className="btn-3"><span>Thêm vào giỏ</span></button>
                                 </div>
+                            </div>
+                            {/* Xem đánh giá sản phẩm */}
+                             <div className="review-product">
+                                <div className="review-title">
+                                <h4 class="mt-5">Review</h4>
+                                </div>
+                                <div className="user-review">
+                                    <div className="name-user">
+                                        <p>Nhu</p>
+                                    </div>
+                                    <div className="icon-review">
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                        <span><i className="fas fa-star"></i></span>
+                                    </div>
+                                    <div className="review-content mt-3">
+                                        <p>Sản phẩm tuyệt vời</p>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
