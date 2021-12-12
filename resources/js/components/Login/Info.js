@@ -52,7 +52,7 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
         if (role.roleUser === "admin")
             return (
                 <Button
-                    color="outline-success"
+                    color="outline-primary"
                     className="btn-md btn-block mt-2"
                     onClick={handleAdminChange}
                 >

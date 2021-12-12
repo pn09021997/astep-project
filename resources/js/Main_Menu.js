@@ -15,6 +15,7 @@ export default function Main_Menu() {
             <Main 
                 role={roleOfUser}
                 setRoleChange={setRoleChange}
+                setRoleOfUser={setRoleOfUser}
             />
         );
     } else {

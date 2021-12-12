@@ -47,7 +47,7 @@ class UserController extends Controller
         {
          $user =  User::where('Username',$datax['Username'])->first();
          $token = $user->createToken('user')->accessToken;
-            return  response()->json(['token'=> $token],200);
+            return  response()->json(['token'=> $token, 'role' => $user["type"]],200);
         }
         else{
             return response(['errors'=> "Not found"]);

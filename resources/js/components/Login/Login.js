@@ -15,6 +15,7 @@ export default function Login({
     setInfoUser,
     role,
     setRoleChange,
+    setRoleOfUser
 }) {
     useLayoutEffect(() => {
         if (localStorage.getItem("loginToken")) {

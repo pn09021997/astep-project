@@ -24,7 +24,7 @@ import Detail from "./Detail/Detail";
 import CartManager from "./CartPage/CartManager";
 import CategoriesTotall from "./CategoriesPage/CategoriesTotal";
 import NoMatch from "./NoMatch/NoMatch";
-export default function Main({ role, setRoleChange }) {
+export default function Main({ role, setRoleChange, setRoleOfUser }) {
     const [infoUser, setInfoUser] = useState({
         email: "",
         phone: "",
@@ -118,6 +118,7 @@ export default function Main({ role, setRoleChange }) {
                             isLogin={isLogin}
                             role={role}
                             setRoleChange={setRoleChange}
+                            setRoleOfUser={setRoleOfUser}
                         />
                     </Route>
                     <Route path="/register">
