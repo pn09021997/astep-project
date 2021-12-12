@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Models\order_details;
 use Illuminate\Http\Request;
 use App\Models\products;
-use App\Models\review;
-use App\Models\user_cart;
 
 //Duyen Controller
 class ProductController extends Controller
@@ -34,7 +31,7 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'product created',
             'product' => $product
-        ]);
+        ]); 
         // return products::create($request->all());
     }
 
@@ -52,21 +49,6 @@ class ProductController extends Controller
         }
         return response()->json([
             'message' => 'products not found!',
-        ]);
-    }
-
-       /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $products = products::find($id);
-        return response()->json([
-            'message' => 'product found!',
-            'product' => $products,
         ]);
     }
 
@@ -103,33 +85,15 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $flag = true;
         $product = products::find($id);
-        if (!$product) {
-            return response()->json([
-                'message' => 'product not found !!!'
-            ]);
-        }
-
-        $userCartListTemp = user_cart::where("product_id", "=", $id)->get();
-        $ordersDetailListTemp = order_details::where("product_id", "=", $id)->get();
-
-        if (count($userCartListTemp) !== 0) {
-            $flag = false;
-        }
-        if (count($ordersDetailListTemp) !== 0) {
-            $flag = false;
-        }
-
-        if ($flag) {
-            $reviewsListRemove = review::where("product_id", "=", $id)->delete();
+        if ($product) {
             $product->delete();
             return response()->json([
-                'message' => 'product and reviews depended deleted'
+                'message' => 'product deleted'
             ]);
         }
         return response()->json([
-            'message' => "can't delete product because have related ingredients."
+            'message' => 'product not found !!!'
         ]);
         //  return $product->delete();
     }
