@@ -97,7 +97,7 @@ class UserController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
-            'type' => 0,
+            'type' => 2,
             'address' => "",
         ];
         DB::table('users')->insert($data);
@@ -411,11 +411,7 @@ class UserController extends Controller
         $flag = true;
         $user = users::find($id);
         if ($user) {
-            if (!$user) {
-                return response()->json([
-                    'message' => 'user not found !!!'
-                ]);
-            }
+
             $userCartListTemp = user_cart::where("user_id", "=", $id)->get();
             $ordersListTemp = order::where("user_id", "=", $id)->get();
             $reviewsListTemp = review::where("user_id", "=", $id)->get();
@@ -435,6 +431,11 @@ class UserController extends Controller
                     'message' => 'deleted user'
                 ]);
             }
+        }
+        if (!$user) {
+            return response()->json([
+                'message' => 'user not found !!!'
+            ]);
         }
         return response()->json([
             'message' => "can't delete user because have related ingredients."
