@@ -15,6 +15,7 @@ class users extends Model
         'phone',
         'type',
         'address',
+        'verify_code',
     ];
-   
+
 }

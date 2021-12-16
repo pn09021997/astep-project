@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
@@ -49,6 +50,9 @@ class UserController extends Controller
         //Note check username !== db || password !== db
         if (Auth::attempt($datax))
         {
+            if (Auth::user()->is_verify!= 1){
+                return response()->json(["status"=>'Please Check your email to verify account']);
+            }
          $user =  User::where('Username',$datax['Username'])->first();
          $token = $user->createToken('user')->accessToken;
             return  response()->json(['token'=> $token, 'role' => $user["type"]],200);
@@ -82,12 +86,12 @@ class UserController extends Controller
                 }
             }
         }
-    $validator = Validator::make($request->all(),[
-        'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
-        'password'=>'required|min:6|max:12', // test rồi
-        'email' => 'required|email|unique:users,email', // test luôn rồi
-        'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
-    ]);
+        $validator = Validator::make($request->all(),[
+            'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
+            'password'=>'required|min:6|max:12', // test rồi
+            'email' => 'required|email|unique:users,email', // test luôn rồi
+            'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
+        ]);
 
         if ($validator->fails()){
             return response(['errors'=>$validator->errors()->all()], 422);
@@ -97,10 +101,11 @@ class UserController extends Controller
             'email' => $request['email'],
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
-            'type' => 2,
-            'address' => "",
+            'type' => 0,
+            'verify_code'=>sha1(time()),
         ];
         DB::table('users')->insert($data);
+        MailController::SendMailRegister($data['email'],$data['verify_code']);
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
