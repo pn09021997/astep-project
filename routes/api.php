@@ -56,6 +56,31 @@ Route::middleware('auth:api')->group(function (){
     Route::post('/cart_update',[CartController::class,'Edit']); // Api cart Update
     Route::get('/cart_delete',[CartController::class,'Delete']); // Api Cart Delete
 });
-Route::middleware(['auth:api','role'])->group(function (){
 
+
+
+
+
+
+// đống route admin
+Route::middleware(['auth:api','role'])->group(function (){
+    // Đống api Category
+    Route::get('category_all',[CategoryController::class,'index']); // Api get all category ở admin
+    Route::post('category_create',[CategoryController::class,'store']); // api post tạo mới 1 category
+    Route::post('category_update/{id}',[CategoryController::class,'update']); // Api Category update
+    Route::get('category_show',[CategoryController::class,'show']); // api get category theo id
+    Route::post('category_delete',[CategoryController::class,'destroy']); // Api delete Category
+    // Api Product
+    Route::get('product_all',[ProductController::class,'index']);
+    Route::post('product_create',[ProductController::class,'store']);
+    Route::get('product_show/{id}',[ProductController::class,'show']);
+    Route::get('product_delete/{id}',[ProductController::class,'destroy']);
+    Route::post('product_update/{id}',[ProductController::class,'update']);
+    // Api user
+
+    Route::get('user_all',[UserController::class,'index']);
+    Route::post('user_create',[UserController::class,'register']);
+    Route::get('user_show/{id}',[UserController::class,'show']);
+    Route::post('user_update/{id}',[UserController::class,'update']);
+    Route::get('user_delete/{id}',[UserController::class,'destroy']);
 });
