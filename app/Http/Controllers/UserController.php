@@ -27,6 +27,7 @@ use Laravel\Passport\Client as OClient;
 use GuzzleHttp\Client;
 use Laravel\Passport\TokenRepository;
 use App\Http\Controllers\EncryptId;
+use Illuminate\Http\RedirectResponse;
 
 
 // Tuấn User Controller
@@ -458,6 +459,8 @@ class UserController extends Controller
                             }
                         }
 
-
+    public  function ForgetPassword(){
+        return view('email.FillEmailForgotPw');
+    }
 
 }

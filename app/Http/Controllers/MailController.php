@@ -16,5 +16,6 @@ class MailController extends Controller
         ];
         $detail['verify_code'] = URL::to('/'). '/verify/verify?code='.$verify_code;
         Mail::to($email)->send(new RegisterMail($detail));
+
     }
 }

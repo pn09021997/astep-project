@@ -84,3 +84,6 @@ Route::middleware(['auth:api','role'])->group(function (){
     Route::post('user_update/{id}',[UserController::class,'update']);
     Route::get('user_delete/{id}',[UserController::class,'destroy']);
 });
+
+
+

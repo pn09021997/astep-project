@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use Illuminate\Support\Facades\URL;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,3 +33,13 @@ Route::resource('/product', 'App\Http\Controllers\ProductController');
 Route::get('/searchProduct',[ProductController::class,'getSearch'])->name('product.search');
 Route::get('/verify/verify',[UserController::class,'UserVerifyEmail']);
 
+Route::get('/forgot-pw/send-email-forgot-pw/',function (){
+        $url_post = URL::to('/').'/forgot-pw/send-email-forgot-pw';
+   return view("email.FillEmailForgotPw",['url_post'=>$url_post]);
+});
+Route::post('/forgot-pw/send-email-forgot-pw',[ResetPasswordController::class,'recive_email']);
+Route::get('password-reset/verify',[ResetPasswordController::class,'getformUpdate']);
+Route::post('password-reset',[ResetPasswordController::class,'updatePassWord']);
+
+//Route::post('/forgot-pw/reset-password', 'ResetPasswordController@sendMail');
+//Route::post('/forgot-pw/reset-password/{token}', 'ResetPasswordController@reset');
