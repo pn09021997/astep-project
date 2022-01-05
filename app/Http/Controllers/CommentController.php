@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\UsefulController;
 use App\Models\comment;
 use App\Models\products;
 use App\Models\users;
@@ -78,6 +79,124 @@ class CommentController extends Controller
             $comment['quyen'] = "";
         }
         return $allComment;
+    }
+
+    private  function  checkRate($rate_data){
+        $rate = intval($rate_data);
+        if ($rate<1 || $rate>5){
+            return 1 ;
+        }
+        if (!UsefulController::checkTypeIsInteger($rate)){
+            return  2 ;
+        }
+        return  0;
+
+
+    }
+
+    public function  postComment(Request $request){
+        // Nhận product id - rate - content comment  -
+        $product_id = $request->product_id;
+        $rate = $request->rate;
+        $content = $request->content_comment;
+
+        if ($this->checkRate($rate)== 1){
+           return response()->json(['status'=>'rate must from 1 to 5 start']);
+        }
+        if ($this->checkRate($rate)==2){
+          return  response()->json(['status'=>'rate must is a number ']);
+        }
+
+        if (!UsefulController::checkTypeIsInteger($product_id)){
+            return response()->json(['status'=>'Wrong product id']);
+        }
+        try {
+            $product = products::findOrFail($product_id);
+        }catch (\Exception $exception){
+            return  response()->json(['status'=>'Not found your product']);
+        }
+        if ($this->check_comment_content($content)==1){
+            return  response()->json(['status'=>'comment content is short than 200 character']);
+        }
+        $user_id = Auth::id();
+        $comment = comment::where('product_id','=',$product_id)->where('user_id','=',$user_id)->first();
+        if (!empty($comment)){
+            // Không trống thì ??
+                return  response()->json(['status'=>'You have comment this product']);
+        }
+        else{
+            $comment_create = new comment ;
+            $comment_create->product_id = $product_id;
+            $comment_create->rate = $rate;
+            $comment_create->user_id = $user_id;
+            $comment_create->content = $content;
+            $comment_create->save();
+            return  response()->json(['status'=>'Comment is Create Successfully'],200);
+        }
+
+    }
+
+    private  function  check_comment_content($comment_content){
+    if (strlen($comment_content)>200){
+        return 1;
+    }
+    return 0;
+    }
+
+    public  function updateComment($request){
+        $product_id = $request->product_id;
+        $rate = $request->rate;
+        $content = $request->content_comment;
+        if ($this->checkRate($rate)== 1){
+            return response()->json(['status'=>'rate must from 1 to 5 start']);
+        }
+        if ($this->checkRate($rate)==2){
+            return  response()->json(['status'=>'rate must is a number ']);
+        }
+
+        if (!UsefulController::checkTypeIsInteger($product_id)){
+            return response()->json(['status'=>'Wrong product id']);
+        }
+        try {
+            $product = products::findOrFail($product_id);
+        }catch (\Exception $exception){
+            return  response()->json(['status'=>'Not found your product']);
+        }
+        if ($this->check_comment_content($content)==1){
+            return  response()->json(['status'=>'comment content is short than 200 character']);
+        }
+        $user_id = Auth::id();
+        $comment = comment::where('product_id','=',$product_id)->where('user_id','=',$user_id)->first();
+        if (Gate::allows('edit-comment', $comment)) {
+            $comment->rate = $rate;
+            $comment->content = $content;
+            $comment->save();
+        }
+        else{
+            return  response()->json(['status'=>'You  can not permission update comment on this comment ']);
+        }
+    }
+
+    public  function deleteComment(Request  $request){
+        $product_id = $request->product_id;
+        if (!UsefulController::checkTypeIsInteger($product_id)){
+            return response()->json(['status'=>'Wrong product id']);
+        }
+        try {
+            $product = products::findOrFail($product_id);
+        }catch (\Exception $exception){
+            return  response()->json(['status'=>'Not found your product']);
+        }
+
+        $user_id = Auth::id();
+        $comment = comment::where('product_id','=',$product_id)->where('user_id','=',$user_id)->first();
+        if (Gate::allows('delete-comment', $comment)) {
+            comment::where('id','=',$comment->id)->first()->delete();
+            return  response()->json(['status'=>'Delete successfully'],200);
+        }
+        else{
+            return  response()->json(['status'=>' can not delete ! Permission ']);
+        }
     }
 
 

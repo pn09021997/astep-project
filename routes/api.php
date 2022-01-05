@@ -44,6 +44,7 @@ Route::get('/searchCategory/{key}',[CategoryController::class,'getSearch'])->nam
 Route::get('/searchUser/{key}',[UserController::class,'getSearch'])->name('user.search');
 Route::get('/product_detail',[ProductController::class,'GetProductById']);
 
+
 // Gom nhóm api có auth lại
 Route::middleware('auth:api')->group(function (){
     Route::get('/watch-comment-auth',[CommentController::class,'WatchComment']);
@@ -55,8 +56,9 @@ Route::middleware('auth:api')->group(function (){
     Route::post('/cart_create',[CartController::class,'Create']); // Api Create
     Route::post('/cart_update',[CartController::class,'Edit']); // Api cart Update
     Route::get('/cart_delete',[CartController::class,'Delete']); // Api Cart Delete
+    Route::post('/postComment',[CommentController::class,'postComment']); // Api create comment
+    Route::post('/updateComment',[CommentController::class,'updateComment']); // Api update comment
 });
-
 
 
 
@@ -77,7 +79,6 @@ Route::middleware(['auth:api','role'])->group(function (){
     Route::get('product_delete/{id}',[ProductController::class,'destroy']);
     Route::post('product_update/{id}',[ProductController::class,'update']);
     // Api user
-
     Route::get('user_all',[UserController::class,'index']);
     Route::post('user_create',[UserController::class,'register']);
     Route::get('user_show/{id}',[UserController::class,'show']);
