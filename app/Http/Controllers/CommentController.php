@@ -173,7 +173,7 @@ class CommentController extends Controller
             $comment->save();
         }
         else{
-            return  response()->json(['status'=>'You  can not permission update comment on this comment ']);
+            return  response()->json(['status'=>'You  can not permission update comment on this comment '],403);
         }
     }
 
@@ -185,9 +185,8 @@ class CommentController extends Controller
         try {
             $product = products::findOrFail($product_id);
         }catch (\Exception $exception){
-            return  response()->json(['status'=>'Not found your product']);
+            return  response()->json(['status'=>'Not found your product'],404);
         }
-
         $user_id = Auth::id();
         $comment = comment::where('product_id','=',$product_id)->where('user_id','=',$user_id)->first();
         if (Gate::allows('delete-comment', $comment)) {
@@ -195,7 +194,7 @@ class CommentController extends Controller
             return  response()->json(['status'=>'Delete successfully'],200);
         }
         else{
-            return  response()->json(['status'=>' can not delete ! Permission ']);
+            return  response()->json(['status'=>' can not delete ! Permission '],403);
         }
     }
 

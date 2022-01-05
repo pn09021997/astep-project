@@ -58,6 +58,7 @@ Route::middleware('auth:api')->group(function (){
     Route::get('/cart_delete',[CartController::class,'Delete']); // Api Cart Delete
     Route::post('/postComment',[CommentController::class,'postComment']); // Api create comment
     Route::post('/updateComment',[CommentController::class,'updateComment']); // Api update comment
+    Route::post('/deleteComment',[CommentController::class,'deleteComment']);
 });
 
 
