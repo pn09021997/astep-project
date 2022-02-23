@@ -171,8 +171,6 @@ class ProductController extends Controller
         if ($validator->fails()){
             return response(['errors'=>$validator->errors()->all()], 422);
         }
-
-        $pro_name;
           //Kiem tra product_name da co hay chua, co bi trung khong
           if($request->product_name == $list[0]['product_name']){
             return response()->json([
