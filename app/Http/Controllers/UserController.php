@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order;
+use App\Models\review;
 use App\Models\User;
+use App\Models\user_cart;
+use App\Models\users;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Foundation\Http\FormRequest;
@@ -45,6 +50,9 @@ class UserController extends Controller
         //Note check username !== db || password !== db
         if (Auth::attempt($datax))
         {
+            if (Auth::user()->is_verify!= 1){
+                return response()->json(["status"=>'Please Check your email to verify account']);
+            }
          $user =  User::where('Username',$datax['Username'])->first();
          $token = $user->createToken('user')->accessToken;
             return  response()->json(['token'=> $token, 'role' => $user["type"]],200);
@@ -78,12 +86,12 @@ class UserController extends Controller
                 }
             }
         }
-    $validator = Validator::make($request->all(),[
-        'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
-        'password'=>'required|min:6|max:12', // test rồi
-        'email' => 'required|email|unique:users,email', // test luôn rồi
-        'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
-    ]);
+        $validator = Validator::make($request->all(),[
+            'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
+            'password'=>'required|min:6|max:12', // test rồi
+            'email' => 'required|email|unique:users,email', // test luôn rồi
+            'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
+        ]);
 
         if ($validator->fails()){
             return response(['errors'=>$validator->errors()->all()], 422);
@@ -94,9 +102,10 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
             'type' => 0,
-            'address' => "",
+            'verify_code'=>sha1(time()),
         ];
         DB::table('users')->insert($data);
+        MailController::SendMailRegister($data['email'],$data['verify_code']);
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
@@ -186,7 +195,20 @@ class UserController extends Controller
         }
     }
 
-/////Viet usercontroller
+    public  function  UserVerifyEmail(Request $request){
+     $verify_code =  $request->query('code');
+    $user = User::where('verify_code','=',$verify_code)->first();
+    if ($user == null){
+        return "Your Verify code is wrong";
+    }
+    else{
+        $user['is_verify']= 1;
+        $user->save();
+        return "Your Account is Verify ! Please Login ";
+    }
+    }
+
+
 
       /**
      * Display a listing of the resource.
@@ -195,9 +217,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = users::all();
-
-        return response()->json($user);
+        $users = users::all()->toArray();
+        $return = [];
+        foreach($users as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        return response()->json($return);
     }
 
     /**
@@ -207,7 +233,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+
     }
 
     /**
@@ -219,30 +245,28 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|max:12|unique:users,Username', 
-            'password'=>'required|min:6|max:12', 
-            'email' => 'required|email|unique:users,email', 
-            'phone'=>'required|digits:10|unique:users,phone', 
+            'Username'=>'required|min:6|max:12|unique:users,Username',
+            'password'=>'required|min:6|max:12',
+            'email' => 'required|email|unique:users,email',
+            'phone'=>'required|digits:10|unique:users,phone',
         ]);
-    
+
             if ($validator->fails()){
                 return response(['errors'=>$validator->errors()->all()], 422);
             }
-        $request->validate([
-            'Username' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'password' => 'required',
-            'type' => 'required',
-            'address' => 'required'
-        ]);
+
+        if($request->type == null){
+            $type = 0;
+        }else{
+            $type = $request->type;
+        }
 
         $user = new users([
             'Username' => $request->get('Username'),
             'email' => $request->get('email'),
             'phone' => $request->get('phone'),
-            'password' => $request->get('password'),
-            'type' => $request->get('type'),
+            'password' => Hash::make($request['password']),
+            'type' => $type,
             'address' => $request->get('address'),
         ]);
 
@@ -261,16 +285,16 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
-        $users = users::find($id);
-        if ($users) {
-
+      $user_id = $this->DichId($id);
+      $user = users::find($user_id);
+        if ($user) {
             return response()->json([
-                'message' => 'users found!',
-                'users' => $users,
+                'message' => 'user found!',
+                'users' => $user,
             ]);
         }
         return response()->json([
-            'message' => 'users not found!',
+            'message' => 'user not found!',
         ]);
     }
 
@@ -282,8 +306,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $users = users::find($id);
-        return response()->json($users);
+
     }
 
     /**
@@ -295,34 +318,90 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'Username' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
-            'password' => 'required',
-            'type' => 'required',
-            'address' => 'required'
+        $list = users::all()->toArray();
+        $return = [];
+        foreach($list as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+
+        $user_id = $this->DichId($id);
+        $user = users::find($user_id);
+
+      if($user){
+
+
+        $validator = Validator::make($request->all(),[
+            'Username'=>'required|min:6|',
+            'password'=>'required|min:6|max:12',
+            'email' => 'required|email|',
+            'phone'=>'required|digits:10|',
         ]);
 
-        $user = users::find($id);
+            if ($validator->fails()){
+                return response(['errors'=>$validator->errors()->all()], 422);
+            }
+
+        $Username; $email; $phone; $type;
+
+
         if ($user['email'] != $request->old_email){
             return response(['message' => 'Update failed']);
         }
-        $user->Username = $request->get('Username');
-        $user->email = $request->get('email');
-        $user->phone = $request->get('phone');
-        $user->password = $request->get('password');
-        $user->type = $request->get('type');
-        $user->address = $request->get('address');
+
+        if($request->type == null){
+            $type = 0;
+        }else{
+            $type = $request->type;
+        }
+
+        //Kiem tra username da co hay chua, co bi trung khong
+            if($request->Username == $list[0]['Username']){
+                return response()->json([
+                    'message' => 'The username has been exits!!!',
+                ]);
+            }else{
+                $Username = $request->Username;
+            }
+
+          //Kiem tra email da co hay chua, co bi trung khong
+            if($request->email == $list[0]['email']){
+                return response()->json([
+                    'message' => 'The email has been exits!!!',
+                ]);
+            }else{
+                $email = $request->email;
+            }
+
+              //Kiem tra phone da co hay chua, co bi trung khong
+              if($request->phone == $list[0]['phone']){
+                return response()->json([
+                    'message' => 'The phone has been exits!!!',
+                ]);
+            }else{
+                $phone = $request->phone;
+            }
 
 
-        //3 Luu
-        $user->save();
 
-        return response()->json([
-            'message' => 'user updated!',
-            'users' => $user
-        ]);
+           $user->update([
+            $user->Username = $Username,
+            $user->email = $email,
+            $user->phone = $request->get('phone'),
+            $user->password = Hash::make($request['password']),
+            $user->type = $type,
+            $user->address = $request->get('address')
+           ]);
+           $user->save();
+           return response()->json([
+               'message' => 'user updated!',
+               'user' => $user
+           ]);
+       }
+
+       return response()->json([
+           'message' => 'user not found!'
+       ]);
     }
 
     /**
@@ -333,16 +412,70 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $id = $this->DichId($id);
+        $flag = true;
         $user = users::find($id);
         if ($user) {
-            $user->delete();
+
+            $userCartListTemp = user_cart::where("user_id", "=", $id)->get();
+            $ordersListTemp = order::where("user_id", "=", $id)->get();
+            $reviewsListTemp = review::where("user_id", "=", $id)->get();
+
+            if (count($userCartListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($ordersListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($reviewsListTemp) !== 0) {
+                $flag = false;
+            }
+            if ($flag) {
+                $user->delete();
+                return response()->json([
+                    'message' => 'deleted user'
+                ]);
+            }
+        }
+        if (!$user) {
             return response()->json([
-                'message' => 'user deleted'
+                'message' => 'user not found !!!'
             ]);
         }
         return response()->json([
-            'message' => 'user not found !!!'
+            'message' => "can't delete user because have related ingredients."
         ]);
+
+    }
+
+
+    private function getName($n) {
+        $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
+        }
+        return $randomString;
+    }
+
+    public  function Xulyid($id):String {
+        $dodaichuoi = strlen($id);
+        $chuoitruoc = $this->getName(10);
+        $chuoisau = $this->getName(22);
+        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        return $handle_id;
+    }
+
+    public function DichId($id){
+        $id = base64_decode($id);
+        $handleFirst = substr($id,10);
+        $idx = "";
+        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
+            $idx.=$handleFirst[$i];
+        }
+        return  $idx;
     }
 
    public function getSearch(Request $request){

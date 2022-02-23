@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\order_details;
+use App\Models\review;
+use App\Models\user_cart;
 use Illuminate\Http\Request;
 use App\Models\products;
+use Illuminate\Support\Facades\DB;
 use App\Models\categories;
-
+use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
 {
     /**
@@ -15,9 +19,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = products::all();
-        $categories = categories::all();
-        return response()->json($products);
+        $products = products::all()->toArray();
+        $return = [];
+        foreach($products as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        return response()->json($return);
     }
 
     /**
@@ -27,8 +35,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $categories = categories::all();
-        return view('admin.product.create', compact('categories'));
+
     }
 
     /**
@@ -39,28 +46,66 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required',
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'required|min:2|max:40|unique:products,product_name',
             'price' => 'required',
             'product_image' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+            'description' => 'required|min:10|max:200',
+            'quantity' => 'required',
+            'category_id'=>'required'
         ]);
-
+        if ($validator->fails()){
+            return  response()->json(['status'=>'Have a problem with your data ']);
+        }
+        $pattern_Integer = '/^\d{1,}$/';
+        // xét pattern  quantity + categoryid
+        if (!preg_match($pattern_Integer,$request->quantity)|| !preg_match($pattern_Integer,$request->category_id)){
+            if (!preg_match($pattern_Integer,$request->quantity)){
+                return  response()->json(['status'=>'quantity must is positive integers']);
+            }
+            else{
+                return  response()->json(['status'=>'Category id must is positive integers']);
+            }
+        }
+        // Khúc này chú ý nhập giá nhập số  thế này :
+        // EX : 123.22 bắt buộc có 2 số sau dấu chấm còn số ở trước thì bao nhiêu số cũng dc
+        // EX : 123.22(dấu chấm not dấu phẩy ) , 88.32,99.12,642.88,54622.99
+        $pattern_price = '/^\d{1,}\.{1,1}\d{2,2}$/';
+        if (!preg_match($pattern_price,$request->price)){
+            return  response()->json(['status'=>'Price must have 2 number after dot and must is not negative ']);
+        }
+        if (!$request->hasFile('product_image')){
+            return "Please Choose File";
+        }
+        $image = $request->file('product_image');
+        $array_image_type = ['png','jpg','jpeg','svg'];
+        if (!in_array($image->getClientOriginalExtension(),$array_image_type)){
+            return  response()->json(['status'=>'Please Choose type image is png  or jpg  or jpeg or svg']);
+        }
+        $checksize = 2097152;
+        if ($image->getSize()>$checksize){
+            return  response()->json(['status'=>'Please file is shorter than 2mb']);
+        }
+        try {
+            categories::findOrFail($request->category_id);
+        }catch (\Exception $exception){
+            return  response()->json(['status'=>'Invalid category - category must is a number in select']);
+        }
+        // dd(storage_path('public/' .'1638934974tong-hop-cac-mau-background-dep-nhat-10070-6.jpg'));
+        // Đoạn code trên ko dc xóa , nó là đường link ảnh lưu lên db đó
+        $filename = time().$image->getClientOriginalName();
+        $duongdan = storage_path('public/' .$filename); // cái này để lưu lên database
+        $request->file('product_image')->storeAs('public',$filename);
         $product = new products([
             'product_name' => $request->get('product_name'),
             'price' => $request->get('price'),
             'description' => $request->get('description'),
             'quantity' => $request->get('quantity'),
-            'product_image' => basename($request->file('product_image')->store('public/images')),
+            'product_image' => $duongdan,
             'category_id' => $request->get('category_id'),
         ]);
-
         $product->save();
-        return response()->json([
-            'message' => 'product created',
-            'products' => $product
-        ]);
+        return  response()->json(['status'=>'Create Product Success']);
     }
 
     /**
@@ -71,12 +116,12 @@ class ProductController extends Controller
      */
     public function show(Request $request, $id) //get item by id
     {
-        $products = products::find($id);
-        if ($products) {
-
+        $pro_id = $this->DichId($id);
+        $product = products::find($pro_id);
+        if ($product) {
             return response()->json([
                 'message' => 'product found!',
-                'products' => $products,
+                'product' => $product,
             ]);
         }
         return response()->json([
@@ -92,11 +137,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $products = products::find($id);
-        return response()->json([
-            'message' => 'product found!',
-            'product' => $products,
-        ]);
+
     }
 
     /**
@@ -108,30 +149,59 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id) //update
     {
+        $list = products::all()->toArray();
+        $return = [];
+        foreach($list as $item){
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+
+      $pro_id = $this->DichId($id);
+      $product = products::find($pro_id);
 
 
-        $request->validate([
-            'product_name' => 'required',
-            'price' => 'required',
-            // 'product_image' => 'required',
-            'description' => 'required',
-            'quantity' => 'required'
+      if($product){
+
+
+      $validator = Validator::make($request->all(),[
+        'product_name'=>'required',
+
+    ]);
+
+        if ($validator->fails()){
+            return response(['errors'=>$validator->errors()->all()], 422);
+        }
+
+        $pro_name;
+          //Kiem tra product_name da co hay chua, co bi trung khong
+          if($request->product_name == $list[0]['product_name']){
+            return response()->json([
+                'message' => 'The product_name has been exits!!!',
+            ]);
+        }else{
+            $pro_name = $request->product_name;
+        }
+
+
+        $product->update([
+        $product->product_name = $pro_name,
+        $product->price = $request->get('price'),
+        $product->description = $request->get('description'),
+        $product->quantity = $request->get('quantity'),
+        // $product->pro_image = $request->get('pro_image');
         ]);
 
-        //2 Tao Product Model, gan gia tri tu form len cac thuoc tinh cua Product model
-        $product = products::find($id);
-        $product->product_name = $request->get('product_name');
-        $product->price = $request->get('price');
-        $product->description = $request->get('description');
-        $product->quantity = $request->get('quantity');
-        // $product->pro_image = $request->get('pro_image');
 
-        //3 Luu
         $product->save();
+        return response()->json([
+            'message' => 'product updated!',
+            'product' => $product
+        ]);
+
+      }
 
         return response()->json([
-            'message' => 'products updated!',
-            'products' => $product
+            'message' => 'product not found !!!'
         ]);
     }
 
@@ -143,36 +213,70 @@ class ProductController extends Controller
      */
     public function destroy($id) //remove
     {
+        $id = $this->DichId($id);
+        $pattern_id = '/^\d{1,}$/';
+        if (!preg_match($pattern_id,$id)){
+            return  response()->json(['message'=>'Please type id is a number']);
+        }
+        $flag = true;
         $product = products::find($id);
         if ($product) {
-            $product->delete();
-            return response()->json([
-                'message' => 'products deleted'
+            if (!$product) {
+                return response()->json([
+                    'message' => 'product not found !!!'
+                ]);
+            }
+
+            $userCartListTemp = user_cart::where("product_id", "=", $id)->get();
+            $ordersDetailListTemp = order_details::where("product_id", "=", $id)->get();
+
+            if (count($userCartListTemp) !== 0) {
+                $flag = false;
+            }
+            if (count($ordersDetailListTemp) !== 0) {
+                $flag = false;
+            }
+
+            if ($flag) {
+                $reviewsListRemove = review::where("product_id", "=", $id)->delete();
+                $product->delete();
+                return response()->json([
+                'message' => 'product and reviews depended deleted'
             ]);
         }
+        }
         return response()->json([
-            'message' => 'products not found !!!'
+            'message' => "can't delete product because have related ingredients."
         ]);
     }
 
-    public function getSearch(Request $request)
-    {
-        $product = products::where('product_name', 'like', '%' . $request->key . '%')
-            ->orwhere('price', 'like', '%' . $request->key . '%')
-            ->get();
-        //   return view('admin.product.search', compact('product'));
-        if ($product) {
-            if (empty(count($product))) {
-                return response()->json([
-                    'message' => 'product not found!',
-                ]);
-            } else {
-                return response()->json([
-                    'message' => count($product) . ' product found!!!',
-                    'item' => $product
-                ]);
-            }
+    private function getName($n) {
+        $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
+        $randomString = '';
+
+        for ($i = 0; $i < $n; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $randomString .= $characters[$index];
         }
+        return $randomString;
+    }
+
+    public  function Xulyid($id):String {
+        $dodaichuoi = strlen($id);
+        $chuoitruoc = $this->getName(10);
+        $chuoisau = $this->getName(22);
+        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        return $handle_id;
+    }
+
+    public function DichId($id){
+        $id = base64_decode($id);
+        $handleFirst = substr($id,10);
+        $idx = "";
+        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
+            $idx.=$handleFirst[$i];
+        }
+        return  $idx;
     }
 
     public function filterProduct(Request $request)
@@ -213,4 +317,47 @@ class ProductController extends Controller
             ]);
         }
     }
+
+    public function getSearch(Request $request){
+        $product = products::where('product_name','like','%'.$request->key.'%')
+                            ->orwhere('price','like','%'.$request->key.'%')
+                            ->get();
+                         //   return view('admin.product.search', compact('product'));
+                           if($product){
+                            if(empty(count($product))){
+                                return response()->json([
+                                    'message' => 'product not found!',
+                                ]);
+                            }
+                            else{
+                                return response()->json([
+                                    'message' => count($product). ' product found!!!',
+                                    'item' => $product
+                                ]);
+                            }
+                        }
+                    }
+                    public function GetProductById(Request $request){
+                        if (!$request->has('id')){return  response()->json(['error'=>'Please Type id product ']);};
+                        $id = $request->query('id');
+                        // Todo fix id không phải là số , số âm , số thực , là chuỗi , null , empty
+
+                        $pattern_product_id = '/^\d{1,}$/';
+                        if (!preg_match($pattern_product_id,$id)){
+                            return  response()->json(['status'=>"Please Type Id is Correct is a Number"]);
+                        }
+                        try { // Tìm kiếm product id nếu không ra thì vô cái cục catch thôi
+                         $product = products::findOrFail($id);
+                        $catename = categories::find($product->category_id);
+                         $category_SameType = $product->category_id;
+                         $sosp1trang = 4 ;
+                         $productSameType = DB::select("    SELECT * FROM `products` WHERE products.category_id = $category_SameType  ORDER BY RAND() LIMIT $sosp1trang;");
+                        }catch (\Exception $exception){
+                            return  response()->json(['status'=>"Not Found Product "]);
+                        }
+                        return  response()->json(['product'=>$product,'category'=>$catename,'SanphamcungLoai'=>$productSameType]);
+
+
+                    }
+
 }
