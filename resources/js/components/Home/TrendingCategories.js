@@ -29,7 +29,7 @@ export default function TrendingCategories() {
         <div className="trending-categories-info">
           <img className="trending-category-product-img img-fluid" src={product.product_image} alt={product.product_name} />
           <div className="info-detail">
-            <p className="trending-category-title"># {findCategory(categoriesList, product)}</p>
+            <a href={"/categories-page/" + findCategory(categoriesList, product)} className="trending-category-title"># {findCategory(categoriesList, product)}</a>
             <p className="trending-category-product-title">{product.product_name}</p>
           </div>
         </div>

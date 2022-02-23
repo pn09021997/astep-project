@@ -56,3 +56,5 @@ Route::get('/category-is-ramdom',[HomePageController::class,'GetCategoryIsRamdom
 Route::get('/searchProduct/{key}',[ProductController::class,'getSearch'])->name('product.search');
 Route::get('/searchCategory/{key}',[CategoryController::class,'getSearch'])->name('category.search');
 Route::get('/searchUser/{key}',[UserController::class,'getSearch'])->name('user.search');
+Route::get('/categoriesPage/{key}',[CategoryController::class,'getProductByCategoryId'])->name('categoriesPage');
+Route::get('/categoriesPage/{key}/{filter}',[ProductController::class,'filterProduct'])->name('product.filter');

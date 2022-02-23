@@ -174,4 +174,43 @@ class ProductController extends Controller
             }
         }
     }
+
+    public function filterProduct(Request $request)
+    {
+        $filterField = "product_name";
+        $filterOption = "DESC";
+        if ($request->key &&  $request->filter) {
+            switch ($request->filter) {
+                case "za": {
+                    $filterOption = "ASC";
+                    break;
+                }
+                case "az": {
+                    $filterOption = "DESC";
+                    break;
+                }
+                case "price-high-low": {
+                    $filterField = "price";
+                    $filterOption = "DESC";
+                    break;
+                }
+                case "price-low-high": {
+                    $filterField = "price";
+                    $filterOption = "ASC";
+                    break;
+                }
+                default: {
+                    $filterField = "product_name";
+                    $filterOption = "DESC";
+                    break;
+                }
+            } 
+            $productList = products::where('category_id', 'like', '%' . $request->key . '%')
+                ->orderBy($filterField, $filterOption)
+                ->get();
+            return response()->json([
+                'products' => $productList,
+            ]);
+        }
+    }
 }

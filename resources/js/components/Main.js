@@ -22,7 +22,7 @@ import Login from "./Login/Login";
 import Register from "./Login/Register";
 import Detail from "./Detail/Detail";
 import CartManager from "./CartPage/CartManager";
-import CategoriesTotall from "./CategoriesPage/CategoriesTotal";
+import CategoriesPage from "./CategoriesPage/CategoriesPage";
 import NoMatch from "./NoMatch/NoMatch";
 export default function Main({ role, setRoleChange, setRoleOfUser }) {
     const [infoUser, setInfoUser] = useState({
@@ -130,8 +130,8 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     <Route path="/cart">
                         <CartManager key="cart" />
                     </Route>
-                    <Route path="/categories-page">
-                        <CategoriesTotall key="categories-page" />
+                    <Route exact path="/categories-page/:id">
+                        <CategoriesPage key="categories-page" />
                     </Route>
                     <Route path="*">
                         <NoMatch/>

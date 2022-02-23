@@ -157,4 +157,23 @@ class CategoryController extends Controller
             }
         }
     }
+
+    
+    public function getProductByCategoryId(Request $request)
+    {
+        $category = categories::where('id', 'like', '%' . $request->key . '%')->get();
+        if ($category) {
+            if (empty(count($category))) {
+                return response()->json([
+                    'message' => 'category not found!',
+                ]);
+            } else {
+                $productList = products::where('category_id', 'like', '%' . $request->key . '%')->get();
+                return response()->json([
+                    'message' => 'category found!!!',
+                    'item' => $productList
+                ]);
+            }
+        }
+    }
 }

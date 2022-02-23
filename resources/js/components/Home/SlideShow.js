@@ -65,7 +65,7 @@ export default function SlideShow() {
                     <p className="slide-show-category-title mb-5">
                         {item.name.toUpperCase()}
                     </p>
-                    <Link className="slide-show-category-link">
+                    <Link className="slide-show-category-link" to={"/categories-page/"+item.id}>
                         Shop Collections
                     </Link>
                 </div>

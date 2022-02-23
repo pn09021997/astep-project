@@ -1,4 +1,7 @@
-.main-navbar {
+  body {
+    background-color: #fff;
+  }
+  .main-navbar {
     text-align: center;
   }
   .main-navbar--custom-link {
