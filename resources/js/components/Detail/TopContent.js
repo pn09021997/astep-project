@@ -1,67 +1,129 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import {
+    Row,
+    Col,
+    Button
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import { AvField, AvForm } from "availity-reactstrap-validation";
+import { FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import "../../../css/TopContent.css";
-export default class TopContent extends Component {
-
-    render() {
-      /*   try{
-            const url = 'http://127.0.0.1:8000/api/product_detail?id';
-            const reponse = await axios.get(url);
-            console.log(reponse);
+export default function TopContent() {
+    const [activeTab, setActiveTab] = useState("1");
+    const [productInfo, setProductInfo] = useState([]);
+    const [categories, setCategories] = useState([]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                `${location.origin}/api/product-detail/27`
+            );
+            setCategories(result.data.category);
+            setProductInfo(result.data.product);
+        };
+        fetchData();
+    }, [])
+    const handleOnValid = (event, value) => {
+        console.log(value);
+    };
+    const handleOnInvalid = (event, error, value) => {
+        console.log(error);
+    };
+    const handleChangeTab = (tab) => {
+        if (activeTab !== tab) {
+            setActiveTab(tab);
         }
-        catch(error){
-            console.log('Failed to fetch products: ', error);
-        } */
-        return (
-            <div className="detail">
-                <div className="detail-header">
-                    <h1>Detail Product</h1>
-                </div>
-                <div className="container">
-                <div className="row">
-                        <div className="col-md-6">
-                            <div className="img-detail">
-                                <img src="//product.hstatic.net/200000065946/product/pro_mau_tu_nhien_noi_that_moho_ghe_an_pallermo_2265922503c242a98a1662e68fc16a70_master.png" width="100%" height="100%" />
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            <div className="header-detail">
-                                <div className="titlle-detail my-3">
-                                    <h3>Ghế Ăn Gỗ Tần Bì Tự Nhiên PALLERMO</h3>
-                                </div>
-                                <div className="quantity-review">
-                                    <p>Đánh giá: </p>
-                                    <div className="like">
-                                        <button type="button" id="btn-like">
-                                            <i className="far fa-thumbs-up" aria-hidden="true"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                                {/* Nội dung chi tiết sản phẩm */}
-                                <div className="description-detail">
-                                    <p><b>Kích thước:</b> Dài 52cm x Rộng 58cm x Cao đến đệm ngồi/lưng tựa 50cm/78cm <br />
-                                        <b> Chất liệu:</b> <br />
-                                        - Gỗ tần bì tự nhiên <br />
-                                        - Vải bọc polyester chống nhăn, kháng bụi bẩn và nấm mốc <br />
-                                        Chống thấm, cong vênh, trầy xước, mối mọt
-                                    </p>
-                                </div>
-                                <div className="price-detail">
-                                    <h4>1,390,000₫</h4>
-                                </div>
-                                <div className="quantity">
-                                    <input type="button" value="+" className="qty-btn" />
-                                    <input type="text" value="1" min="1" className="select-quantity" />
-                                    <input type="button" value="-" className="qty-btn" />
-                                </div>
-                                <div className="add-product-cart">
-                                    <button type="button" className="btn-3"><span>Thêm vào giỏ</span></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    };
+    return (
+        <div className="detail__top-content">
+            <div className="detail__header mt-5">
+                <p className="header-link">
+                    <a href={location.origin} className="home-link">
+                        Home
+                    </a>{" "}
+                    /{" "}
+                    <Link to={`/categories/${categories.id}`} className="category-link">
+                        {categories.name}
+                    </Link>{" "}
+                    / {productInfo.product_name}
+                </p>
             </div>
-        )
-    }
+            <div className="product container-fluid">
+                <Row lg="2" md="1" sm="1">
+                    <Col lg="5">
+                        <div className="product__single">
+                            <div className="product__name my-3">
+                                <h1>{productInfo.product_name}</h1>
+                            </div>
+                            <div className="product__info-detail my-3">
+                                <p className="product__price">$ {productInfo.price}</p>
+                            </div>
+                            <div className="product__cart-select my-3">
+                                <AvForm
+                                    onValidSubmit={handleOnValid}
+                                    onInvalidSubmit={handleOnInvalid}
+                                    className="cart-select-form"
+                                >
+                                    <Row>
+                                        <Col lg="3">
+                                            <AvField
+                                                name="product-quantity"
+                                                type="number"
+                                                value={1}
+                                                id="input-quantity"
+                                            ></AvField>
+                                        </Col>
+                                        <Col lg="4">
+                                            <Button
+                                                className="cart-select-form--btn"
+                                                id="btn-addCart"
+                                            >
+                                                Add To Cart
+                                            </Button>
+                                        </Col>
+                                        <Col lg="4">
+                                            <Button
+                                                className="cart-select-form--btn"
+                                                id="btn-buyNow"
+                                            >
+                                                Buy It Now
+                                            </Button>
+                                        </Col>
+                                    </Row>
+                                </AvForm>
+                                <div className="product__info-warehouse my-3">
+                                    <ul>
+                                        <li>QUANTITY: {productInfo.quantity}</li>
+                                        <li>AVAILABLE: {(productInfo.quantity >= 1) ? "AVAILABLE" : "UNAVAILABLE"}</li>
+                                    </ul>
+                                </div>
+                                <hr />
+                                <div className="social-sharing my-3">
+                                    <p>Share:</p>{" "}
+                                    <button className="social-sharing--btn-link">
+                                        <FaFacebookF />
+                                    </button>{" "}
+                                    <button className="social-sharing--btn-link">
+                                        <FaTwitter />
+                                    </button>{" "}
+                                    <button className="social-sharing--btn-link">
+                                        <FaPinterest />
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                    <Col lg="7">
+                        <div className="img-detail">
+                            <img
+                                className="img-fluid"
+                                src={productInfo.product_image}
+                                width="100%"
+                            />
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+        </div>
+    );
 }

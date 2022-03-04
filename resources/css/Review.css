@@ -7,5 +7,29 @@
 }
 
 .review-rating-detail{
-    color: #f5eb3b;
+    color: #eb7025;
+}
+.review #reviewContent {
+    border: none;
+    outline: none;
+    border-bottom: #000 2px solid;
+    transition: all .6s;
+} 
+.review #reviewContent:focus {
+    border-color: #eb7025;
+} 
+.review .btn-animation {
+    background: linear-gradient(to left, #000 50%, #eb7025 50%) right;
+    background-size: 200%;
+    transition: .5s;
+    outline: none;
+    border: none;
+} 
+.review .btn-animation:hover {
+    background-position: left;
+    border: #fff;
+} 
+#productDesc {
+    color: #a3a1a1;
+    font-size: 1rem;
 }

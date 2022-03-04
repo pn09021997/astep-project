@@ -318,10 +318,17 @@ class ProductController extends Controller
 
     public function getSearch(Request $request)
     {
-        $product = products::where('product_name', 'like', '%' . $request->key . '%')
+        if ($request->key) {
+            $product = products::where('product_name', 'like', '%' . $request->key . '%')
             ->orwhere('price', 'like', '%' . $request->key . '%')
             ->get();
         //   return view('admin.product.search', compact('product'));
+        } else {
+            return response()->json([
+                'message' => 'No product found',
+            ]);
+        } 
+ 
         if ($product) {
             if (empty(count($product))) {
                 return response()->json([
@@ -335,14 +342,9 @@ class ProductController extends Controller
             }
         }
     }
-    public function GetProductById(Request $request)
-    {
-        if (!$request->has('id')) {
-            return  response()->json(['error' => 'Please Type id product ']);
-        };
-        $id = $request->query('id');
-        // Todo fix id không phải là số , số âm , số thực , là chuỗi , null , empty
-
+    public function GetProductById($productId)
+    {   
+        $id = $productId;
         $pattern_product_id = '/^\d{1,}$/';
         if (!preg_match($pattern_product_id, $id)) {
             return  response()->json(['status' => "Please Type Id is Correct is a Number"]);
@@ -356,6 +358,6 @@ class ProductController extends Controller
         } catch (\Exception $exception) {
             return  response()->json(['status' => "Not Found Product "]);
         }
-        return  response()->json(['product' => $product, 'category' => $catename, 'SanphamcungLoai' => $productSameType]);
+        return  response()->json(['product' => $product, 'category' => $catename, 'relatedProducts' => $productSameType]);
     }
 }

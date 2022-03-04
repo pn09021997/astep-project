@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import "../../../css/TrendingCategories.css";
 export default function TrendingCategories() {
@@ -29,7 +30,7 @@ export default function TrendingCategories() {
         <div className="trending-categories-info">
           <img className="trending-category-product-img img-fluid" src={product.product_image} alt={product.product_name} />
           <div className="info-detail">
-            <a href={"/categories-page/" + findCategory(categoriesList, product)} className="trending-category-title"># {findCategory(categoriesList, product)}</a>
+            <Link to={"/categories/" + product.category_id} className="trending-category-title"># {findCategory(categoriesList, product)}</Link>
             <p className="trending-category-product-title">{product.product_name}</p>
           </div>
         </div>

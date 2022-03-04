@@ -2,12 +2,11 @@
 width: 100%;
 height: 100%;
 }
-.related-content{
-    font-size: 1.2rem;
-}
 .related-title{
     text-align: center;
     padding-top:3%;
+    transition: all .8s;
+    font-size: 2rem;
 }
 .related-title:hover{
     color: #eb7025;
@@ -17,8 +16,68 @@ height: 100%;
     padding-bottom: 3%;
 }
 .related{
-    font-size: 2rem;
-    font-weight: bold;
     text-align: center;
     padding: 5% 0%;
+    font-size: 1rem;
 }
+.product-info {
+    padding: 5vh 2vh;
+    text-align: center;
+}
+.product-info img {
+    filter: grayscale(0);
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: filter .5s ease-in-out;
+    backface-visibility: hidden;
+}
+.product-info .info-detail {
+    margin: 0;
+    margin-top: 2vh;
+}
+.info-detail-name {
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all .5s;
+}
+.product-info .info-detail-name:hover {
+    color: #eb7025;
+}
+.product-info .info-detail-price {
+    color: #a3a1a1;
+    margin: 0;
+    font-size: 1rem;
+}
+.product-action--action{
+    position: relative;
+}
+.action-cart {
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    text-align: center;
+    transition: opacity .7s;
+}
+.product-action--action:hover img {
+    filter: grayscale(100%);
+}
+
+.product-action--action:hover .action-cart {
+    opacity: 1;
+}
+.btn-animation {
+    background: linear-gradient(to left, #000 50%, #eb7025 50%) right;
+    background-size: 200%;
+    transition: .5s;
+    outline: none;
+    border: none;
+} 
+.btn-animation:hover {
+    background-position: left;
+    border: #fff;
+} 

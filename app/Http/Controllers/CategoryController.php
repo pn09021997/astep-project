@@ -69,7 +69,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request  $request,$id)
+    public function show(Request $request,$id)
     {
 
         $cat_id = $this->DichId($id);
@@ -247,5 +247,18 @@ class CategoryController extends Controller
                 ]);
             }
         }
+    }
+
+    public function getCategoryById($categoryId) {
+        $category = categories::find($categoryId);
+        if ($category) {
+            return response()->json([
+                'message' => 'category found!',
+                'category' => $category,
+            ]);
+        }
+        return response()->json([
+            'message' => 'category not found!',
+        ]);
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";    
+import React, { useState, useEffect } from "react";
 import {
     Collapse,
     Navbar,
@@ -24,6 +24,7 @@ import Detail from "./Detail/Detail";
 import CartManager from "./CartPage/CartManager";
 import CategoriesPage from "./CategoriesPage/CategoriesPage";
 import NoMatch from "./NoMatch/NoMatch";
+import axios from "axios";
 export default function Main({ role, setRoleChange, setRoleOfUser }) {
     const [infoUser, setInfoUser] = useState({
         email: "",
@@ -38,6 +39,23 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
     //State of navbar
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
+    const [keyword, setKeyword] = useState("none");
+    const [searchResult, setSearchResult] = useState([]);
+    const handleChangeKeyword = (e) => {
+        const { name, value } = e.target;
+        setKeyword(value);
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await axios(
+                `http://localhost:8000/api/searchProduct/${keyword}`
+            );
+            setSearchResult(result.data.item);
+        };
+        fetchData();
+    }, [keyword]);
+
     return (
         <div className="main">
             <Router>
@@ -55,21 +73,32 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                         />
                     </NavbarBrand>
                     {/* search bar */}
+
                     <div className="search-box">
                         <form class="form-inline my-2 my-lg-0">
                             <input
                                 class="form-control mr-sm-2"
+                                name="keyword"
                                 type="text"
                                 placeholder="Search"
+                                value={keyword}
+                                onChange={handleChangeKeyword}
                             />
                             <button
-                                class="btn btn-outline-warning mr-4 my-sm-0"
+                                class="btn mr-4 my-sm-0"
+                                id="btnSearch"
                                 type="submit"
                             >
                                 Search
                             </button>
                         </form>
-
+                        <div className="search-result">
+                            <p>
+                                {searchResult === []
+                                    ? "Not item found"
+                                    : JSON.stringify(searchResult)}
+                            </p>
+                        </div>
                     </div>
                     <NavbarToggler onClick={toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!collapsed} navbar>
@@ -124,13 +153,13 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     <Route path="/register">
                         <Register key="register" />
                     </Route>
-                    <Route path="/product-detail">
+                    <Route path="/product">
                         <Detail key="product-detail" />
                     </Route>
                     <Route path="/cart">
                         <CartManager key="cart" />
                     </Route>
-                    <Route exact path="/categories-page">
+                    <Route exact path="/categories/:category_id">
                         <CategoriesPage key="categories-page" />
                     </Route>
                     <Route path="*">

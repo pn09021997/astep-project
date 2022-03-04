@@ -1,28 +1,20 @@
 
-.detail{
-    background: linear-gradient(rgb(255, 255, 241),rgb(248, 248, 235));
-    background-size:cover ;
-    margin: 0 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+.detail__header{
+  text-align: center;
+  font-size: 1.2rem;
 }
-.detail-header>h1{
-    text-transform: uppercase;
-    margin: 10px 0 10px;
-    padding: 0 0 15px;
-    position: relative;
-  }
-  .detail-header>h1::before{
-    position: absolute;
-    content: "";
-    display: block;
-    width: 55px;
-    height: 1px;
-    bottom: 0px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    background: #fa7a02;
-  }
+.detail__header .product-name {
+  font-weight: 800;
+  margin-top: 10px;
+}  
+.detail__header .home-link {
+  text-decoration: none;
+  color: #eb7025;
+}
+.detail__header .category-link {
+  text-decoration: none;
+  color: #eb7025;
+}
 .img-detail{
     padding: 4% 0%;
 }
@@ -101,14 +93,6 @@
   .btn-3 span:hover:after {
     width: 100%;
   }
-
-/* .btn-add:hover{
-    border-radius: 10px;
-    background-color: transparent;
-    transition: color 0.45s;
-    z-index: 1;
-    color: #434343;
- } */
  .titlle-detail{
    border-bottom: 1px dotted #dfe0e1;
  }
@@ -168,4 +152,55 @@
 .user-review{
     border: 1px solid #d6d3d3 ;
     background: #ffeee8;
+}
+.cart-select-form #btn-addCart:hover {
+  background-position: left;
+} 
+.cart-select-form #btn-addCart {
+  background: linear-gradient(to left, #000 50%, #eb7025 50%) right;
+  background-size: 200%;
+  transition: .5s ease-out;
+}
+.cart-select-form #btn-buyNow {
+  background: #eb7025;
+}
+.cart-select-form #input-quantity {
+  padding: 25px 10px;
+} 
+.cart-select-form .cart-select-form--btn {
+  padding: 15px;
+  width: 100%;
+  background: #000;
+  font-weight: 600;
+  outline: none;
+  border: none;
+}
+.product__info-warehouse ul{
+  list-style: none;
+  padding: 0;
+  color: #777777;
+} 
+.social-sharing{
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  color: #777777;
+}
+.social-sharing p {
+  margin-top: 15px;
+} 
+.social-sharing .social-sharing--btn-link {
+  outline: none;
+  border: none;
+  background: none;
+  color: #777777;
+}
+.social-sharing .social-sharing--btn-link:hover {
+  color: #eb7025;
+  transition: all .8s;
+}
+.product__info-detail .product__price {
+  font-size: 1.5rem;
+  color: #eb7025;
+  font-weight: 600;
 }

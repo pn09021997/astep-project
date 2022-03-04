@@ -8,9 +8,10 @@ export default function ProductList(props) {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                "http://localhost:8000/api/categoriesPage/1/" + props.filterOption
+                `http://localhost:8000/api/categoriesPage/${props.categoryId}/${props.filterOption}`
             );
             setProductList(result.data.products);
+            console.log(result.data.products);
         };
         fetchData();
     }, [props.filterOption]);

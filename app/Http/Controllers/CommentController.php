@@ -12,6 +12,313 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
+
+    public function postComment(Request $request, $product_id)
+    {
+        $product = products::where('id', $product_id)->first();
+        if ($product) {
+            $validator = Validator::make($request->all(), [
+                'content' => 'required',
+                'rate' => ''
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validation errors',
+                    'status' => 500,
+                    'errors' => $validator->message()
+                ], 422);
+            }
+            
+            if ($request->rate == null) {
+                $rate = 1;
+            } else {
+                $rate = $request->rate;
+            }
+            $comment = comment::create([
+                'content' => $request->content,
+                'product_id' => $product->id,
+                'user_id' => $request->user()->id,
+                'rate' => $rate
+            ]);
+
+            $comment->load('user');
+            return response()->json([
+                'message' => 'comment successfully',
+                'comment' => $comment
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Product not found',
+            ], 400);
+        }
+    }
+
+    public function editComment(Request $request, $id)
+    {
+        $comment = comment::with(['user'])->where('id', $id)->first();
+
+        if ($comment) {
+            if ($comment->user_id == $request->user()->id) {
+                $validator = Validator::make($request->all(), [
+                    'content' => 'required',
+                    'rate' => ''
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'message' => 'Validation errors',
+                        'status' => 500,
+                        'errors' => $validator->message()
+                    ], 422);
+                }
+
+                $comment->update([
+                    'content' => $request->content,
+                    'rate' => $request->rate
+
+                ]);
+                return response()->json([
+                    'message' => "Comment successfully updated",
+                    'comment' => $comment
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => "You can't edit this comment",
+                ], 403);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Comment not found',
+            ], 400);
+        }
+    }
+
+    public function deleteComment(Request $request, $id)
+    {
+        $comment = comment::with(['user'])->where('id', $id)->first();
+        if ($comment) {
+            if (Auth::user()->type == 1) {
+                $comment->delete();
+                return response()->json([
+                    'message' => "Comment successfully deleted",
+                ], 200);
+            } else {
+                if ($comment->user_id == $request->user()->id) {
+                    $comment->delete();
+                    return response()->json([
+                        'message' => "Comment successfully deleted",
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'message' => "You can't delete this comment",
+                    ], 403);
+                }
+            }
+        } else {
+            return response()->json([
+                'message' => 'Comment not found',
+            ], 400);
+        }
+    }
+
+
+    //Resource comment
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+    public function index()
+    {
+        $comments = comment::all()->toArray();
+        $return = [];
+        foreach ($comments as $item) {
+            $item['id'] = $this->Xulyid($item['id']);
+            $return[] = $item;
+        }
+        return response()->json($return);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $product_id = $request->product_id;
+        $product = products::where('id', $product_id)->first();
+
+        if ($product) {
+            $validator = Validator::make($request->all(), [
+                'content' => 'required',
+                'rate' => ''
+            ]);
+            if ($validator->fails()) {
+                return response()->json([
+                    'message' => 'Validation errors',
+                    'status' => 500,
+                    'errors' => $validator->message()
+                ], 422);
+            }
+
+            if ($request->rate == null) {
+                $rate = 1;
+            } else {
+                $rate = $request->rate;
+            }
+            $comment = comment::create([
+                'content' => $request->content,
+                'product_id' => $product->id,
+                'user_id' => $request->user()->id,
+                'rate' => $rate
+            ]);
+
+
+            $comment->load('user');
+            return response()->json([
+                'message' => 'comment successfully',
+                'comment' => $comment
+            ], 200);
+        } else {
+            return response()->json([
+                'message' => 'Product not found',
+            ], 400);
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Request $request, $id)
+    {
+
+        $com_id = $this->DichId($id);
+        $comment = comment::find($com_id);
+        if ($comment) {
+            return response()->json([
+                'message' => 'comment found by id!',
+                'comment' => $comment,
+            ]);
+        }
+        return response()->json([
+            'message' => 'comment not found!',
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $comment = comment::find($id);
+        return response()->json([
+            'message' => 'comment found !',
+            'comment' => $comment,
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $com_id = $this->DichId($id);
+        $comment = comment::with(['user'])->where('id', $com_id)->first();
+        if ($comment) {
+            if ($comment->user_id == Auth::user()->id) {
+                $validator = Validator::make($request->all(), [
+                    'content' => 'required',
+                    'rate' => ''
+                ]);
+                if ($validator->fails()) {
+                    return response()->json([
+                        'message' => 'Validation errors',
+                        'status' => 500,
+                        'errors' => $validator->message()
+                    ], 422);
+                }
+                $comment->update([
+                    'content' => $request->content,
+                    'rate' => $request->rate
+
+                ]);
+                return response()->json([
+                    'message' => "Comment successfully updated",
+                    'comment' => $comment
+                ], 200);
+            } else {
+                return response()->json([
+                    'message' => "You can't edit this comment",
+                ], 403);
+            }
+        } else {
+            return response()->json([
+                'message' => 'Comment not found',
+            ], 400);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Request $request, $id)
+    {
+        $com_id = $this->DichId($id);
+        $comment = comment::with(['user'])->where('id', $com_id)->first();
+
+        if ($comment) {
+            if (Auth::user()->type == 1) {
+                $comment->delete();
+                return response()->json([
+                    'message' => "Comment successfully deleted",
+                ], 200);
+            } else {
+                if ($comment->user_id == $request->user()->id) {
+                    $comment->delete();
+                    return response()->json([
+                        'message' => "Comment successfully deleted",
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'message' => "You can't delete this comment",
+                    ], 403);
+                }
+            }
+        } else {
+            return response()->json([
+                'message' => 'Comment not found',
+            ], 400);
+        }
+    }
+
     // Watch comment Auth bao gồm cả quyền delete comment ở admin
     // đồng thời bao gồm phân quyền user r nhé
     // đã fix : Không có field id lên
@@ -83,7 +390,8 @@ class CommentController extends Controller
 
 
 
-    private function getName($n) {
+    private function getName($n)
+    {
         $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
         $randomString = '';
 
@@ -94,20 +402,22 @@ class CommentController extends Controller
         return $randomString;
     }
 
-    public  function Xulyid($id):String {
+    public  function Xulyid($id): String
+    {
         $dodaichuoi = strlen($id);
         $chuoitruoc = $this->getName(10);
         $chuoisau = $this->getName(22);
-        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        $handle_id = base64_encode($chuoitruoc . $id . $chuoisau);
         return $handle_id;
     }
 
-    public function DichId($id){
+    public function DichId($id)
+    {
         $id = base64_decode($id);
-        $handleFirst = substr($id,10);
+        $handleFirst = substr($id, 10);
         $idx = "";
-        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
-            $idx.=$handleFirst[$i];
+        for ($i = 0; $i < strlen($handleFirst) - 22; $i++) {
+            $idx .= $handleFirst[$i];
         }
         return  $idx;
     }
