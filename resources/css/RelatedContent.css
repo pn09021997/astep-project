@@ -36,13 +36,16 @@ height: 100%;
     margin: 0;
     margin-top: 2vh;
 }
-.info-detail-name {
+.info-related-name {
     font-size: 1rem;
     font-weight: 600;
     transition: all .5s;
+    color: #000;
+    
 }
-.product-info .info-detail-name:hover {
+.product-info .info-related-name:hover {
     color: #eb7025;
+    text-decoration: none;
 }
 .product-info .info-detail-price {
     color: #a3a1a1;

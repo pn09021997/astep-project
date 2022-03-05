@@ -69,11 +69,13 @@
 .product-info .info-detail {
     margin: 0;
     margin-top: 2vh;
-}s
+}
 .product-info .info-detail-name {
     font-size: 1rem;
     font-weight: 500;
     transition: 0.5s;
+    color: #000;
+    text-decoration: none;
 }
 .product-info .info-detail-name:hover {
     color: #eb7025;

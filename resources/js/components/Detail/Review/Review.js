@@ -1,33 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
     Button,
     Row,
     Col,
-    Container,
     TabContent,
     TabPane,
     Nav,
     NavItem,
     NavLink,
-    Card,
-    CardText,
-    Input,
     Modal,
     ModalHeader,
     ModalBody,
     ModalFooter,
 } from "reactstrap";
-import { Link } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import classnames from "classnames";
-
 import "../../../../css/Review.css";
 import Rating from "./Rating/Rating";
 import { isArray } from "lodash";
-import Rate from "./Rate/Rate";
-export default function Review() {
+export default function Review(props) {
     const [reviews, setReviews] = useState([]);
     const [product, setProduct] = useState([]);
     const [rating, setRating] = useState(1);
@@ -37,9 +30,9 @@ export default function Review() {
     });
     const [activeTab, setActiveTab] = useState("1");
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         const fetchData = async () => {
-            const result = await axios(`${location.origin}/api/product-detail/27`);
+            const result = await axios(`${location.origin}/api/product-detail/${props.productId}`);
             setProduct(result.data.product);
             setProductId(result.data.product.id);
         };
@@ -50,7 +43,7 @@ export default function Review() {
         const fetchData = async () => {
             let tokenStr = localStorage.getItem("loginToken");
             const result = await axios(
-                `${location.origin}/api/watch-comment-auth?product_id=${27}`,
+                `${location.origin}/api/watch-comment-auth?product_id=${props.productId}`,
                 {
                     headers: { Authorization: `Bearer ${tokenStr}` },
                 }
@@ -207,14 +200,6 @@ export default function Review() {
                 </TabContent>
             </div>
         </div>
-    );
-}
-
-function ProductTab(props) {
-    return (
-        <option value={props.obj.id} key={props.obj.id}>
-            {props.obj.product_name}
-        </option>
     );
 }
 

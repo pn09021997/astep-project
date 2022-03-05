@@ -26,9 +26,11 @@
     font-weight: 400;
     transition: 0.5s;
     color: #000;
+    display: inline-block;
 }
-.trending-category-title:hover {
-    color: #eb7025;
+.trending-category-product-title:hover, .trending-category-title:hover{
+    text-decoration: none;
+    color: #000;
 }
 .trending-categories-info:hover .trending-category-product-img {
     filter: grayscale(0);

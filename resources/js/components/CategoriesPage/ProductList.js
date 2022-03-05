@@ -1,6 +1,7 @@
 import { filter } from "lodash";
 import React, { useState, useEffect } from "react";
 import { Col, Row, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import "../../../css/CategoriesPage.css";
 
 export default function ProductList(props) {
@@ -33,12 +34,15 @@ export default function ProductList(props) {
                                 Add Cart
                             </Button>
                         </div>
-                    </div>  
+                    </div>
 
                     <div className="info-detail">
-                        <p className="info-detail-name">
+                        <Link
+                            to={`/product-detail/${product.id}/reload`}
+                            className="info-detail-name"
+                        >
                             {product.product_name}
-                        </p>
+                        </Link>
                         <p className="info-detail-price">$ {product.price}</p>
                     </div>
                 </div>

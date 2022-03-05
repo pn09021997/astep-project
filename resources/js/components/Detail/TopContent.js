@@ -1,22 +1,23 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import {
     Row,
     Col,
     Button
 } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AvField, AvForm } from "availity-reactstrap-validation";
 import { FaFacebookF, FaTwitter, FaPinterest } from "react-icons/fa";
 import "../../../css/TopContent.css";
-export default function TopContent() {
+export default function TopContent(props) {
+    const history = useHistory();
     const [activeTab, setActiveTab] = useState("1");
     const [productInfo, setProductInfo] = useState([]);
     const [categories, setCategories] = useState([]);
-    useEffect(() => {
+    useLayoutEffect(() => {
         const fetchData = async () => {
             const result = await axios(
-                `${location.origin}/api/product-detail/27`
+                `${location.origin}/api/product-detail/${props.productId}`
             );
             setCategories(result.data.category);
             setProductInfo(result.data.product);

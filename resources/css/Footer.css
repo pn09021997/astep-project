@@ -7,3 +7,11 @@
     list-style: none;
     padding: 0;
 }
+.collections-link {
+    color: #fff;
+    transition: all .4s;
+}
+.collections-link:hover {
+    color: #eb7025;
+    text-decoration: none;
+} 

@@ -8,11 +8,11 @@ import {
     NavItem,
 } from "reactstrap";
 import {
-    BrowserRouter as Router,
+    BrowserRouter,
     Switch,
     Route,
     Link,
-    useLocation,
+    Redirect,
 } from "react-router-dom";
 import "../../css/Main.css";
 
@@ -46,7 +46,7 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
         setKeyword(value);
     };
 
-    useEffect(() => {
+    /*useEffect(() => {
         const fetchData = async () => {
             const result = await axios(
                 `http://localhost:8000/api/searchProduct/${keyword}`
@@ -54,11 +54,11 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
             setSearchResult(result.data.item);
         };
         fetchData();
-    }, [keyword]);
+    }, [keyword]);*/
 
     return (
         <div className="main">
-            <Router>
+            <BrowserRouter>
                 <Navbar
                     color="dark"
                     dark
@@ -75,9 +75,9 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     {/* search bar */}
 
                     <div className="search-box">
-                        <form class="form-inline my-2 my-lg-0">
+                        <form className="form-inline my-2 my-lg-0">
                             <input
-                                class="form-control mr-sm-2"
+                                className="form-control mr-sm-2"
                                 name="keyword"
                                 type="text"
                                 placeholder="Search"
@@ -85,20 +85,13 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                                 onChange={handleChangeKeyword}
                             />
                             <button
-                                class="btn mr-4 my-sm-0"
+                                className="btn mr-4 my-sm-0"
                                 id="btnSearch"
                                 type="submit"
                             >
                                 Search
                             </button>
                         </form>
-                        <div className="search-result">
-                            <p>
-                                {searchResult === []
-                                    ? "Not item found"
-                                    : JSON.stringify(searchResult)}
-                            </p>
-                        </div>
                     </div>
                     <NavbarToggler onClick={toggleNavbar} className="mr-2" />
                     <Collapse isOpen={!collapsed} navbar>
@@ -133,8 +126,6 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     </Collapse>
                 </Navbar>
 
-                {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
                 <Switch>
                     <Route exact path="/">
                         <Home key="home" />
@@ -153,20 +144,21 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     <Route path="/register">
                         <Register key="register" />
                     </Route>
-                    <Route path="/product">
+                    <Route exact path="/product-detail/:product_id" > 
                         <Detail key="product-detail" />
                     </Route>
+                    <Redirect exact from="/product-detail/:product_id/reload" to="/product-detail/:product_id" />
                     <Route path="/cart">
                         <CartManager key="cart" />
                     </Route>
-                    <Route exact path="/categories/:category_id">
+                    <Route path="/categories/:category_id">
                         <CategoriesPage key="categories-page" />
                     </Route>
                     <Route path="*">
                         <NoMatch />
                     </Route>
                 </Switch>
-            </Router>
+            </BrowserRouter>
         </div>
     );
 }

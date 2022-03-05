@@ -12,21 +12,21 @@
   }
   .main-navbar--custom-link:hover {
     color: #e66f28;
+    text-decoration: none;
   }
   .navbar--custom-logo {
     width: 70%;
     height: auto;
   }
   #btnSearch {
-    color: #e66f28;
-    border: #e66f28 1px solid ;
+    color: #fff;
+    border: #fff 1px solid ;
     background: none;
     transition: all .5s;
   } 
   #btnSearch:hover {
     background: #e66f28;
-    border: #fff;
-    color: #fff;
+    border: none;
   } 
   .search-result {
     position: absolute;

@@ -19,7 +19,7 @@ export default function SlideShow() {
             const result = await axios(
                 "http://localhost:8000/api/category-is-ramdom/"
             );
-            setCategoriesList(result.data);
+            setCategoriesList(result.data.categories);
         };
         fetchData();
     }, []);

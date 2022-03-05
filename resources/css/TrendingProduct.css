@@ -24,6 +24,8 @@
     font-size: 1rem;
     font-weight: 500;
     transition: 0.5s;
+    color: #000;
+    text-decoration: none;
 }
 .trending-product-info .info-detail-name:hover {
     color: #eb7025;

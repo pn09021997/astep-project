@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Button } from "reactstrap";
+import { Link } from "react-router-dom";
 import "../../../css/TrendingProduct.css";
 import Swal from "sweetalert2";
 export default function TrendingProduct() {
@@ -21,8 +22,7 @@ export default function TrendingProduct() {
             e.preventDefault();
             const data = {
                 product_id: product.id,
-                quantity:product_qty
-                
+                quantity:product_qty  
             }
            
             let tokenStr = localStorage.getItem("loginToken");
@@ -56,7 +56,7 @@ export default function TrendingProduct() {
                     </div>
 
                     <div className="info-detail">
-                        <p className="info-detail-name">{product.product_name}</p>
+                        <Link to={`/product-detail/${product.id}/reload`} className="info-detail-name">{product.product_name}</Link>
                         <p className="info-detail-price">$ {product.price}</p>
                     </div>
                 </div>
