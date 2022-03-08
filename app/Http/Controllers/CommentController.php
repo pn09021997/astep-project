@@ -209,9 +209,8 @@ class CommentController extends Controller
      */
     public function show(Request $request, $id)
     {
-
         $com_id = $this->DichId($id);
-        $comment = comment::find($com_id);
+        $comment = comment::where('product_id', '=', $id)->get();
         if ($comment) {
             return response()->json([
                 'message' => 'comment found by id!',
@@ -219,7 +218,7 @@ class CommentController extends Controller
             ]);
         }
         return response()->json([
-            'message' => 'comment not found!',
+            'message' => 'comment not found! 1',
         ]);
     }
 

@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class comment extends Model
 {
-    use HasFactory;
     protected $table = 'review';
     protected $fillable = [
         'product_id',
@@ -22,12 +21,5 @@ class comment extends Model
     }
     public function user(){
         return $this->belongsTo('App\Models\users','user_id','id');
-    }
-    public $appends =[
-        'created_at'
-
-    ];
-    public function getCreatedAtAttribute(){
-        
     }
 }

@@ -29,10 +29,13 @@ export default function CreateCategories(props) {
         axios
             .post("http://localhost:8000/api/category/", expenseObject)
             .then((res) => {
-                Swal.fire("Good job!", "Categories Added Successfully", "success")
-                    .then(() => {
-                        window.location.reload(false);
-                    });
+                Swal.fire(
+                    "Good job!",
+                    "Categories Added Successfully",
+                    "success"
+                ).then(() => {
+                    window.location.reload(false);
+                });
             })
             .catch((error) => {
                 Swal.fire({
@@ -42,7 +45,6 @@ export default function CreateCategories(props) {
                     confirmButtonText: "Cool",
                 });
             });
-
     };
 
     const handleOnInvalid = (event, error) => {
@@ -56,8 +58,7 @@ export default function CreateCategories(props) {
 
     return (
         <div className="form-wrapper">
-           <div className="container">
-           <AvForm
+            <AvForm
                 onValidSubmit={handleOnValid}
                 onInvalidSubmit={handleOnInvalid}
             >
@@ -105,7 +106,6 @@ export default function CreateCategories(props) {
                     SUBMIT
                 </Button>
             </AvForm>
-           </div>
             <br></br>
             <br></br>
             <CategoriesList></CategoriesList>

@@ -156,7 +156,7 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
         });
     };
     return (
-        <div className="info container mt-5 mb-5">
+        <div className="info container-fluid mt-5 mb-5">
             <h1 className="info-title text-center">Welcome Back</h1>
             <AvForm
                 onValidSubmit={doUpdateInfo}

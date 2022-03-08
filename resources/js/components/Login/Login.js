@@ -3,6 +3,7 @@ import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import axios from "axios";
 import "../../../css/Login.css";
 //Components
@@ -15,7 +16,7 @@ export default function Login({
     setInfoUser,
     role,
     setRoleChange,
-    setRoleOfUser
+    setRoleOfUser,
 }) {
     useLayoutEffect(() => {
         if (localStorage.getItem("loginToken")) {
@@ -52,6 +53,18 @@ export default function Login({
                     ).then(() => {
                         setIsLogin({ isLoginStatus: true });
                     });
+                } else if (res.data.status) {
+                    Swal.fire({
+                        icon: "info",
+                        html:
+                            "You can go this " +
+                            '<a href="https://accounts.google.com/AccountChooser/identifier?service=mail&continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&flowName=GlifWebSignIn&flowEntry=AccountChooser" target="_blank">links</a> to verify your accout before login',
+                        showCloseButton: true,
+                        showCancelButton: true,
+                        focusConfirm: false,
+                        confirmButtonText: "Great!",
+                        confirmButtonAriaLabel: "Thumbs up, great!",
+                    });
                 } else {
                     Swal.fire({
                         title: "Your Username and Password wrong !",
@@ -81,7 +94,6 @@ export default function Login({
         });
     };
 
-
     //If isLogin -> Info, !isLogin -> Login
     if (isLogin.isLoginStatus) {
         return (
@@ -94,7 +106,7 @@ export default function Login({
         );
     } else {
         return (
-            <div className="login container mt-5 mb-5">
+            <div className="login container-fluid mt-5 mb-5">
                 <h1 className="login-title text-center">LOGIN</h1>
                 <AvForm
                     onValidSubmit={doLogin}

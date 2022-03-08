@@ -116,7 +116,7 @@ class ProductController extends Controller
     public function show(Request $request, $id) //get item by id
     {
         $pro_id = $this->DichId($id);
-        $product = products::find($pro_id);
+        $product = products::where('id', '=', $id)->get();
         if ($product) {
             return response()->json([
                 'message' => 'product found!',

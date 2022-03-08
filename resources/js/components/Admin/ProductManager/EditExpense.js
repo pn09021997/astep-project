@@ -2,11 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Button, Row, Col } from "reactstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useParams } from "react-router-dom";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { Link } from "react-router-dom";
 import "../../../../css/EditExpense.css";
 
 export default function EditExpense(props) {
+    const { id } = useParams();
     const [oldExpense, setOldExpense] = useState({
         product_name: "",
         description: "",
@@ -48,9 +50,10 @@ export default function EditExpense(props) {
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get(
-                "http://localhost:8000/api/product/" + props.match.params.id
+                "http://localhost:8000/api/product/" + id
             );
             const { data } = await result;
+            console.table(data);
             setExpense(data);
             setOldExpense(data);
         };
@@ -119,7 +122,7 @@ export default function EditExpense(props) {
                                             confirmButtonText: "Cool",
                                         });
                                     });
-    
+
                                 Swal.fire("Saved!", "", "success").then(() => {
                                     props.history.push(
                                         `/edit-expense/${props.match.params.id}`
@@ -128,7 +131,7 @@ export default function EditExpense(props) {
                             } else if (result.isDenied) {
                                 Swal.fire("Changes are not saved", "", "info");
                             }
-                        }); 
+                        });
                     } else {
                         Swal.fire({
                             title: "Pls type anything you want to update!",

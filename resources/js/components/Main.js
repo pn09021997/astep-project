@@ -6,14 +6,9 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
+    Alert,
 } from "reactstrap";
-import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import "../../css/Main.css";
 
 //Components
@@ -125,11 +120,14 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                         </Nav>
                     </Collapse>
                 </Navbar>
-
                 <Switch>
                     <Route exact path="/">
                         <Home key="home" />
                     </Route>
+                    <Redirect
+                        from="/verify"
+                        to="/login"
+                    />
                     <Route path="/login">
                         <Login
                             key="login"
@@ -144,10 +142,14 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     <Route path="/register">
                         <Register key="register" />
                     </Route>
-                    <Route exact path="/product-detail/:product_id" > 
+                    <Redirect
+                        from="/product-detail/:product_id/reload"
+                        to="/product-detail/:product_id"
+                    />
+                    <Route path="/product-detail/:product_id">
                         <Detail key="product-detail" />
                     </Route>
-                    <Redirect exact from="/product-detail/:product_id/reload" to="/product-detail/:product_id" />
+
                     <Route path="/cart">
                         <CartManager key="cart" />
                     </Route>

@@ -39,7 +39,7 @@ export default function Register() {
                     console.log(res.data);
                     Swal.fire(
                         "Register Successfully !",
-                        "Now you can login with this account !!!",
+                        "Please check and verify your email before login with this account !!!",
                         "success"
                     ).then(() => {
                         history.push("/login");
@@ -76,7 +76,7 @@ export default function Register() {
     };
 
     return (
-        <div className="register container mt-5 mb-5">
+        <div className="register container-fluid mt-5 mb-5">
             <h1 className="register-title text-center">REGISTER</h1>
             <AvForm
                 onValidSubmit={doRegister}

@@ -33,11 +33,13 @@ use Laravel\Passport\TokenRepository;
 class UserController extends Controller
 {
     // Login View
-    public  function loginview(){
+    public  function loginview()
+    {
         return view('');
     }
-     // Login
-    public  function  login(Request  $request){
+    // Login
+    public  function  login(Request  $request)
+    {
         $request->validate([
             'Username' => 'required|min:6|max:12', // khúc này ngon rồi
             'password' => 'required|min:6|max:12', // test rồi
@@ -48,17 +50,15 @@ class UserController extends Controller
         ];
 
         //Note check username !== db || password !== db
-        if (Auth::attempt($datax))
-        {
-            if (Auth::user()->is_verify!= 1){
-                return response()->json(["status"=>'Please Check your email to verify account']);
+        if (Auth::attempt($datax)) {
+            if (Auth::user()->is_verify != 1) {
+                return response()->json(["status" => 'Please Check your email to verify account']);
             }
-         $user =  User::where('Username',$datax['Username'])->first();
-         $token = $user->createToken('user')->accessToken;
-            return  response()->json(['token'=> $token, 'role' => $user["type"]],200);
-        }
-        else{
-            return response(['errors'=> "Not found"]);
+            $user =  User::where('Username', $datax['Username'])->first();
+            $token = $user->createToken('user')->accessToken;
+            return  response()->json(['token' => $token, 'role' => $user["type"]], 200);
+        } else {
+            return response(['errors' => "Not found"]);
         }
     }
 
@@ -67,9 +67,10 @@ class UserController extends Controller
 
 
     // Register View
-    public  function  registerview(){
+    public  function  registerview()
+    {
 
-        return view('auth.register');
+        return response(['verifySuccess' => 'verify successfully!!!']);
     }
 
 
@@ -86,15 +87,15 @@ class UserController extends Controller
                 }
             }
         }
-        $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
-            'password'=>'required|min:6|max:12', // test rồi
+        $validator = Validator::make($request->all(), [
+            'Username' => 'required|min:6|max:12|unique:users,Username', // khúc này ngon rồi
+            'password' => 'required|min:6|max:12', // test rồi
             'email' => 'required|email|unique:users,email', // test luôn rồi
-            'phone'=>'required|digits:10|unique:users,phone', // khúc này test luôn rồi
+            'phone' => 'required|digits:10|unique:users,phone', // khúc này test luôn rồi
         ]);
 
-        if ($validator->fails()){
-            return response(['errors'=>$validator->errors()->all()], 422);
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
         }
         $data = [
             'Username' => $request['Username'],
@@ -102,10 +103,10 @@ class UserController extends Controller
             'phone' => $request['phone'],
             'password' => Hash::make($request['password']),
             'type' => 0,
-            'verify_code'=>sha1(time()),
+            'verify_code' => sha1(time()),
         ];
         DB::table('users')->insert($data);
-        MailController::SendMailRegister($data['email'],$data['verify_code']);
+        MailController::SendMailRegister($data['email'], $data['verify_code']);
         return response()->json([
             'status' => "Sign Up Success"
         ], 200);
@@ -113,8 +114,9 @@ class UserController extends Controller
 
 
 
-     // Get  info user
-    public  function  infoview(Request $request){
+    // Get  info user
+    public  function  infoview(Request $request)
+    {
         $data = Auth::user();
         $datatoClient = [
             'email' => $data['email'],
@@ -125,8 +127,9 @@ class UserController extends Controller
     }
 
     // Update Info User
-    public  function  infoPost(Request  $request){
-        $checkrule = array() ;
+    public  function  infoPost(Request  $request)
+    {
+        $checkrule = array();
         $data = Auth::user();
         /*if ($data['email'] != $request->old_email || $data['phone'] != $request->old_phone
             || $data ['address'] != $request->old_address){
@@ -194,23 +197,23 @@ class UserController extends Controller
             return response()->json(['status' => 'logout success'], 200);
         }
     }
-
-    public  function  UserVerifyEmail(Request $request){
-     $verify_code =  $request->query('code');
-    $user = User::where('verify_code','=',$verify_code)->first();
-    if ($user == null){
-        return "Your Verify code is wrong";
+    public  function  UserVerifyEmail(Request $request)
+    {
+        $verify_code =  $request->query('code');
+        $user = User::where('verify_code', '=', $verify_code)->first();
+        if ($user == null) {
+            return response(["message" => "Your Verify code is wrong !!!"]);
+        } else {
+            $user['is_verify'] = 1;
+            $user->save();
+            return view('welcome', ['path' => "assets/Login.js"]);
+        }
     }
-    else{
-        $user['is_verify']= 1;
-        $user->save();
-        return "Your Account is Verify ! Please Login ";
-    }
-    }
 
 
 
-      /**
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
@@ -219,7 +222,7 @@ class UserController extends Controller
     {
         $users = users::all()->toArray();
         $return = [];
-        foreach($users as $item){
+        foreach ($users as $item) {
             $item['id'] = $this->Xulyid($item['id']);
             $return[] = $item;
         }
@@ -233,7 +236,6 @@ class UserController extends Controller
      */
     public function create()
     {
-
     }
 
     /**
@@ -244,20 +246,20 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|max:12|unique:users,Username',
-            'password'=>'required|min:6|max:12',
+        $validator = Validator::make($request->all(), [
+            'Username' => 'required|min:6|max:12|unique:users,Username',
+            'password' => 'required|min:6|max:12',
             'email' => 'required|email|unique:users,email',
-            'phone'=>'required|digits:10|unique:users,phone',
+            'phone' => 'required|digits:10|unique:users,phone',
         ]);
 
-            if ($validator->fails()){
-                return response(['errors'=>$validator->errors()->all()], 422);
-            }
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
+        }
 
-        if($request->type == null){
+        if ($request->type == null) {
             $type = 0;
-        }else{
+        } else {
             $type = $request->type;
         }
 
@@ -285,8 +287,8 @@ class UserController extends Controller
      */
     public function show(Request $request, $id)
     {
-      $user_id = $this->DichId($id);
-      $user = users::find($user_id);
+        $user_id = $this->DichId($id);
+        $user = users::find($user_id);
         if ($user) {
             return response()->json([
                 'message' => 'user found!',
@@ -306,7 +308,6 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -320,7 +321,7 @@ class UserController extends Controller
     {
         $list = users::all()->toArray();
         $return = [];
-        foreach($list as $item){
+        foreach ($list as $item) {
             $item['id'] = $this->Xulyid($item['id']);
             $return[] = $item;
         }
@@ -328,80 +329,83 @@ class UserController extends Controller
         $user_id = $this->DichId($id);
         $user = users::find($user_id);
 
-      if($user){
+        if ($user) {
 
 
-        $validator = Validator::make($request->all(),[
-            'Username'=>'required|min:6|',
-            'password'=>'required|min:6|max:12',
-            'email' => 'required|email|',
-            'phone'=>'required|digits:10|',
-        ]);
+            $validator = Validator::make($request->all(), [
+                'Username' => 'required|min:6|',
+                'password' => 'required|min:6|max:12',
+                'email' => 'required|email|',
+                'phone' => 'required|digits:10|',
+            ]);
 
-            if ($validator->fails()){
-                return response(['errors'=>$validator->errors()->all()], 422);
+            if ($validator->fails()) {
+                return response(['errors' => $validator->errors()->all()], 422);
             }
 
-        $Username; $email; $phone; $type;
+            $Username;
+            $email;
+            $phone;
+            $type;
 
 
-        if ($user['email'] != $request->old_email){
-            return response(['message' => 'Update failed']);
-        }
+            if ($user['email'] != $request->old_email) {
+                return response(['message' => 'Update failed']);
+            }
 
-        if($request->type == null){
-            $type = 0;
-        }else{
-            $type = $request->type;
-        }
+            if ($request->type == null) {
+                $type = 0;
+            } else {
+                $type = $request->type;
+            }
 
-        //Kiem tra username da co hay chua, co bi trung khong
-            if($request->Username == $list[0]['Username']){
+            //Kiem tra username da co hay chua, co bi trung khong
+            if ($request->Username == $list[0]['Username']) {
                 return response()->json([
                     'message' => 'The username has been exits!!!',
                 ]);
-            }else{
+            } else {
                 $Username = $request->Username;
             }
 
-          //Kiem tra email da co hay chua, co bi trung khong
-            if($request->email == $list[0]['email']){
+            //Kiem tra email da co hay chua, co bi trung khong
+            if ($request->email == $list[0]['email']) {
                 return response()->json([
                     'message' => 'The email has been exits!!!',
                 ]);
-            }else{
+            } else {
                 $email = $request->email;
             }
 
-              //Kiem tra phone da co hay chua, co bi trung khong
-              if($request->phone == $list[0]['phone']){
+            //Kiem tra phone da co hay chua, co bi trung khong
+            if ($request->phone == $list[0]['phone']) {
                 return response()->json([
                     'message' => 'The phone has been exits!!!',
                 ]);
-            }else{
+            } else {
                 $phone = $request->phone;
             }
 
 
 
-           $user->update([
-            $user->Username = $Username,
-            $user->email = $email,
-            $user->phone = $request->get('phone'),
-            $user->password = Hash::make($request['password']),
-            $user->type = $type,
-            $user->address = $request->get('address')
-           ]);
-           $user->save();
-           return response()->json([
-               'message' => 'user updated!',
-               'user' => $user
-           ]);
-       }
+            $user->update([
+                $user->Username = $Username,
+                $user->email = $email,
+                $user->phone = $request->get('phone'),
+                $user->password = Hash::make($request['password']),
+                $user->type = $type,
+                $user->address = $request->get('address')
+            ]);
+            $user->save();
+            return response()->json([
+                'message' => 'user updated!',
+                'user' => $user
+            ]);
+        }
 
-       return response()->json([
-           'message' => 'user not found!'
-       ]);
+        return response()->json([
+            'message' => 'user not found!'
+        ]);
     }
 
     /**
@@ -445,11 +449,11 @@ class UserController extends Controller
         return response()->json([
             'message' => "can't delete user because have related ingredients."
         ]);
-
     }
 
 
-    private function getName($n) {
+    private function getName($n)
+    {
         $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
         $randomString = '';
 
@@ -460,45 +464,44 @@ class UserController extends Controller
         return $randomString;
     }
 
-    public  function Xulyid($id):String {
+    public  function Xulyid($id): String
+    {
         $dodaichuoi = strlen($id);
         $chuoitruoc = $this->getName(10);
         $chuoisau = $this->getName(22);
-        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        $handle_id = base64_encode($chuoitruoc . $id . $chuoisau);
         return $handle_id;
     }
 
-    public function DichId($id){
+    public function DichId($id)
+    {
         $id = base64_decode($id);
-        $handleFirst = substr($id,10);
+        $handleFirst = substr($id, 10);
         $idx = "";
-        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
-            $idx.=$handleFirst[$i];
+        for ($i = 0; $i < strlen($handleFirst) - 22; $i++) {
+            $idx .= $handleFirst[$i];
         }
         return  $idx;
     }
 
-   public function getSearch(Request $request){
-        $user = users::where('Username','like','%'.$request->key.'%')
-                       ->orwhere('email','like','%'.$request->key.'%')
-                       ->orwhere('address','like', '%' .$request->key.'%')
-                       ->get();
-                            //return view('admin.user.search', compact('user'));
-                            if($user){
-                               if(empty(count($user))){
-                                   return response()->json([
-                                       'message' => 'user not found!',
-                                   ]);
-                               }
-                               else{
-                                   return response()->json([
-                                       'message' => count($user). ' user found!!!',
-                                       'item' => $user
-                                   ]);
-                                }
-                            }
-                        }
-
-
-
+    public function getSearch(Request $request)
+    {
+        $user = users::where('Username', 'like', '%' . $request->key . '%')
+            ->orwhere('email', 'like', '%' . $request->key . '%')
+            ->orwhere('address', 'like', '%' . $request->key . '%')
+            ->get();
+        //return view('admin.user.search', compact('user'));
+        if ($user) {
+            if (empty(count($user))) {
+                return response()->json([
+                    'message' => 'user not found!',
+                ]);
+            } else {
+                return response()->json([
+                    'message' => count($user) . ' user found!!!',
+                    'item' => $user
+                ]);
+            }
+        }
+    }
 }

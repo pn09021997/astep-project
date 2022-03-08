@@ -17,10 +17,12 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import classnames from "classnames";
+import { useHistory } from "react-router-dom";
 import "../../../../css/Review.css";
 import Rating from "./Rating/Rating";
 import { isArray } from "lodash";
 export default function Review(props) {
+    const history = useHistory();
     const [reviews, setReviews] = useState([]);
     const [product, setProduct] = useState([]);
     const [rating, setRating] = useState(1);
@@ -32,7 +34,9 @@ export default function Review(props) {
 
     useLayoutEffect(() => {
         const fetchData = async () => {
-            const result = await axios(`${location.origin}/api/product-detail/${props.productId}`);
+            const result = await axios(
+                `${location.origin}/api/product-detail/${props.productId}`
+            );
             setProduct(result.data.product);
             setProductId(result.data.product.id);
         };
@@ -82,7 +86,7 @@ export default function Review(props) {
         };
         axios
             .post(
-                `http://localhost:8000/api/product/${27}/postComment`,
+                `http://localhost:8000/api/product/${props.productId}/postComment`,
                 reviewObj,
                 {
                     headers: { Authorization: `Bearer ${tokenStr}` },
@@ -94,7 +98,7 @@ export default function Review(props) {
                     "Review Added Successfully",
                     "success"
                 ).then(() => {
-                    window.location.reload(false);
+                    history.push(`/product-detail/${props.productId}/reload`);
                 });
             })
             .catch((error) => {
@@ -125,9 +129,9 @@ export default function Review(props) {
             <div className="container-fluid">
                 <Nav tabs>
                     <NavItem>
-                        <NavLink 
-                            className= {classnames({
-                                active : activeTab === "1",
+                        <NavLink
+                            className={classnames({
+                                active: activeTab === "1",
                             })}
                             onClick={() => {
                                 toggle("1");
@@ -161,7 +165,10 @@ export default function Review(props) {
                         </NavLink>
                     </NavItem>
                 </Nav>
-                <TabContent activeTab={activeTab} className="container-fluid pt-2">
+                <TabContent
+                    activeTab={activeTab}
+                    className="container-fluid pt-2"
+                >
                     <TabPane tabId="1" id="productDesc">
                         {product.description}
                     </TabPane>
@@ -191,7 +198,7 @@ export default function Review(props) {
                             />
                             <Button
                                 type="submit"
-                                className="btn-md btn-block btn-animation" 
+                                className="btn-md btn-block btn-animation"
                             >
                                 Submit
                             </Button>
@@ -204,6 +211,7 @@ export default function Review(props) {
 }
 
 function ReviewContent(props) {
+    const history = useHistory();
     const [oldReviewData, setOldReviewData] = useState({
         content: props.obj.content,
         rate: props.obj.rate,
@@ -251,7 +259,7 @@ function ReviewContent(props) {
                                         "Expense Delete Successfully",
                                         "success"
                                     ).then(() => {
-                                        window.location.reload(false);
+                                        history.push(`/product-detail/${props.obj.product_id}/reload`);
                                     });
                                 })
                                 .catch((error) => {
@@ -331,7 +339,7 @@ function ReviewContent(props) {
                                     .then(() => {
                                         Swal.fire("Saved!", "", "success").then(
                                             () => {
-                                                window.location.reload(false);
+                                                history.push(`/product-detail/${props.obj.product_id}/reload`);
                                             }
                                         );
                                     })
@@ -413,7 +421,7 @@ function ReviewContent(props) {
                                 required: {
                                     value: true,
                                     errorMessage: "Please enter your review",
-                                },  
+                                },
                             }}
                         />
                         <Button
