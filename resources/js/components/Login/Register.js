@@ -47,12 +47,11 @@ export default function Register() {
                 })
                 .catch((err) => {
                     Swal.fire({
-                        title: "Error!",
+                        title: "Error! Please recheck",
                         text: "Do you want to continue ?",
                         icon: "error",
                         confirmButtonText: "Cool",
                     });
-                    console.log(err);
                 });
         }
     };
@@ -219,7 +218,7 @@ export default function Register() {
                 >
                     Register
                 </Button>
-                <Link to="/login">
+                <Link to="/login" className="register--link">
                     <Button
                         color="outline-info"
                         className="btn-md btn-block mt-2"

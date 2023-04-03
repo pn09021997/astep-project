@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
     Collapse,
     Navbar,
@@ -6,7 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    Alert,
+    Alert
 } from "reactstrap";
 import { BrowserRouter, Switch, Route, Link, Redirect } from "react-router-dom";
 import "../../css/Main.css";
@@ -20,6 +20,7 @@ import CartManager from "./CartPage/CartManager";
 import CategoriesPage from "./CategoriesPage/CategoriesPage";
 import NoMatch from "./NoMatch/NoMatch";
 import axios from "axios";
+import SearchPage from "./Search/SearchPage";
 export default function Main({ role, setRoleChange, setRoleOfUser }) {
     const [infoUser, setInfoUser] = useState({
         email: "",
@@ -34,22 +35,11 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
     //State of navbar
     const [collapsed, setCollapsed] = useState(true);
     const toggleNavbar = () => setCollapsed(!collapsed);
-    const [keyword, setKeyword] = useState("none");
-    const [searchResult, setSearchResult] = useState([]);
+    const [keyword, setKeyword] = useState("");
     const handleChangeKeyword = (e) => {
         const { name, value } = e.target;
         setKeyword(value);
     };
-
-    /*useEffect(() => {
-        const fetchData = async () => {
-            const result = await axios(
-                `http://localhost:8000/api/searchProduct/${keyword}`
-            );
-            setSearchResult(result.data.item);
-        };
-        fetchData();
-    }, [keyword]);*/
 
     return (
         <div className="main">
@@ -70,43 +60,40 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     {/* search bar */}
 
                     <div className="search-box">
-                        <form className="form-inline my-2 my-lg-0">
+                        <div className="form-inline my-2 my-lg-0">
                             <input
-                                className="form-control mr-sm-2"
+                                className="form-control mr-sm-2 search-input"
                                 name="keyword"
                                 type="text"
                                 placeholder="Search"
                                 value={keyword}
                                 onChange={handleChangeKeyword}
                             />
-                            <button
-                                className="btn mr-4 my-sm-0"
-                                id="btnSearch"
-                                type="submit"
-                            >
-                                Search
+                            <button className="btn mr-4 my-sm-0" id="btnSearch">
+                                <Link to={`/search/${keyword}`} id="searchLink">
+                                    Search
+                                </Link>
                             </button>
-                        </form>
+                        </div>
                     </div>
                     <NavbarToggler onClick={toggleNavbar} className="mr-2" />
-                    <Collapse isOpen={!collapsed} navbar>
+                    <Collapse isOpen={!collapsed} navbar className="main-navbar__collapse">
                         <Nav navbar>
                             <NavItem className="mb-3">
                                 <Link
-                                    to="/"
+                                    to="/cart"
                                     className="main-navbar--custom-link"
                                 >
-                                    Home
+                                    Cart
                                 </Link>
                             </NavItem>
+
                             <NavItem className="mb-3">
                                 <Link
                                     to="/login"
                                     className="main-navbar--custom-link"
                                 >
-                                    {isLogin.isLoginStatus
-                                        ? infoUser.email
-                                        : "Login"}
+                                    Login
                                 </Link>
                             </NavItem>
                             <NavItem className="mb-3">
@@ -124,10 +111,7 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     <Route exact path="/">
                         <Home key="home" />
                     </Route>
-                    <Redirect
-                        from="/verify"
-                        to="/login"
-                    />
+                    <Redirect from="/verify" to="/login" />
                     <Route path="/login">
                         <Login
                             key="login"
@@ -151,10 +135,13 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                     </Route>
 
                     <Route path="/cart">
-                        <CartManager key="cart" />
+                        <CartManager key="cart" isLogin={isLogin} />
                     </Route>
                     <Route path="/categories/:category_id">
                         <CategoriesPage key="categories-page" />
+                    </Route>
+                    <Route path="/search/:keyword">
+                        <SearchPage key="search-page" />
                     </Route>
                     <Route path="*">
                         <NoMatch />

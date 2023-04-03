@@ -1,15 +1,18 @@
+.trending-product {
+    margin-top: 5rem;
+}
 .trending-product-info {
-    padding: 5vh 2vh;
     text-align: center;
 }
 .trending-product-info img {
-    filter: grayscale(0);
     display: block;
     width: 100%;
-    height: auto;
-    transition: filter .5s ease-in-out;
+    height: 250px;
+    object-fit: contain;
+    transition: filter 0.5s ease-in-out;
     backface-visibility: hidden;
 }
+
 .trending-product-info .info-detail {
     margin: 0;
     margin-top: 2vh;
@@ -35,7 +38,7 @@
     margin: 0;
     font-size: 1rem;
 }
-.product-action--action{
+.product-action--action {
     position: relative;
 }
 .action-cart {
@@ -47,10 +50,7 @@
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     text-align: center;
-    transition: opacity .7s;
-}
-.product-action--action:hover img {
-    filter: grayscale(100%);
+    transition: opacity 0.7s;
 }
 
 .product-action--action:hover .action-cart {

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import "../../../css/TrendingProduct.css";
 import Swal from "sweetalert2";
 export default function TrendingProduct() {
-    const [productList, setProductList] = useState([]); 
+    const [productList, setProductList] = useState([]);
     const [product_qty, setQuantity] = useState(1);
 
     useEffect (() => {
@@ -22,22 +22,22 @@ export default function TrendingProduct() {
             e.preventDefault();
             const data = {
                 product_id: product.id,
-                quantity:product_qty  
+                quantity:product_qty
             }
-           
+
             let tokenStr = localStorage.getItem("loginToken");
             axios.post("http://localhost:8000/api/cart_create/", data, {
                 headers: { Authorization: `Bearer ${tokenStr}` },
-    
+
             }).then((res) => {
                 Swal.fire(
                     "Good job!",
                     "Create cart Successfully",
                     "success"
                 );
-               
+
             })
-    
+
         }
         return (
             <Col key={product.id}>
@@ -65,8 +65,8 @@ export default function TrendingProduct() {
     });
 
     return (
-        <div className="trending-product container-fluid mt-5">
-            <div className="trending-product-introduce">
+        <div className="trending-product container-fluid">
+            <div className="trending-product-introduce mb-4">
                 <h1>Trending Product</h1>
                 <p>
                     Find a bright ideal to suit your taste with our great

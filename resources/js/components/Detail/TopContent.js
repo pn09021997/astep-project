@@ -35,6 +35,11 @@ export default function TopContent(props) {
             setActiveTab(tab);
         }
     };
+
+    useEffect(() => {
+        document.title = `Uneox - ${productInfo.product_name}`;
+    }, [productInfo]);
+
     return (
         <div className="detail__top-content">
             <div className="detail__header mt-5">
@@ -119,7 +124,6 @@ export default function TopContent(props) {
                             <img
                                 className="img-fluid"
                                 src={productInfo.product_image}
-                                width="100%"
                             />
                         </div>
                     </Col>

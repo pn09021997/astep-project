@@ -1,21 +1,18 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import { Col, Nav, NavItem, Row, Button } from "reactstrap";
 import "../../../css/Admin_Menu.css";
 import UserManager from "./UserManager/UserManager";
 import Categories from "./CategoriesManager/CategoriesManager";
 import ProductManager from "./ProductManager/ProductManager";
 import NoMatch from "../NoMatch/NoMatch";
-export default function Admin_Menu({ setRoleChange }) {
+export default function Admin_Menu() {
     //Handle change state to go Admin page 1
     const handleAdminChange = (e) => {
-        let txtNumUrl = window.location.href.indexOf("/", 10);   
+        let txtNumUrl = window.location.href.indexOf("/", 10);
         let currentUrl = window.location.href;
         let txtUrl = currentUrl.substring(0, txtNumUrl);
         window.location.href = txtUrl;
-        setTimeout(() => {
-            setRoleChange({ role: "user" });
-        }, 400);    
     };
 
     return (
@@ -68,6 +65,10 @@ export default function Admin_Menu({ setRoleChange }) {
                     </Col>
                     <Col lg="10">
                         <Switch>
+                            <Redirect
+                                from="/admin"
+                                to="/create-expense"
+                            />
                             <Route
                                 path="/create-expense"
                                 component={ProductManager}

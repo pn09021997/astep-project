@@ -15,9 +15,17 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/{path?}', function () {
-    return view('welcome');
+//Route to admin page
+Route::get('/admin', function () {
+    return view('admin');
 });
+
+Route::get('{any}', function () {
+    return view('welcome'); // or wherever your React app is bootstrapped.
+})->where('any', '.*');
+
+
+
 
 Route::get('/login',[UserController::class,'loginview'])->middleware('checklogin')->name('login');
 Route::get('/register',[UserController::class,'registerview'])->middleware('checklogin');

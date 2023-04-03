@@ -11,7 +11,7 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
         phone: "",
         address: "",
     });
-    
+
     //Call API logout
     const doLogout = () => {
         Swal.fire({
@@ -32,7 +32,7 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
                     axios.get("http://localhost:8000/api/logout/", {
                         headers: { Authorization: `Bearer ${tokenStr}` },
                     });
-                    localStorage.removeItem("loginToken");
+                    window.localStorage.clear();
                 }
             }
         });
@@ -58,11 +58,11 @@ export default function Info({ setInfoUser, setIsLogin, role, setRoleChange }) {
                 >
                     Go Admin
                 </Button>
-            );  
+            );
     };
 
     //Handle change state to go Admin page
-    const handleAdminChange = (e) => {  
+    const handleAdminChange = (e) => {
         setRoleChange({ role: "admin" });
     };
 

@@ -28,7 +28,7 @@ export default function Footer() {
             <div className="footer-content container-fluid">
                 <Row>
                     <Col xs="12" sm="12" md="3">
-                        <div className="footer-logo mb-3">
+                        <div className="footer-logo mb-4">
                             <img
                                 src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
                                 alt="uneox logo"
@@ -37,27 +37,23 @@ export default function Footer() {
                         </div>
                     </Col>
                     <Col xs="12" sm="12" md="4">
-                        <div className="footer-introduce mb-3">
+                        <div className="footer-introduce mb-4">
                             <p>THU DUC COLLEGE OF TECHNOLOGY.</p>
                         </div>
                     </Col>
                     <Col xs="12" sm="12" md="2">
-                        <div className="footer-contact mb-3">
-                            <p>
-                                <ul className="footer-contact-detail">
-                                    {renderCollections}
-                                </ul>
-                            </p>
+                        <div className="footer-contact mb-4">
+                            <ul className="footer-contact-detail">
+                                {renderCollections}
+                            </ul>
                         </div>
                     </Col>
                     <Col xs="12" sm="12" md="3">
-                        <div className="footer-contact mb-3">
-                            <p>
-                                <ul className="footer-contact-detail">
-                                    <li>Email: pn092xxxx@gmail.com</li>
-                                    <li>Phone: 092xxxxxxx</li>
-                                </ul>
-                            </p>
+                        <div className="footer-contact mb-4">
+                            <ul className="footer-contact-detail">
+                                <li>Email: pn092xxxx@gmail.com</li>
+                                <li>Phone: 092xxxxxxx</li>
+                            </ul>
                         </div>
                     </Col>
                 </Row>

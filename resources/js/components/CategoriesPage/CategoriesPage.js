@@ -4,6 +4,7 @@ import { GoPrimitiveDot } from "react-icons/go";
 import { BsFillGridFill, BsFillGrid3X3GapFill } from "react-icons/bs";
 import { useParams } from "react-router-dom";
 import ProductList from "./ProductList";
+import Footer from "../Home/Footer";
 import "../../../css/CategoriesPage.css";
 export default function CategoriesPage() {
     const [filterOption, setFilterOption] = useState("feature");
@@ -27,8 +28,19 @@ export default function CategoriesPage() {
             setCategoryInfo(result.data.category);
         };
         fetchData();
-    }, [])
-    
+    }, []);
+
+    useEffect(() => {
+        document.title = `Uneox - ${categoryInfo.name}`;
+    }, [categoryInfo]);
+
+
+    useEffect(() => {
+        if (screen.width <= 480) {
+            setLayoutCol(1);
+        }
+    }, []);
+
     return (
         <div className="categories">
             <div className="categories__header mb-5">
@@ -96,6 +108,7 @@ export default function CategoriesPage() {
                     </Col>
                 </Row>
             </div>
+            <Footer />
         </div>
     );
 }

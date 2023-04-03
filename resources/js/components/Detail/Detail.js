@@ -2,6 +2,7 @@ import { useEffect, useState, React } from "react";
 import TopContent from "./TopContent";
 import RelatedContent from "./RelatedContent";
 import Review from "./Review/Review";
+import Footer from "../Home/Footer";
 import { useParams } from "react-router-dom";
 import "../../../css/detail.css";
 export default function Detail() {
@@ -18,7 +19,8 @@ export default function Detail() {
                 <TopContent productId={product_id} />
                 <Review productId={product_id} />
                 <RelatedContent productId={product_id} />
-            </div>  
+                <Footer />
+            </div>
         );
     } else {
         return (

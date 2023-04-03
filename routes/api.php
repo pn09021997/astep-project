@@ -40,7 +40,7 @@ Route::post('/login',[UserController::class,'login']); // Api Login
 Route::post('/register',[UserController::class,'register']); // Api Register
 Route::get('/info',[UserController::class,'infoview'])->middleware('auth:api')->name('userinfo'); // Api Get info user
 Route::post('/info',[UserController::class,'infoPost'])->middleware('auth:api'); // Api  Update info user
-Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api');// APi Update PassWord
+Route::post('/password',[UserController::class,'PasswordUpdate'])->middleware('auth:api'); // APi Update PassWord
 Route::get('/logout',[UserController::class,'UserLogout'])->middleware('auth:api'); // Api Logout user
 Route::get('/cart_user',[CartController::class,'Show'])->middleware('auth:api'); // Api User Cart
 Route::post('/cart_create',[CartController::class,'Create'])->middleware('auth:api'); // Api Create

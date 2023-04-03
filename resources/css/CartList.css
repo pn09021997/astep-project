@@ -1,47 +1,127 @@
-.page-width{
+.page-width {
     margin-top: 100px;
-   
 }
-.page-width h2{
+.page-width h2 {
     font-weight: 600;
     font-size: 40px;
     line-height: 1.2;
 }
-.total_tittle{
+.total_tittle {
     text-align: right;
 }
-.quantity_tittle{
+.quantity_tittle {
     text-align: right;
 }
-.product_tittle{
+.product_tittle {
     padding-left: 160px;
 }
-.quantity_cart{
+.quantity_cart {
     padding-left: 50%;
 }
-.cart_total{
+.cart_total {
     padding-left: 85%;
 }
-.view_cart{
+.view_cart {
     max-width: 1920px;
 }
 /* responsive nho hon 750px */
-@media(max-width: 1290px){
-.Container{
-    width: 410px;
-}
-.cart_total{
-    padding-left: 20%;
-}
-.quantity_cart{
-    padding-left: 10%;
-}
-.product_tittle{
-    padding-left: 10%;
-}
-.Checlout_cart{
-    padding-left: 80%;
-}
+@media (max-width: 1290px) {
+    .Container {
+        width: 410px;
+    }
+    .cart_total {
+        padding-left: 20%;
+    }
+    .quantity_cart {
+        padding-left: 10%;
+    }
+    .product_tittle {
+        padding-left: 10%;
+    }
+    .Checlout_cart {
+        padding-left: 80%;
+    }
 }
 
+img {
+    width: 100px;
+    height: 100px;
+}
 
+table {
+    width: 100%;
+}
+
+table tr {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+table tr td,
+th {
+    padding: 20px 0;
+}
+
+.cart .cart-body {
+    margin: 50px 0 100px;
+}
+
+.cart a {
+    text-decoration: none;
+    color: #777;
+    transition: 0.7s;
+}
+
+.cart a:hover {
+    color: #eb7025;
+}
+
+.cart .product-name {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.cart .btn-remove {
+    font-size: 0.7rem;
+}
+
+.cart .price {
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.cart .quantity {
+    font-size: 1.05rem;
+}
+
+.cart textarea {
+    width: 100%;
+    border: none;
+    border-bottom: 2px #000 solid;
+}
+
+.cart .cart-footer p {
+    color: #777;
+    font-size: 1rem;
+}
+
+.cart .cart-footer .price-total {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #000;
+}
+
+.cart .cart-footer .btn-checkout {
+    border: none;
+    background: #000;
+    padding: 16px 40px;
+    font-size: 1rem;
+    color: #fff;
+    font-weight: 500;
+    transition: 0.7s;
+}
+
+.cart .cart-footer .btn-checkout:focus,
+.cart .cart-footer .btn-checkout:hover {
+    background: #eb7025;
+}

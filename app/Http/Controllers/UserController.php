@@ -58,7 +58,7 @@ class UserController extends Controller
             $token = $user->createToken('user')->accessToken;
             return  response()->json(['token' => $token, 'role' => $user["type"]], 200);
         } else {
-            return response(['errors' => "Not found"]);
+            return response(['errors' => "User not exist !"]);
         }
     }
 
@@ -78,12 +78,12 @@ class UserController extends Controller
     public  function  register(Request  $request)
     {
         if ($request->phone[0] != '0') {
-            return  response(['error' => 'Phone always start with 0']);
+            return  response(['errors' => 'Phone always start with 0']);
         } elseif ($request->phone[0] == '0') {
             $check = $request->phone;
             for ($i = 0; $i < strlen($check); $i++) {
                 if (ord($check[$i]) < 48 || ord($check[$i]) > 57) {
-                    return  response(['error' => 'Please type is number in phone']);
+                    return  response(['errors' => 'Please type is number in phone']);
                 }
             }
         }
@@ -104,6 +104,7 @@ class UserController extends Controller
             'password' => Hash::make($request['password']),
             'type' => 0,
             'verify_code' => sha1(time()),
+            'is_verify' => 1,
         ];
         DB::table('users')->insert($data);
         MailController::SendMailRegister($data['email'], $data['verify_code']);
@@ -119,6 +120,7 @@ class UserController extends Controller
     {
         $data = Auth::user();
         $datatoClient = [
+            'username' => $data['Username'],
             'email' => $data['email'],
             'phone' => $data['phone'],
             'address' => $data['address'],
@@ -142,12 +144,12 @@ class UserController extends Controller
         }
         if ($data['phone'] != $phone) {
             if ($phone[0] != '0') {
-                return  response(['error' => 'Phone always start with 0']);
+                return  response(['errors' => 'Phone always start with 0']);
             } elseif ($phone[0] == '0') {
                 $check = $phone;
                 for ($i = 0; $i < strlen($check); $i++) {
                     if (ord($check[$i]) < 48 || ord($check[$i]) > 57) {
-                        return  response(['error' => 'Please type is number in phone']);
+                        return  response(['errors' => 'Please type is number in phone']);
                     }
                 }
             }
@@ -199,11 +201,14 @@ class UserController extends Controller
     }
     public  function  UserVerifyEmail(Request $request)
     {
+        return response(["message" => "Your Verify code is wrong !!!"]);
         $verify_code =  $request->query('code');
         $user = User::where('verify_code', '=', $verify_code)->first();
         if ($user == null) {
+
             return response(["message" => "Your Verify code is wrong !!!"]);
         } else {
+            dd($user['is_verify']);
             $user['is_verify'] = 1;
             $user->save();
             return view('welcome', ['path' => "assets/Login.js"]);
@@ -342,12 +347,6 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return response(['errors' => $validator->errors()->all()], 422);
             }
-
-            $Username;
-            $email;
-            $phone;
-            $type;
-
 
             if ($user['email'] != $request->old_email) {
                 return response(['message' => 'Update failed']);

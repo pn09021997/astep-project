@@ -28,11 +28,13 @@ export default function TrendingCategories() {
         return (
             <Col key={product.id}>
                 <div className="trending-categories-info">
-                    <img
-                        className="trending-category-product-img img-fluid"
-                        src={product.product_image}
-                        alt={product.product_name}
-                    />
+                    <div className="categories-img--zoom">
+                        <img
+                            className="trending-category-product-img img-fluid"
+                            src={product.product_image}
+                            alt={product.product_name}
+                        />
+                    </div>
                     <div className="info-detail">
                         <Link
                             to={"/categories/" + product.category_id}
@@ -40,6 +42,7 @@ export default function TrendingCategories() {
                         >
                             # {findCategory(categoriesList, product)}
                         </Link>
+                        <br/>
                         <Link
                             to={`/product-detail/${product.id}/reload`}
                             className="trending-category-product-title"
@@ -52,7 +55,10 @@ export default function TrendingCategories() {
         );
     });
     return (
-        <div className="trending-categories container-fluid mt-5">
+        <div className="trending-categories container-fluid">
+            <div className="trending-categories-introduce mb-5">
+                <h1>Trending Categories</h1>
+            </div>
             <Row xs="1" sm="1" md="3">
                 {trendingCategory}
             </Row>

@@ -45,7 +45,20 @@ export default function Login({
             .post("http://localhost:8000/api/login/", infoLogin)
             .then((res) => {
                 if (res.data.token !== undefined) {
-                    localStorage.setItem("loginToken", res.data.token);
+                    let tokenStr = res.data.token;
+                    const fetchData = async () => {
+                        const result = await axios(
+                            "http://localhost:8000/api/info/",
+                            {
+                                headers: {
+                                    Authorization: `Bearer ${tokenStr}`,
+                                },
+                            }
+                        );
+                        localStorage.setItem("user", result.data.username);
+                    };
+                    fetchData();
+                    localStorage.setItem("loginToken", tokenStr);
                     Swal.fire(
                         "Login Successfully !",
                         "Welcome Back To Uneo !!!",
@@ -172,7 +185,7 @@ export default function Login({
                     >
                         Submit
                     </Button>
-                    <Link to="/register">
+                    <Link to="/register" className="login--link">
                         <Button
                             color="outline-info"
                             className="btn-md btn-block mt-2"

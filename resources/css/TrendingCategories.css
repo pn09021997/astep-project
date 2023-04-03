@@ -1,25 +1,47 @@
+.trending-categories {
+    margin-top: 5rem;
+}
+.trending-categories-introduce {
+    text-align: center;
+}
 .trending-categories-info {
-    padding: 5vh 2vh;
     position: relative;
+    margin-bottom: 2rem;
 }
+
+.trending-categories-info:hover .trending-category-product-img {
+    transform: scale(1.1);
+}
+
 .trending-categories-info .trending-category-product-img {
+    width: max-content;
     transition: transform 0.5s, filter 0.5s ease-in-out;
-    filter: grayscale(100%);
 }
-.trending-categories-info .trending-category-product-img {
+
+.categories-img--zoom {
+    height: 250px;
     width: 100%;
+    overflow: hidden;
 }
+
+.img-hover-zoom .trending-category-product-img {
+    transition: transform 0.5s ease;
+}
+
 .trending-categories-info .info-detail {
-    position: absolute;
-    bottom: 20%;
-    left: 5vh;
+    margin-top: 20px;
 }
 .trending-category-title {
     font-size: 1.5rem;
     transition: 0.5s;
-    color: #fff;
+    color: #000;
+}
+
+.trending-category-title:hover {
+    color: #000;
     text-decoration: none;
 }
+
 .trending-category-product-title {
     padding-right: 20px;
     font-size: 1.2rem;
@@ -28,21 +50,8 @@
     color: #000;
     display: inline-block;
 }
-.trending-category-product-title:hover, .trending-category-title:hover{
-    text-decoration: none;
-    color: #000;
-}
-.trending-categories-info:hover .trending-category-product-img {
-    filter: grayscale(0);
-    transform: scale(1.1);
-}
 
-@media only screen and (max-width: 400px) {
-    .trending-category-product-title {
-        color: #fff;
-    }
-    .trending-categories-info:hover .trending-category-product-title,
-    .trending-category-title {
-        color: #000;
-    }
+.trending-category-product-title:hover {
+    text-decoration: none;
+    color: #eb7025;
 }

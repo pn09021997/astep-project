@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Button, Container } from "reactstrap";
+import { Container, Table, Button } from "reactstrap";
 import axios from "axios";
- import "../../../css/CartList.css";
+import "../../../css/CartList.css";
+
 export default function CartTableRow() {
-    const history = useHistory();
     // const [product_qty, setQuantity] = useState(1);
-
-    const [cart, setUserCart] = useState([]);
-
+    const [cart, setUserCart] = useState([
+        {
+            product_id: 1,
+            product_name: "Product 1",
+            product_image:
+                "https://www.mountaingoatsoftware.com/uploads/blog/2016-09-06-what-is-a-product.png",
+            ptoduct_price: 12.25,
+        },
+    ]);
 
     useEffect(() => {
         // let isMounted=true;
@@ -20,85 +26,87 @@ export default function CartTableRow() {
             });
         };
         fetchData();
-
     }, []);
-    let cart_HTML = '';
-    if (cart.length> 0) {
-        cart_HTML = <div className="cart-page">
-            <div className="page-width">
-                <h2 className="text-center h3 mb-5">Shopping Cart</h2>
-            </div>
-            <Container>
-                <div className="table-wrapper">
-                    <table className="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th className="quantity_tittle">Quantity</th>
-                                <th className="total_tittle">total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {cart.map((product) => {
-                                return (
-                                    <tr key={product.id}>
-                                        <td>
-                                            <img src={product.product_image} width="100px" />
-                                        </td>
-                                     <td className="product_tittle">
-                                            <a className="h6">
-                                                {product.product_name}
-                                            </a>
-                                            <Button
-                                            
-                                                className="btn-sm btn-block"
-                                                color="danger"> Remove
-                                            </Button> 
-                                        </td>
-                                         <td> {product.price}</td>
-                                        <td className="quantity_cart">
-                                            <div className="input-group">
-                                                <button type="button" className="input-group-text">-</button>
-                                                <div className="form-control text-center">{product.quantity}</div>
-                                            </div>
-                                            <input type="number" value="1" className="text ng-pristine ng-untouched ng-valid" />
-                                        </td>
-                                      
-                                        <td className="cart_total">
-                                            {product.price * product.quantity}
-                                        </td> 
-                                    </tr>
-                                );
-                            })}
-                          
-                        </tbody>
-                        {/* <div className="Checlout_cart col text-center text-md-right">
-                                <p className="h3 cart__subtotal"><span className="money">$398.00</span></p>
-                                <button type="submit" className="btn btn-theme gradient-theme btn-cart-checkout">Check Out</button>
-                            </div> */}
-                    </table>
-                </div>
-            </Container>
-        </div>
-    }
-    else {
-        cart_HTML = <div>
-            <div className="cart-page text-center">
-                <h4>Shopping not Empty</h4>
-            </div>
-        </div>
-    }
+
     return (
         <div className="view_cart">
-            <div className="py-4">
-                <Container>
-                    <div className="row">
-                        <div className="col-md-12">
-
-                            {cart_HTML}
-                        </div>
+            <div className="my-5">
+                <div className="cart">
+                    <div className="cart-header text-center">
+                        <h1>Shopping Cart</h1>
                     </div>
-                </Container>
+                    <Container fluid>
+                        <div className="cart-body">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th></th>
+                                        <th>Quantity</th>
+                                        <th>Total</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div
+                                                className="product-item"
+                                            >
+                                                <a href="#" target="_blank">
+                                                    <img
+                                                        src={
+                                                            cart[0]
+                                                                .product_image
+                                                        }
+                                                        alt=""
+                                                        className="img-fluid"
+                                                    />
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="product-info">
+                                                <a
+                                                    href="./product-detail.html?productName=<?= $arrProduct['name']?>"
+                                                    className="product-name"
+                                                >
+                                                    {" "}
+                                                    {cart[0].product_name}{" "}
+                                                </a>
+                                                <br />
+                                                <a
+                                                    href="./cart-interaction.php?productName=R<?=$arrProduct['name']?>"
+                                                    className="btn-remove"
+                                                >
+                                                    Remove
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="quantity">
+                                                <a href="./cart-interaction.php?productName=M<?=$arrProduct['name']?>">
+                                                    -
+                                                </a>
+                                                <span className="mx-2"> 12 </span>
+                                                <a href="./cart-interaction.php?productName=P<?=$arrProduct['name']?>">
+                                                    +
+                                                </a>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div className="total">
+                                                <p className="price">
+                                                    {cart[0].ptoduct_price}
+                                                </p>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </Container>
+                </div>
             </div>
         </div>
     );

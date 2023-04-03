@@ -327,12 +327,13 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'No product found',
             ]);
-        } 
- 
+        }
+
         if ($product) {
             if (empty(count($product))) {
                 return response()->json([
                     'message' => 'product not found!',
+                    'item' => $product
                 ]);
             } else {
                 return response()->json([
@@ -343,7 +344,7 @@ class ProductController extends Controller
         }
     }
     public function GetProductById($productId)
-    {   
+    {
         $id = $productId;
         $pattern_product_id = '/^\d{1,}$/';
         if (!preg_match($pattern_product_id, $id)) {
