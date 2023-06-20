@@ -320,9 +320,9 @@ class ProductController extends Controller
     {
         if ($request->key) {
             $product = products::where('product_name', 'like', '%' . $request->key . '%')
-            ->orwhere('price', 'like', '%' . $request->key . '%')
-            ->get();
-        //   return view('admin.product.search', compact('product'));
+                ->orwhere('price', 'like', '%' . $request->key . '%')
+                ->get();
+            //   return view('admin.product.search', compact('product'));
         } else {
             return response()->json([
                 'message' => 'No product found',

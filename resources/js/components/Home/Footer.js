@@ -29,11 +29,15 @@ export default function Footer() {
                 <Row>
                     <Col xs="12" sm="12" md="3">
                         <div className="footer-logo mb-4">
-                            <img
-                                src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
-                                alt="uneox logo"
-                                className="img-fluid navbar--custom-logo"
-                            />
+                            <Link
+                                to="/"
+                            >
+                                <img
+                                    src="https://shop.mohd.it/media/catalog/category/astep-logo.png"
+                                    alt="astep logo"
+                                    className="img-fluid navbar--custom-logo"
+                                />
+                            </Link>
                         </div>
                     </Col>
                     <Col xs="12" sm="12" md="4">

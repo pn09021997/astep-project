@@ -42,7 +42,8 @@ body::-webkit-scrollbar-thumb {
     transition: all 0.5s;
 }
 
-.search-input, #btnSearch {
+.search-input,
+#btnSearch {
     font-size: 1.1rem;
 }
 #btnSearch #searchLink {

@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/ico_32x32.png?v=1614611758" >
-    <title>Uneox</title>
+    <link rel="icon" href="https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,f_auto,q_auto:eco,dpr_1/ooxt2rirwm88boygaiqz">
+    <title>Astep</title>
     <link href="{{asset('css/app.css')}}" rel="stylesheet" type="text/css">
 </head>
 

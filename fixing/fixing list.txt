@@ -1,0 +1,22 @@
+FE
+- Add pagination for product list, comments, ... and display.
+- Design more contents for pages.
+- Link for logo in footer.
+- Display Go Admin btn in Login page when account is Admin.
+- Fixing display Not found page.
+
+Responsive
+- Header.
+- Display list products in categories page.
+- Admin page.
+
+BE	
+- Register only for user account.
+- Fixing insert product.
+- Fixing update product.
+- Fixing delete product.
+
+* problem is not pass data of product in API. 
+
+Upload hosting
+

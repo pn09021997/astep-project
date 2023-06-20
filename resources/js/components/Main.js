@@ -52,8 +52,8 @@ export default function Main({ role, setRoleChange, setRoleOfUser }) {
                 >
                     <NavbarBrand href="/" className="mr-auto">
                         <img
-                            src="https://cdn.shopify.com/s/files/1/0076/1708/5530/files/logo_white_360x.png?v=1612539402"
-                            alt="uneox logo"
+                            src="https://www.breradesignapartment.com/2017/wp-content/uploads/2017/03/astep_logo_black.png"
+                            alt="astep logo"
                             className="img-fluid navbar--custom-logo"
                         />
                     </NavbarBrand>
