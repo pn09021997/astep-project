@@ -13,26 +13,48 @@ body::-webkit-scrollbar-thumb {
     background-color: darkgrey;
     border-radius: 50px;
 }
+
+.sticky-nav {
+    position: fixed !important;
+    transition: all 0.5s linear;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    background-color: #fff !important;
+    color: #000 !important;
+}
+
 .main-navbar {
     text-align: center;
     padding: 3vh !important;
+    z-index: 99;
 }
 .main-navbar__collapse {
     padding-top: 5vh;
+}
+.sticky-nav--custom-link {
+    text-decoration: none;
+    color: #000 !important;
+    transition: all 0.5s;
+    font-size: 1rem;
+}
+.sticky-nav--custom-link:hover {
+    color: #e66f28;
+    text-decoration: none;
 }
 .main-navbar--custom-link {
     text-decoration: none;
     color: #fff;
     transition: all 0.5s;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 .main-navbar--custom-link:hover {
     color: #e66f28;
     text-decoration: none;
 }
-.navbar--custom-logo {
-    width: 70%;
-    height: auto;
+
+.sticky-nav--custom-btn {
+    transition: all 0.5s linear;
+    color: #000 !important;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 
 #btnSearch {
@@ -54,6 +76,11 @@ body::-webkit-scrollbar-thumb {
     background: #e66f28;
     border-color: #e66f28;
 }
+
+#btnSearch:hover ~ #searchLink {
+    color: #fff !important;
+}
+
 .search-result {
     position: absolute;
     height: 100px;

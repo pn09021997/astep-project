@@ -1,23 +1,28 @@
+.search-page {
+    display: block !important;
+    padding: 0;
+}
+
+.search-page__content {
+    padding: 0 20px;
+}
+
 .noClick {
     pointer-events: none;
     color: #a3a1a1;
 }
-.search--endline {
-    margin: 10px 20px;
-}
 
-.search__header{
+.search__header {
     text-align: center;
     padding: 20px 0;
-    font-size: 1.2rem;
-    background: url("https://cdn.shopify.com/s/files/1/0076/1708/5530/collections/Image_14_1512x.jpg?v=1626586050") no-repeat center;
 }
+
 .search__header .home-link {
     text-decoration: none;
     color: #eb7025;
 }
 .search__body .search-title {
-    font-size: 5rem;
+    font-size: 3rem;
     font-weight: 700;
 }
 .search__body .search--result-nof {
@@ -28,7 +33,7 @@
     font-weight: 600;
 }
 .product-item--layout-transition {
-    transition: all .5s;
+    transition: all 0.5s;
 }
 .product-info {
     padding: 5vh 2vh;
@@ -39,7 +44,7 @@
     display: block;
     width: 100%;
     height: auto;
-    transition: filter .5s ease-in-out;
+    transition: filter 0.5s ease-in-out;
     backface-visibility: hidden;
 }
 .product-info .info-detail {
@@ -60,30 +65,4 @@
     color: #a3a1a1;
     margin: 0;
     font-size: 1rem;
-}
-.product-action--action{
-    position: relative;
-}
-.action-cart {
-    width: 100%;
-    opacity: 0;
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    text-align: center;
-    transition: opacity .7s;
-}
-.product-action--action:hover img {
-    filter: grayscale(100%);
-}
-
-.product-action--action:hover .action-cart {
-    opacity: 1;
-}
-.add-cart {
-    background-color: #04aa6d;
-    color: white;
-    font-size: 16px;
 }

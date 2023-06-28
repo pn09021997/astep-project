@@ -49,7 +49,6 @@ class ProductController extends Controller
         $validator = Validator::make($request->all(), [
             'product_name' => 'required|min:2|max:40|unique:products,product_name',
             'price' => 'required',
-            'product_image' => 'required',
             'description' => 'required|min:10|max:200',
             'quantity' => 'required',
             'category_id' => 'required'
@@ -57,23 +56,11 @@ class ProductController extends Controller
         if ($validator->fails()) {
             return  response()->json(['status' => 'Have a problem with your data ']);
         }
-        $pattern_Integer = '/^\d{1,}$/';
-        // xét pattern  quantity + categoryid
-        if (!preg_match($pattern_Integer, $request->quantity) || !preg_match($pattern_Integer, $request->category_id)) {
-            if (!preg_match($pattern_Integer, $request->quantity)) {
-                return  response()->json(['status' => 'quantity must is positive integers']);
-            } else {
-                return  response()->json(['status' => 'Category id must is positive integers']);
-            }
-        }
-        // Khúc này chú ý nhập giá nhập số  thế này :
-        // EX : 123.22 bắt buộc có 2 số sau dấu chấm còn số ở trước thì bao nhiêu số cũng dc
-        // EX : 123.22(dấu chấm not dấu phẩy ) , 88.32,99.12,642.88,54622.99
         $pattern_price = '/^\d{1,}\.{1,1}\d{2,2}$/';
         if (!preg_match($pattern_price, $request->price)) {
             return  response()->json(['status' => 'Price must have 2 number after dot and must is not negative ']);
         }
-        if (!$request->hasFile('product_image')) {
+        /*if (!$request->hasFile('product_image')) {
             return "Please Choose File";
         }
         $image = $request->file('product_image');
@@ -81,27 +68,25 @@ class ProductController extends Controller
         if (!in_array($image->getClientOriginalExtension(), $array_image_type)) {
             return  response()->json(['status' => 'Please Choose type image is png  or jpg  or jpeg or svg']);
         }
-        $checksize = 2097152;
-        if ($image->getSize() > $checksize) {
-            return  response()->json(['status' => 'Please file is shorter than 2mb']);
-        }
+        $filename = time() . $image->getClientOriginalName();
+        $duongdan = storage_path('public/' . $filename);
+        $request->file('product_image')->storeAs('public', $filename);
+        */
+
         try {
-            categories::findOrFail($request->category_id);
+            $idCategory = $this->DichId($request->category_id);
+            categories::findOrFail($idCategory);
         } catch (\Exception $exception) {
             return  response()->json(['status' => 'Invalid category - category must is a number in select']);
         }
-        // dd(storage_path('public/' .'1638934974tong-hop-cac-mau-background-dep-nhat-10070-6.jpg'));
-        // Đoạn code trên ko dc xóa , nó là đường link ảnh lưu lên db đó
-        $filename = time() . $image->getClientOriginalName();
-        $duongdan = storage_path('public/' . $filename); // cái này để lưu lên database
-        $request->file('product_image')->storeAs('public', $filename);
+
         $product = new products([
             'product_name' => $request->get('product_name'),
             'price' => $request->get('price'),
             'description' => $request->get('description'),
             'quantity' => $request->get('quantity'),
-            'product_image' => $duongdan,
-            'category_id' => $request->get('category_id'),
+            'product_image' => "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOAAAADgCAMAAAAt85rTAAAAYFBMVEXy8vJ2dnb19fX5+flxcXFzc3Pq6urMzMyurq5ubm5+fn6FhYVra2vi4uLn5+fu7u6+vr6VlZW3t7fFxcWQkJDT09Oampre3t6Tk5N6enqhoaHY2Nirq6uKioqenp67u7tegggxAAAE4klEQVR4nO3c63qrKBgFYP0QDxCPeIjH3P9dDmhMTJM9iXtmWtmz3j9NjenDKghioY4DAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA3yD1d3Hopwu8TxqM0WkHEcZ2Jbxw7u4S5clPl3kHakbuetEO+tdxYT9d7M+Rcl1RBJ9TJee1b08jpSziY0KfYyHnNrVRyjw+rr0GfVAxbPCsCyjj+RWLq/79EGBtQIo7KUQZvOs/rA3YS4+7nJ+GN3Voa8D0fB0N2+DvE1oakProOozz7umUh+9sDVh4a8Cn0j/emlkakIX3gPHDCWke5duElgak6t5E0+37Sa3v5M6bhJYGdFK5djJqU12UTOawd05uB20N6ARiThhtK5DS6TqBqG91aG1AJ9ADoeeF2/coX2dSvF7r0N6AxBoVOJsbGfLztedx79ehvQFNjW3HA/K77Ux4TWhzwC/Cx4m8t7RS2wNuesuvjyqW65BCqwOSytMl4xB9Deh6ZsS3vAYzl0+6nigNXz2JiurU8oCZHgx5l+h87Yt8Lpe+1QFJzYM9n5zX+WwPSOr6hJTLl/HWgPY9dLoGVLdh/VdPgk1AsrYGM/H2CbfVTfSDfDYHpOCX7fIPCRh67/Mh4BH9DwJG+wJaOkxQ0YoPlL55/mZjQD2f/4id88Hx9YT3NftqUF+DzWfVNyN9L3q2KaB5XCjkDq2eUNnzF2zH8Sfdf3Ju/nT2GZeLyqaA1NTc20VmNuUzj+dVuEfW/HSJd6N0D9tWcgEAAAAAAAAAAADAn4ws2tr5W9Tk/3QR/lNp6Fq2w3qvpE/fn7Q47i+CEbH4drGZxQf3sprDZE4wx2hZdbAcT1NzeP0Eo2TZhff48UNgsqhKIbu5LVJalDK/7fokJROqhniQ5cWhfpJlMa+0J1UKUcdNHevP99M4TkFdm+NJWMruzYbD78b4KLssFLLRBeylDLOu7a5dC2VezIK2rbOwnVQ7VBc56tPisxsGqmsns5v54uZF0QlPx6LKLYtL154P1TMxTwS6FTZjzZwkPyeMWCAuy3ukeELBadDHKlcq3SgbGTpOKCrTPhUvY1Ii042cNXJwHF90vn7di+JIdciWLZ40tIyU28xFK+6LmnUNnnrzchzn/QWhdGJ5WQLkOqAJZn6KEg27iJjNO+vFkYZP5g2mOKw4MVbw+RAFfAm61KBnvmHncjmNO010XVWR6SZ6KpYwaVuxuuxnBT9gQNIB6RYweg5Ylstp3OmvAUnpgN7SHKnRAXN3XcN2sIBzx2gC6hY5FzcTtyb6HDCNxXXdiOlkynpuuTSMMevy+xK242B8DmiaKCVl7etrqJLhMr4/N1ETMB2kudZY4OprMJBhzyi+6J6KGi9z9HFfHep/d2yuQd3PizwLClnfdoZ48XMNUlOOWVUVojar9pQUUz2OlXkzFF2minw82DBxuwb1l7hrXXFZ78/0OJiYC9J5CKjv4Lq2baWqpGnRaTAMeVvPn6ly4Y7hnsWK3+B6xWzvu27vLbdqz6cxqhLTSsn8wxL9hcVjff/4kRrob1tDVEt/q28OrFqR9zEql13a+obuDw2oeGHaZTyWH0+srGJ2FoquK9tj9Zz/JmrCrhvUgSe8/xQdcJILAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgrb8AVdFTjJLjUDkAAAAASUVORK5CYII=",
+            'category_id' => $this->DichId($request->get('category_id')),
         ]);
         $product->save();
         return  response()->json(['status' => 'Create Product Success']);
@@ -116,7 +101,7 @@ class ProductController extends Controller
     public function show(Request $request, $id) //get item by id
     {
         $pro_id = $this->DichId($id);
-        $product = products::where('id', '=', $id)->get();
+        $product = products::where('id', '=', $pro_id)->get();
         if ($product) {
             return response()->json([
                 'message' => 'product found!',
@@ -159,8 +144,6 @@ class ProductController extends Controller
 
 
         if ($product) {
-
-
             $validator = Validator::make($request->all(), [
                 'product_name' => 'required',
 

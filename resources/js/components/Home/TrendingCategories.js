@@ -42,7 +42,7 @@ export default function TrendingCategories() {
                         >
                             # {findCategory(categoriesList, product)}
                         </Link>
-                        <br/>
+                        <br />
                         <Link
                             to={`/product-detail/${product.id}/reload`}
                             className="trending-category-product-title"

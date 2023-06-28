@@ -3,6 +3,9 @@
 /public/storage
 /storage/*.key
 /vendor
+/postman-api-testing
+.env
+.env.example
 .env.backup
 .phpunit.result.cache
 docker-compose.override.yml

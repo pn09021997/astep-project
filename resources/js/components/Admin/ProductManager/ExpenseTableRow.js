@@ -21,46 +21,35 @@ export default function ExpenseTableRow(props) {
 
         fetchData()
             .then((res) => {
-                if (!res.message) {
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You won't be able to revert this!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonColor: "#3085d6",
-                        cancelButtonColor: "#d33",
-                        confirmButtonText: "Yes, delete it!",
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            axios
-                                .delete(
-                                    "http://localhost:8000/api/product/" +
-                                        props.obj.id
-                                )
-                                .then((res) => {
-                                    Swal.fire(
-                                        "Good job!",
-                                        "Expense Delete Successfully",
-                                        "success"
-                                    ).then(() => {
-                                        history.push("/create-expense");
-                                    });
-                                })
-                                .catch((error) => {
-                                    console.log(error);
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        axios
+                            .delete(
+                                "http://localhost:8000/api/product/" +
+                                props.obj.id
+                            )
+                            .then((res) => {
+                                Swal.fire(
+                                    "Good job!",
+                                    "Expense Delete Successfully",
+                                    "success"
+                                ).then(() => {
+                                    history.push("/create-expense");
                                 });
-                        }
-                    });
-                } else {
-                    Swal.fire({
-                        title: "This product not exist !!",
-                        text: "Do you want to continue ?",
-                        icon: "error",
-                        confirmButtonText: "Cool",
-                    }).then(() => {
-                        props.history.push(`/expenses-listing`);
-                    });
-                }
+                            })
+                            .catch((error) => {
+                                console.log(error);
+                            });
+                    }
+                });
             })
             .catch((err) => {
                 console.log(err);
@@ -69,7 +58,6 @@ export default function ExpenseTableRow(props) {
 
     return (
         <tr>
-            <td></td>
             <td>{props.obj.product_name}</td>
             <td>{props.obj.category_id}</td>
             <td>{props.obj.quantity}</td>

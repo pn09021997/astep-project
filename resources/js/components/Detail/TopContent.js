@@ -37,7 +37,7 @@ export default function TopContent(props) {
     };
 
     useEffect(() => {
-        document.title = `Uneox - ${productInfo.product_name}`;
+        document.title = `Astep - ${productInfo.product_name}`;
     }, [productInfo]);
 
     return (
@@ -59,10 +59,10 @@ export default function TopContent(props) {
                     <Col lg="5">
                         <div className="product__single">
                             <div className="product__name my-3">
-                                <h1>{productInfo.product_name}</h1>
+                                <h3>{productInfo.product_name}</h3>
                             </div>
                             <div className="product__info-detail my-3">
-                                <p className="product__price">$ {productInfo.price}</p>
+                                <p className="product__price">${productInfo.price}</p>
                             </div>
                             <div className="product__cart-select my-3">
                                 <AvForm
@@ -99,11 +99,9 @@ export default function TopContent(props) {
                                 </AvForm>
                                 <div className="product__info-warehouse my-3">
                                     <ul>
-                                        <li>QUANTITY: {productInfo.quantity}</li>
                                         <li>AVAILABLE: {(productInfo.quantity >= 1) ? "AVAILABLE" : "UNAVAILABLE"}</li>
                                     </ul>
                                 </div>
-                                <hr />
                                 <div className="social-sharing my-3">
                                     <p>Share:</p>{" "}
                                     <button className="social-sharing--btn-link">

@@ -6,10 +6,6 @@ import Swal from "sweetalert2";
 
 export default function CategoriesTableRow(props) {
     const history = useHistory();
-    const subDescripton = (txtDesc) => {
-        let temp = txtDesc + "";
-        return temp.substr(0, 26);
-    }
     const deleteCategories = () => {
         Swal.fire({
             title: "Are you sure?",
@@ -43,9 +39,8 @@ export default function CategoriesTableRow(props) {
 
     return (
         <tr>
-            <td></td>
             <td>{props.obj.name}</td>
-            <td>{subDescripton(props.obj.description)}</td>
+            <td>{props.obj.description}</td>
 
             <td>
                 <Link

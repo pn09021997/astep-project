@@ -1,5 +1,6 @@
 .trending-categories {
     margin-top: 5rem;
+    padding: 0 20px;
 }
 .trending-categories-introduce {
     text-align: center;
@@ -7,6 +8,7 @@
 .trending-categories-info {
     position: relative;
     margin-bottom: 2rem;
+    padding: 50px;
 }
 
 .trending-categories-info:hover .trending-category-product-img {
@@ -54,4 +56,10 @@
 .trending-category-product-title:hover {
     text-decoration: none;
     color: #eb7025;
+}
+
+@media screen and (max-width: 768px) {
+    .trending-categories-info {
+        padding: 20px 0;
+    }
 }

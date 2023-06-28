@@ -7,22 +7,22 @@ export default function TrendingProduct() {
     const [productList, setProductList] = useState([]);
     const [product_qty, setQuantity] = useState(1);
 
-    useEffect (() => {
+    useEffect(() => {
         const fetchData = async () => {
-          const result = await axios(
-              "http://localhost:8000/api/productIsBoughtMuch/"
-          );
-          setProductList(result.data[1]);
-      };
-      fetchData();
-      }, []);
+            const result = await axios(
+                "http://localhost:8000/api/productIsBoughtMuch/"
+            );
+            setProductList(result.data[1]);
+        };
+        fetchData();
+    }, []);
 
     const trendingList = productList.slice(0, 4).map((product) => {
         const submitAddcart = (e) => {
             e.preventDefault();
             const data = {
                 product_id: product.id,
-                quantity:product_qty
+                quantity: product_qty
             }
 
             let tokenStr = localStorage.getItem("loginToken");
@@ -49,15 +49,15 @@ export default function TrendingProduct() {
                             className="img-fluid"
                         />
                         <div className="action-cart">
-                            <Button onClick={submitAddcart} color="danger" outline className="btn-block">
-                                Add Cart
+                            <Button onClick={submitAddcart} outline className="btn-block btn-add-cart--custom btn-animation">
+                                + Quickshop
                             </Button>
                         </div>
                     </div>
 
                     <div className="info-detail">
                         <Link to={`/product-detail/${product.id}/reload`} className="info-detail-name">{product.product_name}</Link>
-                        <p className="info-detail-price">$ {product.price}</p>
+                        <p className="info-detail-price pt-2">${product.price}</p>
                     </div>
                 </div>
             </Col>
@@ -73,7 +73,7 @@ export default function TrendingProduct() {
                     selection of suspension, wall, floor and table lights.
                 </p>
             </div>
-            <Row xs="1" sm="2" md="4">
+            <Row xs="1" sm="2" md="2">
                 {trendingList}
             </Row>
         </div>

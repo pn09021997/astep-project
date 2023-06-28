@@ -53,9 +53,8 @@ export default function EditExpense(props) {
                 "http://localhost:8000/api/product/" + id
             );
             const { data } = await result;
-            console.table(data);
-            setExpense(data);
-            setOldExpense(data);
+            setExpense(data.product[0]);
+            setOldExpense(data.product[0]);
         };
         fetchData();
     }, []);
@@ -86,7 +85,7 @@ export default function EditExpense(props) {
     const handleOnValid = (event, value) => {
         const fetchData = async () => {
             const result = await axios.get(
-                `http://localhost:8000/api/product/${expense.id}}`
+                `http://localhost:8000/api/product/${id}}`
             );
             const { data } = await result;
             return data;
@@ -94,60 +93,49 @@ export default function EditExpense(props) {
 
         fetchData()
             .then((res) => {
-                if (!res.message) {
-                    const expenseObject = {
-                        ...expense,
-                    };
+                const expenseObject = {
+                    ...expense,
+                };
 
-                    if (checkOldExpense(expense, oldExpense)) {
-                        Swal.fire({
-                            title: "Do you want to save the changes?",
-                            showDenyButton: true,
-                            showCancelButton: true,
-                            confirmButtonText: "Save",
-                            denyButtonText: `Don't save`,
-                        }).then((result) => {
-                            if (result.isConfirmed) {
-                                axios
-                                    .patch(
-                                        "http://localhost:8000/api/product/" +
-                                            props.match.params.id,
-                                        expenseObject
-                                    )
-                                    .catch((error) => {
-                                        Swal.fire({
-                                            title: "Error!",
-                                            text: "Do you want to continue ?",
-                                            icon: "error",
-                                            confirmButtonText: "Cool",
-                                        });
+                if (checkOldExpense(expense, oldExpense)) {
+                    Swal.fire({
+                        title: "Do you want to save the changes?",
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: "Save",
+                        denyButtonText: `Don't save`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            axios
+                                .patch(
+                                    "http://localhost:8000/api/product/" +
+                                    props.match.params.id,
+                                    expenseObject
+                                )
+                                .catch((error) => {
+                                    Swal.fire({
+                                        title: "Error!",
+                                        text: "Do you want to continue ?",
+                                        icon: "error",
+                                        confirmButtonText: "Cool",
                                     });
-
-                                Swal.fire("Saved!", "", "success").then(() => {
-                                    props.history.push(
-                                        `/edit-expense/${props.match.params.id}`
-                                    );
                                 });
-                            } else if (result.isDenied) {
-                                Swal.fire("Changes are not saved", "", "info");
-                            }
-                        });
-                    } else {
-                        Swal.fire({
-                            title: "Pls type anything you want to update!",
-                            text: "Do you want to continue ?",
-                            icon: "error",
-                            confirmButtonText: "Cool",
-                        });
-                    }
+
+                            Swal.fire("Saved!", "", "success").then(() => {
+                                props.history.push(
+                                    `/edit-expense/${props.match.params.id}`
+                                );
+                            });
+                        } else if (result.isDenied) {
+                            Swal.fire("Changes are not saved", "", "info");
+                        }
+                    });
                 } else {
                     Swal.fire({
-                        title: "This product not exist !!",
+                        title: "Pls type anything you want to update!",
                         text: "Do you want to continue ?",
                         icon: "error",
                         confirmButtonText: "Cool",
-                    }).then(() => {
-                        props.history.push(`/expenses-listing`);
                     });
                 }
             })
@@ -245,7 +233,7 @@ export default function EditExpense(props) {
                     label="Description"
                     type="textarea"
                     className="text-area-custom"
-                    value={expense.id}
+                    value={expense.description}
                     onChange={handleChange}
                 />
                 <Button

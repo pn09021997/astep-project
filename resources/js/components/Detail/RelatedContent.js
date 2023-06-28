@@ -31,7 +31,7 @@ export default function RelatedContent(props) {
                         />
                         <div className="action-cart">
                             <Button className="btn-block btn-animation">
-                                Add Cart
+                                + Quickshop
                             </Button>
                         </div>
                     </div>
@@ -44,7 +44,7 @@ export default function RelatedContent(props) {
                         >
                             {product.product_name}
                         </Link>
-                        <p className="info-detail-price">$ {product.price}</p>
+                        <p className="info-detail-price pt-2">${product.price}</p>
                     </div>
                 </div>
             </Col>

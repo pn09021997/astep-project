@@ -31,7 +31,7 @@ export default function CategoriesPage() {
     }, []);
 
     useEffect(() => {
-        document.title = `Uneox - ${categoryInfo.name}`;
+        document.title = `Astep - ${categoryInfo.name}`;
     }, [categoryInfo]);
 
 
@@ -55,7 +55,7 @@ export default function CategoriesPage() {
             </div>
             <div className="categories__content">
                 <Row>
-                    <Col className="config" lg="3" md="12">
+                    <Col className="config" lg="2" md="12">
                         <div className="config-filter">
                             <FormGroup>
                                 <Label for="filterProduct" id="filterLabel">
@@ -99,11 +99,11 @@ export default function CategoriesPage() {
                             </button>
                         </div>
                     </Col>
-                    <Col lg="9" md="12">
+                    <Col lg="10" md="12">
                         <ProductList
                             filterOption={filterOption}
                             layoutCol={layoutCol}
-                            categoryId = {category_id}
+                            categoryId={category_id}
                         />
                     </Col>
                 </Row>

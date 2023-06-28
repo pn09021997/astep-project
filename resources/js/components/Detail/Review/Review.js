@@ -149,7 +149,7 @@ export default function Review(props) {
                                 toggle("2");
                             }}
                         >
-                            Reviews
+                            Reviews {reviews.length}
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -328,7 +328,7 @@ function ReviewContent(props) {
                                 axios
                                     .put(
                                         "http://localhost:8000/api/editComment/" +
-                                            props.obj.id,
+                                        props.obj.id,
                                         reviewObj,
                                         {
                                             headers: {
@@ -401,7 +401,7 @@ function ReviewContent(props) {
     };
 
     return (
-        <div>
+        <div className="review__content mb-5">
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalHeader toggle={toggle}>Edit Review Form</ModalHeader>
                 <ModalBody>
@@ -445,13 +445,13 @@ function ReviewContent(props) {
                     <p className="review-date">
                         {new Date(props.obj.updated_at).toDateString()}
                     </p>
-                    <h5 className="review-rating">
+                    <p className="review-rating">
                         Rate -{" "}
                         <span className="review-rating-detail">
                             {props.obj.rate}/5
                         </span>
-                    </h5>
-                    <p className="review-content">{props.obj.content}</p>
+                    </p>
+                    <h5 className="review-desc">{props.obj.content}</h5>
                 </Col>
                 <Col lg={1}>
                     <Button
@@ -469,7 +469,6 @@ function ReviewContent(props) {
                     </Button>
                 </Col>
             </Row>
-            <hr />
         </div>
     );
 }

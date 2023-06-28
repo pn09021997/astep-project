@@ -18,6 +18,7 @@ export default function Detail() {
             <div className="detail">
                 <TopContent productId={product_id} />
                 <Review productId={product_id} />
+                <hr />
                 <RelatedContent productId={product_id} />
                 <Footer />
             </div>

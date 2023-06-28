@@ -19,9 +19,9 @@ export default function SearchList(props) {
 
     const searchList = searchResult.map((product) => {
         return (
-            <Col md="1" lg="3" key={product.id} className="product-item--layout-transition">
+            <Col key={product.id} className="product-item--layout-transition">
                 <div className="product-info">
-                    <div className="product-action--action">
+                    <div>
                         <img
                             src={product.product_image}
                             className="img-fluid"
@@ -35,7 +35,7 @@ export default function SearchList(props) {
                         >
                             {product.product_name}
                         </Link>
-                        <p className="info-detail-price">$ {product.price}</p>
+                        <p className="info-detail-price pt-2">${product.price}</p>
                     </div>
                 </div>
             </Col>
@@ -44,7 +44,7 @@ export default function SearchList(props) {
 
     return (
         <div className="search-list">
-            <Row>{searchList}</Row>
+            <Row xs="1" sm="2" md="3">{searchList}</Row>
         </div>
     );
 }

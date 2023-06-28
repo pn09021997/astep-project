@@ -9,6 +9,7 @@ use App\Models\products;
 use function PHPUnit\Framework\isEmpty;
 
 use Illuminate\Support\Facades\Validator;
+
 class CategoryController extends Controller
 {
     /**
@@ -20,8 +21,7 @@ class CategoryController extends Controller
     {
         $categories = categories::all()->toArray();
         $return = [];
-        foreach($categories as $item){
-            $item['id'] = $this->Xulyid($item['id']);
+        foreach ($categories as $item) {
             $return[] = $item;
         }
         return response()->json($return);
@@ -44,13 +44,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(),[
-            'name'=>'required|unique:categories,name',
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|unique:categories,name',
         ]);
 
-            if ($validator->fails()){
-                return response(['errors'=>$validator->errors()->all()], 422);
-            }
+        if ($validator->fails()) {
+            return response(['errors' => $validator->errors()->all()], 422);
+        }
         $category = new categories([
             'name' => $request->get('name'),
             'description' => $request->get('description'),
@@ -69,7 +69,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request,$id)
+    public function show(Request $request, $id)
     {
 
         $cat_id = $this->DichId($id);
@@ -94,7 +94,6 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-
     }
 
     /**
@@ -108,48 +107,47 @@ class CategoryController extends Controller
     {
         $list = categories::all()->toArray();
         $return = [];
-        foreach($list as $item){
+        foreach ($list as $item) {
             $item['id'] = $this->Xulyid($item['id']);
             $return[] = $item;
         }
 
-      $cat_id = $this->DichId($id);
-      $category = categories::find($cat_id);
+        $cat_id = $this->DichId($id);
+        $category = categories::find($cat_id);
 
 
-      if($category){
-      $validator = Validator::make($request->all(),[
-        'name'=>'required',
-    ]);
-
-        if ($validator->fails()){
-            return response(['errors'=>$validator->errors()->all()], 422);
-        }
-
-        $cat_name;
-
-        //Kiem tra name da co hay chua, co bi trung khong
-        if($request->name == $list[0]['name']){
-            return response()->json([
-                'message' => 'The name has been exits!!!',
+        if ($category) {
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
             ]);
-        }else{
-            $cat_name = $request->name;
+
+            if ($validator->fails()) {
+                return response(['errors' => $validator->errors()->all()], 422);
+            }
+
+            $cat_name;
+
+            //Kiem tra name da co hay chua, co bi trung khong
+            if ($request->name == $list[0]['name']) {
+                return response()->json([
+                    'message' => 'The name has been exits!!!',
+                ]);
+            } else {
+                $cat_name = $request->name;
+            }
+
+            $category->update([
+                $category->name = $cat_name,
+                // $category->image = $request->get('image');
+            ]);
+
+
+            $category->save();
+            return response()->json([
+                'message' => 'category updated!',
+                'category' => $category
+            ]);
         }
-
-        $category->update([
-        $category->name = $cat_name,
-        // $category->image = $request->get('image');
-        ]);
-
-
-        $category->save();
-        return response()->json([
-            'message' => 'category updated!',
-            'category' => $category
-        ]);
-
-      }
 
         return response()->json([
             'message' => 'category not found !!!'
@@ -167,8 +165,8 @@ class CategoryController extends Controller
     {
         $id = $this->DichId($id);
         $pattern_id = '/^\d{1,}$/';
-        if (!preg_match($pattern_id,$id)){
-            return  response()->json(['message'=>'Please type id is a number']);
+        if (!preg_match($pattern_id, $id)) {
+            return  response()->json(['message' => 'Please type id is a number']);
         }
         $category = categories::find($id);
         $productListTemp =  products::where("category_id", "=", $id)->get();
@@ -184,7 +182,8 @@ class CategoryController extends Controller
         ]);
     }
 
-    private function getName($n) {
+    private function getName($n)
+    {
         $characters = '162379812362378dhajsduqwyeuiasuiqwy460123';
         $randomString = '';
 
@@ -195,29 +194,32 @@ class CategoryController extends Controller
         return $randomString;
     }
 
-    public  function Xulyid($id):String {
+    public  function Xulyid($id): String
+    {
         $dodaichuoi = strlen($id);
         $chuoitruoc = $this->getName(10);
         $chuoisau = $this->getName(22);
-        $handle_id = base64_encode($chuoitruoc.$id. $chuoisau);
+        $handle_id = base64_encode($chuoitruoc . $id . $chuoisau);
         return $handle_id;
     }
 
-    public function DichId($id){
+    public function DichId($id)
+    {
         $id = base64_decode($id);
-        $handleFirst = substr($id,10);
+        $handleFirst = substr($id, 10);
         $idx = "";
-        for ($i=0; $i <strlen($handleFirst)-22 ; $i++) {
-            $idx.=$handleFirst[$i];
+        for ($i = 0; $i < strlen($handleFirst) - 22; $i++) {
+            $idx .= $handleFirst[$i];
         }
         return  $idx;
     }
 
 
-    public function getSearch(Request $request){
-        $category = categories::where('name','like','%'.$request->key.'%')->get();
-        if($category){
-            if(empty(count($category))){
+    public function getSearch(Request $request)
+    {
+        $category = categories::where('name', 'like', '%' . $request->key . '%')->get();
+        if ($category) {
+            if (empty(count($category))) {
                 return response()->json([
                     'message' => 'category not found!',
                 ]);
@@ -230,7 +232,7 @@ class CategoryController extends Controller
         }
     }
 
-    
+
     public function getProductByCategoryId(Request $request)
     {
         $category = categories::where('id', 'like', '%' . $request->key . '%')->get();
@@ -249,7 +251,8 @@ class CategoryController extends Controller
         }
     }
 
-    public function getCategoryById($categoryId) {
+    public function getCategoryById($categoryId)
+    {
         $category = categories::find($categoryId);
         if ($category) {
             return response()->json([

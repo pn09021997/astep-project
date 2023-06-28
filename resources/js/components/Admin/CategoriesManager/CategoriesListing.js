@@ -23,7 +23,6 @@ export default function CategoriesList(props) {
             <Table striped hover>
                 <thead>
                     <tr>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Description</th>
                     </tr>

@@ -1,4 +1,3 @@
-import { filter } from "lodash";
 import React, { useState, useEffect } from "react";
 import { Col, Row, Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -23,15 +22,14 @@ export default function ProductList(props) {
                     <div className="product-action--action">
                         <img
                             src={product.product_image}
-                            className="img-fluid"
+                            className="img-fluid categories_img--custom"
                         />
                         <div className="action-cart">
                             <Button
-                                color="danger"
                                 outline
-                                className="btn-block"
+                                className="btn-block btn-animation"
                             >
-                                Add Cart
+                                + Quickshop
                             </Button>
                         </div>
                     </div>
@@ -43,7 +41,7 @@ export default function ProductList(props) {
                         >
                             {product.product_name}
                         </Link>
-                        <p className="info-detail-price">$ {product.price}</p>
+                        <p className="info-detail-price pt-2">${product.price}</p>
                     </div>
                 </div>
             </Col>
@@ -52,7 +50,7 @@ export default function ProductList(props) {
 
     return (
         <div className="product-list">
-            <Row xs={props.layoutCol}>{renderProductList}</Row>
+            <Row md={props.layoutCol} sm="2" xs="1">{renderProductList}</Row>
         </div>
     );
 }

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Row, Col } from "reactstrap";
 import axios from "axios";
-import ExpensesList from "./ExpensesListing";
 import Swal from "sweetalert2";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 
@@ -75,7 +74,7 @@ export default function CreateExpense(props) {
             confirmButtonText: "Cool",
         });
     };
-    
+
     return (
         <div className="form-wrapper">
             <AvForm
@@ -171,10 +170,6 @@ export default function CreateExpense(props) {
                     SUBMIT
                 </Button>
             </AvForm>
-            <br></br>
-            <br></br>
-
-            <ExpensesList> </ExpensesList>
         </div>
     );
 }

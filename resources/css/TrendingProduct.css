@@ -1,8 +1,10 @@
 .trending-product {
     margin-top: 5rem;
+    padding: 0 20px;
 }
 .trending-product-info {
     text-align: center;
+    padding: 50px 100px;
 }
 .trending-product-info img {
     display: block;
@@ -16,6 +18,7 @@
 .trending-product-info .info-detail {
     margin: 0;
     margin-top: 2vh;
+    padding: 20px 60px;
 }
 .trending-product-introduce {
     text-align: center;
@@ -44,6 +47,7 @@
 .action-cart {
     width: 100%;
     opacity: 0;
+    padding: 0 12px;
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -60,4 +64,23 @@
     background-color: #04aa6d;
     color: white;
     font-size: 16px;
+}
+
+.btn-animation {
+    background: linear-gradient(to left, #fff 50%, #eb7025 50%) right;
+    background-size: 200%;
+    transition: 0.5s;
+    outline: none;
+    color: #000;
+    border: 0.5px solid #eb7025;
+}
+.btn-animation:hover {
+    background-position: left;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .trending-product-info {
+        padding: 20px 0;
+    }
 }

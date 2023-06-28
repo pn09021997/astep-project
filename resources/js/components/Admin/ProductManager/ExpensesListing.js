@@ -8,7 +8,7 @@ export default function ExpenseList(props) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await axios("http://localhost:8000/api/product/");   
+            const result = await axios("http://localhost:8000/api/product/");
             setExpenses(result.data);
         };
         fetchData();
@@ -23,7 +23,6 @@ export default function ExpenseList(props) {
             <Table striped hover>
                 <thead>
                     <tr>
-                        <th>Image</th>
                         <th>Name</th>
                         <th>Category</th>
                         <th>Quantity</th>

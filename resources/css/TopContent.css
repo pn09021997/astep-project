@@ -1,116 +1,127 @@
+.product {
+    padding: 0 20px;
+}
 
-.detail__header{
-  text-align: center;
-  font-size: 1.2rem;
+.detail__header {
+    text-align: center;
+}
+.detail__header .header-link {
+    margin-bottom: 5rem;
 }
 .detail__header .product-name {
-  font-weight: 800;
-  margin-top: 10px;
+    font-weight: 800;
+    margin-top: 10px;
 }
 .detail__header .home-link {
-  text-decoration: none;
-  color: #eb7025;
+    text-decoration: none;
+    color: #eb7025;
 }
 .detail__header .category-link {
-  text-decoration: none;
-  color: #eb7025;
+    text-decoration: none;
+    color: #eb7025;
 }
-.img-detail{
+.img-detail {
     padding: 4% 0%;
 }
-.img-detail img{
-    width: 100%;
+.img-detail img {
+    width: 70%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
-.price-detail{
+.price-detail {
     color: #f26524;
 }
-.price-detail:hover{
+.price-detail:hover {
     color: #fc2158;
 }
 .btn-3 {
     position: relative;
     color: white;
-    background: linear-gradient(0deg, rgb(33, 90, 245) 0%, rgba(2,126,251,1) 100%);
+    background: linear-gradient(
+        0deg,
+        rgb(33, 90, 245) 0%,
+        rgba(2, 126, 251, 1) 100%
+    );
     width: 130px;
     height: 40px;
     line-height: 42px;
     padding: 0;
     border: none;
-
-  }
-  .btn-3 span {
+}
+.btn-3 span {
     display: block;
     width: 100%;
     height: 100%;
-  }
-  .btn-3:before,
-  .btn-3:after {
+}
+.btn-3:before,
+.btn-3:after {
     position: absolute;
     content: "";
     right: 0;
     top: 0;
-    background: rgba(2,126,251,1);
+    background: rgba(2, 126, 251, 1);
     transition: all 0.3s ease;
-  }
-  .btn-3:before {
+}
+.btn-3:before {
     height: 0%;
     width: 2px;
-  }
-  .btn-3:after {
+}
+.btn-3:after {
     width: 0%;
     height: 2px;
-  }
-  .btn-3:hover{
+}
+.btn-3:hover {
     background: transparent;
     box-shadow: none;
-  }
-  .btn-3:hover:before {
+}
+.btn-3:hover:before {
     height: 100%;
-  }
-  .btn-3:hover:after {
+}
+.btn-3:hover:after {
     width: 100%;
-  }
-  .btn-3 span:hover{
-     color: rgba(2,126,251,1);
-  }
-  .btn-3 span:before,
-  .btn-3 span:after {
+}
+.btn-3 span:hover {
+    color: rgba(2, 126, 251, 1);
+}
+.btn-3 span:before,
+.btn-3 span:after {
     position: absolute;
     content: "";
     left: 0;
     bottom: 0;
-     background: rgba(2,126,251,1);
+    background: rgba(2, 126, 251, 1);
     transition: all 0.3s ease;
-  }
-  .btn-3 span:before {
+}
+.btn-3 span:before {
     width: 2px;
     height: 0%;
-  }
-  .btn-3 span:after {
+}
+.btn-3 span:after {
     width: 0%;
     height: 2px;
-  }
-  .btn-3 span:hover:before {
+}
+.btn-3 span:hover:before {
     height: 100%;
-  }
-  .btn-3 span:hover:after {
+}
+.btn-3 span:hover:after {
     width: 100%;
-  }
- .titlle-detail{
-   border-bottom: 1px dotted #dfe0e1;
- }
- .quantity-review{
-   display: flex;
-   font-weight: bold;
-  border-bottom: 1px dotted #dfe0e1;
- }
-.add-product-cart{
+}
+.titlle-detail {
+    border-bottom: 1px dotted #dfe0e1;
+}
+.quantity-review {
+    display: flex;
+    font-weight: bold;
+    border-bottom: 1px dotted #dfe0e1;
+}
+.add-product-cart {
     padding: 5% 0%;
 }
-.quantity{
+.quantity {
     padding: 5% 0%;
 }
-.qty-btn{
+.qty-btn {
     float: left;
     background: #f5f5f5;
     border: solid 1px #f5f5f5;
@@ -123,7 +134,7 @@
     text-align: center;
     border-radius: 0;
 }
-.select-quantity{
+.select-quantity {
     background: #fff;
     font-weight: 600;
     height: 32px;
@@ -137,76 +148,87 @@
     float: left;
     -webkit-appearance: none;
 }
-.detail-header{
-  color: #f70122;
-  text-align: center;
-  padding: 1% 0%;
+.detail-header {
+    color: #f70122;
+    text-align: center;
+    padding: 1% 0%;
 }
-.like{
-  padding: 0% 30%;
+.like {
+    padding: 0% 30%;
 }
-#btn-like{
-  border: none;
+#btn-like {
+    border: none;
 }
-#btn-like>i:hover{
-  border: none;
-  background: rgb(96, 96, 236);
+#btn-like > i:hover {
+    border: none;
+    background: rgb(96, 96, 236);
 }
-.user-review{
-    border: 1px solid #d6d3d3 ;
+.user-review {
+    border: 1px solid #d6d3d3;
     background: #ffeee8;
 }
 .cart-select-form #btn-addCart:hover {
-  background-position: left;
+    background-position: left;
+    color: #fff;
+    border-color: #eb7025;
 }
 .cart-select-form #btn-addCart {
-  background: linear-gradient(to left, #000 50%, #eb7025 50%) right;
-  background-size: 200%;
-  transition: .5s ease-out;
-  margin-bottom: 1rem;
+    background: linear-gradient(to left, #fff 50%, #eb7025 50%) right;
+    background-size: 200%;
+    transition: all 0.5s ease;
+    margin-bottom: 1rem;
+    color: #000;
+    border: 0.5px #000 solid;
 }
 .cart-select-form #btn-buyNow {
-  background: #eb7025;
+    background: #eb7025;
+    border: 0.5px #eb7025 solid;
+    transition: all 0.5s ease;
+}
+
+.cart-select-form #btn-buyNow:hover {
+    background-color: transparent;
+    color: #000;
 }
 .cart-select-form #input-quantity {
-  padding: 25px 10px;
+    padding: 25px 10px;
 }
 .cart-select-form .cart-select-form--btn {
-  padding: 15px;
-  width: 100%;
-  background: #000;
-  font-weight: 600;
-  outline: none;
-  border: none;
+    padding: 15px;
+    width: 100%;
+    background: #000;
+    font-weight: 600;
+    outline: none;
+    border: none;
 }
-.product__info-warehouse ul{
-  list-style: none;
-  padding: 0;
-  color: #777777;
+.product__info-warehouse ul {
+    list-style: none;
+    padding: 0;
+    color: #777777;
 }
-.social-sharing{
-  display: flex;
-  width: 30%;
-  justify-content: space-between;
-  color: #777777;
+.social-sharing {
+    display: flex;
+    width: 30%;
+    justify-content: space-between;
+    color: #777777;
 }
 .social-sharing p {
-  margin-top: 15px;
+    margin-top: 15px;
 }
 .social-sharing .social-sharing--btn-link {
-  outline: none;
-  border: none;
-  background: none;
-  color: #777777;
+    outline: none;
+    border: none;
+    background: none;
+    color: #777777;
 }
 .social-sharing .social-sharing--btn-link:hover {
-  color: #eb7025;
-  transition: all .8s;
+    color: #eb7025;
+    transition: all 0.8s;
 }
 .product__info-detail .product__price {
-  font-size: 1.5rem;
-  color: #eb7025;
-  font-weight: 600;
+    font-size: 1.5rem;
+    color: #eb7025;
+    font-weight: 600;
 }
 
 @media only screen and (max-width: 480px) {

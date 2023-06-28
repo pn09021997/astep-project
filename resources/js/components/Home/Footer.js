@@ -42,7 +42,8 @@ export default function Footer() {
                     </Col>
                     <Col xs="12" sm="12" md="4">
                         <div className="footer-introduce mb-4">
-                            <p>THU DUC COLLEGE OF TECHNOLOGY.</p>
+                            <p>2593 Timbercrest Road, Chisana, Alaska Badalas
+                                United State,</p>
                         </div>
                     </Col>
                     <Col xs="12" sm="12" md="2">

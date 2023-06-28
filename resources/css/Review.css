@@ -1,35 +1,49 @@
-.review-title{
+.review__content {
+    border-bottom: 0.5px solid #000;
+}
+.review-desc {
+    padding: 10px 20px;
+}
+.review-title {
     text-align: center;
 }
 
-.review-date{
+.review-date {
     color: #a3a1a1;
 }
 
-.review-rating-detail{
+.review-rating-detail {
     color: #eb7025;
 }
 .review #reviewContent {
     border: none;
     outline: none;
     border-bottom: #000 2px solid;
-    transition: all .6s;
-} 
+    transition: all 0.6s;
+}
 .review #reviewContent:focus {
     border-color: #eb7025;
-} 
+}
 .review .btn-animation {
-    background: linear-gradient(to left, #000 50%, #eb7025 50%) right;
+    background: linear-gradient(to left, #fff 50%, #eb7025 50%) right;
     background-size: 200%;
-    transition: .5s;
+    transition: all 0.5s ease;
     outline: none;
     border: none;
-} 
+    color: #000;
+    border: 1px transparent solid;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
 .review .btn-animation:hover {
     background-position: left;
-    border: #fff;
-} 
+    color: #fff;
+    border-color: #eb7025;
+}
 #productDesc {
     color: #a3a1a1;
     font-size: 1rem;
+}
+
+.nav-tabs .nav-link {
+    color: #000 !important;
 }

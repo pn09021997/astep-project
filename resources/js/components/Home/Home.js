@@ -113,6 +113,7 @@ export default function Home() {
                 productList={productList.slice(0, 3)}
                 categoriesList={categoriesList.slice(0, 3)}
             />
+            <hr />
             {/* Trending Products */}
             <TrendingProduct productList={productList} />
             {/* Footer */}
